@@ -35,14 +35,11 @@ public class HomeController {
 		System.out.println("gg");
 		System.out.println("gg1");
 		System.out.println("gg2");
-<<<<<<< Upstream, based on origin/master
 		System.out.println("gg3");
 		System.out.println("gg4");
 		System.out.println("gg3");
 		System.out.println("gg4");
 		
-=======
->>>>>>> 51d79f8 12:02 commit
 		return "home"; 
 	}
 	
