@@ -36,10 +36,7 @@ public class HomeController {
 		System.out.println("gg1");
 		System.out.println("gg2");
 		System.out.println("gg3");
-		System.out.println("gg4");
-		System.out.println("gg3");
-		System.out.println("gg4");
-		
+
 		return "home"; 
 	}
 	
