@@ -40,6 +40,7 @@ public class HomeController {
 		System.out.println("�����");
 
 		System.out.println("soohyun");
+		System.out.println("commit");
 
 
 		return "home"; 
