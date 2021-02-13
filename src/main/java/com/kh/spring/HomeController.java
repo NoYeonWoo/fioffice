@@ -42,7 +42,7 @@ public class HomeController {
 		System.out.println("soohyun");
 		System.out.println("commit");
 		
-		System.out.println("kim");
+		System.out.println("kim2");
 		System.out.println("commit");
 
 
