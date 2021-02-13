@@ -37,9 +37,12 @@ public class HomeController {
 		System.out.println("gg1");
 		System.out.println("gg2");
 		System.out.println("gg3");
-		System.out.println("�����");
+		System.out.println("占쏙옙占쏙옙占�");
 
 		System.out.println("soohyun");
+		System.out.println("commit");
+		
+		System.out.println("kim");
 		System.out.println("commit");
 
 
