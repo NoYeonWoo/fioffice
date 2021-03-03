@@ -9,6 +9,6 @@
 <body>
 <!--ContextPath 설정 -->
 
-<jsp:forward page="WEB-INF/views/main_ablepro.jsp"/>
+<jsp:forward page="WEB-INF/views/common/main1.jsp"/>
 </body>
 </html>
