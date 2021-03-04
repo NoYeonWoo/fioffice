@@ -16,19 +16,11 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
      
-        <!-- Required Js -->
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>
-<!-- Apex Chart -->
-<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>
-<!-- custom-chart js -->
-<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pages/dashboard-main.js"></script>
-
+     
    <title>FIOFFICE</title>
 </head>
 <body>
+<!-- [ navigation menu ] start -->
 <nav class="pcoded-navbar menu-light ">
 		<div class="navbar-wrapper  ">
 			<div class="navbar-content scroll-div " >
@@ -122,5 +114,17 @@
 			</div>
 		</div>
 	</nav>
+	<!-- [ navigation menu ] end -->
+	
+	
+	<!-- Required Js -->
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>
+	<!-- Apex Chart -->
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>
+	<!-- custom-chart js -->
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pages/dashboard-main.js"></script>   
 </body>
 </html>
