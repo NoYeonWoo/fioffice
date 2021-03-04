@@ -7,9 +7,7 @@
 </head>
 
 <body class="">
-		<jsp:include page="sidebar.jsp" flush="false"></jsp:include>
-		<jsp:include page="topbar.jsp" flush="false"></jsp:include>
-
+		
 	<!-- [ Pre-loader ] start 로딩기능  -->
 	<div class="loader-bg">
 		<div class="loader-track">
@@ -17,8 +15,8 @@
 		</div>
 	</div>
 	<!-- [ Pre-loader ] End -->
-
-	
+	<jsp:include page="sidebar.jsp"/>
+	<jsp:include page="topbar.jsp"/>
 <!-- [ Main Content ] start 메인화면 시작  -->
         
  <div class="pcoded-main-container"> <!--메인 화면 전체시작 -->
