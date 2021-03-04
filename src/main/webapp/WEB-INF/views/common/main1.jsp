@@ -3,6 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 </head>
 
 <body class="">
@@ -34,8 +35,8 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">마이포털</a></li>
-                            <li class="breadcrumb-item"><a href="/main2.jsp">마이워크</a></li>
+                            <li class="breadcrumb-item"><a href="#!">My Portal</a></li>
+                            <li class="breadcrumb-item"><a href="main2.jsp">My Company</a></li>
                         </ul>
                     </div>
                 </div>
@@ -262,7 +263,7 @@
                                                 </label>
                                             </div>
                                             <div class="d-inline-block align-middle">
-                                                <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40 align-top m-r-15">
+                                                <img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40 align-top m-r-15">
                                                 <div class="d-inline-block">
                                                     <h6>John Deo</h6>
                                                     <p class="text-muted m-b-0">Graphics Designer</p>
@@ -513,7 +514,7 @@
                             </div>
                             <div class="row">
                                 <div class="col-sm-auto p-r-0">
-                                    <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius profile-img cust-img m-b-15">
+                                    <img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-4.jpg" alt="user image" class="img-radius profile-img cust-img m-b-15">
                                 </div>
                                 <div class="col">
                                     <h6 class="m-b-15">Allina D’croze <span class="float-right f-13 text-muted"> a week ago</span></h6>
