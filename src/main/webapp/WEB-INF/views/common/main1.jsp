@@ -6,7 +6,7 @@
 
 </head>
 
-<body class="">
+<body class="       ">
       
    <!-- [ Pre-loader ] start 로딩기능 
    <div class="loader-bg">
