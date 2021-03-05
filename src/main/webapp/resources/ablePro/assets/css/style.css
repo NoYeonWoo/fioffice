@@ -24202,3 +24202,29 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
 
 /* image varient End */
 /**====== Authentication css end ======**/
+
+/*==============================================================
+	Calendar Start
+==============================================================*/
+.calendar-wrap{}
+.calendar-wrap .fc-event.ui-draggable-handle{
+	padding: 5px;
+	margin-bottom: 5px;
+}
+.fc th{
+	font-weight: 500;
+	padding: 10px !important;
+	background: #e1e1f5;
+}
+.fc-day-grid-event .fc-time{
+	font-weight: 500 !important;
+}
+.fc-day-grid-event .fc-content{
+	padding: 3px 9px;
+}
+.fc-header-toolbar h2{
+	font-size: 24px;
+}
+/*==============================================================
+	Calendar End
+==============================================================*/
