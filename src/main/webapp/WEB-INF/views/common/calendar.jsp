@@ -1,9 +1,11 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<title>FullCalendar by Creative Tim</title>
+<title>FullCalendar</title>
 
-<meta charset="utf-8" />
+<meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
 <link
@@ -68,31 +70,29 @@
 				var calendar = $('#calendar').fullCalendar(
 						{
 							header : {
-								left : 'title',
-								center : 'agendaDay,agendaWeek,month',
-								right : 'prev,next today'
+								left : 'agendaDay,agendaWeek,month'
 							},
 							editable : true,
-							firstDay : 1, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+							firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
 							selectable : true,
 							defaultView : 'month',
 
 							axisFormat : 'h:mm',
-							columnFormat : {
-								month : 'ddd', // Mon
-								week : 'ddd d', // Mon 7
-								day : 'dddd M/d', // Monday 9/7
+							columnFormat: {
+								month: 'ddd',
+								week: 'M/d ddd ',
+								day: 'M월d일 dddd',
 								agendaDay : 'dddd d'
 							},
-							titleFormat : {
-								month : 'MMMM yyyy', // September 2009
-								week : "MMMM yyyy", // September 2009
-								day : 'MMMM yyyy' // Tuesday, Sep 8, 2009
+							titleFormat: {
+								month: 'yyyy년 MMMM',
+								week: "MMM d{ '&#8212;'[ MMM] d}",
+								day: 'yyyy년 MMM d일 dddd'
 							},
 							allDaySlot : false,
 							selectHelper : true,
 							select : function(start, end, allDay) {
-								var title = prompt('Event Title:');
+								var title = prompt('일정을 입력하세요 :');
 								if (title) {
 									calendar.fullCalendar('renderEvent', {
 										title : title,

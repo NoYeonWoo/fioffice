@@ -35,7 +35,6 @@
                         </div>
                         <ul class="breadcrumb">
                         	<li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="index.jsp">My Portal</a></li>
                         </ul>
                     </div>
                 </div>
