@@ -83,7 +83,7 @@
                </li>
                
                   <li class="nav-item pcoded-menu-caption">
-                   <label>상품</label>
+                   <label>Product</label>
                </li>
                
                   <li class="nav-item pcoded-hasmenu">
