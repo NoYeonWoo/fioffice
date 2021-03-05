@@ -11,7 +11,7 @@
    <!-- [ Pre-loader ] start 로딩기능 
    <div class="loader-bg">
       <div class="loader-track">
-         <div class="loader-fill"></div>
+         <div class="loader-fill">dfdfdf</div>
       </div>
    </div> -->
    
@@ -35,7 +35,6 @@
                         </div>
                         <ul class="breadcrumb">
                         	<li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="index.jsp">My Portal</a></li>
                         </ul>
                     </div>
                 </div>

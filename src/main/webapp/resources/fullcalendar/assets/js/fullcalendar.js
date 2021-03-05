@@ -45,14 +45,14 @@ var defaults = {
 	
 	// time formats
 	titleFormat: {
-		month: 'MMMM yyyy',
-		week: "MMM d[ yyyy]{ '&#8212;'[ MMM] d yyyy}",
-		day: 'dddd, MMM d, yyyy'
+		month: 'yyyy년 MMMM',
+		week: "MMM d{ '&#8212;'[ MMM] d}",
+		day: 'yyyy년 MMM d일 dddd'
 	},
 	columnFormat: {
 		month: 'ddd',
-		week: 'ddd M/d',
-		day: 'dddd M/d'
+		week: 'M/d ddd ',
+		day: 'M월d일 dddd'
 	},
 	timeFormat: { // for event elements
 		'': 'h(:mm)t' // default
@@ -61,19 +61,19 @@ var defaults = {
 	// locale
 	isRTL: false,
 	firstDay: 0,
-	monthNames: ['January','February','March','April','May','June','July','August','September','October','November','December'],
-	monthNamesShort: ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-	dayNames: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-	dayNamesShort: ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+	monthNames: ['1월','2월','3월','3월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	monthNamesShort: ['1월','2월','3월','3월','5월','6월','7월','8월','9월','10월','11월','12월'],
+	dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'],
+	dayNamesShort: ['일','월','화','수','목','금','토'],
 	buttonText: {
 		prev: "<span class='fc-text-arrow'>&lsaquo;</span>",
 		next: "<span class='fc-text-arrow'>&rsaquo;</span>",
 		prevYear: "<span class='fc-text-arrow'>&laquo;</span>",
 		nextYear: "<span class='fc-text-arrow'>&raquo;</span>",
-		today: 'today',
-		month: 'month',
-		week: 'week',
-		day: 'day'
+		today: '오늘',
+		month: '월간',
+		week: '주간',
+		day: '일간'
 	},
 	
 	// jquery-ui theming
@@ -1633,7 +1633,7 @@ var dateFormatters = {
 	yy	: function(d)	{ return (d.getFullYear()+'').substring(2) },
 	yyyy: function(d)	{ return d.getFullYear() },
 	t	: function(d)	{ return d.getHours() < 12 ? 'a' : 'p' },
-	tt	: function(d)	{ return d.getHours() < 12 ? 'am' : 'pm' },
+	tt	: function(d)	{ return d.getHours() < 12 ? '오전' : '오후' },
 	T	: function(d)	{ return d.getHours() < 12 ? 'A' : 'P' },
 	TT	: function(d)	{ return d.getHours() < 12 ? 'AM' : 'PM' },
 	u	: function(d)	{ return formatDate(d, "yyyy-MM-dd'T'HH:mm:ss'Z'") },
