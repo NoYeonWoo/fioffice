@@ -6,7 +6,6 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 
-
 <link
 	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
 	rel='stylesheet' />
