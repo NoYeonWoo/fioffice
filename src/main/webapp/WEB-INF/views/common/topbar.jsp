@@ -9,12 +9,12 @@
 <!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
-			
+
 				<div class="m-header">
 					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
-					<a href="#!" class="b-brand">
+					<a href="index.jsp" class="b-brand">
 						<!-- ========   change your logo hear   ============ -->
-						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/logo.png" alt="" class="logo">
+						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/test.png" alt="" class="logo">
 						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/logo-icon.png" alt="" class="logo-thumb">
 					</a>
 					<a href="#!" class="mob-toggler">
@@ -41,8 +41,8 @@
 								
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
 									<div class="pro-head">
-										<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-1.jpg" class="img-radius" alt="User-Profile-Image">
-										<span>유저 이름</span>
+										<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" class="img-radius" alt="User-Profile-Image">
+										<span>사원명</span>
 										<a href="auth-signin.html" class="dud-logout" title="Logout">
 											<i class="feather icon-log-out"></i>
 										</a>

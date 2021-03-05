@@ -34,8 +34,8 @@
                             <h5 class="m-b-10"></h5>
                         </div>
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">My Portal</a></li>
+                        	<li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="index.jsp">My Portal</a></li>
                         </ul>
                     </div>
                 </div>
@@ -367,8 +367,7 @@
             </div>
         </div>
    
-    
- <!-- 캘린더 일정-—>  -->
+    <!-- 캘린더 일정 -->
                     <div class="card-body text-center">
                         <div class="table-responsive">
                             <table class="table">
@@ -399,9 +398,6 @@
             </div>
 </div>
 <!-- [ Main Content ] 메인화면 끝 -->
-
-
-    
     
     <jsp:include page="footer.jsp"/>
 </body>
