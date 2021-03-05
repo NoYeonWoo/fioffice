@@ -221,7 +221,7 @@ $(document).ready(function() {
     }, 400);
     // remove pre-loader end
 });
-
+ 
 // ===============
 $(window).resize(function() {
     togglemenu();

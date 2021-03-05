@@ -15,8 +15,6 @@
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
 
-     
-     
    <title>FIOFFICE</title>
 </head>
 <body>
