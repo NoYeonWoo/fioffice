@@ -7,9 +7,7 @@
 </head>
 
 <body class="">
- 
-   <jsp:include page="sidebar.jsp"/>
-   <jsp:include page="topbar.jsp"/>
+
 <!--메인 화면 전체시작 -->
    <div class="pcoded-main-container">
      <div class="pcoded-content">
