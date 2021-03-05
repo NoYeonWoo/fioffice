@@ -7,7 +7,7 @@
 </head>
 <body>
 <!-- [ Header ] start -->
-	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
+	<header class="navbar pcoded-header navbar-expand-md navbar-light header-blue">
 		
 			
 				<div class="m-header">

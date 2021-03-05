@@ -29,12 +29,12 @@
 					<div class="main-menu-header">
 						<img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-2.jpg" alt="User-Profile-Image">
 						<div class="user-details">
-							<div id="more-details">UX Designer <i class="fa fa-caret-down"></i></div>
+							<div id="more-details">이윤해 <i class="fa fa-caret-down"></i></div>
 						</div>
 					</div>
 					<div class="collapse" id="nav-user-link">
 						<ul class="list-unstyled">
-							<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>View Profile</a></li>
+							<li class="list-group-item"><a href="user-profile.html"><i class="feather icon-user m-r-5"></i>마이페이지</a></li>
 							<li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
 							<li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
 						</ul>
@@ -43,19 +43,75 @@
 				
 				<ul class="nav pcoded-inner-navbar ">
 					<li class="nav-item pcoded-menu-caption">
-					    <label>Navigation</label>
+					    <label>My portal</label>
 					</li>
 					<li class="nav-item">
-					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-home"></i></span><span class="pcoded-mtext">Dashboard</span></a>
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
 					</li>
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
+					</li>
+					
 					<li class="nav-item pcoded-hasmenu">
-					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">Page layouts</span></a>
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">게시판</span></a>
 					    <ul class="pcoded-submenu">
-					        <li><a href="layout-vertical.html" target="_blank">Vertical</a></li>
-					        <li><a href="layout-horizontal.html" target="_blank">Horizontal</a></li>
+					        <li><a href="layout-vertical.html" target="_blank">커뮤니티</a></li>
+					        <li><a href="layout-horizontal.html" target="_blank">부서게시판</a></li>
+					           <li><a href="layout-horizontal.html" target="_blank">공지사항</a></li>
 					    </ul>
 					</li>
-					<li class="nav-item pcoded-menu-caption">
+					
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
+					</li>
+							<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
+					</li>
+				
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-signature"></i></span><span class="pcoded-mtext">전자결재</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
+					</li>
+					<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>
+					</li>
+						<li class="nav-item">
+					    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+					</li>
+					
+						<li class="nav-item pcoded-menu-caption">
+					    <label>상품</label>
+					</li>
+					
+						<li class="nav-item pcoded-hasmenu">
+					    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>
+					    <ul class="pcoded-submenu">
+					        <li><a href="layout-vertical.html" target="_blank">상품관리</a></li>
+					        <li><a href="layout-horizontal.html" target="_blank">입출고관리</a></li>
+					        <li><a href="layout-vertical.html" target="_blank">거래처관리</a></li>
+					        
+					    </ul>
+					</li>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+				<!--  	<li class="nav-item pcoded-menu-caption">
 					    <label>UI Element</label>
 					</li>
 					<li class="nav-item pcoded-hasmenu">
@@ -108,7 +164,7 @@
 					    </ul>
 					</li>
 					<li class="nav-item"><a href="sample-page.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
-
+-->
 				</ul>
 				
 			</div>
