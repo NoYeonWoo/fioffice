@@ -215,7 +215,7 @@ html .fc,
 	color: #8069AE;	
 }
 .fc-button-month.fc-state-default, .fc-button-agendaWeek.fc-state-default, .fc-button-agendaDay.fc-state-default{
-    min-width: 57px;
+    min-width: 58px;
 	text-align: center;
 	transition: all 0.2s;
 	-webkit-transition: all 0.2s;
