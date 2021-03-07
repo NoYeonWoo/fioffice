@@ -86,7 +86,7 @@
 							},
 							titleFormat: {
 								month: 'yyyy년 MMMM',
-								week: "MMM d{ '&#8212;'[ MMM] d}",
+								week: "MMM dd일{ '&#8212;'[ MMM] d일}",
 								day: 'yyyy년 MMM d일 dddd'
 							},
 							allDaySlot : false,

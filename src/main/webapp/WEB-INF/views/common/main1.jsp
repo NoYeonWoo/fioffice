@@ -17,7 +17,7 @@
    
    
    <!-- [ Pre-loader ] End -->
-   <jsp:include page="adminSidebar.jsp"/>
+   <jsp:include page="sidebar.jsp"/>
    <jsp:include page="topbar.jsp"/>
    
    <div class="pcoded-main-container">
@@ -49,7 +49,7 @@
             <div class="col-xl-6 col-md-12">
                <div class="card latest-update-card">
                   <div class="card-header">
-                     <h5>Latest Updates</h5>
+                     <h5>근태관리</h5>
                      <div class="card-header-right">
                         <div class="btn-group card-option">
                            <button type="button" class="btn dropdown-toggle"
@@ -146,7 +146,7 @@
             <div class="col-xl-6 col-md-12">
                <div class="card table-card">
                   <div class="card-header">
-                     <h5>Projects</h5>
+                     <h5>TODO+</h5>
                      <div class="card-header-right">
                         <div class="btn-group card-option">
                            <button type="button" class="btn dropdown-toggle"
@@ -305,7 +305,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Striped Table</h5>
+                        <h5>공지사항</h5>
                         <span class="d-block m-t-5">use class <code>table-striped</code> inside table element</span>
                     </div>
                     <div class="card-body table-border-style">
