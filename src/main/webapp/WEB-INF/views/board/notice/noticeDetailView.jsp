@@ -7,7 +7,7 @@
 </head>
 
 <body class="">
- 
+
    <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
    
