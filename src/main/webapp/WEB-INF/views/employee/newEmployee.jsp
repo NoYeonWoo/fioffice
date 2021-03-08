@@ -6,7 +6,7 @@
 
 </head>
 
-<body class="">
+<body class=" ">
 
 	<jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>

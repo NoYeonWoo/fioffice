@@ -5,10 +5,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class approvalController {
-
+ 
 	
 	
-	@RequestMapping("approvalList.do")
+	@RequestMapping("approvalList.do ")
 	public String approvalList() {
 		return "approval/approvalListView";
 	}

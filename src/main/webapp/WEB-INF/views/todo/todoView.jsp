@@ -108,8 +108,7 @@ p {
 								<h5 class="m-b-10"></h5>
 							</div>
 							<ul class="breadcrumb">
-								<li class="breadcrumb-item"><a href="index.jsp"><i
-										class="feather icon-home"></i></a></li>
+								<li class="breadcrumb-item"><a href="index.jsp"><i	class="feather icon-home"></i></a></li>
 							</ul>
 						</div>
 					</div>
@@ -123,6 +122,7 @@ p {
 					<div class="card">
 						<div class="card-header">
 							<h3 class="m-0 font-weight-bold text-primary">TODO+</h3>
+						
 						</div>
 
 
@@ -146,13 +146,13 @@ p {
 
 									<div class="col-sm-4">
 										<div class="card bg-light">
-											<div class="card-header">Todo</div>
+											<div class="card-header">Todo  	 <a  href=""  data-toggle="modal" data-target="#todoinsert"><i class="fas fa-plus-square text-gray-800 "></i></a></div>
 											<div class="card-body">
 												<div class="urgent">
 													<ul class="depth02">
 
 														<li>
-															<div class="data" id="app-block">
+															<div class="data" id="app-block" data-toggle="modal" data-target="#tododetail">
 																<p class="titled">마케팅발주서</p>
 																<p class="subd">기한:2021-02-03</p>
 																<form action="mod" accept-charset="utf-8" method="get"
@@ -245,7 +245,85 @@ p {
 	<!--지우지 마세요    div class="pcoded-main-container"  -->
 	<!-- [ Main Content ] 메인화면 끝 -->
 
-
+		   <!-- todo 넣기 모달시작  -->       
+		   
+		   		<div class="col-xl-4 col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5>할일</h5>
+					</div>
+					<div class="card-body">
+						<div id="todoinsert" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalPopoversLabel">할일</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<h5>Tooltips in a Button</h5>
+										<p>This <a href="#!" role="button" class="btn  btn-secondary tooltip-test" data-toggle="tooltip" title="Button Tooltip" data-container="#exampleModalPopovers">button</a>
+											triggers a popover on click.</p>
+										<hr />
+										<h5>Tooltips in a modal</h5>
+										<p class="mb-0"><a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip"
+												data-container="#exampleModalPopovers">that
+												link</a> have tooltips on hover.</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn  btn-primary">Save changes</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">Launch demo modal</button>
+					</div>
+				</div>
+			</div>
+		   	   
+   <!-- todo 모달끝  -->   
+   
+   
+   
+   	   <!-- todo상세보기  모달시작  -->       
+		   
+		   		<div class="col-xl-4 col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<h5>할일</h5>
+					</div>
+					<div class="card-body">
+						<div id="tododetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="tododetail" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalPopoversLabel">할일</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<div class="modal-body">
+										<h5>Tooltips in a Button</h5>
+										<p>This <a href="#!" role="button" class="btn  btn-secondary tooltip-test" data-toggle="tooltip" title="Button Tooltip" data-container="#exampleModalPopovers">button</a>
+											triggers a popover on click.</p>
+										<hr />
+										<h5>Tooltips in a modal</h5>
+										<p class="mb-0"><a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip"
+												data-container="#exampleModalPopovers">that
+												link</a> have tooltips on hover.</p>
+									</div>
+									<div class="modal-footer">
+										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+										<button type="button" class="btn  btn-primary">Save changes</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<button type="button" class="btn  btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">Launch demo modal</button>
+					</div>
+				</div>
+			</div>
+		   	   
+   <!-- todo 모달끝  -->  
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

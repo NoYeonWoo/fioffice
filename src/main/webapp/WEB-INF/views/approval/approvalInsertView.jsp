@@ -6,7 +6,7 @@
 
 
 
-  <link rel="stylesheet" href= "${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+  <link rel="stylesheet " href= "${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
   
   <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
