@@ -4,10 +4,10 @@
 <html>
 <head>
 <title>FullCalendar</title>
-
+ 
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-
+ 
 <link
 	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
 	rel='stylesheet' />
@@ -24,7 +24,7 @@
 	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
 	type="text/javascript"></script>
 	
-	
+	 
 <script>
 	$(document).ready(
 			function() {
@@ -86,7 +86,7 @@
 							},
 							titleFormat: {
 								month: 'yyyy년 MMMM',
-								week: "MMM d{ '&#8212;'[ MMM] d}",
+								week: "MMM dd일{ '&#8212;'[ MMM] d일}",
 								day: 'yyyy년 MMM d일 dddd'
 							},
 							allDaySlot : false,
@@ -101,7 +101,7 @@
 										allDay : allDay
 									}, true // make the event "stick"
 									);
-								}
+								} 
 								calendar.fullCalendar('unselect');
 							},
 							droppable : true, // this allows things to be dropped onto the calendar !!!
