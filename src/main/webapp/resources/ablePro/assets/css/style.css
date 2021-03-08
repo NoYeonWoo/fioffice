@@ -23757,7 +23757,7 @@ pre[class*=language-]:before {
     border-bottom: 1px solid #e2e5e8;
     font-size: 13px;
     color: #37474f;
-    background: #ecf0f5;
+    background: #fff;
     text-transform: uppercase;
 }
 
