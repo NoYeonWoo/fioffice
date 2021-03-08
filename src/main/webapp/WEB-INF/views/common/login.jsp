@@ -28,7 +28,7 @@
 	<div class="auth-content">
 	
 
-		<div class="card">
+		<div class="card" >
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
 				

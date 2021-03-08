@@ -61,7 +61,7 @@
                </li>
                
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
+                   <a href="todoListView.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
                <li class="nav-item">
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
@@ -71,7 +71,7 @@
                </li>
             
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-signature"></i></span><span class="pcoded-mtext">전자결재</span></a>
+                   <a href="approvalList.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-signature"></i></span><span class="pcoded-mtext">전자결재</span></a>
                </li>
                <li class="nav-item">
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
