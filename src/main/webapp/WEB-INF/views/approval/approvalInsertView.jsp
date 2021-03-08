@@ -5,13 +5,12 @@
 <head>
 
 
-  <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
-  <script src="${pageContext.request.contextPath}/resources/summernote/summernote-ko-KR.js"></script>
-  <link rel="stylesheet" href= "${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+
+  <link rel="stylesheet " href= "${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
   
   <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
-<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+
 </head>
 
 <body class="">
@@ -22,9 +21,25 @@
    <div class="pcoded-main-container">
      <div class="pcoded-content">
       
-
+<!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
+   
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10"></h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <!-- [ breadcrumb ] end -->
   
-<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
+
 <div class="row">
  
 
@@ -57,16 +72,20 @@
 					  
 					
 					  
-					<form>
-  <textarea id="summernote" name="summernote"></textarea>
-</form>
-			           
-			           <input type="file" name="uploadFile">
-						  
+				  <div class="form-group">
+						    <textarea class="form-control" id="summernote" name="apContent" maxlength="140" rows="7" autocomplete="off"></textarea>
+						 </div>
+			         
+			          
+			          
+                     <input type="file" class="form-control" id="" name="">
+                  
+			          
+			          <br><br>	  
 					  <div class="row">
 						  <div id="buttons">
 							  <button type="button" id="submitBtn" class="btn btn-primary">전송</button>
-							  <button type="button" onclick="location.href='approvalView.do'" class="btn btn-danger">취소</button>
+							  <button type="button" onclick="location.href='approvalList.do'" class="btn btn-danger">취소</button>
 						  </div>
 					  </div>
 					 </form>
@@ -102,7 +121,9 @@
     </script>
     
     
-    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/summernote/summernote-ko-KR.js"></script>
     
     
    	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

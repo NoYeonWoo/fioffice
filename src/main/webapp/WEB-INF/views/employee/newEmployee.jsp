@@ -6,7 +6,7 @@
 
 </head>
 
-<body class="">
+<body class=" ">
 
 	<jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
@@ -16,13 +16,30 @@
 
 		<div class="pcoded-content">
 
+     <!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
+   
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10"></h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <!-- [ breadcrumb ] end -->
+  
 
-
-			<div class="col-lg-8">
+			<div class="col-lg-6">
 				<div class="card mb-4">
 					<div class="card-header">
 						<h3>신규 사원 등록</h3>
-					</div>
+					</div><br><br>
 					<div class="card-body">
 						<form name="newEmpForm" method="post" autocomplete="off">
 							<table class="table table-bordered" id="dataTable">

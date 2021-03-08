@@ -13,17 +13,31 @@
 	<!--메인 화면 전체시작 -->
 	<div class="pcoded-main-container">
 		<div class="pcoded-content">
+		
+		<!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
+   
+        <div class="page-header">
+            <div class="page-block">
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <div class="page-header-title">
+                            <h5 class="m-b-10"></h5>
+                        </div>
+                        <ul class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+  <!-- [ breadcrumb ] end -->
+  
 			<div class="row">
-
-
-
-
-                 
 				<div class="col-sm-10">
 					<div class="card">
 						<div class="card-header">
 							
-						 <button type="button" class="btn btn-outline-primary"><i class="fas fa-file-signature"></i>새결재</button> <h3 class="m-0 font-weight-bold text-primary">나의 문서함</h3> 
+						  <h3 class="m-0 font-weight-bold text-primary">나의 문서함</h3> <a class="btn btn-secondary" style="float:right" href="approvalInsertForm.do"> <i class="fas fa-file-signature"></i>글쓰기</a>
 						 	
 					  
 							</div>
@@ -153,7 +167,7 @@
 								</div>
 							</div>
 						</div>
-									
+										   <!-- 결재하기 모달끝  -->   
 									</tr>
 								</tbody>
 							</table>
