@@ -14,7 +14,7 @@
     <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
-
+ 
    <title>FIOFFICE</title>
 </head>
 <body>
@@ -38,7 +38,7 @@
                   </ul>
                </div>
             </div>
-            
+             
             <ul class="nav pcoded-inner-navbar ">
                <li class="nav-item pcoded-menu-caption">
                    <label>My portal</label>

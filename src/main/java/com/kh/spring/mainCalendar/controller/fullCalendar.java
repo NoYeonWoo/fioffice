@@ -38,7 +38,7 @@ public class fullCalendar {
 	public String mainView() {
 		
 		return "mainCalendar/fullCalendar";
-		
+		  
 	}
 
 }

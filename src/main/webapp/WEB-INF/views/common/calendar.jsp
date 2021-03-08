@@ -24,7 +24,7 @@
 	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
 	type="text/javascript"></script>
 	
-	
+	 
 <script>
 	$(document).ready(
 			function() {
@@ -101,7 +101,7 @@
 										allDay : allDay
 									}, true // make the event "stick"
 									);
-								}
+								} 
 								calendar.fullCalendar('unselect');
 							},
 							droppable : true, // this allows things to be dropped onto the calendar !!!

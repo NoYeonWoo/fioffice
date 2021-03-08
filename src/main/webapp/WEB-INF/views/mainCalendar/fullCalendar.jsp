@@ -53,7 +53,7 @@
 		  <div class="col-lg-8 col-md-12">
             <div class="card table-card">
                    
-                    
+                   
                  <div class="pd-20 card-box mb-30">
                <div class="calendar-wrap">
                   <div id='calendar'></div>
