@@ -17,7 +17,7 @@
    
    
    <!-- [ Pre-loader ] End -->
-   <jsp:include page="sidebar.jsp"/>
+   <jsp:include page="adminSidebar.jsp"/>
    <jsp:include page="topbar.jsp"/>
    
    <div class="pcoded-main-container">
