@@ -14,7 +14,7 @@
 					<a class="mobile-menu" id="mobile-collapse" href="#!"><span></span></a>
 					<a href="index.jsp" class="b-brand">
 						<!-- ========   change your logo hear   ============ -->
-						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/test.png" alt="" class="logo">
+						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/logo.png" alt="" class="logo">
 						<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/logo-icon.png" alt="" class="logo-thumb">
 					</a>
 					<a href="#!" class="mob-toggler">
