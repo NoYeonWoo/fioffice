@@ -41,8 +41,8 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                      		<li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                          	<li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
+                         	<li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                         </ul>
                     </div>
                 </div>
@@ -70,13 +70,24 @@
            	<!-- 폼 컨텐츠 영역 -->
 				  <div class="card-body">
 					  <div class="form-group">
+					  <!-- 카테고리 -->
+					<tr>
+					<td><label>카테고리</label></td>
+					<td>
+						<select name="deptCategory" >
+		                     <option value="10" style="color : black;">긴급</option>
+		                     <option value="20" style="color : black;">알림</option>
+		                     <option value="30" style="color : black;">공지</option>
+                  		</select>
+					</td>
+					</tr>
 					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
-					   
 					    <input type="hidden" name="bType" value="B">
 					  </div>
 					    <div class="form-group">
 						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
 						  </div>
+						  
 					  <div class="row">
 						  <div id="buttons">
 							  <button type="button" onclick="commit();" class="btn btn-primary">등록</button>
@@ -85,6 +96,7 @@
 					  </div>
 				 </div>
 				</div>
+
 			</form>
 		</div>
 	
@@ -122,6 +134,9 @@
 			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
     	});
     });
+    
+    
+    
     
     </script>
 

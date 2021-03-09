@@ -6,7 +6,7 @@
 <meta charset="UTF-8 ">
 <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-     <meta name="description" content="" />
+    <meta name="description" content="" />
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
    
@@ -14,9 +14,11 @@
     <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
-
-
+	<!-- 썸머노트  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+	
    <title>FIOFFICE</title>
+   
 </head>
 <body>
 <!-- [ navigation menu ] start -->
@@ -45,7 +47,7 @@
                    <label>My portal</label>
                </li>
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
+                   <a href="cmain.co" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
                </li>
                <li class="nav-item">
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
@@ -54,9 +56,9 @@
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">게시판</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html" target="_blank">커뮤니티</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">부서게시판</a></li>
-                          <li><a href="layout-horizontal.html" target="_blank">공지사항</a></li>
+                       <li><a href="nlist.bo">공지사항</a></li>
+                       <li><a href="dlist.bo">부서 게시판</a></li>
+                          <li><a href="clist.bo">커뮤니티</a></li>
                    </ul>
                </li>
                
@@ -64,7 +66,7 @@
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
+                   <a href="sinsertForm.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
                </li>
                      <li class="nav-item">
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
@@ -182,6 +184,12 @@
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>
    <!-- custom-chart js -->
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pages/dashboard-main.js"></script>   
+
+    
+	<!-- 썸머노트  -->
+	   
+	<script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
 
    
 </body>

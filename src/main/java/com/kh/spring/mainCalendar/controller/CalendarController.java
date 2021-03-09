@@ -28,13 +28,13 @@ import com.kh.spring.address.model.service.AddressService;
 import com.kh.spring.mainCalendar.model.service.CalendarService;
 
 @Controller
-public class fullCalendar {
+public class CalendarController {
 	
 	@Autowired
 	private CalendarService calendarService;
 	
  
-	@RequestMapping("main.co")
+	@RequestMapping("cmain.co")
 	public String mainView() {
 		
 		return "mainCalendar/fullCalendar";

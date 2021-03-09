@@ -61,8 +61,8 @@
                         </div>
                         <ul class="breadcrumb">
                           <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                          <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                           <li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
+                         <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,82 +85,36 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
               
-               <h5>부서 게시판</h5>
+               <h5>설문</h5>
             </div>
             
         <!-- 리스트 영역 -->
             <div class="card-body">
 	            <div style="margin-bottom: 1em;">
-	            	<form action="notice.do" autocomplete="off" style="display: inline-block; width:50%;">
+	            	<form action="notice.do" autocomplete="off" style="display: inline-block; width:30%;">
 	              		<input type="search" name="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" style="display: inline-block; width: 50%">
-	              		<input type="submit" class="btn" value="검색" style="border: 1px solid lightgray">
-	              		<input type="hidden" name="cate" value="${cate}">
-	              		<c:set var="search" value="${search}"/>
-					<c:if test="${!empty search}">
-						<p>"${search}"에 대한 검색결과 입니다.</p>
-					</c:if>
+	              		<input type="submit" class="btn" value="검색">
+	              		
 	           		</form>
-	           		<div style="display: inline-block; width:40%; float: right;">
-	           			<select id="selectbox" name="dataTable_length" name="cate" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" style="width:40%; float: right;">
-		           			<option value="countDesc">조회수 높은순</option>
-		           			<option value="DateDesc">최신 게시물 순</option>
-		           			<option value="DateASC">오래된 게시물 순</option>
-	           			</select>
-	           			<script type="text/javascript">
-	           				$(document).ready(function(){
-	           					var cate = "${cate}";
-	           					$("#selectbox").val(cate).prop("selected",true);
-	           				});
-	           			
-	           				$("#selectbox").change(function(){
-	           					var cate = $("#selectbox option:selected").val();
-	           					var search = "${search}";
-	           					var page = "${page}";
-	           					
-	           					window.location.href="notice.do?search="+search+"&page="+page+"&cate="+cate;
-	           				});
-	           			</script>
-	           		</div>
+
 	       	</div>
               <div class="table-responsive" style="clear: both;">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>
-                      <th>게시번호</th>
+                      <th>번호</th>
+                      <th>분류</th>
                       <th>제목</th>
+                      <th>날짜</th>
                       <th>조회수</th>
                       <th>게시자</th>
-                      <th>게시일</th>
                     </tr>
                   </thead>
-                  <tfoot>
-                    <tr>
-                      <th>게시번호</th>
-                      <th>제목</th>
-                      <th>조회수</th>
-                      <th>게시자</th>
-                      <th>게시일</th>
-                    </tr>
-                  </tfoot>
+                  
                   <tbody>
-                  	<!-- 상단 노출수  -->
-                  	<c:forEach var="i" items="${important}" >
-                  	<c:url var="bdetail" value="bdetail.do">
-                  		<c:param name="cate" value="${cate}"/>
-                  		<c:param name="search" value="${search}"/>
-                  		<c:param name="bNo" value="${i.bNo}"/>
-                  		<c:param name="page" value="${ pi.currentPage }"/>
-                  	</c:url>
-						<tr style="background-color: rgb(220,220,220); font-weight: bold;">
-							<td>${i.bNo}</td>
-							<td><i class="as fa-fw fa fa-bullhorn"> </i>
-							
-							<td>${i.bCount}</td>
-							<td>${i.empName}</td>
-							<td>${i.bDate}</td>
-						</tr>
-					</c:forEach>
-					<!-- 일반 노출부  -->
+  
+					
+					<!-- 일반 게시글 목록 영역  -->
 					<c:forEach var="n" items="${normal}" >
 					<c:url var="bdetail" value="bdetail.do">
 						<c:param name="cate" value="${cate}"/>
@@ -170,24 +124,27 @@
                   	</c:url>
 					<tr class="bContents">
 						<td>${n.bNo}</td>
-						
 						<td>${n.bCount}</td>
+						<td>${n.empName}</td>
+						<td>${n.empName}</td>
 						<td>${n.empName}</td>
 						<td>${n.bDate}</td>
 					</tr>
 					</c:forEach>
                   </tbody>
                 </table>
-                <!--글쓰기 버튼  -->
-                <c:if test="${loginEmp.empStatus eq 'A' }">
-                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
+                
+                 <!--글쓰기 버튼  -->
+                <div align="right">
+                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-check"></i>
 					</span>
 					<span class="text" style="color: white">글쓰기</span>
 				</a>
-				</c:if>
-								<!-- 페이지 영역  -->
+				</div>
+				
+				<!-- 페이지 영역  -->
                	<div class="row" style="width: 90%; margin-left: 5%;">
                		<div class="pagination">
 
