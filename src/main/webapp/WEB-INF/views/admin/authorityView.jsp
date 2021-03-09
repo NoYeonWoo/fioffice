@@ -36,7 +36,7 @@
 
 <body class="">
  
-   <jsp:include page="../common/sidebar.jsp"/>
+   <jsp:include page="../common/adminSidebar.jsp"/>
    <jsp:include page="../common/topbar.jsp"/>
 <!--메인 화면 전체시작 -->
    <div class="pcoded-main-container">
