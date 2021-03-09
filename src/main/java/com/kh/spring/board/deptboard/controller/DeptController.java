@@ -48,5 +48,12 @@ public class DeptController {
 		return "board/deptboard/dboardInsertForm";
 		  
 	}
+	
+	@RequestMapping("ddetail.bo")
+	public String boardDetailView() {
+		
+		return "board/deptboard/dboardDetailView";
+		  
+	}
 
 }

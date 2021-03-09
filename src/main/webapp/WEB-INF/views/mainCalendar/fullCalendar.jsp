@@ -3,6 +3,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+    
 <style>
 	.btn-primary {
 	    color: #fff;
@@ -80,7 +85,7 @@
 				<div class="card-body text-center">
                     <div class="table-responsive">
                         <div class="card-body">
-						<button type="button" class="btn  btn-primary btn-lg"> + 일정등록 </button>
+						<button type="button" class="btn  btn-primary btn-lg"><i class="fas fa-plus"></i>&nbsp;일정등록</button>
 						</div>
                       </div>
                   </div>

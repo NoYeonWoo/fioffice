@@ -4,6 +4,10 @@
 <html>
 <head>
 
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+    
+   
 </head>
 
 <body class="">

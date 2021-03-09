@@ -61,8 +61,9 @@
                 종로지원 : 서울특별시 중구 남대문로 120 대일빌딩 2F, 3F <br>
                 당산지원 : 서울특별시 영등포구 선유동2로 57 이레빌딩 (구관) 19F, 20F 
             </p>
-            <p id="p2">Copyright ⓒ 1998-2019 KH Information Educational Institute All Right Reserved</p>     
+            <p id="p2">Copyright ⓒ <strong class="tc_blue">FIOFFICE</strong>. All rights reserved. </p> 
         </div>
     </div>
+	
 </body>
 </html>

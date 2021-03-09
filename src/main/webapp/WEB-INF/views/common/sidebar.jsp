@@ -18,9 +18,40 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 	
    <title>FIOFFICE</title>
-   
+	
+	<style>
+	
+	.btn-outline-primary {
+    color: #8069AE;
+    border-color: #8069AE;
+	}
+	
+	.btn-outline-primary:hover {
+	    color: #fff;
+	    background-color: #8069AE;
+	    border-color: #8069AE;
+	}
+	
+	.btn-outline-primary:focus, .btn-outline-primary.focus {
+	    box-shadow: 0 0 0 0rem rgba(70, 128, 255, 0.5);
+	}
+	
+	.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+	    color: #8069AE;
+	    background-color: transparent;
+	}
+	
+	.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+	  .show > .btn-outline-primary.dropdown-toggle {
+	    color: #fff;
+	    background-color: #8069AE;
+	    border-color: #8069AE;
+	}
+	
+	</style>
 </head>
 <body>
+
 <!-- [ navigation menu ] start -->
 <nav class="pcoded-navbar menu-light ">
       <div class="navbar-wrapper  ">

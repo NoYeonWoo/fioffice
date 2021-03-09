@@ -59,7 +59,7 @@
 				<div class="card-body text-center">
                     <div class="table-responsive">
                         <div class="card-body">
-						<button type="button" class="btn  btn-primary btn-lg"> + 설문등록  </button>
+						<button type="button" class="btn  btn-primary btn-lg"><i class="fas fa-plus"></i>&nbsp;설문등록  </button>
 						</div>
                       </div>
                   </div>

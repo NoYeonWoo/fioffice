@@ -4,6 +4,12 @@
 <html>
 <head>
 
+
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+    
+   
+
 <style type="text/css">
 	#buttons button{
 		margin: 5em;
@@ -75,6 +81,7 @@
 					<td><label>카테고리</label></td>
 					<td>
 						<select name="deptCategory" >
+							<option value="">분류</option>
 		                     <option value="10" style="color : black;">긴급</option>
 		                     <option value="20" style="color : black;">알림</option>
 		                     <option value="30" style="color : black;">공지</option>
