@@ -8,7 +8,7 @@ public class todoCotroller {
 
 	@RequestMapping("todoListView.do")
 	public String authorityView() {
-		return "todo/todoView ";
+		return "todo/todoView";
 	}
 	
 }

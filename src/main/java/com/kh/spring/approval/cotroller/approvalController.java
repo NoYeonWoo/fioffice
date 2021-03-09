@@ -8,7 +8,7 @@ public class approvalController {
  
 	
 	
-	@RequestMapping("approvalList.do ")
+	@RequestMapping("approvalList.do")
 	public String approvalList() {
 		return "approval/approvalListView";
 	}
