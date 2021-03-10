@@ -47,7 +47,7 @@
 			<div class="col-lg-10">
 				<div class="card mb-4">
 					<div class="card-header">
-						<h3>신규 사원 등록</h3>
+						<h3>사원 수정</h3>
 					</div><br><br>
 					<div class="card-body">
 					
@@ -60,17 +60,16 @@
 							
                                 <tr>
                                  <td style="width:10%">이름</td>
-                                 <td style="width:40%"><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
                                  <td style="width:10%">주민번호</td>
-                                 <td style="width:40%">
-                                      <div class="row">
-										<div class="col-sm-4 mb-sm-0">
-											<input type="text" id= "empRegNo1" name="empRegNo1" class="form-control form-control-user" max="6">
+                                 <td style="width:25%"><div class="row">
+										<div class="col-sm-3 mb-sm-0">
+											<input type="text" id= "empphone1" name="empphone" class="form-control form-control-user" max="6">
 										</div>
-										<div class="col-sm-4">
-											<input type="text" id="empRegNo2" name="empRegNo2" class="form-control form-control-user">
+										<div class="col-sm-3">
+											<input type="text" id="empphone2" name="empphone" class="form-control form-control-user">
 										</div>
-									   </div>
+									
 
 										
 										</td>

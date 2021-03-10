@@ -34,8 +34,8 @@
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
                    <ul class="pcoded-submenu">
                        <li><a href="layout-vertical.html" target="_blank">조직설계</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">사원관리</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">사원추가</a></li>
+                       <li><a href="manageEmp.do" target="_blank">사원관리</a></li>
+                       <li><a href="insertEmp.do" target="_blank">사원추가</a></li>
                    </ul>
                </li>
                
