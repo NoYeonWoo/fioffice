@@ -48,10 +48,10 @@
                         <h5>주소록</h5>
                         <span class="d-block m-t-5">
                         <div class="card-body">
-                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="검색">
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
-                        	<button type="button" class="btn  btn-primary">추가하기</button>
+                        	<button type="button" class="btn  btn-primary">휴가계</button>
                         	
                         </div>
                         </span>
