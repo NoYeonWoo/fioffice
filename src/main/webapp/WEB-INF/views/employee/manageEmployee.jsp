@@ -232,40 +232,26 @@
 
 						<!-- jQuery와 Postcodify를 로딩한다. 주소입력 -->
 						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
-						<script>
 					
-							$(function() {
-								$("#postcodify_search_button")
-										.postcodifyPopUp();
-							});
-						</script>
                          
                          	 <script>
+                     
 								function endFunction() {
 								  confirm("퇴사를 진행하시겠습니까?");
 								}
 							</script>
 						     
-						      <script>
-								function updateEmp() {
-								  confirm("수정을 진행하시겠습니까?");
-								}
-							</script>
-
-     
-						
-						
-									</div>
+												</div>
 									</div>
 									
 									<div class="modal-footer">
-									<a class="btn btn-secondary" style="float:right" onclick= "updateEmp()" href="updateEmp.do"> <i class="fas fa-file-signature"></i>수정하기</a>								
+									<a class="btn btn-secondary " type="submit" style="float:right" onclick= "updateEmp()"  id="updateButton" href="updateEmp.do"> <i class="fas fa-file-signature"></i>수정하기</a>								
 							
 									</div>
 								</div>
 							</div>
 						</div>
-										   <!-- 결재하기 모달끝  -->  
+										   <!-- 상세보기  모달끝  -->  
 
 
  </div> <!--지우지 마세요    div class="row"  -->
