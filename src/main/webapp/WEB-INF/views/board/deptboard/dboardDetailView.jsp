@@ -133,24 +133,25 @@
 	</div>
 	</div>
 		
-	</div>
+
 	
 	
 	
 	<!-- 댓글 영역 -->
-	<div class="app-card app-board-comment app-board-section">
-   	<div class="card shadow mb-4">
+
+   
    	
-   	
+   
 	<div class="app-board-comment-target" id="comment"></div>
 		<div class="app-comment-header app-board-container tw-flex tw-items-center">
-			<div class="tw-font-bold tw-text-base tw-mr-2">댓글</div>
+			<div class="tw-font-bold tw-text-base tw-mr-2" >댓글</div>
 			    <div class="tw-text-sm">
 			      <span class="tw-text-gray-700">총 </span>
 			      <span class="tw-text-primary tw-text-gray-700">count</span><span class="tw-text-gray-700">개</span>
+			    	
 			    </div>
 			</div>
-	  
+	  <br>
 		  
 	  <!-- 등록되는 댓글 영역 -->
 		<ul id="app-board-comment-list" class="app-board-comment-list">
@@ -210,6 +211,9 @@
 			            <div class="app-comment-content tw-py-3">
 			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
 			         	</div>
+			         	<div align="right">
+			         	<a class="comment-item-tool app-link tw-mr-2">답글</a> 
+			         	</div>
 				</div>
 			</li>
 		</ul>   
@@ -227,10 +231,10 @@
 				<span class="text" style="color: white">댓글 등록</span>
 			</a>
 		</div>
-		
+		</div>
 	
-	</div> <!-- 댓글 영역 카드 -->
-	
+	</div> <!-- 댓글 영역-->
+
 	
 	
 	</div> <!-- div class="container-fluid" -->
