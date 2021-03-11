@@ -18,9 +18,40 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
 	
    <title>FIOFFICE</title>
-   
+	
+	<style>
+	
+	.btn-outline-primary {
+    color: #8069AE;
+    border-color: #8069AE;
+	}
+	
+	.btn-outline-primary:hover {
+	    color: #fff;
+	    background-color: #8069AE;
+	    border-color: #8069AE;
+	}
+	
+	.btn-outline-primary:focus, .btn-outline-primary.focus {
+	    box-shadow: 0 0 0 0rem rgba(70, 128, 255, 0.5);
+	}
+	
+	.btn-outline-primary.disabled, .btn-outline-primary:disabled {
+	    color: #8069AE;
+	    background-color: transparent;
+	}
+	
+	.btn-outline-primary:not(:disabled):not(.disabled):active, .btn-outline-primary:not(:disabled):not(.disabled).active,
+	  .show > .btn-outline-primary.dropdown-toggle {
+	    color: #fff;
+	    background-color: #8069AE;
+	    border-color: #8069AE;
+	}
+	
+	</style>
 </head>
 <body>
+
 <!-- [ navigation menu ] start -->
 <nav class="pcoded-navbar menu-light ">
       <div class="navbar-wrapper  ">
@@ -92,9 +123,9 @@
                   <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="pList.pio">상품관리</a></li>
-                       <li><a href="ioList.pio">입출고관리</a></li>
-                       <li><a href="cList.pio">거래처관리</a></li>
+                       <li><a href="pList.pio" target="_blank">상품관리</a></li>
+                       <li><a href="ioList.pio" target="_blank">입출고관리</a></li>
+                       <li><a href="cList.pio" target="_blank">거래처관리</a></li>
                        
                    </ul>
                </li>

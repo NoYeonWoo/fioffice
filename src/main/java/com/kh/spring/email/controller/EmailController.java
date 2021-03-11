@@ -1,4 +1,4 @@
-package com.kh.spring.board.deptboard.controller;
+package com.kh.spring.email.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,36 +24,17 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 
-import com.kh.spring.address.model.service.AddressService;
-import com.kh.spring.board.deptboard.model.service.DeptService;
-import com.kh.spring.board.notice.model.service.NoticeService;
-import com.kh.spring.mainCalendar.model.service.CalendarService;
 
 @Controller
-public class DeptController {
+public class EmailController {
 	
-	@Autowired
-	private DeptService deptService;
-	
-	@RequestMapping("dlist.bo")
-	public String boardList() {
-		
-		return "board/deptboard/dboardListView";
-		  
-	}
-	
-	@RequestMapping("dinsertForm.bo")
-	public String boardInsertForm() {
-		
-		return "board/deptboard/dboardInsertForm";
-		  
-	}
-	
-	@RequestMapping("ddetail.bo")
-	public String boardDetailView() {
-		
-		return "board/deptboard/dboardDetailView";
-		  
-	}
 
+
+	@RequestMapping("view.email")
+	public String viewAddress() {
+		return "email/email";
+	}
+	
+	
+	////////////////시작
 }

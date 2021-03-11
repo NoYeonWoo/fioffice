@@ -4,6 +4,10 @@
 <html>
 <head>
 
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+    
+    
 </head>
 
 <body class="       ">
@@ -17,7 +21,7 @@
    
    
    <!-- [ Pre-loader ] End -->
-   <jsp:include page="adminSidebar.jsp"/>
+   <jsp:include page="sidebar.jsp"/>
    <jsp:include page="topbar.jsp"/>
    
    <div class="pcoded-main-container">

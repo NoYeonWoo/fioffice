@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="addressMapper">
+	
+	<resultMap id="addressResultSet" type="Address"><!-- 오른쪽은 vo에서  -->
+		<id column="ADDRESS_NO" property="addressNo"/>
+		<result column="ADDRESS_NAME" property="addressName"/>
+		<result column="ADDESS_PHONE" property="addressPhone"/>
+		<result column="ADDRESS_EMAIL" property="addressEmail"/>
+		<result column="ADDRESS_COM_NAME" property="addressComName"/>
+		<result column="ADDRESS_JOB" property="addressJob"/>
+		<result column="ADDRESS_TEL" property="addressTel"/>
+		<result column="ADDRESS_DEPT" property="addressDept"/>
+		<result column="ADDRESS_ADDRESS" property="addressAddress"/>
+		<result column="ADDRESS_MEMO" property="addressMemo"/>
+		<result column="STATUS" property="status"/>
+	</resultMap>
+	
+	
+	<select id="selectList" resultMap="addressResultSet">
+		SELECT *
+		FROM ADDRESS
+		WHERE STATUS = 'Y'
+		ORDER BY ADDRESS_NO DESC
+	
+	</select>
+	
+	<select id="selectAddress" parameterType="_int" resultMap="addressResultSet">
+		SELECT *
+		FROM ADDRESS
+		WHERE ADDRESS_NO=#{addressNo}
+		and status='Y'
+	</select>
+	
+	<update id="deleteAddress" parameterType="_int">
+	
+	UPDATE ADDRESS
+	SET STATUS='N'
+	WHERE ADDRESS_NO=#{addressNo}
+	
+	
+	</update>
+	
+</mapper>

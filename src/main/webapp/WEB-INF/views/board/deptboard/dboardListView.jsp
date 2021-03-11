@@ -3,44 +3,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<style>
 
-.cate{
- 	background-color: #B8ACD0;
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+    	
+<!-- CSS -->
 
-}
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
+<!-- JS -->
+<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
 
-.pagination {
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
-}
+	<style>
+	
+	:root {
+		--aside-width: 17.625rem;
+		}
+		
+	.cate{
+	 	background-color: #B8ACD0;
+	
+	}
+	
+	.pagination {
+	  display: inline-block;
+	  margin-left: auto;
+	  margin-right: auto;
+	}
+	
+	.pagination a {
+	  color: black;
+	  float: left;
+	  padding: 8px 16px;
+	  text-decoration: none;
+	  transition: background-color .3s;
+	}
+	
+	.pagination a.active {
+	  background-color: rgb(2, 1, 13);
+	  color: white;
+	}
+	
+	
+	 a:link { color: gray; text-decoration: none;}
+	 a:visited { color: gray; text-decoration: none;}
+	 a:hover {text-decoration: none;}
+	
+	.bContents:hover {
+		background: rgb(250,250,250);
+	}
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 8px 16px;
-  text-decoration: none;
-  transition: background-color .3s;
-}
-
-.pagination a.active {
-  background-color: rgb(2, 1, 13);
-  color: white;
-}
-
-
- a:link { color: gray; text-decoration: none;}
- a:visited { color: gray; text-decoration: none;}
- a:hover {text-decoration: none;}
-
-.bContents:hover {
-	background: rgb(250,250,250);
-}
-</style>
+	</style>
 </head>
 
-<body class="">
+<body>
   
    <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
@@ -84,104 +99,136 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              
                <h5>부서 게시판</h5>
             </div>
             
-        <!-- 리스트 영역 -->
-            <div class="card-body">
-	            <div style="margin-bottom: 1em;">
-	            	<form action="notice.do" autocomplete="off" style="display: inline-block; width:30%;">
-	              		<input type="search" name="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTable" style="display: inline-block; width: 50%">
-	              		<input type="submit" class="btn" value="검색">
-	              		
-	           		</form>
-	           		<div style="display: inline-block; width:40%; float: right;">
-	           			<select id="selectbox" name="dataTable_length" name="cate" aria-controls="dataTable" class="custom-select custom-select-sm form-control form-control-sm" style="width:40%; float: right;">
-		           			<option value="countDesc">조회수 높은순</option>
-		           			<option value="DateDesc">최신 게시물 순</option>
-		           			<option value="DateASC">오래된 게시물 순</option>
-	           			</select>
-	           			<script type="text/javascript">
-	           				$(document).ready(function(){
-	           					var cate = "${cate}";
-	           					$("#selectbox").val(cate).prop("selected",true);
-	           				});
-	           			
-	           				$("#selectbox").change(function(){
-	           					var cate = $("#selectbox option:selected").val();
-	           					var search = "${search}";
-	           					var page = "${page}";
-	           					
-	           					window.location.href="notice.do?search="+search+"&page="+page+"&cate="+cate;
-	           				});
-	           			</script>
-	           		</div>
-	       	</div>
-              <div class="table-responsive" style="clear: both;">
-                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                  <thead>
-                    <tr>
-                      <th>번호</th>
-                      <th>분류</th>
-                      <th>제목</th>
-                      <th>날짜</th>
-                      <th>조회수</th>
-                      <th>게시자</th>
-                    </tr>
-                  </thead>
-                  
-                  <tbody>
-                  
-                  	<!-- 상단 공지 영역 -->
-                  	<c:forEach var="i" items="${important}" >
-                  	<c:url var="bdetail" value="bdetail.do">
-                  		<c:param name="cate" value="${cate}"/>
-                  		<c:param name="search" value="${search}"/>
-                  		<c:param name="bNo" value="${i.bNo}"/>
-                  		<c:param name="page" value="${ pi.currentPage }"/>
-                  	</c:url>
-						<tr style="background-color: rgb(220,220,220); font-weight: bold;">
-							<td>test</td>
-							<td>공지</i>
-							<td>공지</td>
-							<td>공지</td>
-							<td>공지</td>
-							<td>관리자</td>
-						</tr>
-					</c:forEach>
-					
-					<!-- 일반 게시글 목록 영역  -->
-					<c:forEach var="n" items="${normal}" >
-					<c:url var="bdetail" value="bdetail.do">
-						<c:param name="cate" value="${cate}"/>
-                  		<c:param name="search" value="${search}"/>
-                  		<c:param name="bNo" value="${n.bNo}"/>
-                  		<c:param name="page" value="${ pi.currentPage }"/>
-                  	</c:url>
-					<tr class="bContents">
-						<td>${n.bNo}</td>
-						<td>${n.bCount}</td>
-						<td>${n.empName}</td>
-						<td>${n.empName}</td>
-						<td>${n.empName}</td>
-						<td>${n.bDate}</td>
-					</tr>
-					</c:forEach>
-                  </tbody>
-                </table>
+            
+    <!-- 리스트 영역 -->
+	<div class="app-board-section">
+
+
+    <ul class="app-board-template-list">
+                
+        <li>
+            <a class="tw-flex-1" href="ddetail.bo">
+            
+	        <div class="tw-flex-1">
+	          	<div class="app-list-title tw-flex-wrap">
+	            	<span>[getCategory]
+	            	<span class="tw-mr-1">게시글 제목입니다.</span>
+	            	</span>
+				</div>
+	          
+	          <div class="app-list-meta">
+	             <span>
+	              <div class="app-list-member" style="color: #;">
+	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+	                 		<div class="member_4 tw-inline-flex tw-items-center">김영찬</div>
+	              		</div>
+				</div>
+	            </span>        
+				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
+	                                                                  
+	            <span>
+	               <span class="tw-mr-1">조회</span>
+	               <span>10</span>
+	            </span>              
+	         </div>
+         
+        	</div> <!--   <div class="tw-flex-1"> -->
+        	</a>
+    	</li>
+    </ul>
+
+
+
+    <ul class="app-board-template-list">
+                
+        <li>
+            <a class="tw-flex-1" href="ddetail.bo">
+            
+	        <div class="tw-flex-1">
+	          	<div class="app-list-title tw-flex-wrap">
+	            	<span>[getCategory]
+	            	<span class="tw-mr-1">게시글 제목입니다.</span>
+	            	</span>
+				</div>
+	          
+	          <div class="app-list-meta">
+	             <span>
+	              <div class="app-list-member" style="color: #;">
+	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+	                 		<div class="member_4 tw-inline-flex tw-items-center">이윤해</div>
+	              		</div>
+				</div>
+	            </span>        
+				<span title="2021-02-04 01:33:27">2021.03.08</span>                                    
+	                                                                  
+	            <span>
+	               <span class="tw-mr-1">조회</span>
+	               <span>80</span>
+	            </span>              
+	         </div>
+         
+        	</div> <!--   <div class="tw-flex-1"> -->
+        	<!-- 댓글 count -->
+        	<div class="app-list-comment">20</div>
+        	</a>
+    	</li>
+    </ul>
+    
+     <ul class="app-board-template-list">
+                
+        <li>
+            <a class="tw-flex-1" href="ddetail.bo">
+            
+	        <div class="tw-flex-1">
+	          	<div class="app-list-title tw-flex-wrap">
+	            	<span>[getCategory]
+	            	<span class="tw-mr-1">게시글 제목입니다.</span>
+	            	</span>
+				</div>
+	          
+	          <div class="app-list-meta">
+	             <span>
+	              <div class="app-list-member" style="color: #;">
+	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+	                 		<div class="member_4 tw-inline-flex tw-items-center">노연우</div>
+	              		</div>
+				</div>
+	            </span>        
+				<span title="2021-02-04 01:33:27">2021.03.04</span>                                    
+	                                                                  
+	            <span>
+	               <span class="tw-mr-1">조회</span>
+	               <span>15</span>
+	            </span>              
+	         </div>
+         
+        	</div> <!--   <div class="tw-flex-1"> -->
+        	<!-- 댓글 count -->
+        	<div class="app-list-comment">11</div>
+        	</a>
+    	</li>
+    </ul>
+
                 
                 <!--글쓰기 버튼  -->
+                <div><br>
                 <div align="right">
                 <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
-						<i class="fas fa-check"></i>
+						<i class="fas fa-plus"></i>
 					</span>
-					<span class="text" style="color: white">글쓰기</span>
-				</a>
+					<span class="text" style="color: white">&nbsp;글쓰기</span>
+				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				<br>
 				</div>
 				
-				<!-- 페이지 영역  -->
+				
+              </div>
+              
+              <!-- 페이지 영역  -->
                	<div class="row" style="width: 90%; margin-left: 5%;">
                		<div class="pagination">
 
@@ -199,7 +246,6 @@
 					</div>
                </div>
 				
-              </div>
             </div>
           </div>			
 				

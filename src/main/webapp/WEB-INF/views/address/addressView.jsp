@@ -26,6 +26,7 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="#!">My Portal</a></li>
                         </ul>
                     </div>
                 </div>
@@ -37,79 +38,102 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  
-
-<!-- [ Contextual-table ] start -->
-            <div class="col-md-6">
+ 
+ 
+ 
+ <!-- [ stiped-table ] start -->
+            <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Contextual Classes</h5>
-                        <span class="d-block m-t-5">For Make row Contextual add Contextual class like <code>.table-success</code> in <code> tr tag</code> and For cell add Contextual class in <code> td or th tag</code> .</span>
+                        <h5>주소록</h5>
+                        <span class="d-block m-t-5">
+                        <div class="card-body">
+                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                        	<br>
+                        	<button type="button" class="btn  btn-secondary">검색하기</button>
+                        	<button type="button" class="btn  btn-primary">추가하기</button>
+                        	
+                        </div>
+                        </span>
+                        
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
+                                        <th>번호</th>
+                                        <th>이름</th>
+                                        <th>휴대폰번호</th>
+                                        <th>이메일</th>
+                                        <th>회사이름</th>
+                                        <th>직급</th>
+                                        <th>내선전화</th>
+                                        <th>부서</th>
+                                        <th>회사주소</th>
+                                        <th>메모</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr class="table-active">
+                                    <tr>
                                         <td>1</td>
                                         <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
+                                        <td>010-1111-2222</td>
+                                        <td>qwerty@naver.com</td>
+                                        <td>주 참맛</td>
+                                        <td>대리</td>
+                                        <td>070-123-5444</td>
+                                        <td>홍보부</td>
+                                        <td>경기도 성남시 이매동 효성아파트1406-504</td>
+                                        <td>대머리이고 나이많아 보이고 커피를 좋아한다.</td>
                                     </tr>
                                     <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr class="table-success">
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr>
-                                        <td>4</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr class="table-warning">
-                                        <td>5</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>010-1111-2222</td>
+                                        <td>qwerty@naver.com</td>
+                                        <td>주 참맛</td>
+                                        <td>대리</td>
+                                        <td>070-123-5444</td>
+                                        <td>홍보부</td>
+                                        <td>경기도 성남시 이매동 효성아파트1406-504</td>
+                                        <td>대머리이고 나이많아 보이고 커피를 좋아한다.</td>
                                     </tr>
                                     <tr>
-                                        <td>6</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                    <tr class="table-danger">
-                                        <td>7</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>010-1111-2222</td>
+                                        <td>qwerty@naver.com</td>
+                                        <td>주 참맛</td>
+                                        <td>대리</td>
+                                        <td>070-123-5444</td>
+                                        <td>홍보부</td>
+                                        <td>경기도 성남시 이매동 효성아파트1406-504</td>
+                                        <td>대머리이고 나이많아 보이고 커피를 좋아한다.</td>
                                     </tr>
                                     <tr>
-                                        <td>8</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>010-1111-2222</td>
+                                        <td>qwerty@naver.com</td>
+                                        <td>주 참맛</td>
+                                        <td>대리</td>
+                                        <td>070-123-5444</td>
+                                        <td>홍보부</td>
+                                        <td>경기도 성남시 이매동 효성아파트1406-504</td>
+                                        <td>대머리이고 나이많아 보이고 커피를 좋아한다.</td>
                                     </tr>
-                                    <tr class="table-info">
-                                        <td>9</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>Mark</td>
+                                        <td>010-1111-2222</td>
+                                        <td>qwerty@naver.com</td>
+                                        <td>주 참맛</td>
+                                        <td>대리</td>
+                                        <td>070-123-5444</td>
+                                        <td>홍보부</td>
+                                        <td>경기도 성남시 이매동 효성아파트1406-504</td>
+                                        <td>대머리이고 나이많아 보이고 커피를 좋아한다.</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -117,7 +141,7 @@
                     </div>
                 </div>
             </div>
-            <!-- [ Contextual-table ] end -->
+            <!-- [ stiped-table ] end -->
 
 
 
@@ -133,4 +157,5 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 </body>
+
 </html>

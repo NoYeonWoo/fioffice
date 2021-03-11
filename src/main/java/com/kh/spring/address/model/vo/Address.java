@@ -11,7 +11,7 @@ public class Address {
 	public String addressDept;
 	public String addressAddress;
 	public String addressMemo;
-	public String Status;
+	public String status;
 	
 	
 	public Address() {
@@ -19,6 +19,9 @@ public class Address {
 	}
 	
 	
+	
+
+
 	public Address(int addressNo, String addressName, String addressPhone, String addressEmail, String addressComName,
 			String addressJob, String addressTel, String addressDept, String addressAddress, String addressMemo,
 			String status) {
@@ -33,8 +36,11 @@ public class Address {
 		this.addressDept = addressDept;
 		this.addressAddress = addressAddress;
 		this.addressMemo = addressMemo;
-		Status = status;
+		this.status = status;
 	}
+
+
+
 
 
 	public int getAddressNo() {
@@ -42,9 +48,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressNo(int addressNo) {
 		this.addressNo = addressNo;
 	}
+
+
+
 
 
 	public String getAddressName() {
@@ -52,9 +64,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressName(String addressName) {
 		this.addressName = addressName;
 	}
+
+
+
 
 
 	public String getAddressPhone() {
@@ -62,9 +80,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressPhone(String addressPhone) {
 		this.addressPhone = addressPhone;
 	}
+
+
+
 
 
 	public String getAddressEmail() {
@@ -72,9 +96,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressEmail(String addressEmail) {
 		this.addressEmail = addressEmail;
 	}
+
+
+
 
 
 	public String getAddressComName() {
@@ -82,9 +112,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressComName(String addressComName) {
 		this.addressComName = addressComName;
 	}
+
+
+
 
 
 	public String getAddressJob() {
@@ -92,9 +128,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressJob(String addressJob) {
 		this.addressJob = addressJob;
 	}
+
+
+
 
 
 	public String getAddressTel() {
@@ -102,9 +144,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressTel(String addressTel) {
 		this.addressTel = addressTel;
 	}
+
+
+
 
 
 	public String getAddressDept() {
@@ -112,9 +160,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressDept(String addressDept) {
 		this.addressDept = addressDept;
 	}
+
+
+
 
 
 	public String getAddressAddress() {
@@ -122,9 +176,15 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressAddress(String addressAddress) {
 		this.addressAddress = addressAddress;
 	}
+
+
+
 
 
 	public String getAddressMemo() {
@@ -132,19 +192,31 @@ public class Address {
 	}
 
 
+
+
+
 	public void setAddressMemo(String addressMemo) {
 		this.addressMemo = addressMemo;
 	}
 
 
+
+
+
 	public String getStatus() {
-		return Status;
+		return status;
 	}
+
+
+
 
 
 	public void setStatus(String status) {
-		Status = status;
+		this.status = status;
 	}
+
+
+
 
 
 	@Override
@@ -152,8 +224,14 @@ public class Address {
 		return "Address [addressNo=" + addressNo + ", addressName=" + addressName + ", addressPhone=" + addressPhone
 				+ ", addressEmail=" + addressEmail + ", addressComName=" + addressComName + ", addressJob=" + addressJob
 				+ ", addressTel=" + addressTel + ", addressDept=" + addressDept + ", addressAddress=" + addressAddress
-				+ ", addressMemo=" + addressMemo + ", Status=" + Status + "]";
+				+ ", addressMemo=" + addressMemo + ", status=" + status + "]";
 	}
+
+
+
+
+
+	
 	
 	
 	
