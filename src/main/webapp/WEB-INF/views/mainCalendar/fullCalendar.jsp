@@ -96,9 +96,9 @@
             <div class="card table-card">
                    
                 <div class="pd-20 card-box mb-30">
-               <div class="calendar-wrap">
-                  <div id='calendar'></div>
-               </div>
+               	<div class="calendar-wrap">
+                  	<div id='calendar'></div>
+               	</div>
                
                  <jsp:include page="/WEB-INF/views/common/calendar.jsp"/>
                  
