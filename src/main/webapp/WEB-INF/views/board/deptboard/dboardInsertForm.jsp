@@ -97,8 +97,13 @@
 						  
 					  <div class="row">
 						  <div id="buttons">
-							  <button type="button" onclick="commit();" class="btn btn-primary">등록</button>
-							  <button type="button" onclick="javascript:history.back();" class="btn btn-danger">취소</button>
+							  	<a href="dinsert.so" class="btn btn-primary btn-icon-split">
+								<span class="icon text-white-50">
+								</span>
+								<span class="text" style="color: white">등록</span>
+								</a>
+								
+							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>
 				 </div>

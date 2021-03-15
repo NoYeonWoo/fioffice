@@ -38,13 +38,7 @@
         box-sizing: border-box;
         
    		}
-   		
-   		a.app-button-xs {
-   			color: #ffffff;
-   		}
-   		
-
-
+		
 	</style>
 </head>
 
@@ -60,6 +54,7 @@
      <div class="pcoded-content">
       
         
+          
    <!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
         <div class="page-header">
             <div class="page-block">
@@ -69,15 +64,14 @@
                             <h5 class="m-b-10"></h5>
                         </div>
                         <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                          <li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
+                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
   <!-- [ breadcrumb ] end -->
+  
   
   
 	<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
@@ -92,9 +86,7 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>부서 게시판</h5>
-               <div class="card-header-right">  
-               </div>
+               <h5>설문</h5>
             </div>
             
 
@@ -103,7 +95,7 @@
 	<div class="app-board-article-head">
 	<div class="app-board-container">
 	<!-- <img src="" alt=""> -->
-	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">부서게시판 디테일뷰 테스트</h1>
+	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">설문 디테일뷰 테스트</h1>
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
@@ -113,12 +105,12 @@
 	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">오수현</a>
 	<div class="app-article-meta">
 	<el-tooltip content="2021-02-04 01:33:27">
-	<div class="app-article-meta-item">2021.03.09</div>
+	<div class="app-article-meta-item">2021.02.04</div>
 	</el-tooltip>
 	<div class="app-article-meta-divider"> ・ </div>
 	<div class="app-article-meta-item">조회 수 1</div>
 	<div class="app-article-meta-divider"> ・ </div>
-	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 4</a>
+	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 0</a>
 	</div>
 	</div>
 	</div> <div class="tw-flex-1"></div>
@@ -135,23 +127,16 @@
 	
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
-			본문 내용입니다.<br><br>
-			
+			본문 내용입니다.<br>
 		</div>
 	
 	<!-- 비율용 -->
 		<div class="tw-flex tw-pt-8">
-			<div class="tw-flex-1" align="right">
-			<!-- 글수정 -->
-			<a href="dupdateForm.bo" class="app-button app-button-rounded">
-						<span class="text" style="color: #383A3C">글 수정</span>
-					</a>
+			<div class="tw-flex-1">
 			</div>
-			
 		</div>
 	</div>
-	
-	
+
 	</div>
 		
 
@@ -247,19 +232,19 @@
 	<textarea id="editor-138" name="content" style="display: none;"></textarea>
 	</div>
 	<br>
-			<div>
+	 		<div>
 			 	<div class="right">
 			        <a href="rinsert.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">댓글 등록</span>
 					</a>
 				</div>
 				<div class="left">
-			        <a href="dlist.bo" class="app-button app-button-rounded app-button-xs primary">
+			        <a href="slist.so" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">목록</span>
 					</a>
 				</div>
 			</div>
-		</div>
+	</div>
 	
 	</div> <!-- 댓글 영역-->
 

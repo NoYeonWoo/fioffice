@@ -36,16 +36,30 @@ public class SurveyController {
 	private SurveyService surveyService;
 	
 	@RequestMapping("slist.so")
-	public String boardList() {
+	public String surveyList() {
 		
 		return "survey/surveyListView";
 		  
 	}
 	
+	@RequestMapping("sdetail.so")
+	public String surveyDetailView() {
+		
+		return "survey/surveyDetailView";
+		  
+	}
+	
 	@RequestMapping("sinsertForm.so")
-	public String boardInsertForm() {
+	public String surveyInsertForm() {
 		
 		return "survey/surveyInsertForm";
+		  
+	}
+	
+	@RequestMapping("sadmin.so")
+	public String surveyAdmin() {
+		
+		return "survey/surveyAdmin";
 		  
 	}
 

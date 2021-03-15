@@ -1,4 +1,4 @@
-package com.kh.spring.board.notice.controller;
+package com.kh.spring.board.community.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -24,39 +24,40 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 
-import com.kh.spring.board.notice.model.service.NoticeService;
+import com.kh.spring.board.community.model.service.CommunityService;
 
 @Controller
-public class NoticeController {
+public class CommunityController {
 	
 	@Autowired
-	private NoticeService noticeService;
+	private CommunityService communityService;
 	
-	@RequestMapping("nlist.bo")
+	@RequestMapping("clist.bo")
 	public String boardList() {
 		
-		return "board/notice/noticeListView";
+		return "board/community/communityListView";
 		  
 	}
 	
-	@RequestMapping("ninsertForm.bo")
+	@RequestMapping("cinsertForm.bo")
 	public String boardInsertForm() {
 		
-		return "board/notice/noticeInsertForm";
+		return "board/community/communityInsertForm";
 		  
 	}
 	
-	@RequestMapping("nupdateForm.bo")
+	@RequestMapping("cupdateForm.bo")
 	public String boardUpdateForm() {
 		
-		return "board/notice/noticeUpdateForm";
+		return "board/community/communityUpdateForm";
 		  
 	}
 	
-	@RequestMapping("ndetail.bo")
+	
+	@RequestMapping("cdetail.bo")
 	public String boardDetailView() {
 		
-		return "board/notice/noticeDetailView";
+		return "board/community/communityDetailView";
 		  
 	}
 

@@ -148,8 +148,8 @@
                         </div>
                         <ul class="breadcrumb">
                           <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
+                          <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                           <li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                         </ul>
                     </div>
                 </div>
@@ -171,7 +171,7 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>부서 게시판</h5>
+               <h5>커뮤니티</h5>
             </div>
             
             
@@ -181,37 +181,16 @@
     
 	<div class="app-board-section">
 	
-	<ul class="app-board-category app-card app-card--force">
-	    <li class="active">
-	    <a href="dlist.bo">전체</a>
-	    </li>
-    	<li>
-	    <a href="">
-	        <span style="txt">공지</span>
-	    </a>
-	    </li>
-	    <li>
-		    <a href="">
-		        <span style="txt">긴급</span>
-		    </a>
-	   	</li>
-	   	<li>
-		    <a href="">
-		        <span style="txt">알람</span>
-	        </a>
-		</li>
-		</ul>
-	
 	
 
 
     <ul class="app-board-template-list">
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="cdetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
+	            	<span>[자체말머리]
 	            	<span class="tw-mr-1">게시글 제목입니다.</span>
 	            	</span>
 				</div>
@@ -242,11 +221,11 @@
     <ul class="app-board-template-list">
                 
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="cdetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
+	            	<span>[자체말머리]
 	            	<span class="tw-mr-1">게시글 제목입니다.</span>
 	            	</span>
 				</div>
@@ -277,11 +256,11 @@
      <ul class="app-board-template-list">
                 
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="cdetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
+	            	<span>[자체말머리]
 	            	<span class="tw-mr-1">게시글 제목입니다.</span>
 	            	</span>
 				</div>
@@ -313,7 +292,7 @@
                 <!--글쓰기 버튼  -->
                 <div><br>
                 <div align="right">
-                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
+                <a href="cinsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 					</span>

@@ -24,10 +24,8 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 
-import com.kh.spring.address.model.service.AddressService;
 import com.kh.spring.board.deptboard.model.service.DeptService;
-import com.kh.spring.board.notice.model.service.NoticeService;
-import com.kh.spring.mainCalendar.model.service.CalendarService;
+
 
 @Controller
 public class DeptController {
@@ -46,6 +44,13 @@ public class DeptController {
 	public String boardInsertForm() {
 		
 		return "board/deptboard/dboardInsertForm";
+		  
+	}
+	
+	@RequestMapping("dupdateForm.bo")
+	public String boardUpdateForm() {
+		
+		return "board/deptboard/dboardUpdateForm";
 		  
 	}
 	

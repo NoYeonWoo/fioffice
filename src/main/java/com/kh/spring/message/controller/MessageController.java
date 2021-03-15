@@ -1,4 +1,4 @@
-package com.kh.spring.board.notice.controller;
+package com.kh.spring.message.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -22,41 +22,20 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.spring.message.model.service.MessageService;
 
-
-import com.kh.spring.board.notice.model.service.NoticeService;
 
 @Controller
-public class NoticeController {
+public class MessageController {
 	
 	@Autowired
-	private NoticeService noticeService;
+	private MessageService messageService;
 	
-	@RequestMapping("nlist.bo")
-	public String boardList() {
+ 
+	@RequestMapping("chat.mo")
+	public String mainView() {
 		
-		return "board/notice/noticeListView";
-		  
-	}
-	
-	@RequestMapping("ninsertForm.bo")
-	public String boardInsertForm() {
-		
-		return "board/notice/noticeInsertForm";
-		  
-	}
-	
-	@RequestMapping("nupdateForm.bo")
-	public String boardUpdateForm() {
-		
-		return "board/notice/noticeUpdateForm";
-		  
-	}
-	
-	@RequestMapping("ndetail.bo")
-	public String boardDetailView() {
-		
-		return "board/notice/noticeDetailView";
+		return "message/msgChat";
 		  
 	}
 
