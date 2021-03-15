@@ -31,7 +31,7 @@
 		<div class="card" >
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
-				
+				  <form action="login.me" method="post">
 					<div class="card-body">
 						<img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
 						<h4 class="mb-3 f-w-400">Sign up</h4>
@@ -45,9 +45,10 @@
 							<input type="password" class="form-control" id="Password" placeholder="비밀번호를 입력하세요">
 						</div>
 					
-						<button class="btn btn-primary btn-block mb-4">Sign up</button>
+						<button class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" value="Login" >Sign up</button>
 						<p class="mb-2">비밀번호를 잊으셨나요? <a href="auth-signin.html" class="f-w-400">비밀번호찾기</a></p>
 					</div>
+					</form>
 				</div>
 			</div>
 		</div>

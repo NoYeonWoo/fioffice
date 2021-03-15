@@ -243,25 +243,31 @@ p {
 							<div class="modal-dialog" role="document">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalPopoversLabel">Modal Title</h5>
+										<h5 class="modal-title" id="exampleModalPopoversLabel">할일을 추가해주세요</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									</div>
+									<form id="insertTodo" method="post" action="insertTodo.do">
 									<div class="modal-body">
-										<h5>Tooltips in a Button</h5>
-										<p>This <a href="#!" role="button" class="btn  btn-secondary tooltip-test" data-toggle="tooltip" title="Button Tooltip" data-container="#exampleModalPopovers">button</a>
-											triggers a popover on click.</p>
-										<hr />
-										<h5>Tooltips in a modal</h5>
-										<p class="mb-0"><a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip"
-												data-container="#exampleModalPopovers">that
-												link</a> have tooltips on hover.</p>
+										<h5>제목을 입력해 주세요</h5>
+										<input type="text" id="title" class="form-control" name="todoTitle" required>
+										<hr>
+									    <h5>마감날짜</h5>
+									    <input type="date" id="insertDate" name="insertDate" class="form-control form-control-user">
+										<hr>
+									
+										<h5>할일내용 </h5>
+										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
+								
 									</div>
+									
 									<div class="modal-footer">
 										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-										<button type="button" class="btn  btn-primary">Save changes</button>
+										<button type="submit" class="btn  btn-primary" >저장</button>
 									</div>
+									</form>
 								</div>
 							</div>
+							
 							</div>
    <!-- todo 모달끝  -->   
    

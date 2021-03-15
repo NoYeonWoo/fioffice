@@ -37,7 +37,7 @@
 					<div class="card">
 						<div class="card-header">
 							
-						  <h3 class="m-0 font-weight-bold text-primary">나의 문서함</h3> <a class="btn btn-secondary" style="float:right" href="approvalInsertForm.do"> <i class="fas fa-file-signature"></i>글쓰기</a>
+						  <h3 class="m-0 font-weight-bold text-primary">나의 문서함</h3> <a class="btn btn-secondary" style="float:right" href="approvalInsertForm.do"> <i class="fas fa-file-signature"></i>결재하기</a>
 						 	
 					  
 							</div>
@@ -105,7 +105,7 @@
 								<tbody>
 
 								<tr>
-										<td >데이터가 없습니다.</td>
+										<td ><a></a>데이터가 없습니다.</td>
 							            <td >데이터가 없습니다.</td>
 							            <td >데이터가 없습니다.</td>
 						 	            <td >데이터가 없습니다.</td>
@@ -145,29 +145,10 @@
 							            <td >데이터가 없습니다.</td>
 						 	            <td >데이터가 없습니다.</td>
 						          	   <td >데이터가 없습니다.</td>
-						          	   <td ><i class="fas fa-clipboard-list"/><a  href=""  data-toggle="modal" data-target=".bd-example-modal-lg">상세보기</a></td>
+						          	   <td ><i class="fas fa-clipboard-list"/><a  href="approval.do"  >상세보기</a></td>
 						          	   
 						          	   
-						   <!-- 결재하기 모달시작  -->       	   
-									  <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-							    <div class="modal-dialog modal-lg">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title h4" id="myLargeModalLabel">Large Modal</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									</div>
-									<div class="modal-body">
-										
-									</div>
-									
-									<div class="modal-footer">
-									<button type="button" class="btn-sm  btn-primary">결재하기</button>								
-									<button type="button" class="btn-sm  btn-danger">반려</button>
-									</div>
-								</div>
-							</div>
-						</div>
-										   <!-- 결재하기 모달끝  -->   
+				
 									</tr>
 								</tbody>
 							</table>
