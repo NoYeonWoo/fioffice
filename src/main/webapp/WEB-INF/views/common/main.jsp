@@ -146,165 +146,92 @@
             
             
             
-            <!-- Todo main 화면 으로 쓸 예정 -->
-            <div class="col-xl-6 col-md-12">
-               <div class="card table-card">
-                  <div class="card-header">
-                     <h5>TODO+</h5>
-                     <div class="card-header-right">
-                        <div class="btn-group card-option">
-                           <button type="button" class="btn dropdown-toggle"
-                              data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="feather icon-more-horizontal"></i>
-                           </button>
-                           <ul
-                              class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                              <li class="dropdown-item full-card"><a href="#!"><span><i
-                                       class="feather icon-maximize"></i> maximize</span><span
-                                    style="display: none"><i
-                                       class="feather icon-minimize"></i> Restore</span></a></li>
-                              <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                       class="feather icon-minus"></i> collapse</span><span
-                                    style="display: none"><i class="feather icon-plus"></i>
-                                       expand</span></a></li>
-                              <li class="dropdown-item reload-card"><a href="#!"><i
-                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                              <li class="dropdown-item close-card"><a href="#!"><i
-                                    class="feather icon-trash"></i> remove</a></li>
-                           </ul>
+ <!-- [ Todo-list1 ] start -->
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>To Do List</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" name="task-insert" class="form-control add_task_todo" placeholder="Create your task list" required="">
+                            <div class="input-group-append">
+                                <button class="btn waves-effect waves-light btn-secondary" id="add-btn">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
                         </div>
-                     </div>
-                  </div>
-                  <div class="card-body p-0">
-                     <div class="table-responsive">
-                        <table class="table table-hover mb-0">
-                           <thead>
-                              <tr>
-                                 <th>
-                                    <div class="chk-option">
-                                       <label
-                                          class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                          <input type="checkbox" class="custom-control-input">
-                                          <span class="custom-control-label"></span>
-                                       </label>
-                                    </div> Assigned
-                                 </th>
-                                 <th>Name</th>
-                                 <th>Due Date</th>
-                                 <th class="text-right">Priority</th>
-                              </tr>
-                           </thead>
-                           <tbody>
-                              <tr>
-                                 <td>
-                                    <div class="chk-option">
-                                       <label
-                                          class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                          <input type="checkbox" class="custom-control-input">
-                                          <span class="custom-control-label"></span>
-                                       </label>
-                                    </div>
-                                    <div class="d-inline-block align-middle">
-                                       <img
-                                          src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-4.jpg"
-                                          alt="user image"
-                                          class="img-radius wid-40 align-top m-r-15">
-                                       <div class="d-inline-block">
-                                          <h6>John Deo</h6>
-                                          <p class="text-muted m-b-0">Graphics Designer</p>
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td>Able Pro</td>
-                                 <td>Jun, 26</td>
-                                 <td class="text-right"><label
-                                    class="badge badge-light-danger">Low</label></td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="chk-option">
-                                       <label
-                                          class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                          <input type="checkbox" class="custom-control-input">
-                                          <span class="custom-control-label"></span>
-                                       </label>
-                                    </div>
-                                    <div class="d-inline-block align-middle">
-                                       <img
-                                          src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-2.jpg"
-                                          alt="user image"
-                                          class="img-radius wid-40 align-top m-r-15">
-                                       <div class="d-inline-block">
-                                          <h6>Jenifer Vintage</h6>
-                                          <p class="text-muted m-b-0">Web Designer</p>
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td>Mashable</td>
-                                 <td>March, 31</td>
-                                 <td class="text-right"><label
-                                    class="badge badge-light-primary">high</label></td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="chk-option">
-                                       <label
-                                          class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                          <input type="checkbox" class="custom-control-input">
-                                          <span class="custom-control-label"></span>
-                                       </label>
-                                    </div>
-                                    <div class="d-inline-block align-middle">
-                                       <img
-                                          src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-3.jpg"
-                                          alt="user image"
-                                          class="img-radius wid-40 align-top m-r-15">
-                                       <div class="d-inline-block">
-                                          <h6>William Jem</h6>
-                                          <p class="text-muted m-b-0">Developer</p>
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td>Flatable</td>
-                                 <td>Aug, 02</td>
-                                 <td class="text-right"><label
-                                    class="badge badge-light-success">medium</label></td>
-                              </tr>
-                              <tr>
-                                 <td>
-                                    <div class="chk-option">
-                                       <label
-                                          class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                          <input type="checkbox" class="custom-control-input">
-                                          <span class="custom-control-label"></span>
-                                       </label>
-                                    </div>
-                                    <div class="d-inline-block align-middle">
-                                       <img
-                                          src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-2.jpg"
-                                          alt="user image"
-                                          class="img-radius wid-40 align-top m-r-15">
-                                       <div class="d-inline-block">
-                                          <h6>David Jones</h6>
-                                          <p class="text-muted m-b-0">Developer</p>
-                                       </div>
-                                    </div>
-                                 </td>
-                                 <td>Guruable</td>
-                                 <td>Sep, 22</td>
-                                 <td class="text-right"><label
-                                    class="badge badge-light-primary">high</label></td>
-                              </tr>
-                           </tbody>
-                        </table>
-                     </div>
-                  </div>
-               </div>
+                        <div class="new-task">
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(1);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(2);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(3);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <span class="custom-control-label">Contrary to popular belief</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(4);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(5);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(6);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                        <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(7);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- Todo main 화면 끝 -->
+            <!-- [ Todo-list1 ] end -->
             
-            
+          
             <!-- 공지사항게시판 시작 -->
             <div class="col-xl-12">
                 <div class="card">
@@ -401,7 +328,7 @@
             </div>
 </div>
 <!-- [ Main Content ] 메인화면 끝 -->
-    
+       <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/todo.js"></script>
     <jsp:include page="footer.jsp"/>
 </body>
 </html>
