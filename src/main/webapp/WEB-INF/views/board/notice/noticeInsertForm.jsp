@@ -47,8 +47,6 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                         	<li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         	<li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
                         </ul>
                     </div>
                 </div>
@@ -67,27 +65,16 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="dinsert.bo" method="post" autocomplete="off">
+		<form id="boardForm" role="form" action="ninsert.bo" method="post" autocomplete="off">
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
-               		<h5>부서 게시판</h5>
+               		<h5>공지사항</h5>
            		</div>
            		
            	<!-- 폼 컨텐츠 영역 -->
 				  <div class="card-body">
 					  <div class="form-group">
-					  <!-- 카테고리 -->
-					<tr>
-					<td><label>카테고리</label></td>
-					<td>
-						<select name="deptCategory" >
-							<option value="">분류</option>
-		                     <option value="10" style="color : black;">긴급</option>
-		                     <option value="20" style="color : black;">알림</option>
-		                     <option value="30" style="color : black;">공지</option>
-                  		</select>
-					</td>
-					</tr>
+
 					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
 					    <input type="hidden" name="bType" value="B">
 					  </div>
@@ -97,12 +84,11 @@
 						  
 					  <div class="row">
 						  <div id="buttons">
-							  	<a href="dupdate.bo" class="btn btn-primary btn-icon-split">
+							  	<a href="ninsert.bo" class="btn btn-primary btn-icon-split">
 								<span class="icon text-white-50">
 								</span>
 								<span class="text" style="color: white">등록</span>
 								</a>
-								
 							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>

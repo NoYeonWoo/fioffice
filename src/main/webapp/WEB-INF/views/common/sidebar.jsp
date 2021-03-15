@@ -97,7 +97,7 @@
                    <a href="todoListView.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
                <li class="nav-item">
-                   <a href="sinsertForm.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
+                   <a href="slist.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
                </li>
                      <li class="nav-item">
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
@@ -113,7 +113,7 @@
                    <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>
                </li>
                   <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+                   <a href="chat.mo" class="nav-link "><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
                
                   <li class="nav-item pcoded-menu-caption">
@@ -123,9 +123,9 @@
                   <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="pList.pio" target="_blank">상품관리</a></li>
-                       <li><a href="ioList.pio" target="_blank">입출고관리</a></li>
-                       <li><a href="cList.pio" target="_blank">거래처관리</a></li>
+                       <li><a href="pList.pio">상품관리</a></li>
+                       <li><a href="ioList.pio">입출고관리</a></li>
+                       <li><a href="cList.pio">거래처관리</a></li>
                        
                    </ul>
                </li>

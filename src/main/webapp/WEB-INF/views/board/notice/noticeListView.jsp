@@ -147,9 +147,8 @@
                             <h5 class="m-b-10"></h5>
                         </div>
                         <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                          <li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
+                          <li class="breadcrumb-item"><a href="index.jsp">
+                          <i class="feather icon-home"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -171,7 +170,7 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>부서 게시판</h5>
+               <h5>공지사항</h5>
             </div>
             
             
@@ -181,46 +180,22 @@
     
 	<div class="app-board-section">
 	
-	<ul class="app-board-category app-card app-card--force">
-	    <li class="active">
-	    <a href="dlist.bo">전체</a>
-	    </li>
-    	<li>
-	    <a href="">
-	        <span style="txt">공지</span>
-	    </a>
-	    </li>
-	    <li>
-		    <a href="">
-		        <span style="txt">긴급</span>
-		    </a>
-	   	</li>
-	   	<li>
-		    <a href="">
-		        <span style="txt">알람</span>
-	        </a>
-		</li>
-		</ul>
-	
-	
 
 
     <ul class="app-board-template-list">
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="ndetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
+	            	<span class="tw-mr-1">공지사항입니다.</span>
 				</div>
 	          
 	          <div class="app-list-meta">
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">김영찬</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
 	              		</div>
 				</div>
 	            </span>        
@@ -240,80 +215,73 @@
 
 
     <ul class="app-board-template-list">
-                
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="ndetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
+	            	<span class="tw-mr-1">공지사항입니다.</span>
 				</div>
 	          
 	          <div class="app-list-meta">
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">이윤해</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
 	              		</div>
 				</div>
 	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.08</span>                                    
+				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
 	                                                                  
 	            <span>
 	               <span class="tw-mr-1">조회</span>
-	               <span>80</span>
+	               <span>10</span>
 	            </span>              
 	         </div>
          
         	</div> <!--   <div class="tw-flex-1"> -->
-        	<!-- 댓글 count -->
-        	<div class="app-list-comment">20</div>
         	</a>
     	</li>
     </ul>
     
-     <ul class="app-board-template-list">
-                
+    
+    <ul class="app-board-template-list">
         <li>
-            <a class="tw-flex-1" href="ddetail.bo">
+            <a class="tw-flex-1" href="ndetail.bo">
             
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[getCategory]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
+	            	<span class="tw-mr-1">공지사항입니다.</span>
 				</div>
 	          
 	          <div class="app-list-meta">
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">노연우</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
 	              		</div>
 				</div>
 	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.04</span>                                    
+				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
 	                                                                  
 	            <span>
 	               <span class="tw-mr-1">조회</span>
-	               <span>15</span>
+	               <span>10</span>
 	            </span>              
 	         </div>
          
         	</div> <!--   <div class="tw-flex-1"> -->
-        	<!-- 댓글 count -->
-        	<div class="app-list-comment">11</div>
         	</a>
     	</li>
     </ul>
+    
+    
 
                 
                 <!--글쓰기 버튼  -->
                 <div><br>
                 <div align="right">
-                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
+                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 					</span>

@@ -33,21 +33,21 @@
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html" target="_blank">조직설계</a></li>
-                       <li><a href="manageEmp.do" target="_blank">사원관리</a></li>
-                       <li><a href="insertEmp.do" target="_blank">사원추가</a></li>
+                       <li><a href="layout-vertical.html">조직설계</a></li>
+                       <li><a href="manageEmp.do">사원관리</a></li>
+                       <li><a href="insertEmp.do">사원추가</a></li>
                    </ul>
                </li>
                
                 <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">매뉴관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html" target="_blank">공지사항</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">결재</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">주소록</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">캘린더</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">설문</a></li>
-                       <li><a href="layout-horizontal.html" target="_blank">회의실</a></li>
+                       <li><a href="layout-vertical.html">공지사항</a></li>
+                       <li><a href="layout-horizontal.html">결재</a></li>
+                       <li><a href="layout-horizontal.html">주소록</a></li>
+                       <li><a href="layout-horizontal.html">캘린더</a></li>
+                       <li><a href="sadmin.so">설문</a></li>
+                       <li><a href="layout-horizontal.html">회의실</a></li>
                    </ul>
                </li>
 
