@@ -8,6 +8,11 @@
 	text-align:center;
 	margin: auto;
 }
+#textbig{ 
+	height:300px; 
+    resize:none;
+
+}
 </style>
 </head>
 
@@ -122,7 +127,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">메모</span>
                             </div>
-                            <textarea class="form-control" aria-label="With textarea" readonly="readonly"></textarea>
+                            <textarea id="textbig" class="form-control" aria-label="With textarea" readonly="readonly"></textarea>
                         </div>
                         
                         

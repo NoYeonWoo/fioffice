@@ -17,6 +17,14 @@
 	</resultMap>
 	
 	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM ADDRESS
+		WHERE STATUS='Y'
+	
+	</select>
+	
+	
 	<select id="selectList" resultMap="addressResultSet">
 		SELECT *
 		FROM ADDRESS
@@ -25,6 +33,8 @@
 	
 	</select>
 	
+	
+	<!--sdsd -->
 	<select id="selectAddress" parameterType="_int" resultMap="addressResultSet">
 		SELECT *
 		FROM ADDRESS

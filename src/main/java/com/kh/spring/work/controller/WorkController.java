@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.spring.work.model.service.WorkService;
 
 
 
@@ -31,8 +32,20 @@ public class WorkController {
 
 
 	@RequestMapping("view.work")
-	public String viewAddress() {
+	public String viewWork() {
+		
+		
+		
+		
+		
+		
+		
 		return "work/work";
+	}
+	@RequestMapping("view.workMain")
+	public String viewWorkMain() {
+		
+		return "work/workMain";
 	}
 	
 	
