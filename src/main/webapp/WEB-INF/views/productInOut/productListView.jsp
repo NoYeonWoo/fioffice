@@ -44,131 +44,35 @@
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
-                            <div id="custom-btn_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                            	<table id="custom-btn" class="table table-striped table-bordered nowrap dataTable" role="grid" aria-describedby="custom-btn_info">
+                            	<table id="productList" class="table table-hover row-border  nowrap">
 	                                <thead>
-	                                    <tr role="row">
-	                                    <th class="sorting" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Name: activate to sort column ascending" style="width: 262px;">Name</th>
-	                                    <th class="sorting_desc" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" style="width: 412px;" aria-sort="descending">Position</th>
-	                                    <th class="sorting" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" style="width: 194px;">Office</th>
-	                                    <th class="sorting" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" style="width: 99px;">Age</th>
-	                                    <th class="sorting" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" style="width: 201px;">Start date</th>
-	                                    <th class="sorting" tabindex="0" aria-controls="custom-btn" rowspan="1" colspan="1" aria-label="Salary: activate to sort column ascending" style="width: 156px;">Salary</th>
+	                                    <tr>
+	                                    <th  id="pCode" style="width: 200px;">상품코드</th>
+	                                    <th  id="pName" style="width: 250px;">상품명</th>
+	                                    <th  id="preStock" style="width: 100px;">이월재고</th>
+	                                    <th  id="inCount" style="width: 80px;">입고수량</th>
+	                                    <th  id="inPrice" style="width: 150px;">입고단가</th>
+	                                    <th  id="outCount" style="width: 80px;">출고수량</th>
+	                                    <th  id="outPrice" style="width: 150px;">출고단가</th>
+	                                    <th  id="stock" style="width: 100px;">재고</th>
+	                                    <th id="comment" style="width: 200px;">비고</th> 
 	                                    </tr>
 	                                </thead>
 	                                <tbody>  
-	                                <tr role="row" class="odd">
-	                                        <td class="">Gloria Little</td>
-	                                        <td class="sorting_1">Systems Administrator</td>
+	                                <tr>
+	                                        <td>Gloria Little</td>
+	                                        <td>Systems Administrator</td>
 	                                        <td>New York</td>
 	                                        <td>59</td>
 	                                        <td>2009/04/10</td>
 	                                        <td>$237,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Tiger Nixon</td>
-	                                        <td class="sorting_1">System Architect</td>
-	                                        <td>Edinburgh</td>
-	                                        <td>61</td>
-	                                        <td>2011/04/25</td>
-	                                        <td>$320,800</td>
-	                                    </tr><tr role="row" class="odd">
-	                                        <td class="">Quinn Flynn</td>
-	                                        <td class="sorting_1">Support Lead</td>
-	                                        <td>Edinburgh</td>
-	                                        <td>22</td>
-	                                        <td>2013/03/03</td>
-	                                        <td>$342,000</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Bradley Greer</td>
-	                                        <td class="sorting_1">Software Engineer</td>
-	                                        <td>London</td>
-	                                        <td>41</td>
-	                                        <td>2012/10/13</td>
-	                                        <td>$132,000</td>
-	                                    </tr><tr role="row" class="odd">
-	                                        <td class="">Brenden Wagner</td>
-	                                        <td class="sorting_1">Software Engineer</td>
-	                                        <td>San Francisco</td>
-	                                        <td>28</td>
-	                                        <td>2011/06/07</td>
-	                                        <td>$206,850</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Sonya Frost</td>
-	                                        <td class="sorting_1">Software Engineer</td>
-	                                        <td>Edinburgh</td>
-	                                        <td>23</td>
-	                                        <td>2008/12/13</td>
-	                                        <td>$103,600</td>
-	                                    </tr><tr role="row" class="odd">
-	                                        <td class="">Haley Kennedy</td>
-	                                        <td class="sorting_1">Senior Marketing Designer</td>
-	                                        <td>London</td>
-	                                        <td>43</td>
-	                                        <td>2012/12/18</td>
-	                                        <td>$313,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Cedric Kelly</td>
-	                                        <td class="sorting_1">Senior Javascript Developer</td>
-	                                        <td>Edinburgh</td>
-	                                        <td>22</td>
-	                                        <td>2012/03/29</td>
-	                                        <td>$433,060</td>
-	                                    </tr><tr role="row" class="odd">
-	                                        <td class="">Doris Wilder</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>Sidney</td>
-	                                        <td>23</td>
-	                                        <td>2010/09/20</td>
-	                                        <td>$85,600</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
 	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
-	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
-	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
-	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
-	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
-	                                    </tr><tr role="row" class="even">
-	                                        <td class="">Herrod Chandler</td>
-	                                        <td class="sorting_1">Sales Assistant</td>
-	                                        <td>San Francisco</td>
-	                                        <td>59</td>
-	                                        <td>2012/08/06</td>
-	                                        <td>$137,500</td>
+	                                        <td>2009/04/10</td>
+	                                        <td>$237,500</td>
 	                                    </tr></tbody>
-	                                <tfoot>
-	                                    <tr><th rowspan="1" colspan="1">Name</th><th rowspan="1" colspan="1">Position</th><th rowspan="1" colspan="1">Office</th><th rowspan="1" colspan="1">Age</th><th rowspan="1" colspan="1">Start date</th><th rowspan="1" colspan="1">Salary</th></tr>
-	                                </tfoot>
                             	</table>
                         	</div>
-                    	</div>
+                        </div>
                 	</div>
             	</div>
             <!-- Basic Button table end -->
@@ -184,12 +88,26 @@
     
     <jsp:include page="../common/footer.jsp"/>
     
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/menu-setting.min.js"></script>
+	<script>
+	$(document).ready(function() {
+        $('#productList').DataTable({
+            columnDefs: [
+                { orderable: false, targets: [3,4,5,6,8] },
+                { searchable: false, targets: [2,3,4,5,6,7]}
+              ],
+              dom: '<"float-left"B><"float-right"f>rtip',
+            buttons: [{
+                text: 'My Custom',
+                action: function(e, dt, node, config) {
+                    alert('Button activated');
+                }
+            }]
+        });
+	});
+	</script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.colVis.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.buttons.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.bootstrap4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pages/data-buttons-custom.js"></script>
 </body>
 </html>

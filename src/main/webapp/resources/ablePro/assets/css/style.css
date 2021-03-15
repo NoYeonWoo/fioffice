@@ -18,7 +18,7 @@ File: style.css
   unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
 }
 
-/* cyrillic */
+/* cyrillic */ 
 @font-face {
     font-family: 'Open Sans';
   font-style: normal;
@@ -10784,7 +10784,7 @@ a.text-dark:hover, a.text-dark:focus {
   h3 {
         page-break-after: avoid;
     }
-  @    page {
+  @page {
         size: a3;
     }
 
@@ -23911,7 +23911,8 @@ table.footable-paging-center > tfoot > tr.footable-paging > td {
 }
 
 /**======= basic table css end ======**/
-#row-delete .selected,
+
+#row-delete .selected, 
 #row-select .selected {
     background-color: #B8ACD0;
     color: #fff;
@@ -23922,28 +23923,9 @@ table.dataTable tbody > tr > .selected {
     background: #B8ACD0;
 }
 
-table.dataTable tbody > tr.selected table.dataTable tbody > tr > .selected td.select-checkbox:after,
-  table.dataTable tbody > tr.selected table.dataTable tbody > tr.selected.select-checkbox:after,
-  table.dataTable tbody > tr.selected th.select-checkbox:after,
-  table.dataTable tbody > tr > .selected table.dataTable tbody > tr > .selected td.select-checkbox:after,
-  table.dataTable tbody > tr > .selected table.dataTable tbody > tr.selected.select-checkbox:after,
-  table.dataTable tbody > tr > .selected th.select-checkbox:after {
-    text-shadow: 1px 1px #e4f2fe, -1px -1px #e4f2fe, 1px -1px #e4f2fe, -1px 1px #e4f2fe;
-}
-
 table.dataTable tbody .selected td.select-checkbox:before,
 table.dataTable tbody .selected th.select-checkbox:before {
     border-color: #fff;
-}
-
-table.dataTable tbody > tr > .selected td.select-checkbox:after,
-table.dataTable tbody > tr > .selected th.select-checkbox:after,
-table.dataTable tbody > tr.selected td.select-checkbox:after,
-table.dataTable tbody > tr.selected th.select-checkbox:after {
-    content: '\2714';
-    margin-top: -11px;
-    margin-left: -4px;
-    text-align: center;
 }
 
 div.dt-button-info {
@@ -23991,7 +23973,7 @@ div.dtk-focus-alt table.dataTable tbody th.focus {
     color: #ffba57;
 }
 
-/**====== Data Tables css end ======**/
+/**====== Data Tables css end ======*
 /**  =====================
       Authentication css start
 ==========================  **/

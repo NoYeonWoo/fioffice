@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    setTimeout(function() {
         // [ Custom button ]
         $('#custom-btn').DataTable({
             dom: 'Bfrtip',
@@ -78,5 +77,4 @@ $(document).ready(function() {
             }]
         });
 
-    }, 350);
 });
