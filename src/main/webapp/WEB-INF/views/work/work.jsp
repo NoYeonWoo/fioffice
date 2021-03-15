@@ -52,6 +52,7 @@
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
                         	<button type="button" class="btn  btn-primary">휴가계</button>
+                        	<a href="view.workMain"><button type="button" class="btn  btn-primary">임시 메인</button></a>
                         	
                         </div>
                         </span>

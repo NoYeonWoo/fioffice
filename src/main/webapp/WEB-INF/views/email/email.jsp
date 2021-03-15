@@ -51,7 +51,8 @@
                         <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
-                        	<button type="button" class="btn  btn-primary">휴가계</button>
+                        	<a href="send.email"><button type="button" class="btn  btn-primary">보내기</button></a>
+                        	<a href="detail.email"><button type="button" class="btn  btn-primary">임시상세</button></a>
                         	
                         </div>
                         </span>

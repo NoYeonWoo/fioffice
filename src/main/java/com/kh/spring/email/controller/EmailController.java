@@ -31,8 +31,16 @@ public class EmailController {
 
 
 	@RequestMapping("view.email")
-	public String viewAddress() {
+	public String viewEmail() {
 		return "email/email";
+	}
+	@RequestMapping("send.email")
+	public String sendEmail() {
+		return "email/emailSend";
+	}
+	@RequestMapping("detail.email")
+	public String detailEmail() {
+		return "email/emailDetail";
 	}
 	
 	

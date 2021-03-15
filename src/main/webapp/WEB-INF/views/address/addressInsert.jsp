@@ -56,7 +56,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Basic Component</h5>
+                        <h5>주소록 추가</h5>
                     </div>
                     <div class="card-body">
                         <form>
@@ -138,8 +138,7 @@
                         <div class="col-md-12">
 
 					<div class="card-body">
-						<button type="button" class="btn  btn-primary btn-lg">수정하기</button>
-						<button type="button" class="btn  btn-secondary btn-lg">삭제하기</button>
+						<button type="button" class="btn  btn-primary btn-lg">추가하기</button>
 					</div>
 
 					</div>
