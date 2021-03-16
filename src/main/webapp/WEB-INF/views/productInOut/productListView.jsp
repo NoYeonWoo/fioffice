@@ -84,7 +84,41 @@
 <!-- [ Main Content ] 메인화면 끝 -->
 
 
-    
+     <div class="modal fade" id="productAdd">  
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">상품추가</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
+            </div>
+				<form name="newProduct" action="login.me" method="post" autocomplete="off">
+					<table class="table table-bordered col-sm-10"  align="center">
+                    	<tr>
+                        	<td style="width:20%">상품코드</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                            <td style="width:20%">상품명</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                             <td style="width:20%">입고단가</td>
+                             <td><input type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>원</span></td>
+                        </tr><tr>
+                             <td style="width:20%">출고단가</td>
+                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                        </tr><tr>
+                             <td style="width:20%">비고</td>
+                             <td><input type="text" class="form-control form-control-sm"></td>
+                        </tr>
+					</table>
+					<div class="modal-footer">
+                    	<button type="submit" class="btn btn-primary">추가하기</button>
+                    	<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+                	</div>
+				</form>	
+            </div>
+        </div>
+    </div>
     
     <jsp:include page="../common/footer.jsp"/>
     
@@ -96,10 +130,22 @@
                 { searchable: false, targets: [2,3,4,5,6,7]}
               ],
               dom: '<"float-left"B><"float-right"f>rtip',
+              responsive: {
+                  details: {
+                      display: $.fn.dataTable.Responsive.display.modal( {
+                          header: function ( row ) {
+                              var data = row.data();
+                              return 'Details for '+data[0]+' '+data[1];
+                          }
+                      } ),
+                      renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
+                          tableClass: 'table'
+                      } )
+                  }
+              },
             buttons: [{
-                text: 'My Custom',
+                text: '상품추가',
                 action: function(e, dt, node, config) {
-                    alert('Button activated');
                 }
             }]
         });
@@ -109,5 +155,7 @@
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.buttons.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.bootstrap4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.responsive.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/responsive.bootstrap4.js"></script>
 </body>
 </html>
