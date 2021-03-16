@@ -5,12 +5,15 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	 <typeAliases>
+		<typeAlias type="com.kh.spring.address.model.vo.Address" alias="Address"/>
 	<typeAlias type="com.kh.spring.todo.model.vo.Todo" alias="Todo"/>
 		<typeAlias type="com.kh.spring.employee.model.vo.Employee" alias="Employee"/>
 	</typeAliases>
 	
 	
 	<mappers>
+		<!--<mapper resource="/mappers/board-mapper.xml"/> -->
+		<mapper resource="mapper/address-mapper.xml"/> 
 		<mapper resource="/mappers/todo-mapper.xml"/> 
 		<mapper resource="/mappers/employee-mapper.xml"/> 
 	</mappers>

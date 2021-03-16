@@ -16,9 +16,9 @@
 	
 	<bean id="realDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
-		<property name="username" value="FIOFFICE"/>
-		<property name="password" value="FIOFFICE"/>
+		<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/><!-- orcl -->
+		<property name="username" value="fioffice"/><!-- FIOFFICE -->
+		<property name="password" value="fioffice"/><!-- FIOFFICE -->
 		<property name="defaultAutoCommit" value="false"/>
 	</bean>
 	
