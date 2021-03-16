@@ -37,15 +37,15 @@
 						<h4 class="mb-3 f-w-400">Sign up</h4>
 						<div class="form-group mb-3">
 							<label class="floating-label" for="Username">Username</label>
-							<input type="text" class="form-control" id="Username" placeholder="사원번호를 입력하세요">
+							<input type="text" class="form-control" id="empNo" name="empNo" placeholder="사원번호를 입력하세요">
 						</div>
 					
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Password">Password</label>
-							<input type="password" class="form-control" id="Password" placeholder="비밀번호를 입력하세요">
+							<input type="password" class="form-control" id="empPwd" name="empPwd" placeholder="비밀번호를 입력하세요">
 						</div>
 					
-						<button class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" value="Login" >Sign up</button>
+						<button type="submit" class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" value="Login" >Sign up</button>
 						<p class="mb-2">비밀번호를 잊으셨나요? <a href="auth-signin.html" class="f-w-400">비밀번호찾기</a></p>
 					</div>
 					</form>

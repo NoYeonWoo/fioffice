@@ -26,7 +26,7 @@
 					<ul class="navbar-nav ml-auto">
 						
 						<li>
-	
+
 							<div class="dropdown drp-user">
 							
 								<!-- 메일 외부로
@@ -34,9 +34,10 @@
 								<i class="feather icon-mail"></i>
 								</a>
 								-->
-								
+								<a >  ${loginUser.empName}님 환영합니다</a>
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<i class="feather icon-user"></i>
+									
 								</a>
 								
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
@@ -44,7 +45,7 @@
 										<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" class="img-radius" alt="User-Profile-Image">
 										<span>사원명</span>
 										<a href="auth-signin.html" class="dud-logout" title="Logout">
-											<i class="feather icon-log-out"></i>
+										<i class="feather icon-log-out"></i>
 										</a>
 									</div>
 									<ul class="pro-body">
