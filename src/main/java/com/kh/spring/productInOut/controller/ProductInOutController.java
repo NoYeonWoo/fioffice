@@ -20,4 +20,19 @@ public class ProductInOutController {
 	public String inoutListView() {
 		return "productInOut/inoutListView";
 	}
+	
+	@RequestMapping("pDetail.pio")
+	public String productDetail() {
+		return "productInOut/productDetail";
+	}
+	
+	@RequestMapping("cDetail.pio")
+	public String clientDetail() {
+		return "productInOut/clientDetail";
+	}
+	
+	@RequestMapping("ioDetail.pio")
+	public String inoutDetail() {
+		return "productInOut/inoutDetail";
+	}
 }

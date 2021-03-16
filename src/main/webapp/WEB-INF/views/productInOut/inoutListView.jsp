@@ -208,7 +208,7 @@
 	        buttons: [{
 	            text: 'My Custom button',
 	            action: function(e, dt, node, config) {
-	                alert('Button activated');
+	            	window.location="ioDetail.pio"
 	            }
 	        }]
 	    });
