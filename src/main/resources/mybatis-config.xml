@@ -5,11 +5,12 @@
 		<setting name="jdbcTypeForNull" value="NULL"/>
 	</settings>
 	 <typeAliases>
-	
+		<typeAlias type="com.kh.spring.address.model.vo.Address" alias="Address"/>
 	</typeAliases>
 	
 	
 	<mappers>
 		<!--<mapper resource="/mappers/board-mapper.xml"/> -->
+		<mapper resource="mapper/address-mapper.xml"/> 
 	</mappers>
 </configuration>
