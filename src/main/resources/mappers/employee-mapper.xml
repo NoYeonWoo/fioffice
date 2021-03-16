@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="employeeMapper">
+
+
+  <resultMap type="Employee" id="employeeResultSet">
+
+	<id property="empNo" column="EMP_NO" />
+	<result property="empPwd" column="EMP_PWD" />
+	<result property="empName" column="EMP_NAME" />
+	<result property="phone" column="PHONE" />
+	<result property="address" column="ADDRESS" />
+	<result property="officePhone" column="OFFICE_PHONE" />
+	<result property="email" column="EMAIL" />
+	<result property="resNo" column="RES_NO" />
+	<result property="joinDate" column="JOIN_DATE" />
+	<result property="entDate" column="ENT_DATE" />
+	<result property="originName" column="ORIGIN_NAME" />
+	<result property="changeName" column="CHANGE_NAME" />
+    <result property="status" column="STATUS" />
+
+  
+
+  </resultMap>
+
+  
+
+
+<!-- * <insert>, <update>, <delete> 태그: 해당태그들은설정이동일 -->
+  <select id="loginEmployee" parameterType="Employee" resultMap="employeeResultSet">
+  <!--암호화전 -->
+  SELECT* 
+  FROM EMPLOYEE 
+  WHERE EMP_NO=#{empNo}
+  AND EMP_PWD=#{empPwd}
+  AND STATUS='y'
+
+
+  </select>
+
+
+
+</mapper>

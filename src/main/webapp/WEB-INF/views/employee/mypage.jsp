@@ -33,7 +33,7 @@
 								<div class="list-group" id="list-tab" role="tablist">
 									<a class="list-group-item list-group-item-action active"
 										id="list-updateForm-list" data-toggle="list"
-										href="#list-updateForm" role="tab" aria-controls="home">내정보수정</a>
+										href="#list-updateForm" role="tab" aria-controls="home">내정보</a>
 									<a class="list-group-item list-group-item-action"
 										id="list-updatePwd-list" data-toggle="list"
 										href="#list-updatePwd" role="tab" aria-controls="profile">비밀번호변경</a>

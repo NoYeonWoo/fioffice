@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -150,14 +152,16 @@ p {
 											<div class="card-body">
 												<div class="urgent">
 													<ul class="depth02">
-
+                                                        <c:if test="${fn:length(todolist) > 0}">
+								                        <c:forEach items="${todolist}" var="item">
+								                        <c:if test="${item.status eq 'T' }">
 														<li>
-															<div class="data" id="app-block" data-toggle="modal" data-target="#tododetail">
-																<p class="titled">마케팅발주서</p>
-																<p class="subd">기한:2021-02-03</p>
+															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+																<p class="titled">${item.todoTitle }</p>
+																<p class="subd">기한:${item.todoDoneDate} }</p>
 																<form action="mod" accept-charset="utf-8" method="get"
 																	class="modiform">
-																	<input type="hidden" value=${item.id } name="id">
+																	<input type="hidden" value=${item.todoNo } name="id">
 																	<input type="hidden" value="DOING" name="type">
 																	<input class="modiB" type="submit" value="→" name=modi>
 																</form>
@@ -165,7 +169,9 @@ p {
 
 															</div>
 														</li>
-
+															</c:if>	
+                                                  </c:forEach>
+												</c:if>	
 													</ul>
 												</div>
 											</div>
@@ -252,7 +258,42 @@ p {
 										<input type="text" id="title" class="form-control" name="todoTitle" required>
 										<hr>
 									    <h5>마감날짜</h5>
-									    <input type="date" id="insertDate" name="insertDate" class="form-control form-control-user">
+									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
+										<hr>
+									
+										<h5>할일내용 </h5>
+										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
+								
+									</div>
+									
+									<div class="modal-footer">
+										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+										<button type="submit" class="btn  btn-primary" id="addTodo">저장</button>
+									</div>
+									</form>
+								</div>
+							</div>
+							
+							</div>
+   <!-- todo 모달끝  -->   
+   
+   
+   
+   	   <!-- todo상세보기  모달시작  -->       
+	                       <div id="detailTodo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalPopoversLabel">할일을 추가해주세요</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<form id="insertTodo" method="post" action="insertTodo.do">
+									<div class="modal-body">
+										<h5>제목을 입력해 주세요</h5>
+										<input type="text" id="title" class="form-control" name="todoTitle" required>
+										<hr>
+									    <h5>마감날짜</h5>
+									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
 										<hr>
 									
 										<h5>할일내용 </h5>
@@ -269,37 +310,26 @@ p {
 							</div>
 							
 							</div>
-   <!-- todo 모달끝  -->   
-   
-   
-   
-   	   <!-- todo상세보기  모달시작  -->       
-	                       <div id="tododetail" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalPopoversLabel">Modal Title</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									</div>
-									<div class="modal-body">
-										<h5>Tooltips in a Button</h5>
-										<p>This <a href="#!" role="button" class="btn  btn-secondary tooltip-test" data-toggle="tooltip" title="Button Tooltip" data-container="#exampleModalPopovers">button</a>
-											triggers a popover on click.</p>
-										<hr />
-										<h5>Tooltips in a modal</h5>
-										<p class="mb-0"><a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip" data-container="#exampleModalPopovers">This link</a> and <a href="#!" class="tooltip-test" data-toggle="tooltip" title="Tooltip"
-												data-container="#exampleModalPopovers">that
-												link</a> have tooltips on hover.</p>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-										<button type="button" class="btn  btn-primary">Save changes</button>
-									</div>
-								</div>
-							</div>
-							</div>
    <!-- todo 모달끝  -->  
 
+
+<script>
+$(function () {
+	selectTodoList();
+  $("#addTodo").click(function(){
+	
+	  
+	  
+	  
+	  
+  })
+  
+    	
+})
+
+
+
+</script>
 		</div>
 
 		<!--지우지 마세요    div class="row"  -->
