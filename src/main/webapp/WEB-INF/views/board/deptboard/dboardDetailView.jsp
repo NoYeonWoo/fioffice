@@ -232,9 +232,6 @@
 			            <div class="app-comment-content tw-py-3">
 			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
 			         	</div>
-			         	<div align="right">
-			         	<a class="comment-item-tool app-link tw-mr-2">답글</a> 
-			         	</div>
 				</div>
 			</li>
 		</ul>   

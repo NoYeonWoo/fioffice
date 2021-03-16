@@ -237,7 +237,6 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>공지사항</h5>
-                        <span class="d-block m-t-5">use class <code>table-striped</code> inside table element</span>
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
