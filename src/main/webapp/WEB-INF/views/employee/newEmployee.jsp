@@ -17,7 +17,7 @@
 
 <body class=" ">
 
-	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"></jsp:include>
+	<jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
 	<!--메인 화면 전체시작 -->
 	<div class="pcoded-main-container">
@@ -60,15 +60,15 @@
 							
                                 <tr>
                                  <td style="width:10%">이름</td>
-                                 <td style="width:40%"><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                                 <td style="width:40%"><input type="text" class="form-control form-control-sm" style="width:40%" name="empName" id="empName"></td>
                                  <td style="width:10%">주민번호</td>
                                  <td style="width:40%">
                                       <div class="row">
 										<div class="col-sm-4 mb-sm-0">
-											<input type="text" id= "empRegNo1" name="empRegNo1" class="form-control form-control-user" max="6">
-										</div>
+											<input type="text" id= "resNo1" name="resNo" class="form-control form-control-user" max="6">
+										</div><label>-</label>
 										<div class="col-sm-4">
-											<input type="text" id="empRegNo2" name="empRegNo2" class="form-control form-control-user">
+											<input type="text" id="resNo2" name="resNo" class="form-control form-control-user">
 										</div>
 									   </div>
 
@@ -77,51 +77,39 @@
                                 </tr>
 							
                                 <tr>
-                                 <td style="width:10%">부서코드</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
+                                 <td style="width:10%">부서</td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="deptName" id="deptName"></td>
                                  <td style="width:10%">직급</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="empPosition" id="empPosition"></td>
                                 </tr>
 															
                                 <tr>
                                  <td style="width:10%">입사일</td>
                                  <td style="width:25%"><input type="date" id="joinDate" name="joinDate" class="form-control form-control-user" style="width: 50%;"></td>
                                  <td style="width:10%">개인번호</td>
-                                 <td style="width:25%"><div class="row">
-										<div class="col-sm-3 mb-sm-0">
-											<input type="text" id="phone1" name="phone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="phone2" name="phone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="phone3" name="phone" class="form-control form-control-user">
-										</div>
-									</div></td>
+                                 <td style="width:25%">
+										
+											<input type="text" id="phone1" name="phone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
+										
                                 </tr>
                                 
                                 							
                                 <tr>
                                  <td style="width:10%">내선번호</td>
-                                 <td style="width:25%"><div class="row">
-										<div class="col-sm-3 mb-sm-0">
-											<input type="text" id= "empphone1" name="empphone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="empphone2" name="empphone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="empphone3" name="empphone" class="form-control form-control-user">
-										</div></td>
+                                 <td style="width:25%">									
+                                 		<input type="text" id="officePhone" name="officePhone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
+</td>
                                  <td style="width:10%">이메일</td>
-                                 <td style="width:25%">			<div class="row">
-										<div class="col-sm-5 mb-sm-0">
-											<input type="email" id="email1" name="email" class="form-control form-control-user">
+                                 <td style="width:25%">			
+									<div class="row">
+										<div class="col-sm-4 mb-sm-0">
+											<input type="text" id= "email1" name="email" class="form-control form-control-user" max="6">
+										</div><label>@</label>
+										<div class="col-sm-4">
+											<input type="text" id="email2" name="email" class="form-control form-control-user">
 										</div>
-										<div class="col-sm-5">
-											<input type="email" id="email2" name="email" class="form-control form-control-user">
-										</div>
-									</div></td>
+									   </div>
+									</td>
                                 </tr>
                                 
                                 

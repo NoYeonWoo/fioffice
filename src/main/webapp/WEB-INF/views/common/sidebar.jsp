@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -10,8 +11,10 @@
     <meta name="keywords" content="">
     <meta name="author" content="Phoenixcoded" />
    
-    <!-- Favicon icon -->
-    <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
+      <!-- Favicon icon -->
+	 <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+	 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+	 
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
 	<!-- 썸머노트  -->
@@ -56,23 +59,27 @@
 <nav class="pcoded-navbar menu-light ">
       <div class="navbar-wrapper  ">
          <div class="navbar-content scroll-div " >
-            
+         
             <div class="">
+               
                <div class="main-menu-header">
                   <img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="User-Profile-Image">
                   <div class="user-details">
-                     <div id="more-details">이윤해 <i class="fa fa-caret-down"></i></div>
+                     <div id="more-details">${loginUser.empName}님<i class="fa fa-caret-down"></i></div>
                   </div>
                </div>
+        
                <div class="collapse" id="nav-user-link">
                   <ul class="list-unstyled">
+                     <c:if test="${ !empty sessionScope.loginUser }">
                      <li class="list-group-item"><a href="mypage.do"><i class="feather icon-user m-r-5"></i>마이페이지</a></li>
                      <li class="list-group-item"><a href="#!"><i class="feather icon-settings m-r-5"></i>Settings</a></li>
-                     <li class="list-group-item"><a href="auth-normal-sign-in.html"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+                     <li class="list-group-item"><a href="logout.me"><i class="feather icon-log-out m-r-5"></i>Logout</a></li>
+                      </c:if>
                   </ul>
                </div>
             </div>
-            
+             
             <ul class="nav pcoded-inner-navbar ">
                <li class="nav-item pcoded-menu-caption">
                    <label>My portal</label>
@@ -81,7 +88,7 @@
                    <a href="cmain.co" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
                </li>
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
+                   <a href="view.work" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
                </li>
                
                <li class="nav-item pcoded-hasmenu">
@@ -97,7 +104,7 @@
                    <a href="todoListView.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
                <li class="nav-item">
-                   <a href="slist.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
+                   <a href="sinsertForm.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
                </li>
                      <li class="nav-item">
                    <a href="enrollForm.r" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
@@ -107,13 +114,14 @@
                    <a href="approvalList.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-signature"></i></span><span class="pcoded-mtext">전자결재</span></a>
                </li>
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
+                   <a href="view.add" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
                </li>
                <li class="nav-item">
-                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>
+                   <a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a><!-- ssdd -->
+
                </li>
                   <li class="nav-item">
-                   <a href="chat.mo" class="nav-link "><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+                   <a href="index.html" class="nav-link "><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
                
                   <li class="nav-item pcoded-menu-caption">
@@ -123,9 +131,9 @@
                   <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="pList.pio">상품관리</a></li>
-                       <li><a href="ioList.pio">입출고관리</a></li>
-                       <li><a href="cList.pio">거래처관리</a></li>
+                       <li><a href="pList.pio" target="_blank">상품관리</a></li>
+                       <li><a href="ioList.pio" target="_blank">입출고관리</a></li>
+                       <li><a href="cList.pio" target="_blank">거래처관리</a></li>
                        
                    </ul>
                </li>

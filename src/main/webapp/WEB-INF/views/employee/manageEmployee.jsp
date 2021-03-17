@@ -75,7 +75,7 @@
             
                 <div class="card">
                     <div class="card-header">
-                      <h3>신규 사원 등록</h3>
+                      <h3>사원관리</h3>
                        
                     </div>
                     <div class="card-body table-border-style">
@@ -111,8 +111,8 @@
                                 <tbody>
                                     <tr>
                                         <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
+                                        <td>${loginUser.empName}</td>
+                                        <td>${loginUser.empNo}</td>
                                         <td>@mdo</td>
                                         <td>@mdo</td>
                                         <td><i class="fas fa-clipboard-list"/><a  href=""  data-toggle="modal" data-target=".bd-example-modal-lg">상세보기</a></td>
@@ -155,7 +155,7 @@
 							    <div class="modal-dialog modal-lg">
 								<div class="modal-content">
 									<div class="modal-header">
-										<h5 class="modal-title h4" id="myLargeModalLabel">이윤해 상세보기</h5>
+										<h5 class="modal-title h4" id="myLargeModalLabel">${loginUser.empName} 상세보기</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									</div>
 									<div class="modal-body">
@@ -163,7 +163,7 @@
 											<div class="card-body">
 					
 					
-						<form name="newEmpForm" method="post" autocomplete="off">
+						<form name="empForm.do" method="post" autocomplete="off">
 						
 						                              
 
@@ -171,17 +171,14 @@
 							
                                 <tr>
                                  <td style="width:10%">이름</td>
-                                 <td style="width:25%"></td>
+                                 <td style="width:25%">${loginUser.empName}</td>
                                  <td style="width:10%">주민번호</td>
-                                 <td style="width:25%">
-									
-
-										
+                                 <td style="width:25%">	${loginUser.resNo}							
 										</td>
                                 </tr>
 							
                                 <tr>
-                                 <td style="width:10%">부서코드</td>
+                                 <td style="width:10%">부서</td>
                                  <td style="width:25%"></td>
                                  <td style="width:10%">직급</td>
                                  <td style="width:25%"></td>
@@ -189,35 +186,25 @@
 															
                                 <tr>
                                  <td style="width:10%">입사일</td>
-                                 <td style="width:25%"></td>
+                                 <td style="width:25%">${loginUser.joinDate}</td>
                                  <td style="width:10%">개인번호</td>
-                                 <td style="width:25%"><div class="row">
+                                 <td style="width:25%">${loginUser.phone}
 									</td>
                                 </tr>
                                 
                                 							
                                 <tr>
                                  <td style="width:10%">내선번호</td>
-                                 <td style="width:25%"><div class="row">
-										
-										</td>
+                                 <td style="width:25%">${loginUser.officePhone}</td>
                                  <td style="width:10%">이메일</td>
-								</td>
+								  <td style="width:25%">${loginUser.email}</td>
                                 </tr>
                                 
                                 
                              <tr>
                                  <td style="width:10%">주소</td>
-                                 <td colspan="3">       
-				             		<div class="form-inline"><!-- 인라인 폼은 가로로 배열된 형태로 폼태그에 form-inling 클래스를 사용합니다.  -->
-									<label> &nbsp; 우편번호 :  </label>
-									
-						
-									<label> &nbsp; 도로명주소 : </label>
-									
-								    <label> &nbsp;상세주소 : </label>
-									
-				                	</td>
+                                 <td colspan="3"> ${loginUser.address}      </td>
+				             		
                                 
                                 </tr>
 							 
