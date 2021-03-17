@@ -43,7 +43,7 @@ public class AddressController {
 		int listCount = addressService.selectListCount();
 		//System.out.println(listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);//페이지리밋 10 보드 이미지 5
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);//페이지리밋 10 보드 이미지 5 
 		
 		ArrayList<Address> list = addressService.selectListCount(pi);
 		
