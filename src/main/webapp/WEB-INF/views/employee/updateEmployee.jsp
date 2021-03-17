@@ -47,7 +47,7 @@
 			<div class="col-lg-10">
 				<div class="card mb-4">
 					<div class="card-header">
-						<h3>사원 수정</h3>
+						<h3>사원수정</h3>
 					</div><br><br>
 					<div class="card-body">
 					
@@ -60,67 +60,56 @@
 							
                                 <tr>
                                  <td style="width:10%">이름</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
+                                 <td style="width:40%"><input type="text" class="form-control form-control-sm" style="width:40%" name="empName" id="empName"></td>
                                  <td style="width:10%">주민번호</td>
-                                 <td style="width:25%"><div class="row">
-										<div class="col-sm-3 mb-sm-0">
-											<input type="text" id= "empphone1" name="empphone" class="form-control form-control-user" max="6">
+                                 <td style="width:40%">
+                                      <div class="row">
+										<div class="col-sm-4 mb-sm-0">
+											<input type="text" id= "resNo1" name="resNo" class="form-control form-control-user" max="6">
+										</div><label>-</label>
+										<div class="col-sm-4">
+											<input type="text" id="resNo2" name="resNo" class="form-control form-control-user">
 										</div>
-										<div class="col-sm-3">
-											<input type="text" id="empphone2" name="empphone" class="form-control form-control-user">
-										</div>
-									
+									   </div>
 
 										
 										</td>
                                 </tr>
 							
                                 <tr>
-                                 <td style="width:10%">부서코드</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
+                                 <td style="width:10%">부서</td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="deptName" id="deptName"></td>
                                  <td style="width:10%">직급</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%"></td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="empPosition" id="empPosition"></td>
                                 </tr>
 															
                                 <tr>
                                  <td style="width:10%">입사일</td>
                                  <td style="width:25%"><input type="date" id="joinDate" name="joinDate" class="form-control form-control-user" style="width: 50%;"></td>
                                  <td style="width:10%">개인번호</td>
-                                 <td style="width:25%"><div class="row">
-										<div class="col-sm-3 mb-sm-0">
-											<input type="text" id="phone1" name="phone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="phone2" name="phone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="phone3" name="phone" class="form-control form-control-user">
-										</div>
-									</div></td>
+                                 <td style="width:25%">
+										
+											<input type="text" id="phone1" name="phone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
+										
                                 </tr>
                                 
                                 							
                                 <tr>
                                  <td style="width:10%">내선번호</td>
-                                 <td style="width:25%"><div class="row">
-										<div class="col-sm-3 mb-sm-0">
-											<input type="text" id= "empphone1" name="empphone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="empphone2" name="empphone" class="form-control form-control-user">
-										</div>
-										<div class="col-sm-3">
-											<input type="text" id="empphone3" name="empphone" class="form-control form-control-user">
-										</div></td>
+                                 <td style="width:25%">									
+                                 		<input type="text" id="officePhone" name="officePhone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
+</td>
                                  <td style="width:10%">이메일</td>
-                                 <td style="width:25%">			<div class="row">
-										<div class="col-sm-5 mb-sm-0">
-											<input type="email" id="email1" name="email" class="form-control form-control-user">
+                                 <td style="width:25%">			
+									<div class="row">
+										<div class="col-sm-4 mb-sm-0">
+											<input type="text" id= "email1" name="email" class="form-control form-control-user" max="6">
+										</div><label>@</label>
+										<div class="col-sm-4">
+											<input type="text" id="email2" name="email" class="form-control form-control-user">
 										</div>
-										<div class="col-sm-5">
-											<input type="email" id="email2" name="email" class="form-control form-control-user">
-										</div>
-									</div></td>
+									   </div>
+									</td>
                                 </tr>
                                 
                                 

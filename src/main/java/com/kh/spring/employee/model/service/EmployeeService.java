@@ -6,5 +6,7 @@ public interface EmployeeService {
 
 	  Employee loginEmployee(Employee emp) throws Exception;
 
+	  int updateMypage(Employee emp);
+
 		
 }

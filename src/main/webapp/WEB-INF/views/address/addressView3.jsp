@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -87,10 +88,11 @@
 							<h5>주소록</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
-									<input type="email" class="form-control" id="searchForm"
-										aria-describedby="emailHelp" value="123"> <br>
-									<button type="button" class="btn  btn-secondary">검색하기</button>
-									<button type="button" class="btn  btn-primary">추가하기</button>
+									<input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                        			<br>
+                        			<button type="button" class="btn  btn-secondary">검색하기</button>
+                        			<a href ="insert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
+                        			<a href="detail.add"><button type="button" class="btn  btn-primary">임시상세</button></a>
 
 								</div>
 							</span>
@@ -143,7 +145,7 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="list.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
+									href="view.add?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -156,7 +158,7 @@
 							<c:choose>
 								<c:when test="${ pi.currentPage ne p }">
 									<li class="page-item"><a class="page-link"
-										href="list.bo?currentPage=${ p }">${ p }</a></li>
+										href="view.add?currentPage=${ p }">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item disabled"><a class="page-link"
@@ -169,11 +171,11 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
-									href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"
-									href="list.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
