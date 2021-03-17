@@ -8,6 +8,7 @@
 		<typeAlias type="com.kh.spring.address.model.vo.Address" alias="Address"/>
 	<typeAlias type="com.kh.spring.todo.model.vo.Todo" alias="Todo"/>
 		<typeAlias type="com.kh.spring.employee.model.vo.Employee" alias="Employee"/>
+		<typeAlias type="com.kh.spring.board.notice.model.vo.Notice" alias="Notice"/>
 	</typeAliases>
 	
 	
@@ -16,5 +17,6 @@
 		<mapper resource="mappers/address-mapper.xml"/> 
 		<mapper resource="/mappers/todo-mapper.xml"/> 
 		<mapper resource="/mappers/employee-mapper.xml"/> 
+		<mapper resource="/mappers/notice-mapper.xml"/> 
 	</mappers>
 </configuration>
