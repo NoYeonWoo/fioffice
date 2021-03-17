@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="emailMapper">
+	
+	<resultMap id="emailResultSet" type="Email"><!-- 오른쪽은 vo에서  -->
+		<id column="EMAIL_NO" property="emailNo"/>
+		<result column="EMAIL_TITLE" property="emailTitle"/>
+		<result column="EMAIL_CONTENT" property="emailContent"/>
+		<result column="EMAIL_O_FILE" property="emailOFile"/>
+		<result column="EMAIL_N_FILE" property="emailNFile"/>
+		<result column="EMAIL_TIME" property="emailTime"/>
+		<result column="STATUS" property="status"/>
+		<result column="EMAIL_IMPORTANT" property="emailImportant"/>
+		<result column="EMAIL_SEND" property="emailSend"/>
+		<result column="EMAIL_RECEIVE" property="emailReceive"/>
+	</resultMap>
+	
+	<select id="selectList" resultMap="emailResultSet">
+		SELECT *
+		FROM EMAIL
+		WHERE EMP_NO =#{empNo}
+		ORDER BY EMAIL_TIME DESC
+	</select>
+	
+</mapper>
