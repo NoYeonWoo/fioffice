@@ -1,3 +1,4 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -41,7 +42,7 @@
 								</div>
 							</div>
 	 			
-   <div class="tab-content" id="nav-tabContent">
+                   <div class="tab-content" id="nav-tabContent">
 
 					<div class="card-body tab-pane fade show active" id="list-updateForm"
 						role="tabpanel" aria-labelledby="list-home-list">
@@ -49,12 +50,12 @@
   
       
       
-						<form name="newEmpForm" method="post" autocomplete="off">
+						<form name="update.me" method="post" autocomplete="off">
 
 				
                              
                          
-							<table class="table table-bordered" style="width:80%">
+							<table class="table table-bordered" style="width:900px">
                                	<tr >
 									<td style="height: 50px; " >사진 </td>
 									<td  >
@@ -69,91 +70,102 @@
 								<tr>
 									<td style="width: 10%">이름</td>
 									<td style="width: 40%"><input type="text"
-										class="form-control form-control-user" style="width: 40%" readonly></td>
+										class="form-control form-control-user" style="width: 40%" value="${loginUser.empName}" readonly></td>
 								</tr>
 								<tr>
-									<td style="width: 10%">개인번호</td>
-									<td style="width: 40%">
-										<div class="row">
-											<div class="col-sm-3 mb-sm-0">
-												<input type="text" id="phone1" name="phone"
-													class="form-control form-control-user">
-											</div>
-											<div class="col-sm-3">
-												<input type="text" id="phone2" name="phone"
-													class="form-control form-control-user">
-											</div>
-											<div class="col-sm-3">
-												<input type="text" id="phone2" name="phone"
-													class="form-control form-control-user">
-											</div>
-
-										</div>
-									</td>
-
+									 <td style="width:10%">개인번호</td>
+                                 <td style="width:25%">
+										
+											<input type="text" id="phone" name="phone" class="form-control form-control-user" value="${loginUser.phone}" placeholder="(-)포함 입력해주세요"style="width: 50%" >
+								</td>
 
 
 								</tr>
 
 								<tr>
 									<td style="width: 10%">부서</td>
-									<td style="width: 25%"><input type="text"
-										class="form-control" readonly></td>
+									<td style="width: 40%"><input type="text"
+										class="form-control"  name="deptName" id="deptName" value="${loginUser.deptName}" readonly style="width: 40%"></td>
 
 								</tr>
 								<tr>
 									<td style="width: 10%">직급</td>
-									<td style="width: 25%"><input type="text"
-										class="form-control" readonly></td>
+									<td style="width: 40%"><input type="text"
+										class="form-control" name="empPosition" id="empPosition" value="${loginUser.empPosition}" readonly style="width: 40%"></td>
 								</tr>
 
 
 								<tr>
 									<td style="width: 10%">내선번호</td>
-									<td style="width: 25%">
-									<div class="row">
-											<div class="col-sm-3 mb-sm-0">
-												<input type="text" id="empphone1" name="empphone"
-													class="form-control form-control-user">
-											</div>
-											<div class="col-sm-3">
-												<input type="text" id="empphone2" name="empphone"
-													class="form-control form-control-user">
-											</div>
-											<div class="col-sm-3">
-												<input type="text" id="empphone3" name="empphone"
-													class="form-control form-control-user">
-											</div></td>
+									<td style="width: 40%">
+									
+											
+												<input type="text" id="officePhone1" name="officePhone"
+													class="form-control form-control-user"  value="${loginUser.officePhone}" readonly style="width: 50%">
+		
 								</tr>
 								<tr>
 									<td style="width: 10%">이메일</td>
-									<td style="width: 25%">
-										<div class="row">
-											<div class="col-sm-5 mb-sm-0">
-												<input type="email" id="email1" name="email"
-													class="form-control form-control-user">
-											</div>
-											<div class="col-sm-5">
-												<input type="email" id="email2" name="email"
-													class="form-control form-control-user">
-											</div>
-										</div>
+									<td style="width: 40%">
+									
+											
+												<input type="email" id="email" name="email"
+													class="form-control form-control-user"  value="${loginUser.email}" style="width: 50%">
+										
+										
 									</td>
 								</tr>
-								<tr>
-
-
-								</tr>
+						              <tr>
+                                 <td style="width:10%">주소</td>
+                                 <td colspan="3">       
+				             		<div class="form-inline"><!-- 인라인 폼은 가로로 배열된 형태로 폼태그에 form-inling 클래스를 사용합니다.  -->
+									<label> &nbsp; 우편번호 :  </label>
+									           		<c:forTokens var="addr" items="${ loginUser.address }" delims="/" varStatus="status">
+											<c:if test="${ status.index eq 0 && addr >= '0' && addr <= '99999' }">
+												<c:set var="post" value="${ addr }"/>
+											</c:if>
+											<c:if test="${ status.index eq 0 && !(addr >= '0' && addr <= '99999') }">
+												<c:set var="address1" value="${ addr }"/>
+											</c:if>
+											<c:if test="${ status.index eq 1 }">
+												<c:set var="address1" value="${ addr }"/>
+											</c:if>
+											<c:if test="${ status.index eq 2 }">
+												<c:set var="address2" value="${ addr }"/>
+											</c:if>
+										</c:forTokens>
+									<input type="text"  name="post" class="form-control mr-2 postcodify_postcode5" value="${ post }" style="width:25%">
+									<button type="button" class="btn btn-primary" id="postcodify_search_button">검색</button>
+									
+									<br><br><br>
+									<label> &nbsp; 도로명주소 : </label>
+									<input type="text" name="address1" class="form-control postcodify_address" value="${ address1 }" style="width:35%">
+								    </div><br>
+								    <label> &nbsp;상세주소 : </label>
+									<input type="text" name="address2" class="form-control postcodify_extra_info" value="${ address2 }" style="width:35%">
+				                	</td>
+                     
+                                </tr>
 
 							</table>
 						</form>
+						
+						
+						<!-- jQuery와 Postcodify를 로딩한다. -->
+						<script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
+						<script>
+					
+							$(function() {
+								$("#postcodify_search_button")
+										.postcodifyPopUp();
+							});
+						</script>
+						
 
 					<!-- 등록하기 버튼 -->
-						<a href="javascript:confirm();"
-							class="btn btn-primary btn-icon-split"> <span
-							class="icon text-white-50"> <i class="fas fa-check"></i>
-						</span> <span class="text">수정하기</span>
-						</a>
+						<button type="submit" class="btn btn-primary"> <i class="fas fa-check"></i> 수정하기</button> 
+						
+						
 
 
       <script>
