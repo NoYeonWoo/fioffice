@@ -7,12 +7,22 @@
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
  <style>
-	.table td, .table th {
+	.inout .table td, .table th {
 		padding:0.75rem !important;
 	}
 	.select-checkbox:before {
     margin-top: 0px !important;
 }
+.btn-primary{
+	background-color: #B8ACD0 !important;
+    border-color: #B8ACD0 !important;
+}
+.btn{
+	padding:0.5rem 0.95rem !important;
+}
+ .modal-content .table td{
+   line-height: 35px!important;
+   }
  </style>
 </head>
 
@@ -49,11 +59,11 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Custom Button</h5>
+                        <h5>입출고관리</h5>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
-                            <table id="inoutList"  class="table table-hover row-border  nowrap">
+                            <table id="inoutList"  class="table table-hover row-border  nowrap inout">
                                 <thead>
                                     <tr>
                                     	<th id="check" style="width: 50px; text-align: center;">check</th>
@@ -180,7 +190,52 @@
             </div> <!--지우지 마세요   div class="pcoded-content"  -->
             </div> <!--지우지 마세요    div class="pcoded-main-container"  -->
 <!-- [ Main Content ] 메인화면 끝 -->
-
+ <div class="modal fade" id="inoutAdd">  
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">입출고추가</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
+            </div>
+             <div class="modal-body">
+				<form name="newInout" action="login.me" method="post" autocomplete="off">
+					<table class="table table-bordered  "  align="center">
+                    	<tr>
+                        	<td style="width:20%">입출고일자</td>
+                            <td><input type="date" id="inoutDate" name="inoutDate"  class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                            <td style="width:20%">구분</td>
+                             <td><input type="radio" name="inout" id="in" value="입고">
+                    			 <label for="in">IN</label> &nbsp;&nbsp;
+                    			 <input type="radio" name="inout" id="out" value="출고">
+                    			 <label for="out">OUT</label></td>
+                        </tr><tr>
+                            <td style="width:20%">거래처명</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                            <td style="width:20%">상품명</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                             <td style="width:20%">수량</td>
+                             <td><input type="number" class="form-control form-control-sm"style="width:25%"></td>
+                        </tr><tr>
+                             <td style="width:20%">금액</td>
+                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                        </tr><tr>
+                             <td style="width:20%">비고</td>
+                             <td><input type="text" class="form-control form-control-sm"></td>
+                        </tr>
+					</table>
+					<div class="modal-footer">
+                    	<button type="submit" class="btn btn-primary">추가하기</button>
+                    	<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+                	</div>
+				</form>	
+			</div>
+            </div>
+        </div>
+    </div>
 
     
     
@@ -206,9 +261,15 @@
 		        order: [[ 1, 'asc' ]],
               dom: '<"float-left"B><"float-right"f>rtip',
 	        buttons: [{
-	            text: 'My Custom button',
+	            text: '입출고 추가',
+	            className: 'btn-primary',
 	            action: function(e, dt, node, config) {
-	            	window.location="ioDetail.pio"
+	            	$("#inoutAdd").modal("show");
+	            }
+	        },{
+	            text: '삭제',
+	            className: 'btn-danger',
+	            action: function(e, dt, node, config) {
 	            }
 	        }]
 	    });
