@@ -41,5 +41,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   </select>
 
 
+<update id="updateMypage" parameterType="Employee">
+	UPDATE EMPLOYEE
+	SET 
+	PHONE = #{phone},
+	OFFICE_PHONE = #{officePhone},	
+	AGE = #{age},
+	EMAIL = #{email},
+	ADDRESS = #{address},
+	WHERE EMP_NO = #{empNo}
+	
+
+
+</update>
+
 
 </mapper>

@@ -33,7 +33,7 @@
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html">조직설계</a></li>
+                       <li><a href="layout-vertical.html">부서관리</a></li>
                        <li><a href="manageEmp.do">사원관리</a></li>
                        <li><a href="insertEmp.do">사원추가</a></li>
                    </ul>

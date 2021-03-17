@@ -14,4 +14,9 @@ public class EmployeeDao {
 		return sqlSession.selectOne("employeeMapper.loginEmployee",emp);
 	}
 
+	public int updateMypage(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("employeeMapper.updateMypage",emp);
+	}
+
 }

@@ -1,3 +1,5 @@
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,6 +8,13 @@
 <meta charset="UTF-8">
 </head>
 <body>
+
+	<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+		</script>
+		<c:remove var="msg" scope="session"/>
+	</c:if>
 <!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
@@ -34,19 +43,22 @@
 								<i class="feather icon-mail"></i>
 								</a>
 								-->
-								<a >  ${loginUser.empName}님 환영합니다</a>
+								<c:if test="${ !empty sessionScope.loginUser }">
+								<a >  ${sessionScope.loginUser.empName}님 환영합니다</a>	</c:if>
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
 									<i class="feather icon-user"></i>
 									
 								</a>
-								
+							
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
 									<div class="pro-head">
+									<c:if test="${ !empty sessionScope.loginUser }">
 										<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" class="img-radius" alt="User-Profile-Image">
-										<span>사원명</span>
-										<a href="auth-signin.html" class="dud-logout" title="Logout">
+										<span>${loginUser.empName}님</span>
+										<a href="logout.me" class="dud-logout" title="Logout">
 										<i class="feather icon-log-out"></i>
 										</a>
+										</c:if>
 									</div>
 									<ul class="pro-body">
 									
