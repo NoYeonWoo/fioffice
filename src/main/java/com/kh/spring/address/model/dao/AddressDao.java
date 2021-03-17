@@ -22,7 +22,7 @@ public class AddressDao {
 		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("addressMapper.selectList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("addressMapper.selectList", null, rowBounds); 
 	}
 
 }
