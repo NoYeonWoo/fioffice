@@ -23,6 +23,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
+import com.kh.spring.address.model.vo.PageInfo;
+import com.kh.spring.common.Pagination;
+
+import com.kh.spring.email.model.vo.Email;
+
 
 
 @Controller
@@ -31,9 +36,25 @@ public class EmailController {
 
 
 	@RequestMapping("view.email")
-	public String viewEmail() {
+	public String selectList(/*@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model*/) {
+		
+		
+		/*
+		int listCount = emailService.selectListCount();
+		//System.out.println(listCount);
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);//페이지리밋 10 보드 이미지 5
+		
+		ArrayList<Email> list = emailService.selectListCount(pi);
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi);
+		
+*/
 		return "email/email";
+		
 	}
+
 	@RequestMapping("send.email")
 	public String sendEmail() {
 		return "email/emailSend";
