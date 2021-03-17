@@ -16,13 +16,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="count" column="COUNT"/>
 	</resultMap>
 	
-	<select id="selectList" resultMap="NoticeResultSet">
+	<select id="selectNList" resultMap="NoticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE STATUS='Y'
 		ORDER BY NOTICE_NO DESC
 	</select>
 	
+	<insert id="insertNotice" parameterType="Notice">
+		INSERT INTO NOTICE
+		
+	</insert>
+	
+	<select id="selectNotice" resultMap="NoticeResultSet">
+		SELECT *
+		FROM NOTICE
+		WHERE NOTICE_NO=#{noticeNo}
+		AND STATUS='Y'
+	</select>
 	
 	
 </mapper>

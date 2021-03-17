@@ -39,6 +39,12 @@
         box-sizing: border-box;
         
    		}
+   		
+   		div.comment {
+        
+       	text-align: right;
+       	 
+   		}
 
 
 	</style>
@@ -188,8 +194,10 @@
 		    	<div class="tw-flex-1 tw-pl-4">
 		       		<div class="tw-flex tw-items-center tw-flex-wrap">
 			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">이윤해</span> 
+			   		 		<span class="tw-flex tw-items-center">이윤해</span>
+			   		 		
 			 			 </div>
+			 			
 		      
 		    		</div>
 			            <div class="app-comment-content tw-py-3">
@@ -203,12 +211,13 @@
 		    	<div class="tw-flex-1 tw-pl-4">
 		       		<div class="tw-flex tw-items-center tw-flex-wrap">
 			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">노연우</span> 
+			   		 		<span class="tw-flex tw-items-center">노연우</span>
 			 			 </div>
 		      
 		    		</div>
 			            <div class="app-comment-content tw-py-3">
 			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
+			              	<div></div>
 			         	</div>
 				</div>
 			</li>
@@ -220,7 +229,6 @@
 			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
 			   		 		<span class="tw-flex tw-items-center">김영찬</span> 
 			 			 </div>
-		      
 		    		</div>
 			            <div class="app-comment-content tw-py-3">
 			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
