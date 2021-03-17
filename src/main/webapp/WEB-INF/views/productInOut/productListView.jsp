@@ -5,6 +5,18 @@
 <head>
  <!-- data tables css -->
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
+ <style>
+ .btn-primary{
+	background-color: #B8ACD0 !important;
+    border-color: #B8ACD0 !important;
+}
+.btn{
+	padding:0.5rem 0.95rem !important;
+}
+ .modal-content .table td{
+   line-height: 35px!important;
+   }
+ </style>
 </head>
 
 <body class="">
@@ -40,7 +52,7 @@
           <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Custom Button</h5>
+                        <h5>상품관리</h5>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
@@ -69,6 +81,26 @@
 	                                        <td>59</td>
 	                                        <td>2009/04/10</td>
 	                                        <td>$237,500</td>
+	                                    </tr><tr>
+	                                        <td>Gloria Little</td>
+	                                        <td> Administrator</td>
+	                                        <td>New Yo</td>
+	                                        <td>59</td>
+	                                        <td>2009/04/10</td>
+	                                        <td>$237,500</td>
+	                                        <td>59</td>
+	                                        <td>2009/04/10</td>
+	                                        <td>$237,500</td>
+	                                    </tr><tr>
+	                                        <td>Gloria Little</td>
+	                                        <td>Systemsr</td>
+	                                        <td>New rk</td>
+	                                        <td>59</td>
+	                                        <td>2009/04/10</td>
+	                                        <td>$237,500</td>
+	                                        <td>59</td>
+	                                        <td>2009/04/10</td>
+	                                        <td>$237,500</td>
 	                                    </tr></tbody>
                             	</table>
                         	</div>
@@ -85,18 +117,20 @@
 
 
      <div class="modal fade" id="productAdd">  
-        <div class="modal-dialog modal-sm">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
             <!-- Modal Header -->
             <div class="modal-header">
                 <h4 class="modal-title">상품추가</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
+             <div class="modal-body">
 				<form name="newProduct" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered col-sm-10"  align="center">
+					<table class="table table-bordered  "  align="center">
                     	<tr>
+                    	
                         	<td style="width:20%">상품코드</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%" placeholder="P0000형식으로 작성해주세요"></td>
                         </tr><tr>
                             <td style="width:20%">상품명</td>
                             <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
@@ -116,6 +150,57 @@
                     	<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
                 	</div>
 				</form>	
+			</div>
+            </div>
+        </div>
+    </div>
+    
+     <div class="modal fade" id="productDetail">  
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h4 class="modal-title">상세보기</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
+            </div>
+             <div class="modal-body">
+				<form name="productUpdate" action="login.me" method="post" autocomplete="off">
+					<table class="table table-bordered  "  align="center">
+                    	<tr>
+                        	<td style="width:20%">상품코드</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                            <td style="width:20%">상품명</td>
+                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                        </tr><tr>
+                             <td style="width:20%">이월재고</td>
+                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
+                        </tr><tr>
+                             <td style="width:20%">출고수량</td>
+                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
+                        </tr><tr>
+                             <td style="width:20%">입고단가</td>
+                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                        </tr><tr>
+                             <td style="width:20%">출고수량</td>
+                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
+                        </tr><tr>
+                             <td style="width:20%">출고단가</td>
+                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                        </tr><tr>
+                             <td style="width:20%">재고</td>
+                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
+                        </tr><tr>
+                             <td style="width:20%">비고</td>
+                             <td><input type="text" class="form-control form-control-sm"></td>
+                        </tr>
+					</table>
+					<div class="modal-footer">
+                    	<button type="submit" class="btn btn-primary">수정하기</button>
+                    	<button type="button" onclick="$('#postForm').submit();" class="btn btn-danger">삭제하기</button>
+                	</div>
+				</form>	
+			</div>
             </div>
         </div>
     </div>
@@ -124,30 +209,33 @@
     
 	<script>
 	$(document).ready(function() {
-        $('#productList').DataTable({
+        var table=$('#productList').DataTable({
             columnDefs: [
                 { orderable: false, targets: [3,4,5,6,8] },
                 { searchable: false, targets: [2,3,4,5,6,7]}
               ],
               dom: '<"float-left"B><"float-right"f>rtip',
-              responsive: {
-                  details: {
-                      display: $.fn.dataTable.Responsive.display.modal( {
-                          header: function ( row ) {
-                              var data = row.data();
-                              return 'Details for '+data[0]+' '+data[1];
-                          }
-                      } ),
-                      renderer: $.fn.dataTable.Responsive.renderer.tableAll( {
-                          tableClass: 'table'
-                      } )
-                  }
-              },
             buttons: [{
                 text: '상품추가',
+                className: 'btn-primary',
                 action: function(e, dt, node, config) {
+                	$("#productAdd").modal("show");
                 }
             }]
+        });
+        
+        $("#productList tbody").on('click', 'tr', function(){
+        	//$("#productList td:nth-child(2)").text("");
+            $("tr:nth-child(1) input").val(table.row(this).data()[0]);
+            $("tr:nth-child(2) input").val(table.row(this).data()[1]);
+            $("tr:nth-child(3) input").val(table.row(this).data()[2]);
+            $("tr:nth-child(4) input").val(table.row(this).data()[3]);
+            $("tr:nth-child(5) input").val(table.row(this).data()[4]);
+            $("tr:nth-child(6) input").val(table.row(this).data()[5]);
+            $("tr:nth-child(7) input").val(table.row(this).data()[6]);
+            $("tr:nth-child(8) input").val(table.row(this).data()[7]);
+            $("tr:nth-child(9) input").val(table.row(this).data()[8]);
+            $("#productDetail").modal("show");
         });
 	});
 	</script>

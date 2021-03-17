@@ -14,7 +14,7 @@
 	
 	<mappers>
 		<!--<mapper resource="/mappers/board-mapper.xml"/> -->
-		<mapper resource="mappers/address-mapper.xml"/> 
+		<mapper resource="/mappers/address-mapper.xml"/> 
 		<mapper resource="/mappers/todo-mapper.xml"/> 
 		<mapper resource="/mappers/employee-mapper.xml"/> 
 		<mapper resource="/mappers/notice-mapper.xml"/> 
