@@ -12,12 +12,9 @@
 
 	
 
-		<jsp:forward page="WEB-INF/views/common/main.jsp"/>
+		
 		 
+<jsp:forward page="WEB-INF/views/common/main.jsp"/>
 
-
-
-
-
-</body>
+</body>s
 </html>
