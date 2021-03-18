@@ -14,13 +14,7 @@
 
 		
 		 
-
-	<c:if test="${empty sessionScope.loginUser}">
-		<jsp:forward page="login.do"></jsp:forward>
-	</c:if>
-	<c:if test="${!empty sessionScope.loginUser}">  </c:if> -->
-
--->
+<jsp:forward page="WEB-INF/views/common/main.jsp"/>
 
 </body>s
 </html>
