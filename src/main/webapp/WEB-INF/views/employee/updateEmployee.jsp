@@ -52,7 +52,7 @@
 					<div class="card-body">
 					
 					
-						<form name="newEmpForm" method="post" autocomplete="off">
+						<form name="newEmpForm" method="post" >
 						
 						                              
 
