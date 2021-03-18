@@ -124,6 +124,20 @@
 	.app-board-category .app-category-child>ul>li.app-ative>a{font-weight:600}
 	
 	.app-board-category>li:hover>.app-category-child{display:block}
+	
+	div.left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        
+    	}
+    
+    	div.right {
+        
+        float: right;
+        box-sizing: border-box;
+        
+   		}
 
 	</style>
 </head>
@@ -178,12 +192,11 @@
             
     <!-- 리스트 영역 -->
     	
-
-    
+   
+ 
 	<div class="app-board-section">
 	
-
-
+		
     <ul class="app-board-template-list">
         <li>
             <a class="tw-flex-1" href="ndetail.bo">
@@ -210,6 +223,8 @@
 	         </div>
          
         	</div> <!--   <div class="tw-flex-1"> -->
+        	<!-- 댓글 count -->
+        	<div class="app-list-comment">11</div>
         	</a>
     	</li>
     </ul>
@@ -280,9 +295,22 @@
     
 
                 
-                <!--글쓰기 버튼  -->
-                <div><br>
-                <div align="right">
+                
+                
+                
+                
+         <div> <!-- 하단 영역 -->     
+        
+		        <!-- 서치 버튼 -->
+				<div class="left">
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="clientList"></label>
+					<input type="submit" onclick="jQuery(this).parents('form.bd_srch_btm').submit();return false;" class="app-button app-button-rounded app-button-xs primary" value="검색">
+				</div>
+		
+				<!--글쓰기 버튼  -->
+				<c:if test="${loginUser == admin}">
+                <div class="right">
                 <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
@@ -291,21 +319,41 @@
 				</a>&nbsp;&nbsp;&nbsp;&nbsp;
 				<br>
 				</div>
+				</c:if>
 				
-				
-              </div>
+        </div> <!-- 하단 영역 -->
               
+              
+
               <!-- 페이지 영역  -->
                	<div class="row" style="width: 90%; margin-left: 5%;">
                		<div class="pagination">
 
 							<nav aria-label="Page navigation example">
 							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#!">Previous</a></li>
-								<li class="page-item"><a class="page-link" href="#!">1</a></li>
-								<li class="page-item"><a class="page-link" href="#!">2</a></li>
-								<li class="page-item"><a class="page-link" href="#!">3</a></li>
-								<li class="page-item"><a class="page-link" href="#!">Next</a></li>
+							<c:choose>
+                			<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			</c:when>
+                			
+                			</c:choose>
+							<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    		<c:choose>
+                    		
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:when>
+                		
+                	</c:choose>
 							</ul>
 						</nav>
 						

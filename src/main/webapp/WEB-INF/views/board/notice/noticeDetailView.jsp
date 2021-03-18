@@ -101,22 +101,22 @@
 	<div class="app-board-article-head">
 	<div class="app-board-container">
 	<!-- <img src="" alt=""> -->
-	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">공지사항 디테일뷰 테스트</h1>
+	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">${ n.noticeTitle }</h1>
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
 	<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
-	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">오수현</a>
+	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">관리자</a>
 	<div class="app-article-meta">
-	<el-tooltip content="2021-02-04 01:33:27">
-	<div class="app-article-meta-item">2021.03.09</div>
-	</el-tooltip>
+	
+	<div class="app-article-meta-item">${ n.noticeDate }</div>
+	
 	<div class="app-article-meta-divider"> ・ </div>
-	<div class="app-article-meta-item">조회 수 100</div>
+	<div class="app-article-meta-item">조회 수 ${ n.count }</div>
 	<div class="app-article-meta-divider"> ・ </div>
-	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 4</a>
+	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 ${ n.replyCount }</a>
 	</div>
 	</div>
 	</div> <div class="tw-flex-1"></div>
@@ -133,7 +133,7 @@
 	
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
-			본문 내용입니다.<br><br>
+			${ n.noticeContent }<br><br>
 			
 		</div>
 	
@@ -179,63 +179,17 @@
 		    	<div class="tw-flex-1 tw-pl-4">
 		       		<div class="tw-flex tw-items-center tw-flex-wrap">
 			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">오수현</span> 
+			   		 		<span class="tw-flex tw-items-center">${ n.replyWriter }</span> 
 			 			 </div>
 		      
 		    		</div>
 			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
+			              	<div class="comment_227_0 rhymix_content xe_content">${ n.replyContent }</div>
 			         	</div>
 				</div>
 			</li>
 		</ul> 
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">이윤해</span>
-			   		 		
-			 			 </div>
-			 			
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul> 
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">노연우</span>
-			 			 </div>
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			              	<div></div>
-			         	</div>
-				</div>
-			</li>
-		</ul>
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">김영찬</span> 
-			 			 </div>
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul>   
+		
       
       
 	<!-- 댓글 작성폼 영역 -->
@@ -252,7 +206,7 @@
 					</a>
 				</div>
 				<div class="left">
-			        <a href="dlist.bo" class="app-button app-button-rounded app-button-xs primary">
+			        <a href="nlist.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">목록</span>
 					</a>
 				</div>

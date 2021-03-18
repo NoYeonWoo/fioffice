@@ -42,7 +42,7 @@
                 <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">매뉴관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html">공지사항</a></li>
+                       <li><a href="nlist.bo">공지사항</a></li>
                        <li><a href="layout-horizontal.html">결재</a></li>
                        <li><a href="layout-horizontal.html">주소록</a></li>
                        <li><a href="layout-horizontal.html">캘린더</a></li>

@@ -6,9 +6,10 @@
 	</settings>
 	 <typeAliases>
 		<typeAlias type="com.kh.spring.address.model.vo.Address" alias="Address"/>
-	<typeAlias type="com.kh.spring.todo.model.vo.Todo" alias="Todo"/>
+		<typeAlias type="com.kh.spring.todo.model.vo.Todo" alias="Todo"/>
 		<typeAlias type="com.kh.spring.employee.model.vo.Employee" alias="Employee"/>
 		<typeAlias type="com.kh.spring.board.notice.model.vo.Notice" alias="Notice"/>
+		<typeAlias type="com.kh.spring.board.common.model.vo.Reply" alias="Reply"/>
 	</typeAliases>
 	
 	

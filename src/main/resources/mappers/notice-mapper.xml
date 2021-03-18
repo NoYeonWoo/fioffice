@@ -16,17 +16,65 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="count" column="COUNT"/>
 	</resultMap>
 	
-	<select id="selectNList" resultMap="NoticeResultSet">
+	<resultMap id="replyResultSet" type="Reply">
+		<id property="replyNo" column="REPLY_NO" />
+		<result property="replyWriter" column="REPLY_WRITER"/>
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="refBoardNo" column="REF_BNO" />
+		<result property="replyDate" column="REPLY_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM NOTICE
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="selectList" resultMap="NoticeResultSet">
 		SELECT *
 		FROM NOTICE
 		WHERE STATUS='Y'
 		ORDER BY NOTICE_NO DESC
 	</select>
 	
+	
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE
-		
+		VALUES(SEQ_NOTINO.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent},
+		SYSDATE, DEFAULT, DEFAULT)
 	</insert>
+	
+	<update id="deleteNotice" parameterType="_int">
+		UPDATE NOTICE
+		SET STATUS='N'
+		WHERE NOTICE_NO=#{noticeNo}
+	</update>
+	
+	<update id="updateNotice" parameterType="Notice">
+		UPDATE NOTICE
+		SET NOTICE_CONTENT=#{noticeContent},
+			NOTICE_TITLE=#{noticeTitle}
+		WHERE NOTICE_NO=#{noticeNo}
+	</update>
+	
+	<update id="updateIncreaseCount" parameterType="_int">
+		UPDATE NOTICE
+		SET COUNT=COUNT+1
+		WHERE NOTICE_NO=#{noticeNo}
+	</update>
+	
+	<select id="selectTopList" resultMap="NoticeResultSet">
+		<!-- 메인화면 공지사항 -->
+		<![CDATA[
+		SELECT *
+		FROM(SELECT *
+			FROM NOTICE
+			WHERE STATUS='Y'
+			ORDER BY COUNT DESC)
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
 	
 	<select id="selectNotice" resultMap="NoticeResultSet">
 		SELECT *
@@ -35,5 +83,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND STATUS='Y'
 	</select>
 	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{replyWriter}, #{replyContent}, #{refBoardNo}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="selectReplyList" resultMap="replyResultSet">
+		SELECT REPLY_NO, REPLY_WRITER, REPLY_CONTENT, REPLY_DATE
+		FROM REPLY
+		WHERE REF_BNO=#{noticeNo}
+		AND STATUS='Y'
+		ORDER BY REPLY_NO DESC
+	</select>
+	
+	<select id="commentCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPLY
+		WHERE REF_BNO=#{noticeNo}
+		AND STATUS='Y'
+	</select>
 	
 </mapper>
