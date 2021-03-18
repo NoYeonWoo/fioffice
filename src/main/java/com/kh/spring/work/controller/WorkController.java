@@ -22,30 +22,55 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+
+import com.kh.spring.address.model.vo.PageInfo;
+import com.kh.spring.common.Pagination;
 import com.kh.spring.work.model.service.WorkService;
+import com.kh.spring.work.model.vo.Work;
 
 
 
 @Controller
 public class WorkController {
 	
-
+	@Autowired
+	private WorkService workService;
 
 	@RequestMapping("view.work")
-	public String viewWork() {
+	//viewwork
+	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model) {
+
+			
+			
 		
+			int listCount = workService.selectListCount();
+			System.out.println(listCount);
+			
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);
+			
+			ArrayList<Work> list = workService.selectListCount(pi);
+			
+			model.addAttribute("list",list);
+			model.addAttribute("pi",pi);
+
 		
-		
-		
-		
-		
-		
-		return "work/work";
+		return "work/workTest";
 	}
+	
+	
+	
+	
+	
+	
 	@RequestMapping("view.workMain")
 	public String viewWorkMain() {
 		
 		return "work/workMain";
+	}
+	@RequestMapping("view.workMain2")
+	public String viewWorkMain2() {
+		
+		return "work/workMain2";
 	}
 	
 	

@@ -1,9 +1,45 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+#boardList {
+	text-align: center;
+}
 
+#boardList>tbody>tr:hover {
+	cursor: pointer;
+}
+
+#pagingArea {
+	width: fit-content;
+	margin: auto;
+}
+/* #pagingArea a{color:black} */
+#searchForm {
+	width: 80%;
+	margin: auto;
+}
+
+#searchForm>* {
+	float: left;
+	margin: 5px;
+}
+
+.select {
+	width: 20%;
+}
+
+.text {
+	width: 53%;
+}
+
+.searchBtn {
+	Width: 20%;
+}
+</style>
 </head>
 
 <body class="">
@@ -80,7 +116,7 @@
 												<td>${ w.workStart }</td>
 												<td>${ w.workEnd }</td>
 												<td>${ w.workStack }</td>
-												<td>${ w.workExeed }</td>
+												<td>${ w.workExceed }</td>
 												<td>${ w.workRemain }</td>
 												<td>${ w.workDate }</td>
 												<td>${ w.status }</td>
@@ -95,7 +131,54 @@
             <!-- [ stiped-table ] end -->
 
 
+			<div id="pagingArea">
+					<ul class="pagination">
+						<c:choose>
+							<c:when test="${ pi.currentPage ne 1 }">
+								<li class="page-item"><a class="page-link"
+									href="view.add?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
+							</c:when>
+							<c:otherwise>
+								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+							</c:otherwise>
+						</c:choose>
 
+						<!-- ㅇㅁㄴㅇㅁ노암닝ㅁ너ㅣㅏ어ㅣㅁ넝ㅁ너ㅏ암너         이제 번호 클릭이동 -->
+						
+						<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+							<c:choose>
+								<c:when test="${ pi.currentPage ne p }">
+									<li class="page-item"><a class="page-link"
+										href="view.add?currentPage=${ p }">${ p }</a></li>
+								</c:when>
+								<c:otherwise>
+									<li class="page-item disabled"><a class="page-link"
+										href="">${ p }</a></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+
+
+						<c:choose>
+							<c:when test="${ pi.currentPage ne pi.maxPage }">
+								<li class="page-item"><a class="page-link"
+									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+							</c:when>
+							<c:otherwise>
+								<li class="page-item disabled"><a class="page-link"
+									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+							</c:otherwise>
+						</c:choose>
+					</ul>
+				</div>
+
+				<br clear="both">
+				<br> <br>
+				<br>
+			</div>
+			<br>
+			<br>
+		</div>
 
 
 	<div id="pagingArea">

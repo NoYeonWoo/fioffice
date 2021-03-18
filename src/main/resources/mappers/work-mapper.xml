@@ -4,21 +4,29 @@
 	
 	<resultMap id="workResultSet" type="Work"><!-- 오른쪽은 vo에서  -->
 		<id column="WORK_NO" property="workNo"/>
-		<result column="EMP_NO" property="empNo"/>
 		<result column="WORK_START" property="workStart"/>
 		<result column="WORK_END" property="workEnd"/>
 		<result column="WORK_STACK" property="workStack"/>
-		<result column="WORK_EXCEED" property="workExeed"/>
+		<result column="WORK_EXCEED" property="workExceed"/>
 		<result column="WORK_REMAIN" property="workRemain"/>
 		<result column="WORK_DATE" property="workDate"/>
 		<result column="STATUS" property="status"/>
+		<result column="EMP_NO" property="empNo"/>
 	</resultMap>
 	
+	
+	<select id="selectListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM WORK
+		WHERE STATUS='Y'
+	
+	</select>
 	<select id="selectList" resultMap="workResultSet">
 		SELECT *
 		FROM WORK
-		WHERE EMP_NO =#{empNo}
-		ORDER BY WORK_DATE DESC
+		WHERE STATUS = 'Y'
+		ORDER BY WORK_NO DESC
+	
 	</select>
 	
 </mapper>

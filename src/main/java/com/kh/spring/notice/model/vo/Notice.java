@@ -2,7 +2,7 @@ package com.kh.spring.notice.model.vo;
 
 public class Notice {
 
-	public String notice_no;
+	public String noticeNo;
 	public String noticeWriter;
 	public String noticeTitle;
 	public String noticeContent;
@@ -15,10 +15,10 @@ public class Notice {
 	}
 
 
-	public Notice(String notice_no, String noticeWriter, String noticeTitle, String noticeContent, String noticeDate,
+	public Notice(String noticeNo, String noticeWriter, String noticeTitle, String noticeContent, String noticeDate,
 			String status) {
 		super();
-		this.notice_no = notice_no;
+		this.noticeNo = noticeNo;
 		this.noticeWriter = noticeWriter;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
@@ -27,13 +27,13 @@ public class Notice {
 	}
 
 
-	public String getNotice_no() {
-		return notice_no;
+	public String getNoticeNo() {
+		return noticeNo;
 	}
 
 
-	public void setNotice_no(String notice_no) {
-		this.notice_no = notice_no;
+	public void setNoticeNo(String noticeNo) {
+		this.noticeNo = noticeNo;
 	}
 
 
@@ -89,7 +89,7 @@ public class Notice {
 
 	@Override
 	public String toString() {
-		return "Notice [notice_no=" + notice_no + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
+		return "Notice [notice_no=" + noticeNo + ", noticeWriter=" + noticeWriter + ", noticeTitle=" + noticeTitle
 				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", status=" + status + "]";
 	}
 
