@@ -164,8 +164,9 @@
                             <div class="col">
                                 <div class="msg">
                                     <p class="m-b-0">Nice to meet you!</p>
-                                    <img src="assets/images/widget/dashborad-1.jpg" alt="">
-                                    <img src="assets/images/widget/dashborad-3.jpg" alt="">
+                                    
+                                    <img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/widget/dashborad-1.jpg" alt="">
+                                    <img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/widget/dashborad-3.jpg" alt="">
                                 </div>
                                 <p class="text-muted m-b-0"><i class="fa fa-clock-o m-r-10"></i>10:20am</p>
                             </div>

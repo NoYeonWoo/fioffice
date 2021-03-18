@@ -113,9 +113,9 @@
 
 	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">오수현</a>
 	<div class="app-article-meta">
-	<el-tooltip content="2021-02-04 01:33:27">
+	
 	<div class="app-article-meta-item">2021.03.09</div>
-	</el-tooltip>
+	
 	<div class="app-article-meta-divider"> ・ </div>
 	<div class="app-article-meta-item">조회 수 1</div>
 	<div class="app-article-meta-divider"> ・ </div>

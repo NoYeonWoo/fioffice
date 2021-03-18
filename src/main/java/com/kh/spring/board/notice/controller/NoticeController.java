@@ -22,9 +22,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
-
-
+import com.kh.spring.board.common.Pagination;
+import com.kh.spring.board.common.model.vo.PageInfo;
+import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.notice.model.service.NoticeService;
+import com.kh.spring.board.notice.model.vo.Notice;
 
 @Controller
 public class NoticeController {
@@ -33,31 +35,69 @@ public class NoticeController {
 	private NoticeService noticeService;
 	
 	@RequestMapping("nlist.bo")
-	public String boardList() {
+	public String selectNlist(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
+		
+		int listCount = noticeService.selectLictCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 5);
+		
+		ArrayList<Notice> list = noticeService.selectList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
 		
 		return "board/notice/noticeListView";
 		  
 	}
 	
 	@RequestMapping("ninsertForm.bo")
-	public String boardInsertForm() {
+	public String noticeInsertForm() {
 		
 		return "board/notice/noticeInsertForm";
 		  
 	}
 	
+	
 	@RequestMapping("nupdateForm.bo")
-	public String boardUpdateForm() {
+	public String noticeUpdateForm() {
 		
 		return "board/notice/noticeUpdateForm";
 		  
 	}
 	
 	@RequestMapping("ndetail.bo")
-	public String boardDetailView() {
+	public ModelAndView selectNotice(int noticeNo, ModelAndView mv) {
 		
-		return "board/notice/noticeDetailView";
-		  
+		int result = noticeService.updateIncreaseCount(noticeNo);
+		
+		if(result > 0) {
+			Notice n = noticeService.selectBoard(noticeNo);
+			mv.addObject("n", n).setViewName("board/notice/noticeDetailView");
+		}else {
+			
+		}
+		
+		return mv;
 	}
+	
+	@ResponseBody
+	@RequestMapping("rinsert.bo")
+	public String insertReply(Reply r) {
+		int result = noticeService.insertReply(r);
+		
+		return String.valueOf(result);
+		
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="rlist.bo", produces="application/json; charset=UTF-8")
+	public String selectReplyList(int noticeNo) {
+		
+		ArrayList <Reply> list = noticeService.selectReplyList(noticeNo);
+		
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(list);
+		
+	}
+		
 
 }
