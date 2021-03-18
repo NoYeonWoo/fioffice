@@ -51,7 +51,7 @@ public class AddressController {
 		model.addAttribute("pi",pi);
 		
 
-		return "address/addressView3";//3
+		return "address/addressView3";
 		
 	}
 	
@@ -59,7 +59,7 @@ public class AddressController {
 	public String viewUpdate( ){
 		
 
-		return "address/addressUpdate";//3 
+		return "address/addressUpdate";
 		
 	}
 	
@@ -67,14 +67,14 @@ public class AddressController {
 	public String viewDetail( ){
 		
 
-		return "address/addressDetail";//3
+		return "address/addressDetail";
 		
 	}
 	@RequestMapping("insert.add")
 	public String viewinsert( ){
 		
 
-		return "address/addressInsert";//3
+		return "address/addressInsert";
 		
 	}
 	
