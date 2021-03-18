@@ -4,14 +4,14 @@ import java.sql.Date;
 
 public class Work {
 	public int workNo;
-	public int empNo;
 	public Date workStart;
 	public Date workEnd;
 	public Date workStack;
-	public Date workExeed;
+	public Date workExceed;
 	public Date workRemain;
 	public Date workDate;
-	public Date status;
+	public String status;
+	public String empNo;
 	
 	
 	
@@ -22,15 +22,15 @@ public class Work {
 
 
 
-	public Work(int workNo, int empNo, Date workStart, Date workEnd, Date workStack, Date workExeed, Date workRemain,
-			Date workDate, Date status) {
+	public Work(int workNo, String empNo, Date workStart, Date workEnd, Date workStack, Date workExceed, Date workRemain,
+			Date workDate, String status) {
 		super();
 		this.workNo = workNo;
 		this.empNo = empNo;
 		this.workStart = workStart;
 		this.workEnd = workEnd;
 		this.workStack = workStack;
-		this.workExeed = workExeed;
+		this.workExceed = workExceed;
 		this.workRemain = workRemain;
 		this.workDate = workDate;
 		this.status = status;
@@ -53,14 +53,14 @@ public class Work {
 
 
 
-	public int getEmpNo() {
+	public String getEmpNo() {
 		return empNo;
 	}
 
 
 
 
-	public void setEmpNo(int empNo) {
+	public void setEmpNo(String empNo) {
 		this.empNo = empNo;
 	}
 
@@ -109,15 +109,15 @@ public class Work {
 
 
 
-	public Date getWorkExeed() {
-		return workExeed;
+	public Date getWorkExceed() {
+		return workExceed;
 	}
 
 
 
 
-	public void setWorkExeed(Date workExeed) {
-		this.workExeed = workExeed;
+	public void setWorkExceed(Date workExceed) {
+		this.workExceed = workExceed;
 	}
 
 
@@ -151,14 +151,14 @@ public class Work {
 
 
 
-	public Date getStatus() {
+	public String getStatus() {
 		return status;
 	}
 
 
 
 
-	public void setStatus(Date status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 
@@ -168,7 +168,7 @@ public class Work {
 	@Override
 	public String toString() {
 		return "Work [workNo=" + workNo + ", empNo=" + empNo + ", workStart=" + workStart + ", workEnd=" + workEnd
-				+ ", workStack=" + workStack + ", workExeed=" + workExeed + ", workRemain=" + workRemain + ", workDate="
+				+ ", workStack=" + workStack + ", workExeed=" + workExceed + ", workRemain=" + workRemain + ", workDate="
 				+ workDate + ", status=" + status + "]";
 	}
 

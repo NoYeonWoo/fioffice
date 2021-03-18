@@ -25,7 +25,7 @@ import com.google.gson.JsonIOException;
 
 import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
-
+import com.kh.spring.email.model.service.EmailService;
 import com.kh.spring.email.model.vo.Email;
 
 
@@ -33,7 +33,7 @@ import com.kh.spring.email.model.vo.Email;
 @Controller
 public class EmailController {
 	
-
+	//@Autowired EmailService emailService;
 
 	@RequestMapping("view.email")
 	public String selectList(/*@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model*/) {
