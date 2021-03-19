@@ -134,10 +134,40 @@
 	<!-- 비율용 -->
 		<div class="tw-flex tw-pt-8">
 			<div class="tw-flex-1">
+			<!-- 글수정 -->
+			<div>
+			<div class="right">
+			<a href="supdateForm.bo" class="app-button app-button-rounded">
+						<span class="text" style="color: #383A3C">설문 수정</span>
+			</a>
+			</div>
+			<!-- 글삭제 -->
+			<div class="left">
+			<a href="sdelete.bo" class="app-button app-button-rounded">
+						<span class="text" style="color: #383A3C">설문 삭제</span>
+			</a>
+			</div>
 			</div>
 		</div>
 	</div>
 
+	</div>
+	
+	
+	<!-- 설문 답변 제출로 넘어가기 -->
+	
+	<div class="app-article-footer">
+	
+	<div class="app-article-vote">
+		<div class="card-body">
+			<a href="ssubmission.so" class="btn btn-primary btn-icon-split">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus"></i>
+					</span>
+					<span class="text" style="color: white">&nbsp;설문 제출</span>
+			</a>
+		</div>
+	</div>
 	</div>
 		
 

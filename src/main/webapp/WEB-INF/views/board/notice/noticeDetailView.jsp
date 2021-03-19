@@ -139,18 +139,24 @@
 	
 	<!-- 비율용 -->
 		<div class="tw-flex tw-pt-8">
-		
-			<div class="tw-flex-1" align="right">
+			<div class="tw-flex-1">
 			<!-- 글수정 -->
+			<div>
+			<div class="right">
 			<a href="nupdateForm.bo" class="app-button app-button-rounded">
 						<span class="text" style="color: #383A3C">글 수정</span>
-					</a>
+			</a>
 			</div>
-			
+			<!-- 글삭제 -->
+			<div class="left">
+			<a href="ndelete.bo" class="app-button app-button-rounded">
+						<span class="text" style="color: #383A3C">글 삭제</span>
+			</a>
+			</div>
+			</div>
 		</div>
 	</div>
-	
-	
+
 	</div>
 		
 
