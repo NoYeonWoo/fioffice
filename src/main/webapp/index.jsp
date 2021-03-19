@@ -13,8 +13,15 @@
 	
 
 		
-		 
+	<c:if test="${empty sessionScope.loginUser}">
+		<jsp:forward page="login.do"></jsp:forward>
+	</c:if>
+	<c:if test="${!empty sessionScope.loginUser}">
+	
+			 
 <jsp:forward page="WEB-INF/views/common/main.jsp"/>
+	
+	  </c:if> 
 
-</body>s
+</body>
 </html>

@@ -83,7 +83,7 @@
 								</tr>
 
 								<tr>
-									<td style="width: 10%">부서</td>
+									<td style="width: 10%">부서(팀)</td>
 									<td style="width: 40%"><input type="text"
 										class="form-control"  name="deptName" id="deptName" value="${loginUser.deptName}" readonly style="width: 40%"></td>
 

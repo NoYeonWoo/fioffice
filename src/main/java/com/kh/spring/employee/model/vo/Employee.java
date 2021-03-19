@@ -31,6 +31,8 @@ public class Employee {
 	private String status;//상태
 	private String deptName;//부서명  
 	private String empPosition;//직급
+	private String jobCode;//직급코드
+	private String deptCode;//부서코드
 
 
 }

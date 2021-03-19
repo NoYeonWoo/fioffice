@@ -27,9 +27,24 @@ public class TodoServiceImpl implements TodoService {
 			return todoDao.insertTodo(sqlSession,t);
 		}
 
+
 		@Override
 		public ArrayList<Todo> selectTodo() {
 			// TODO Auto-generated method stub
 			return todoDao.selectTodo(sqlSession);
+		}
+
+
+		@Override
+		public void removeTodo(String todoNo) {
+			// TODO Auto-generated method stub
+			todoDao.deleteTodo(sqlSession,todoNo);
+		}
+
+
+		@Override
+		public void modifyTodo(String todoNo, String status) {
+			// TODO Auto-generated method stub
+			todoDao.updateTodo(sqlSession,todoNo,status);
 		}
 }

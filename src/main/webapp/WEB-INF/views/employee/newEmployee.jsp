@@ -77,10 +77,10 @@
                                 </tr>
 							
                                 <tr>
-                                 <td style="width:10%">부서</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="deptName" id="deptName"></td>
-                                 <td style="width:10%">직급</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="empPosition" id="empPosition"></td>
+                                 <td style="width:10%">부서코드</td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="deptCode" id="deptCode"></td>
+                                 <td style="width:10%">직급코드</td>
+                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="jobCode" id="jobCode"></td>
                                 </tr>
 															
                                 <tr>
