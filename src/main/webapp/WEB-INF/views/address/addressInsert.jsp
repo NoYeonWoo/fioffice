@@ -59,7 +59,7 @@
                         <h5>주소록 추가</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="addressForm" action="insert.add" method="post">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
@@ -138,7 +138,7 @@
                         <div class="col-md-12">
 
 					<div class="card-body">
-						<button type="button" class="btn  btn-primary btn-lg">추가하기</button>
+						<button type="submit" class="btn  btn-primary btn-lg">추가하기</button>
 					</div>
 
 					</div>
