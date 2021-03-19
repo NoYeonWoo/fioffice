@@ -11,4 +11,6 @@ public interface  AddressService {
 
 	ArrayList<Address> selectListCount(PageInfo pi);
 
+	int insertAddress(Address a);
+
 }

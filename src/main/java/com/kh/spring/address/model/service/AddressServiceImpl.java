@@ -32,6 +32,12 @@ public class AddressServiceImpl implements AddressService {
 		return addressDao.selectListCount(sqlSession,pi);
 	}
 
+	@Override
+	public int insertAddress(Address a) {
+		// TODO Auto-generated method stub
+		return addressDao.insertAddress(sqlSession, a);
+	}
+
 	
 	
 }

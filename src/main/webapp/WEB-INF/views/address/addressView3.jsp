@@ -91,7 +91,7 @@
 									<input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
-                        			<a href ="insert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
+                        			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
                         			<a href="detail.add"><button type="button" class="btn  btn-primary">임시상세</button></a>
 
 								</div>
@@ -145,10 +145,10 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
+									href="view.add?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li><!--이전페이지 -->
 							</c:when>
 							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+								<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -171,11 +171,11 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

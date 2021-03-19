@@ -51,4 +51,13 @@
 	
 	</update>
 	
+	<insert id="insertAddress" parameterType="Address">
+	
+		INSERT INTO ADDRESS
+		VALUES(SEQ_ADDRESS_NO.NEXTVAL, #{addressName}, #{addressPhone}, #{addressEmail}, #{addressComName}, #{addressJob}, #{addressTel}, #{addressDept},#{addressAddress},
+		#{addressMemo},default)
+	
+	
+	</insert>
+	
 </mapper>

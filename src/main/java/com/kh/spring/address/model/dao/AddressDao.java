@@ -25,4 +25,9 @@ public class AddressDao {
 		return (ArrayList)sqlSession.selectList("addressMapper.selectList", null, rowBounds); 
 	}
 
+	public int insertAddress(SqlSessionTemplate sqlSession, Address a) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("addressMapper.insertAddress",a);
+	}
+
 }
