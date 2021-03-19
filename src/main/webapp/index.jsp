@@ -16,5 +16,5 @@
 		 
 <jsp:forward page="WEB-INF/views/common/main.jsp"/>
 
-</body>s
+</body>
 </html>

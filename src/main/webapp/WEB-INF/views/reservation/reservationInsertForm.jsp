@@ -5,8 +5,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-
 <link
 	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
 	rel='stylesheet' />
@@ -15,8 +13,7 @@
 	rel='stylesheet' media='print' />
  <style>
 .roomSelect{
-	padding-left: 7rem;
-	padding-right: 7rem;
+	padding: 3rem 7rem 3rem 7rem;
 }
 #calendar {
   padding: 0rem 7rem 3rem 7rem;
@@ -145,10 +142,10 @@ select::-ms-expand {
 					<table id="rList" class="table table-hover row-border  nowrap">
 	                                <thead>
 	                                    <tr>
-	                                    <th id="rDate" style="width: 150px;">날짜</th>
-	                                    <th id="rTitle" style="width: 250px;">회의명</th>
-	                                    <th id="rRoom" style="width: 100px;">회의실</th>
-	                                    <th id="rTime" style="width: 100px;">시간</th> 
+	                                    <th id="rDate" style="width: 20%;">날짜</th>
+	                                    <th id="rTitle" style="width: 40%;">회의명</th>
+	                                    <th id="rRoom" style="width: 20%;">회의실</th>
+	                                    <th id="rTime" style="width: 20%;">시간</th> 
 	                                    </tr>
 	                                </thead>
 	                                <tbody>  

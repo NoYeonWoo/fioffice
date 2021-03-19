@@ -33,21 +33,20 @@
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="layout-vertical.html">부서관리</a></li>
+                       <li><a href="dept.ad">부서관리</a></li>
                        <li><a href="manageEmp.do">사원관리</a></li>
                        <li><a href="insertEmp.do">사원추가</a></li>
                    </ul>
                </li>
                
                 <li class="nav-item pcoded-hasmenu">
-                   <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">매뉴관리</span></a>
+                   <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">메뉴관리</span></a>
                    <ul class="pcoded-submenu">
                        <li><a href="nlist.bo">공지사항</a></li>
                        <li><a href="layout-horizontal.html">결재</a></li>
-                       <li><a href="layout-horizontal.html">주소록</a></li>
-                       <li><a href="layout-horizontal.html">캘린더</a></li>
+                       <li><a href="calendar.ad">캘린더</a></li>
                        <li><a href="sadmin.so">설문</a></li>
-                       <li><a href="layout-horizontal.html">회의실</a></li>
+                       <li><a href="meetingRoom.ad">회의실</a></li>
                    </ul>
                </li>
 

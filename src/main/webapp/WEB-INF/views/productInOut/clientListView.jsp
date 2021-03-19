@@ -16,6 +16,9 @@
  .modal-content .table td{
    line-height: 35px!important;
    }
+.table-hover>tbody>tr:hover{
+		cursor:pointer
+}
  </style>
 </head>
 
@@ -59,14 +62,14 @@
                             <table id="clientList" class="table table-hover row-border  nowrap">
                                 <thead>
                                     <tr>
-                                    	<th id="cCode" style="width: 200px;">거래처코드</th>
-	                                    <th id="cName" style="width: 300px;">거래처명</th>
-	                                    <th id="corporateNo" style="width: 300px;">사업자등록번호</th>
-	                                    <th id="address" style="width: 200px;">주소</th>
-	                                    <th id="manager" style="width: 100px;">담당자</th>
-	                                    <th id="phone" style="width: 200px;">연락처</th>
-	                                    <th id="sortation" style="width: 100px;">구분</th>
-	                                    <th id="comment" style="width: 200px;">비고</th> 
+                                    	<th id="cCode" style="width: 12%;">거래처코드</th>
+	                                    <th id="cName" style="width: 15%;">거래처명</th>
+	                                    <th id="corporateNo" style="width: 18%;">사업자등록번호</th>
+	                                    <th id="address" style="width: 18%;">주소</th>
+	                                    <th id="manager" style="width: 5%;">담당자</th>
+	                                    <th id="phone" style="width: 15%;">연락처</th>
+	                                    <th id="sortation" style="width: 5%;">구분</th>
+	                                    <th id="comment" style="width: 12%;">비고</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -222,7 +225,7 @@
             </div>
              <div class="modal-body">
 				<form name="clientUpdate" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered  "  align="center">
+					<table class="table table-bordered table-detail "  align="center">
                     	<tr>
                         	<td style="width:20%">거래처코드</td>
                             <td><input type="text" class="form-control form-control-sm" style="width:40%" placeholder="C0000형식으로 작성해주세요"></td>
@@ -298,20 +301,20 @@
 	            }
 	        }]
 	    });
-		$("#clientList tbody").on('click', 'tr', function(){
+		$("#clientList tr").click( function(){
         	//$("#clientList td:nth-child(2)").text("");
-            $("tr:nth-child(1) input").val(table.row(this).data()[0]);
-            $("tr:nth-child(2) input").val(table.row(this).data()[1]);
-            $("tr:nth-child(3) input").val(table.row(this).data()[2]);
-            $("tr:nth-child(4) input").val(table.row(this).data()[3]); //주소
-            $("tr:nth-child(5) input").val(table.row(this).data()[4]);
-            $("tr:nth-child(6) input").val(table.row(this).data()[5]);
+            $(".table-detail tr:nth-child(1) input").val(table.row(this).data()[0]);
+            $(".table-detail tr:nth-child(2) input").val(table.row(this).data()[1]);
+            $(".table-detail tr:nth-child(3) input").val(table.row(this).data()[2]);
+            $(".table-detail tr:nth-child(4) input").val(table.row(this).data()[3]); //주소
+            $(".table-detail tr:nth-child(5) input").val(table.row(this).data()[4]);
+            $(".table-detail tr:nth-child(6) input").val(table.row(this).data()[5]);
    			if(table.row(this).data()[6]=="입고"){
-   				$("input:radio[id='in']").prop("checked", true);   
+   				$(".table-detail input:radio[id='in']").prop("checked", true);   
    			}else{
-   				$("input:radio[id='out']").prop("checked", true); 
+   				$(".table-detail input:radio[id='out']").prop("checked", true); 
    			}
-            $("tr:nth-child(8) input").val(table.row(this).data()[7]);
+            $(".table-detail tr:nth-child(8) input").val(table.row(this).data()[7]);
             $("#clientDetail").modal("show");
         });
 	});

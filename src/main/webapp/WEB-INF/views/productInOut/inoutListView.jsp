@@ -7,10 +7,10 @@
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
  <style>
-	.inout .table td, .table th {
-		padding:0.75rem !important;
-	}
-	.select-checkbox:before {
+#inoutList td,th{
+	padding:0.75rem !important;
+	}	
+.select-checkbox:before {
     margin-top: 0px !important;
 }
 .btn-primary{
@@ -23,6 +23,9 @@
  .modal-content .table td{
    line-height: 35px!important;
    }
+.table-hover>tbody>tr:hover{
+		cursor:pointer
+}
  </style>
 </head>
 
@@ -66,14 +69,15 @@
                             <table id="inoutList"  class="table table-hover row-border  nowrap inout">
                                 <thead>
                                     <tr>
-                                    	<th id="check" style="width: 50px; text-align: center;">check</th>
-                                        <th  id="iOCode" style="width: 150px;">입출고일자</th>
-	                                    <th  id="sortation" style="width: 80px;">구분</th>
-	                                    <th  id="cName" style="width: 250px;">거래처명</th>
-	                                    <th  id="pName" style="width: 250px;">상품명</th>
-	                                    <th  id="quantity" style="width: 80px;">수량</th>
-	                                    <th  id="price" style="width: 150px;">금액</th>
-	                                    <th id="Comment" style="width: 200px;">비고</th> 
+                                    	<th id="check" style="width: 5%; text-align: center;">
+											<input type="checkbox" name="all_selected"></th>
+                                        <th  id="iOCode" style="width: 13%;">입출고일자</th>
+	                                    <th  id="sortation" style="width: 7%;">구분</th>
+	                                    <th  id="cName" style="width: 15%;">거래처명</th>
+	                                    <th  id="pName" style="width: 20%;">상품명</th>
+	                                    <th  id="quantity" style="width: 12%;">수량</th>
+	                                    <th  id="price" style="width: 13%;">금액</th>
+	                                    <th id="Comment" style="width: 15%;">비고</th> 
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -242,8 +246,8 @@
     <jsp:include page="../common/footer.jsp"/>
     
 	<script>
-	var table = $(document).ready(function() {
-		$('#inoutList').DataTable({
+ 	$(document).ready(function() {
+		var table =$('#inoutList').DataTable({
 			columnDefs: [
 				{
 		            className: 'select-checkbox',
@@ -273,6 +277,13 @@
 	            }
 	        }]
 	    });
+		$('input[name=all_selected]').on('click', function(){
+			if ($(this).is( ":checked" )) {
+				table.rows(  ).select();
+			} else {
+				table.rows(  ).deselect();
+			}
+			});
 	});
 	
 	</script>

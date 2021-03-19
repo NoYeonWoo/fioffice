@@ -8,8 +8,7 @@
 <meta charset="UTF-8">
 </head>
 <body>
-
-	<c:if test="${ !empty msg }">
+<c:if test="${ !empty msg }">
 		<script>
 			alert("${msg}");
 		</script>
@@ -65,7 +64,7 @@
 										<li><a href="mypage.do" class="dropdown-item"><i class="feather icon-user"></i> 마이 페이지</a></li>
 										<li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-message-circle"></i> 메신저</a></li>
 										<li><a href="" class="dropdown-item"><i class="feather icon-mail"></i> 이메일</a></li>
-										<li><a href="authority.aut" class="dropdown-item"><i class="feather icon-settings"></i> 관리자</a></li>
+										<li><a href="authority.ad" class="dropdown-item"><i class="feather icon-settings"></i> 관리자</a></li>
 									</ul>
 								</div>
 							</div>
