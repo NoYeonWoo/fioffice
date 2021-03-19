@@ -71,10 +71,11 @@ public class EmployeeController {
 	     return mv;
 	 }**/
 	 @RequestMapping(value="login.me",method=RequestMethod.POST)
-public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
+   public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
 		 System.out.println("@ModelAttribute(\"userId\") : "+emp.getEmpNo());
 	     System.out.println("@ModelAttribute(\"userPwd\") : "+emp.getEmpPwd());
-	     
+	  
+
 	     Employee loginUser;
 	      loginUser=employeeService.loginEmployee(emp);
 	     System.out.println("loginUser:::::"+loginUser);

@@ -151,24 +151,69 @@ p {
 											<div class="card-header">Todo  	 <a  href=""  data-toggle="modal" data-target="#insertTodo"><i class="fas fa-plus-square text-gray-800 "></i></a></div>
 											<div class="card-body">
 												<div class="urgent">
+										          
 													<ul class="depth02">
-                                                        <c:if test="${fn:length(todolist) > 0}">
+                                                        <c:if test="${ fn:length(todolist)>0}">
 								                        <c:forEach items="${todolist}" var="item">
-								                        <c:if test="${item.status eq 'T' }">
+								                        <c:if test="${item.status eq 'T'}">
+								                        	<form action="updateTodo.do" accept-charset="utf-8" method="post" class="modiform">
+								                        	 <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
 															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
+																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
+																    <input type="hidden" value="${item.todoNo }" name="todoNo">
+																	<input type="hidden" value="N" name="status">
+																	<input class="modiB" type="submit" value="→" name=modi>
+																
+
+
+															</div>
+														</li>
+														
+														</form>
+															</c:if>
+															</c:if>	
+                                                  </c:forEach>
+                                                  	
+												</c:if>
+												
+													</ul>
+												
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="col-sm-4">
+										<div class="card bg-light">
+											<div class="card-header">Doing</div>
+											<div class="card-body">
+												<div class="urgent">
+													<ul class="depth02">
+                                                              <c:if test="${ fn:length(todolist)>0}">
+								                        <c:forEach items="${todolist}" var="item">
+								                        <c:if test="${item.status eq 'N'}">
+								                        <c:if test="${item.empNo eq loginUser.empNo }">
+														<li>
+														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+																<p class="titled">${item.todoTitle }</p>
+																<p class="subd">기한:${item.todoDoneDate} }</p>
+																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
+															
 																<form action="mod" accept-charset="utf-8" method="get"
 																	class="modiform">
-																	<input type="hidden" value=${item.todoNo } name="id">
-																	<input type="hidden" value="DOING" name="type">
+																	
+ 																	<input type="hidden" value="${item.todoNo }" name="todoNo">
+																	<input type="hidden" value="D" name="status">
 																	<input class="modiB" type="submit" value="→" name=modi>
 																</form>
 
 
 															</div>
 														</li>
+														</c:if>	
 															</c:if>	
                                                   </c:forEach>
 												</c:if>	
@@ -177,57 +222,38 @@ p {
 											</div>
 										</div>
 									</div>
-									
-									<div class="col-sm-4">
+
+												<div class="col-sm-4">
 										<div class="card bg-light">
-											<div class="card-header">doing</div>
+											<div class="card-header">Done</div>
 											<div class="card-body">
 												<div class="urgent">
 													<ul class="depth02">
-
+                                                              <c:if test="${ fn:length(todolist)>0}">
+								                        <c:forEach items="${todolist}" var="item">
+								                        <c:if test="${item.status eq 'D'}">
+								                          <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
-															<div class="data" id="app-block">
-																<p class="titled">마케팅발주서</p>
-																<p class="subd">기한:2021-02-03</p>
+														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+																<p class="titled">${item.todoTitle }</p>
+																<p class="subd">기한:${item.todoDoneDate} }</p>
+																<p class="subd">내용:${item.todoContent} }</p>
+															
 																<form action="mod" accept-charset="utf-8" method="get"
 																	class="modiform">
-																	<input type="hidden" value=${item.id } name="id">
-																	<input type="hidden" value="DOING" name="type">
+																	<input type="hidden" value="${item.empNo }" name="empNo">
+ 																	<input type="hidden" value="${item.todoNo }" name="todoNo">
+																	<input type="hidden" value="del" name="status">
 																	<input class="modiB" type="submit" value="→" name=modi>
 																</form>
 
 
 															</div>
 														</li>
-
-													</ul>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<div class="col-sm-4">
-										<div class="card bg-light">
-											<div class="card-header">done</div>
-											<div class="card-body">
-												<div class="done">
-
-													<ul class="depth02">
-
-														<li>
-															<div class="data" id="app-block">
-																<p class="titled">마케팅발주서</p>
-																<p class="subd">기한:2021-02-03</p>
-																<form action="mod" accept-charset="utf-8" method="get"
-																	class="modiform">
-																	<input type="hidden" value=${item.id } name="id">
-																	<input class="modiB" type="submit" value="del"
-																		name=modi>
-																</form>
-
-															</div>
-														</li>
-
+															</c:if>	
+															</c:if>	
+                                                  </c:forEach>
+												</c:if>	
 													</ul>
 												</div>
 											</div>
@@ -252,10 +278,10 @@ p {
 										<h5 class="modal-title" id="exampleModalPopoversLabel">할일을 추가해주세요</h5>
 										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
 									</div>
-									<form id="insertTodo" method="post" action="insertTodo.do">
+									<form  id="insertTodo" method="post" action="insertTodo.do">
 									<div class="modal-body">
 										<h5>제목을 입력해 주세요</h5>
-										<input type="text" id="title" class="form-control" name="todoTitle" required>
+										<input type="text" id="todoTitle" class="form-control" name="todoTitle" required>
 										<hr>
 									    <h5>마감날짜</h5>
 									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
@@ -263,7 +289,9 @@ p {
 									
 										<h5>할일내용 </h5>
 										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
-								
+								        
+									    <input type="hidden" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
+										<hr>
 									</div>
 									
 									<div class="modal-footer">
@@ -290,7 +318,7 @@ p {
 									<form id="insertTodo" method="post" action="insertTodo.do">
 									<div class="modal-body">
 										<h5>제목을 입력해 주세요</h5>
-										<input type="text" id="title" class="form-control" name="todoTitle" required>
+										<input type="text" id="title" class="form-control" name="todoTitle" value="" required>
 										<hr>
 									    <h5>마감날짜</h5>
 									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
@@ -300,37 +328,66 @@ p {
 										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
 								
 									</div>
-									
+									</form>
 									<div class="modal-footer">
 										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn  btn-primary" >저장</button>
+										<button type="submit" class="btn  btn-primary" id="reload" >저장</button>
 									</div>
-									</form>
+									
 								</div>
 							</div>
 							
 							</div>
    <!-- todo 모달끝  -->  
 
-
+<!-- 
 <script>
 $(function () {
 	selectTodoList();
   $("#addTodo").click(function(){
+	$.ajax({
+	   url:"insertTodo.do",
+	   type:"post",
+	   data:{todoTitle:${"#todoTitle"}.val(),
+		     todoDoneDate:${"#todoDoneDate"}.val(),
+		     todoContent:${"#todoContent"}.val()},
+	  success:function(result){
+		      $("#todoTitle").val("");
+		      $("#todoDoneDate").val("");
+		      $("#todoContent").val("");
+	  },error:function(){
+		  console.log("댓글작성 실패")
+	  }	     
+		});
 	
 	  
 	  
 	  
 	  
-  })
+  });
   
     	
-})
+});
+
+ -->
+<script type="text/javascript">
+
+	
+$('#reload').click(function(e)){
+
+
+	if(!confirm('정말로 삭제하시겠습니까?')) return; 
+	
+	
+}
 
 
 
-</script>
-		</div>
+	
+  </script>
+  
+  
+  </div>
 
 		<!--지우지 마세요    div class="row"  -->
 	</div>

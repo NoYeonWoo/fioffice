@@ -21,4 +21,17 @@ public class TodoDao {
 		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
 	}
 
+	public int deleteTodo(SqlSessionTemplate sqlSession, String todoNo) {
+		
+		return sqlSession.delete("todoMapper.deleteTodo");
+	}
+
+	public int updateTodo(SqlSessionTemplate sqlSession, String todoNo, String status) {
+		
+		return sqlSession.update("todoMapper.updateTodo");
+		
+	}
+
+
+
 }
