@@ -11,6 +11,7 @@
 <!-- CSS -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
+
 <!-- JS -->
 <script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
 

@@ -131,17 +131,26 @@
 	
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
+			<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /><br>
 			본문 내용입니다.<br>추천은 커뮤니티에만.<br><br>
-			<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" />
 		</div>
 	
 	<!-- 비율용 -->
 		<div class="tw-flex tw-pt-8">
-			<div class="tw-flex-1" align="right">
+			<div class="tw-flex-1">
 			<!-- 글수정 -->
+			<div>
+			<div class="right">
 			<a href="cupdateForm.bo" class="app-button app-button-rounded">
 						<span class="text" style="color: #383A3C">글 수정</span>
-					</a>
+			</a>
+			</div>
+			<!-- 글삭제 -->
+			<div class="left">
+			<a href="cdelete.bo" class="app-button app-button-rounded">
+						<span class="text" style="color: #383A3C">글 삭제</span>
+			</a>
+			</div>
 			</div>
 		</div>
 	</div>
@@ -157,7 +166,7 @@
 		</div>
 	</div>
 	</div>
-	</div>
+	
 		
 
 	

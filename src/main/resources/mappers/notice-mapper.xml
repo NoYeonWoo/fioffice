@@ -38,7 +38,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		ORDER BY NOTICE_NO DESC
 	</select>
 	
-	
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE
 		VALUES(SEQ_NOTINO.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent},

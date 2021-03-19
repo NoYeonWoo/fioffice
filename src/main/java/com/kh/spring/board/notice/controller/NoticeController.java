@@ -57,6 +57,24 @@ public class NoticeController {
 		  
 	}
 	
+	/*@RequestMapping("ninsert.bo")
+	public String insertBoard(Notice n, HttpServletRequest request, Model model,
+							@RequestParam(name="uploadFile", required=false) MultipartFile file) {
+	
+		System.out.println(n);
+		System.out.println("file : " + file);
+		
+		
+		
+		int result = noticeService.insertNotice(n);
+		
+		if(result > 0) {
+			return "redirect:nlist.bo";
+		}else {
+			throw new Exception("게시물 작성에 실패하였습니다.");
+		}
+	}*/
+	
 	
 	@RequestMapping("nupdateForm.bo")
 	public String noticeUpdateForm() {
