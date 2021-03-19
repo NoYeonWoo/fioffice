@@ -16,6 +16,9 @@
  .modal-content .table td{
    line-height: 35px!important;
    }
+.table-hover>tbody>tr:hover{
+		cursor:pointer
+}
  </style>
 </head>
 
@@ -59,15 +62,15 @@
                             	<table id="productList" class="table table-hover row-border  nowrap">
 	                                <thead>
 	                                    <tr>
-	                                    <th  id="pCode" style="width: 200px;">상품코드</th>
-	                                    <th  id="pName" style="width: 250px;">상품명</th>
-	                                    <th  id="preStock" style="width: 100px;">이월재고</th>
-	                                    <th  id="inCount" style="width: 80px;">입고수량</th>
-	                                    <th  id="inPrice" style="width: 150px;">입고단가</th>
-	                                    <th  id="outCount" style="width: 80px;">출고수량</th>
-	                                    <th  id="outPrice" style="width: 150px;">출고단가</th>
-	                                    <th  id="stock" style="width: 100px;">재고</th>
-	                                    <th id="comment" style="width: 200px;">비고</th> 
+	                                    <th  id="pCode" style="width: 15%;">상품코드</th>
+	                                    <th  id="pName" style="width: 20%;">상품명</th>
+	                                    <th  id="preStock" style="width: 10%">이월재고</th>
+	                                    <th  id="inCount" style="width: 5%;">입고수량</th>
+	                                    <th  id="inPrice" style="width: 10%;">입고단가</th>
+	                                    <th  id="outCount" style="width: 5%;">출고수량</th>
+	                                    <th  id="outPrice" style="width: 10%;">출고단가</th>
+	                                    <th  id="stock" style="width: 10%;">재고</th>
+	                                    <th id="comment" style="width: 15%;">비고</th> 
 	                                    </tr>
 	                                </thead>
 	                                <tbody>  
@@ -165,7 +168,7 @@
             </div>
              <div class="modal-body">
 				<form name="productUpdate" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered  "  align="center">
+					<table class="table table-bordered table-detail"  align="center">
                     	<tr>
                         	<td style="width:20%">상품코드</td>
                             <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
@@ -224,17 +227,17 @@
             }]
         });
         
-        $("#productList tbody").on('click', 'tr', function(){
+        $("#productList tr").click( function(){
         	//$("#productList td:nth-child(2)").text("");
-            $("tr:nth-child(1) input").val(table.row(this).data()[0]);
-            $("tr:nth-child(2) input").val(table.row(this).data()[1]);
-            $("tr:nth-child(3) input").val(table.row(this).data()[2]);
-            $("tr:nth-child(4) input").val(table.row(this).data()[3]);
-            $("tr:nth-child(5) input").val(table.row(this).data()[4]);
-            $("tr:nth-child(6) input").val(table.row(this).data()[5]);
-            $("tr:nth-child(7) input").val(table.row(this).data()[6]);
-            $("tr:nth-child(8) input").val(table.row(this).data()[7]);
-            $("tr:nth-child(9) input").val(table.row(this).data()[8]);
+            $(".table-detail tr:nth-child(1) input").val(table.row(this).data()[0]);
+            $(".table-detail tr:nth-child(2) input").val(table.row(this).data()[1]);
+            $(".table-detail tr:nth-child(3) input").val(table.row(this).data()[2]);
+            $(".table-detail tr:nth-child(4) input").val(table.row(this).data()[3]);
+            $(".table-detail tr:nth-child(5) input").val(table.row(this).data()[4]);
+            $(".table-detail tr:nth-child(6) input").val(table.row(this).data()[5]);
+            $(".table-detail tr:nth-child(7) input").val(table.row(this).data()[6]);
+            $(".table-detail tr:nth-child(8) input").val(table.row(this).data()[7]);
+            $(".table-detail tr:nth-child(9) input").val(table.row(this).data()[8]);
             $("#productDetail").modal("show");
         });
 	});

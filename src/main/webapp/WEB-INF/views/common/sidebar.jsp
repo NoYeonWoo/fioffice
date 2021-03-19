@@ -212,13 +212,11 @@
    </nav>
    <!-- [ navigation menu ] end -->
    
-   
    <!-- Required Js -->
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>
-
    <!-- Apex Chart -->
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>
    <!-- custom-chart js -->

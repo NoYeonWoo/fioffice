@@ -8,7 +8,7 @@
 </head>
 
 <body class="">
-   <jsp:include page="../common/sidebar.jsp"/>
+   <jsp:include page="../common/adminSidebar.jsp"/>
    <jsp:include page="../common/topbar.jsp"/>
 <!--메인 화면 전체시작 -->
    <div class="pcoded-main-container">
@@ -36,7 +36,7 @@
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
-
+ 
  </div> <!--지우지 마세요    div class="row"  -->
             </div> <!--지우지 마세요   div class="pcoded-content"  -->
             </div> <!--지우지 마세요    div class="pcoded-main-container"  -->
