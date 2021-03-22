@@ -8,7 +8,7 @@
 	text-align:center;
 	margin: auto;
 }
-#textbig{ 
+#addressMemo{ 
 	height:300px; 
     resize:none;
 
@@ -64,19 +64,19 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">이름</label>
-                                        <input type="text" class="form-control" id="Text" value="" >
+                                        <input type="text" class="form-control" id="addressName" name="addressName" value="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">휴대폰번호</label>
-                                        <input type="text" class="form-control" id="Text" placeholder="" >
+                                        <input type="text" class="form-control" id="addressPhone" name="addressPhone" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Email">이메일</label>
-                                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="" >
+                                        <input type="email" class="form-control" id="addressEmail" name="addressEmail" aria-describedby="emailHelp" placeholder="" >
                                     </div>
                                 </div>
                             </div>
@@ -86,19 +86,19 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">회사이름</label>
-                                        <input type="text" class="form-control" id="Text" value="" >
+                                        <input type="text" class="form-control" id="addressComName" name="addressComName" value="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">직급</label>
-                                        <input type="text" class="form-control" id="Text" placeholder="" >
+                                        <input type="text" class="form-control" iid="addressJob" name="addressJob" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">내선전화</label>
-                                        <input type="text" class="form-control" id="Text" placeholder="" >
+                                        <input type="text" class="form-control" id="addressTel" name="addressTel" placeholder="" >
                                     </div>
                                 </div>
                             </div>
@@ -108,13 +108,13 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">부서</label>
-                                        <input type="text" class="form-control" id="Text" aria-describedby="" value="" >
+                                        <input type="text" class="form-control" id="addressDept" name="addressDept" aria-describedby="" value="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">회사주소</label>
-                                        <input type="text" class="form-control" id="Text" placeholder="" >
+                                        <input type="text" class="form-control" id="addressAddress" name="addressAddress" placeholder="" >
                                     </div>
                                 </div>
                                 
@@ -127,7 +127,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">메모</span>
                             </div>
-                            <textarea id="textbig" class="form-control" aria-label="With textarea" ></textarea>
+                            <textarea id="addressMemo" name="addressMemo" class="form-control" aria-label="With textarea" ></textarea>
                         </div>
                         
                         
