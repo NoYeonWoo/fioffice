@@ -50,7 +50,7 @@
 				  	<form action="insertApproval.do" method="post" enctype="Multipart/form-data" id="form">
 					  
 					   <div class="form-group">
-						   <strong>기안자 : </strong><input type="text" class="form-control" value="( ${loginEmp.empNo} ) ${loginEmp.empName}" name="empNo" readonly>
+						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empNo} (${loginUser.empName})" name="empNo" readonly>
 					   </div>
 					   <div class="row">
 						   <div class="form-group col-lg-6">

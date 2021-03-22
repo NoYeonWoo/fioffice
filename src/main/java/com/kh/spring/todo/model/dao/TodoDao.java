@@ -21,15 +21,28 @@ public class TodoDao {
 		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
 	}
 
-	public int deleteTodo(SqlSessionTemplate sqlSession, String todoNo) {
-		
-		return sqlSession.delete("todoMapper.deleteTodo");
+
+
+
+
+	public int updateDoing(SqlSessionTemplate sqlSession, int tno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("todoMapper.updateDoing",tno);
 	}
 
-	public int updateTodo(SqlSessionTemplate sqlSession, String todoNo, String status) {
-		
-		return sqlSession.update("todoMapper.updateTodo");
-		
+	public int updateDone(SqlSessionTemplate sqlSession, int tno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("todoMapper.updateDone",tno);
+	}
+
+	public int deleteTodo(SqlSessionTemplate sqlSession, int tno) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("todoMapper.updateDelete",tno);
+	}
+
+	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
 	}
 
 
