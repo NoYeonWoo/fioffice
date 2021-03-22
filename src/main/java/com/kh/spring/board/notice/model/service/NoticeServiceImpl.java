@@ -31,13 +31,13 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int updateIncreaseCount(int noticeNo) {
-		return noticeDao.updateIncreaseCount(sqlSession, noticeNo);
+	public int updateIncreaseCount(int nno) {
+		return noticeDao.updateIncreaseCount(sqlSession, nno);
 	}
 
 	@Override
-	public Notice selectBoard(int noticeNo) {
-		return noticeDao.selectBoard(sqlSession, noticeNo);
+	public Notice selectBoard(int nno) {
+		return noticeDao.selectBoard(sqlSession, nno);
 	}
 
 	@Override
@@ -46,8 +46,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public ArrayList<Reply> selectReplyList(int noticeNo) {
-		return noticeDao.selectReplyList(sqlSession, noticeNo);
+	public ArrayList<Reply> selectReplyList(int nno) {
+		return noticeDao.selectReplyList(sqlSession, nno);
 	}
 
 	@Override

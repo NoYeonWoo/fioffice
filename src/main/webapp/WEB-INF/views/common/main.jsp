@@ -7,7 +7,9 @@
  <!-- Favicon icon -->
  <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
- 
+  <!-- CSS -->
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     
 </head>
 
@@ -292,7 +294,7 @@
                <div class="calendar-wrap">
                   <div id='calendar'></div>
                </div>
-                  <jsp:include page="calendar.jsp"/>
+                 
                </div>
             </div>
         </div>
@@ -328,6 +330,47 @@
             </div>
 </div>
 <!-- [ Main Content ] 메인화면 끝 -->
+
+
+
+<script>
+    $(document).ready(function(){
+	var calendar = $('#calendar').fullCalendar( {
+		editable : true,
+		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+		selectable : true,
+		defaultView : 'month',
+		axisFormat : 'h:mm',
+		columnFormat: {
+			month: 'ddd',
+			week: 'M/d ddd ',
+			day: 'M월d일 dddd',
+			agendaDay : 'dddd d'
+		},
+		titleFormat: {
+			month: 'yyyy년 MMMM',
+			week: "MMM dd일{ '&#8212;'[ MMM] d일}",
+			day: 'yyyy년 MMM d일 dddd'
+		},
+		dayClick: function(date, allDay, jsEvent, view) {
+            
+			if(yesterDate > date){
+				alert("이미 지난 날짜는 선택할 수 없습니다.");
+			}else{			             
+	           $("#reservationTime").modal("show");
+			}
+          }
+      });
+    }); 
+    
+    </script>
+    <script
+	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js'
+	type="text/javascript"></script>
+	<script
+	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
+	type="text/javascript"></script>
+
        <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/todo.js"></script>
     <jsp:include page="footer.jsp"/>
 </body>

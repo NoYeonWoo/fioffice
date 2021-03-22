@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,11 +12,11 @@
 <!-- CSS -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
-
-<!-- JS -->
+<!-- CSS -->
 <script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
 
 	<style>
+	
 	
 	:root {
 		--aside-width: 17.625rem;
@@ -30,6 +31,7 @@
 	  display: inline-block;
 	  margin-left: auto;
 	  margin-right: auto;
+	  padding: 20px 0px 0px 0px;
 	}
 	
 	.pagination a {
@@ -139,7 +141,20 @@
         box-sizing: border-box;
         
    		}
+   	
+   	tbody tr:hover td {
+    background: #F8F9FA;
+	}
 
+	.noticeNo {
+   	color: #ffffff;
+	}
+	
+	th, td {
+	padding:20px 0px 0px 0px;
+	}
+	
+   	
 	</style>
 </head>
 
@@ -192,159 +207,106 @@
              
             
     <!-- 리스트 영역 -->
+    
+  	
+    
     	
    
- 
-	<div class="app-board-section">
+ 	<!-- 테이블 영역 -->
+	<div class="card-body">
+	<!-- 서치 버튼 -->
+				<div class="left">&nbsp;
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="noticeList"></label>
+					<a href="nsearch.bo" class="app-button app-button-rounded app-button-xs primary">
+						<span class="text" style="color: white">검색</span>
+					</a>
+				</div>
+	    <div class="table-responsive">
+	    
+	    
+	    <br>
+	    <table id="noticeList" class="app-board-template-list" style="border-collapse:collapse">
+		<tbody>
+		
+			<c:forEach items="${ list }" var="n">
+			<tr>
+			
+			<td>
+		    <ul class="app-board-template-list">
+		        <li>
+			        <div class="tw-flex-1">
+			          	<div class="app-list-title tw-flex-wrap">
+			            	<span class="tw-mr-1">${n.noticeTitle}</span>
+						</div>
+		     
+			          <div class="app-list-meta">
+			             <span>
+			              <div class="app-list-member" style="color: #;">
+			                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+			                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
+			              		</div>
+						</div>
+			            </span>
+			            <!-- 날짜 -->
+						<span>${n.noticeDate}</span>
+						
+			            <!-- 조회 -->                                                      
+			            <span>
+			               <span class="tw-mr-1">조회</span>
+			               <span>${n.count}</span>
+			            </span>
+
+			         </div>
+			         </li>
+			             </ul>
+		       </td> 
+		      <td class="noticeNo" style="width: 0.1%;">${ n.noticeNo }</td>
+			
+		       	<td style="width: 05%;"> 
+		        <ul class="app-board-template-list">
+		        <li>
+		        	</div> <!--   <div class="tw-flex-1"> -->
+		        	<!-- 댓글 count -->
+		        	<div class="app-list-comment">11</div>
+		        	
+	    		</li>
+	    		</ul>
+	    		</td>
+	    		 </tr>
+	    		</c:forEach>	
+	    		
+	    </tbody>
+	    </table>
 	
-		
-    <ul class="app-board-template-list">
-        <li>
-            <a class="tw-flex-1" href="ndetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span class="tw-mr-1">공지사항입니다.</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>10</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	<!-- 댓글 count -->
-        	<div class="app-list-comment">11</div>
-        	</a>
-    	</li>
-    </ul>
-
-
-
-    <ul class="app-board-template-list">
-        <li>
-            <a class="tw-flex-1" href="ndetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span class="tw-mr-1">공지사항입니다.</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>10</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	</a>
-    	</li>
-    </ul>
-    
-    
-    <ul class="app-board-template-list">
-        <li>
-            <a class="tw-flex-1" href="ndetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span class="tw-mr-1">공지사항입니다.</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>10</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	</a>
-    	</li>
-    </ul>
-    
-    
-
-                
-                
-                
-                
-                
-         <div> <!-- 하단 영역 -->     
-        
-		        <!-- 서치 버튼 -->
-				<div class="left">
-				<br>&nbsp;&nbsp;&nbsp;&nbsp;
-					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="clientList"></label>
-					<input type="submit" onclick="jQuery(this).parents('form.bd_srch_btm').submit();return false;" class="app-button app-button-rounded app-button-xs primary" value="검색">
-				</div>
-		
-				<!--글쓰기 버튼  -->
-				<c:if test="${loginUser == admin}">
-                <div class="right">
-                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
-					<span class="icon text-white-50">
-						<i class="fas fa-plus"></i>
-					</span>
-					<span class="text" style="color: white">&nbsp;글쓰기</span>
-				</a>&nbsp;&nbsp;&nbsp;&nbsp;
-				<br>
-				</div>
-				</c:if>
-				
-        </div> <!-- 하단 영역 -->
-              
-              
-
-              <!-- 페이지 영역  -->
-               	<div class="row" style="width: 90%; margin-left: 5%;">
-               		<div class="pagination">
-
-							<nav aria-label="Page navigation example">
-							<ul class="pagination">
-							<c:choose>
-                			<c:when test="${ pi.currentPage ne 1 }">
+	
+     </div>
+     
+  
+  
+		<br><br><div> <!-- 하단 영역 -->     
+        		
+       <!-- 페이징 영역 -->
+       <div class="left">
+  		<div id="pagingArea">
+  		
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
                 			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
-                			</c:when>
-                			
-                			</c:choose>
-							<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-                    		<c:choose>
-                    		
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
                     			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
-	                		
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
 	                	</c:choose>
                     </c:forEach>
                     
@@ -353,15 +315,37 @@
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
                 			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
-                		
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:otherwise>
                 	</c:choose>
-							</ul>
-						</nav>
-						
-					
-					</div>
-               </div>
+                </ul>
+            </div>
+             </div>
+		        
+		
+				<!--글쓰기 버튼  -->
 				
+				
+                <div class="right">
+                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus"></i>
+					</span>
+					<span class="text" style="color: white">&nbsp;글쓰기</span>
+				</a>
+				<br>
+				</div>
+
+				
+        </div> <!-- 하단 영역 -->
+			
+			<br><br>	
+        
+  	
+          </div>
+  
+  
             </div>
           </div>			
 				
@@ -380,5 +364,20 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+     <script>
+    
+
+    $(function(){
+		$("#noticeList tbody tr").click(function(){
+			location.href="ndetail.bo?nno=" + $(this).children().eq(1).text();
+		});
+	});
+    
+   
+	</script>
+    
+<!-- JS -->
+	<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
+ 	
 </body>
 </html>
