@@ -78,7 +78,7 @@ select::-ms-expand {
                     </div>
                     <div class="card-body">
                     	<div class="roomSelect">
-                    		<select id="meetingroom" class="form-select form-select-lg"aria-label=".form-select-lg example">
+                    		<select id="meetingroom" class="form-select form-select-lg" aria-label=".form-select-lg example">
                     			<option value="">--회의실선택--</option>
                     			<option value="R1">1번회의실</option>
                     			<option value="R2">2번회의실</option>

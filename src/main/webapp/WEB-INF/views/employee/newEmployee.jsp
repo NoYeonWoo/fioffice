@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -78,9 +80,28 @@
 							
                                 <tr>
                                  <td style="width:10%">부서코드</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="deptCode" id="deptCode"></td>
+                                 <td style="width:25%">
+                                 	<div class="row">
+                                 		<select class="form-control form-control-sm" style="width:30%; margin:0rem 2rem 0rem 1rem;" name="deptMain" id="deptMain">
+                                 		<option value="">상위부서선택</option>
+                                 		<c:forEach items="${ dList }" var="d">	
+                                 			<c:if test="${ fn:length(d.deptCode) < 4 }">
+                                 				<option value="${ d.deptCode }">${ d.deptName }</option>
+						                    </c:if>
+					                    </c:forEach>
+                                 		</select>
+                                 		<select class="form-control form-control-sm" style="width:30%" name="deptSub" id="deptSub">
+                                 		<option value="">하위부서선택</option>
+                                 		
+                                 		</select></div></td>
                                  <td style="width:10%">직급코드</td>
-                                 <td style="width:25%"><input type="text" class="form-control form-control-sm" style="width:25%" name="jobCode" id="jobCode"></td>
+                                 <td style="width:25%">
+                                 	<select class="form-control form-control-sm" style="width:30%" name="jobCode" id="jobCode">
+                                 	<option value="">직급선택</option>
+                                 	<c:forEach items="${ jList }" var="j">	
+						                        <option value="${ j.jobCode }">${ j.jobName }</option>
+									</c:forEach>
+                                 	</select></td>
                                 </tr>
 															
                                 <tr>
@@ -145,22 +166,35 @@
 							});
 						</script>
 
-
-
-
-
-
 						<!-- 등록하기 버튼 -->
 						<a href="javascript:confirm();"
 							class="btn btn-primary btn-icon-split"> <span
 							class="icon text-white-50"> <i class="fas fa-check"></i>
 						</span> <span class="text">등록하기</span>
 						</a>
-						
-						
-						
-						
+
 						<script type="text/javascript">
+						$("#deptMain").change(function() {
+							if($("#deptMain option:selected").val()!=""){
+								console.log($("#deptMain option:selected").val());
+								<c:forEach items="${ dList }" var="d">	
+									<c:choose>
+                     					<c:when test="${ fn:length(d.deptCode) == 4 }">
+                     						var subDept = '<c:out value="${fn:substring(d.deptCode,0,2)}"/>';
+                     						console.log(subDept);
+                     						if(subDept==$("#deptMain option:selected").val()){
+                     							$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
+                     						}
+			                    		</c:when>
+			                    		<c:when test="${ fn:length(d.deptCode) == 5 }">
+			                    			if(${fn:substring(d.deptCode,0,3)}==$("#deptMain option:selected").val()){
+			                    				$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
+                 							}
+		                    			</c:when>
+			                    	</c:choose>
+		                    	</c:forEach>
+					   		}
+						});
 							function confirm() {
 								var name = $("#name").val();
 								var dept = $("#dept").val();

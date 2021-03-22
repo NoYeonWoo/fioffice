@@ -61,7 +61,7 @@
      <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>일정관리</h5>
+                        <h3>일정관리</h3>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
@@ -142,8 +142,8 @@
 					<table class="table table-bordered  "  align="center">
                     	<tr>
                             <td style="width:20%">달력</td>
-                             <td><input type="radio" name="dateType" id="lift" value="양력">
-                    			 <label for="lift">양력</label> &nbsp;&nbsp;
+                             <td><input type="radio" name="dateType" id="solar" value="양력">
+                    			 <label for="solar">양력</label> &nbsp;&nbsp;
                     			 <input type="radio" name="dateType" id="lunar" value="음력">
                     			 <label for="lunar">음력</label></td>
                         </tr><tr>

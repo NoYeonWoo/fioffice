@@ -28,7 +28,7 @@
                    <label>ADMIN</label>
                </li>
                <li class="nav-item">
-                   <a href="authority.aut" class="nav-link "><span class="pcoded-micon"><i class="feather icon-edit m-r-5"></i></span><span class="pcoded-mtext">권한관리</span></a>
+                   <a href="authority.ad" class="nav-link "><span class="pcoded-micon"><i class="feather icon-edit m-r-5"></i></span><span class="pcoded-mtext">권한관리</span></a>
                </li>
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
@@ -119,6 +119,7 @@
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/moment.js"></script>
 
    <!-- Apex Chart -->
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>

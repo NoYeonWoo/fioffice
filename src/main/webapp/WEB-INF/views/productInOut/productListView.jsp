@@ -55,7 +55,7 @@
           <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>상품관리</h5>
+                        <h3>상품관리</h3>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
