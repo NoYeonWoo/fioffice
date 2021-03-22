@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +12,8 @@
 <!-- CSS -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
-
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
 
 <style>
 	#buttons button{
@@ -48,6 +50,7 @@
 	  display: inline-block;
 	  margin-left: auto;
 	  margin-right: auto;
+	  padding: 0px 0px 20px 0px;
 	}
 	
 	.pagination a {
@@ -84,7 +87,7 @@
         box-sizing: border-box;
         
    		}
-
+   
 	
 </style>
 </head>
@@ -151,7 +154,7 @@
 					<span class="text" style="color: white">&nbsp;설문등록</span>
 					</a>
 					<br><br>
-						
+					
 		<ul class="pcoded-submenu">
 				<li>
 					<p class="title">
@@ -181,75 +184,40 @@
 		</div>
 		
 		
-           		
            	<!-- 컨텐츠 영역 -->
-           	
 				<br>
-				
 				<div class="right">
 				<div class="dataTables_wrapper container">
-				        <table class="chart size dataTable" id="surveyList" style="width: 100%; margin-bottom: 0px;">
-                <thead>
-                    <tr role="row">
-
-                    <th class="sorting_disable sorting_disabled" role="columnheader"
-                    rowspan="1" colspan="1" aria-label="번호" style="width: 48px;">
-                            <span class="title_sort">
-                                <label>번호</label>
-                            </span>
-                     </th>
-                     
-                     <th class="align_c sorting" role="columnheader" tabindex="0" aria-controls="surveyList"
-                        rowspan="1" colspan="1" aria-label="상태 : activate to sort column ascending" style="width: 68px;">
-                            <span class="title_sort">
-                                <label>상태</label>
-                                <ins class="ic"></ins><span class="selected"></span>
-                            </span>
-                     </th>
-                        
-                      <th class="title sorting" role="columnheader" tabindex="0" aria-controls="surveyList"
-                        rowspan="1" colspan="1" aria-label="제목: activate to sort column ascending" style="width: 278px;">
-                            <span class="title_sort">
-                                <label>제목</label>
-                                <ins class="ic"></ins><span class="selected"></span>
-                            </span>
-                      </th>
-                      
-                      <th class="sorting_disable align_c sorting" role="columnheader" tabindex="0" aria-controls="surveyList"
-                        rowspan="1" colspan="1" aria-label="설문 기간: activate to sort column ascending" style="width: 318px;">
-                            <span class="title_sort">설문 기간</span>
-                            
-                      </th>
-                      
-                      <th class="last title sorting" role="columnheader" tabindex="0" aria-controls="surveyList"
-                        rowspan="1" colspan="1" aria-label="작성자 : activate to sort column ascending" style="width: 168px;">
-                            <span class="title_sort">
-                                <label>작성자</label>
-                                <ins class="ic"></ins><span class="selected"></span>
-                            </span>
-                      </th>
-                      
-                      </tr>
-                </thead>
+				
+			<table id="surveyList" class="table table-hover row-border  nowrap">
+               <thead>
+	                <tr>
+	                <th id="sNo" style="width: 10%;">번호</th>
+	                <th id="sStatus" style="width: 10%;">상태</th>
+	               	<th id="sTitle" style="width: 25%;">제목</th>
+	               	<th id="sDate" style="width: 30%;">설문 기간</th>
+	                <th id="sWriter" style="width: 15%;">작성자</th>
+	                </tr>
+	           </thead>
             
  
             <tbody role="alert">
-            <tr class="odd">
-	            <td class="surveyNo">57</td>
-	            <td class="status">진행중</td>
-	            <td class="title"><a href="sdetail.so">
-	            <span class="txt">송년회 장소</span></a>
-	            <td class="date">2021-03-12 ~ 2021-03-13</td>
-	            <td class="writer">김상후 대표이사</td>
+             <c:forEach items="${ list }" var="s">
+            <tr>
+	            <td>${s.surNo}</td>
+	            <td>${s.status}</td>
+	            <td><span id="txt">${s.surTitle}</span>
+	            <td>${s.surStart} ~ ${s.surEnd}</td>
+	            <td>${s.surWriter}</td>
             </tr>
+            </c:forEach>	
             </tbody>
             
             </table>
 		</div>
         </div>
         
-        
-         <!-- 페이지 영역  -->
+         <!-- 페이지 영역  
               <br><br>
                	<div class="row" style="width: 90%; margin-left: 5%;">
                		<div class="pagination">
@@ -263,12 +231,10 @@
 								<li class="page-item"><a class="page-link" href="#!">Next</a></li>
 							</ul>
 						</nav>
-						
-					
 					</div>
-               </div>
-         <br>
-        
+               </div> -->
+               
+        <br>
         </div>
         </div>
         
@@ -287,11 +253,34 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+    <script>
+    $(document).ready(function() {
+		var table = $('#surveyList').DataTable({
+			columnDefs: [
+				{ orderable: false, targets: [1,2,3,4]},
+				{ searchable: false, targets: [0,1]}
+              ],
+              dom: '<"float-right">t<"float-left"f><"float-right"p>'
+          	
+	    });
+		
+	});
     
+    $(function(){
+		$("#surveyList tbody tr").click(function(){
+			location.href="sdetail.so?sno=" + $(this).children().eq(0).text();
+		});
+	});
+    
+   
+	</script>
     
 <!-- JS -->
-<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
-  
-  
+	<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
+ 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.buttons.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.bootstrap4.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.select.min.js"></script>
 </body>
 </html>

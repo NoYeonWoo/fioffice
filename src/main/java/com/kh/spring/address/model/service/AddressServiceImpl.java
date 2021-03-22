@@ -35,8 +35,33 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public int insertAddress(Address a) {
 		// TODO Auto-generated method stub
-		return addressDao.insertAddress(sqlSession, a);
+		int result= addressDao.insertAddress(sqlSession, a);
+		return result;
 	}
+
+	@Override
+	public Address selectAddress(int ano) {
+		// TODO Auto-generated method stub
+		return addressDao.selectAddress(sqlSession,ano);
+	}
+
+	@Override
+	public int deleteAddress(int ano) {
+		// TODO Auto-generated method stub
+		System.out.println("delete.add ser ano:: "+ano);
+		return addressDao.deleteAddress(sqlSession,ano);
+	}
+
+	@Override
+	public int updateAddress(int ano) {
+		// TODO Auto-generated method stub
+		return addressDao.updateAddress(sqlSession,ano);
+	}
+
+
+
+
+
 
 	
 	

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +11,12 @@
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
    
  <!-- CSS -->
-
+<link
+	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
+	rel='stylesheet' />
+<link
+	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css'
+	rel='stylesheet' media='print' />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
 
 <style>
@@ -62,25 +68,6 @@
 	.cate{
 	 	background-color: #B8ACD0;
 	
-	}
-	
-	.pagination {
-	  display: inline-block;
-	  margin-left: auto;
-	  margin-right: auto;
-	}
-	
-	.pagination a {
-	  color: black;
-	  float: left;
-	  padding: 8px 16px;
-	  text-decoration: none;
-	  transition: background-color .3s;
-	}
-	
-	.pagination a.active {
-	  background-color: rgb(2, 1, 13);
-	  color: white;
 	}
 	
 	 a:link { color: gray; text-decoration: none;}
@@ -197,17 +184,46 @@
 						<div class="right" align="left">
 						
 		                <div class="pd-20 card-box mb-30" align="center">
-		               	<div class="calendar-wrap">
-		                  	<div id='calendar'></div>
-		               	</div>
-                 			<jsp:include page="/WEB-INF/views/common/calendar.jsp"/>
-               			</div>
+		               	<div id="calendarWrapper">
+			           		<div id="calendar">
+			           	</div>
+                 			
                			<br>
         				</div>
         				
         				
 						</div>
 						</div>
+						
+						
+	<!-- 모달 -->
+	<div class="modal fade" id="addCalendar">  
+	        <div class="modal-dialog modal-lg modal-dialog-centered">
+	            <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">일정 등록</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            </div>
+	             <div class="modal-body">
+					<form name="insertCalendar" action="cinsert.co" method="post" autocomplete="off">
+					<label for="calDate" class="mr-sm-2">날짜 선택</label>
+						<input type="date" id="calStart" name="calStart" class="form-control form-control-user">
+						<input type="date" id="calEnd" name="calEnd" class="form-control form-control-user">
+						<br><br>
+						<label for="calTitle" class="mr-sm-2">일정</label>
+	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle"> <br>
+	                    <label for="calContent" class="mr-sm-2">일정 코멘트</label>
+	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
+						<br>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
+	                    	<button type="submit" class="btn btn-primary">등록하기</button>
+	                	</div>
+					</form>	
+				</div>
+	            </div>
+	        </div>
+	    </div>
 						
 						
                       </div>
@@ -224,11 +240,43 @@
 	
 	
 	<!-- [ Main Content ] 메인화면 끝 -->
-
-
+	
     
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
+    <script>
+    $(document).ready(function(){
+    	
+    	var today = new Date();
+		var yesterDate = today.getTime() - (1 * 24 * 60 * 60 * 1000);
+		
+	var calendar = $('#calendar').fullCalendar( {
+		header : {
+			left : 'agendaDay,agendaWeek,month'
+		},
+		editable : false,
+		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+		selectable : true,
+		defaultView : 'month',
+		allDaySlot : false,
+		selectHelper : true,
+		dayClick: function(date, allDay, jsEvent, view) {
+			if(yesterDate > date){
+				alert("이미 지난 날짜는 선택할 수 없습니다.");
+			}else{			             
+	           $("#addCalendar").modal("show");
+			}
+          }
+      });
+    }); 
+    
+    </script>
+    <script
+	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js'
+	type="text/javascript"></script>
+	<script
+	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
+	type="text/javascript"></script>
 </body>
 </html>

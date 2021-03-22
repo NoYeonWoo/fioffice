@@ -60,4 +60,14 @@
 	
 	</insert>
 	
+	
+	<update id="updateAddress" parameterType="Address">
+		UPDATE BOARD
+		SET ADDRESS_NAME=#{addressName}, ADDESS_PHONE=#{addressPhone}, ADDRESS_EMAIL=#{addressEmail} , ADDRESS_COM_NAME=#{addressComName} , ADDRESS_JOB=#{addressJob} , ADDRESS_TEL=#{addressTel} ,
+		 ADDRESS_DEPT=#{addressDept} , ADDRESS_ADDRESS=#{addressAddress}, ADDRESS_MEMO=#{addressMemo}
+		
+		WHERE ADDRESS_NO=#{addressNo}
+	
+	</update>
+	
 </mapper>

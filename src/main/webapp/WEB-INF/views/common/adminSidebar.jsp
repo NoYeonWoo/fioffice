@@ -14,7 +14,9 @@
     <link rel="icon" href="${pageContext.request.contextPath}/resources/ablePro/assets/images/favicon.ico" type="image/x-icon">
     <!-- vendor css -->
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
-
+<!-- 썸머노트  -->
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+	
    <title>FIOFFICE</title>
 </head>
 <body>
@@ -42,10 +44,10 @@
                 <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">메뉴관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="nlist.bo">공지사항</a></li>
+                       <li><a href="notice.ad">공지사항</a></li>
                        <li><a href="layout-horizontal.html">결재</a></li>
                        <li><a href="calendar.ad">캘린더</a></li>
-                       <li><a href="sadmin.so">설문</a></li>
+                       <li><a href="survey.ad">설문</a></li>
                        <li><a href="meetingRoom.ad">회의실</a></li>
                    </ul>
                </li>
@@ -125,6 +127,11 @@
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/apexcharts.min.js"></script>
    <!-- custom-chart js -->
    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pages/dashboard-main.js"></script>   
+
+<!-- 썸머노트  -->
+	   
+	<script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/summernote/lang/summernote-ko-KR.js"></script>
 
    
 </body>

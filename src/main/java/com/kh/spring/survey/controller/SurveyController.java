@@ -25,9 +25,12 @@ import com.google.gson.JsonIOException;
 
 
 import com.kh.spring.address.model.service.AddressService;
+import com.kh.spring.board.common.Pagination;
+import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.notice.model.service.NoticeService;
 import com.kh.spring.mainCalendar.model.service.CalendarService;
 import com.kh.spring.survey.model.service.SurveyService;
+import com.kh.spring.survey.model.vo.Survey;
 
 @Controller
 public class SurveyController {
@@ -56,11 +59,22 @@ public class SurveyController {
 		  
 	}
 	
-	@RequestMapping("sadmin.so")
-	public String surveyAdmin() {
-		
-		return "survey/surveyAdmin";
-		  
-	}
 
+	/*@RequestMapping("slist.so")
+	public String selectNlist(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
+		
+		System.out.println("설문 리스트 조회");
+		int listCount = surveyService.selectLictCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Survey> list = surveyService.selectList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "survey/surveyListView";
+		  
+	}*/
+	
 }

@@ -44,7 +44,7 @@ public class AddressController {
 		int listCount = addressService.selectListCount();
 		//System.out.println(listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 		
 		ArrayList<Address> list = addressService.selectListCount(pi);
 		
@@ -56,40 +56,75 @@ public class AddressController {
 		
 	}
 	
-	@RequestMapping("update.add")
-	public String viewUpdate( ){
+	
+	
+	@RequestMapping("detail.add")
+	public ModelAndView selectAddress(int ano, ModelAndView mv){
 		
-
-		return "address/addressUpdate";
+		Address a = addressService.selectAddress(ano);
+		
+		System.out.println("address컨트롤러 detail ano  "+ano);
+		mv.addObject("a",a).setViewName("address/addressDetail");
+		return mv;
 		
 	}
 	
-	@RequestMapping("detail.add")
-	public String viewDetail( ){
+	
+	@RequestMapping("delete.add")
+	public String deleteAddress(@RequestParam("ano") int ano ,HttpServletRequest request, Model model){
 		
+		int result =addressService.deleteAddress(ano);
 
-		return "address/addressDetail";
+		System.out.println("delete.add 리설트  "+result);
+		return "redirect:view.add";
+		
 		
 	}
+	
+	@RequestMapping("goupdate.add")
+	public ModelAndView updateForm(@RequestParam("ano") int ano, ModelAndView mv, HttpServletRequest request){
+		
+		
+		Address a = addressService.selectAddress(ano);
+		
+		System.out.println("address컨트롤러 goupdate ano asdkasjkldasdjlkasd::  "+ano);
+		mv.addObject("a",a).setViewName("address/addressDetail");
+		return mv;
+		
+	}
+	
+	@RequestMapping("update.add")
+	public String updateAddress(@RequestParam("ano") int ano ,HttpServletRequest request, Model model) {
+		
+		int result =addressService.updateAddress(ano);
+		
+				
+		return "redirect:view.add";
+		
+		
+	}
+	
+	
+	
 	@RequestMapping("goinsert.add")
 	public String goviewInsert( ){
 		
-
+		
 		return "address/addressInsert";
 		
 	}
-	
 	@RequestMapping("insert.add")
 	public String viewinsert(@ModelAttribute Address a){
 		
 		int result = addressService.insertAddress(a);
-		
+		System.out.println("address컨트롤러 insert 리설트  "+result);
 
+		
 			if(result>0) {
-				return "redirect:/";
+				return "redirect:view.add";
 				
 			}else {
-				return "redirect:/";
+				return "redirect:view.add";
 			}
 
 		

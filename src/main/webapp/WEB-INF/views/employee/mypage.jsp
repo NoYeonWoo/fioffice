@@ -50,19 +50,26 @@
   
       
       
-						<form name="update.me" method="post" autocomplete="off">
+						<form action="update.me" method="post"  enctype="multipart/form-data">
 
-				
+				           
                              
-                         
+                               <input type="hidden" name="empNo" value="${loginUser.empNo }">
 							<table class="table table-bordered" style="width:900px">
+							
                                	<tr >
+                               	
 									<td style="height: 50px; " >사진 </td>
 									<td  >
 									     
-				                         <img  id="titleImg"  border="1px" width="120" height="120" border="1px" > 
+				                         <img  id="titleImg"  border="1px" width="120" height="120" border="1px" src="${pageContext.request.contextPath}/resources/upload_files/${loginUser.changeName}" > 
 				                         <div id="filearea" >
-				                         <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" > 
+				                         <input type="file" name="file1" id="file1" onchange="loadImg(this, 1);" >
+				                                     <c:if test="${ !empty loginUser.originName }">
+	                                                               현재 업로드된 파일 : ${ loginUser.originName } <br>
+	                            <input type="hidden" name="changeName" value="${ loginUser.changeName }">
+	                            <input type="hidden" name="originName" value="${ loginUser.originName }">
+                            </c:if> 
 				                         </div>
 				                         </td>
 									
@@ -148,7 +155,7 @@
                                 </tr>
 
 							</table>
-						</form>
+					
 						
 						
 						<!-- jQuery와 Postcodify를 로딩한다. -->
@@ -160,48 +167,15 @@
 										.postcodifyPopUp();
 							});
 						</script>
-						
+					
 
 					<!-- 등록하기 버튼 -->
 						<button type="submit" class="btn btn-primary"> <i class="fas fa-check"></i> 수정하기</button> 
 						
-						
+						</form>		
 
 
-      <script>
-	$(function() {
-		$("#filearea").hide();
-		$("#titleImg").click(function(){
-			$("#file1").click();
-		});
 
-	});
-	
-	
-	function loadImg(inputFile, num) {// 이미지 미리보기 
-		//inputFile : 현재 변화가 생긴 input type = "file"
-		//num : 조건문을 활용 하기 위해 전달받은 매개변수
-
-		console.dir(inputFile);
-
-		if (inputFile.files.length == 1) {//file이 존재 할경우 
-			var reader = new FileReader();// 파일을 읽어들이 FileReader객체를 생성 
-
-			reader.readAsDataURL(inputFile.files[0]);//파일을 읽어주는 메소드  --> 해당 파일을 읽어서 url을 부여 (문자열로 저장 )
-
-			reader.onload = function(e) {//파일 읽기가 다완료 되면 실행할 메소드 
-				switch (num) {
-
-				case 1 : $("#titleImg").attr("src", e.target.result); break;
-		
-				}
-			};
-
-		}
-	}
-	
-	</script>
-   
 </div>
 
 <!-- 비밀번호변경 시작 -->

@@ -50,41 +50,43 @@
 				  	<form action="insertApproval.do" method="post" enctype="Multipart/form-data" id="form">
 					  
 					   <div class="form-group">
-						   <strong>기안자 : </strong><input type="text" class="form-control" value="( ${loginEmp.empNo} ) ${loginEmp.empName}" name="empNo" readonly>
+						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empName} (${loginUser.deptName})" name="empNo" readonly style="">
 					   </div>
 					   <div class="row">
 						   <div class="form-group col-lg-6">
-						    	<strong>결재자 : </strong><input type="text" class="form-control" value="${gEmp}" name="approvalEmp" readonly>
+						    	<strong>결재자 : </strong><input type="text" class="form-control" value="차장님" name="firstApprEmp" readonly>
 						   </div>
 						   <div class="form-group col-lg-6">
-						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="${hEmp}" name="hEmp" readonly>
+						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="대표이사님" name="lastAppEmp" readonly>
 						   </div>
 					
 					    </div>
 					  <div class="form-group">
-					    	<input type="text" class="form-control" name="apTitle" placeholder="제목을 입력해주세요" autocomplete="off" required>
+					    	<input type="text" class="form-control" name="approvalTitle" placeholder="제목을 입력해주세요" autocomplete="off" required>
 					   	</div>
 					   
+				
+					   
 						 <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                       <label class="form-check-label" for="exampleCheck1">긴급</label>
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="urgent" value="긴급">
+                       <label class="form-check-label" for="exampleCheck1" style="color:red; " >긴급</label>
                        </div>
 					  
 					
 					  
 				  <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="apContent" maxlength="140" rows="7" autocomplete="off"></textarea>
+						    <textarea class="form-control" id="summernote" name="approvalContent" maxlength="140" rows="7" autocomplete="off"></textarea>
 						 </div>
 			         
 			          
 			          
-                     <input type="file" class="form-control" id="" name="">
+                     <input type="file" class="form-control" id="uploadFile" name="uploadFile">
                   
 			          
 			          <br><br>	  
 					  <div class="row">
 						  <div id="buttons">
-							  <button type="button" id="submitBtn" class="btn btn-primary">전송</button>
+							  <button type="submit" id="submitBtn" class="btn btn-primary">전송</button>
 							  <button type="button" onclick="location.href='approvalList.do'" class="btn btn-danger">취소</button>
 						  </div>
 					  </div>

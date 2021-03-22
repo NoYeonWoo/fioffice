@@ -78,11 +78,11 @@
 				  <div class="card-body">
 					  <div class="form-group">
 
-					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
+					    <input type="text" class="form-control" id="cTitle" name="cTitle" placeholder="제목을 입력해주세요." required>
 					    <input type="hidden" name="bType" value="B">
 					  </div>
 					    <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
+						    <textarea class="form-control" id="summernote" name="cContent" maxlength="140" rows="7"></textarea>
 						  </div>
 						  
 					  <div class="row">

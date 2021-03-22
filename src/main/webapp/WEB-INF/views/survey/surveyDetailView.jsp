@@ -128,22 +128,24 @@
 	
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
-			본문 내용입니다.<br>
+			<span>설문 안내 조사 내용</span>
+			<br>
+			<span>설문 기간</span>
+			<br>
+			<span>설문 질문</span>
+			<br>
+			<span>설문 내용</span>
+			<br>
 		</div>
+		
 	
 	<!-- 비율용 -->
 		<div class="tw-flex tw-pt-8">
 			<div class="tw-flex-1">
-			<!-- 글수정 -->
-			<div>
-			<div class="right">
-			<a href="supdateForm.bo" class="app-button app-button-rounded">
-						<span class="text" style="color: #383A3C">설문 수정</span>
-			</a>
-			</div>
+			
 			<!-- 글삭제 -->
 			<div class="left">
-			<a href="sdelete.bo" class="app-button app-button-rounded">
+			<a href="sdelete.so" class="app-button app-button-rounded">
 						<span class="text" style="color: #383A3C">설문 삭제</span>
 			</a>
 			</div>

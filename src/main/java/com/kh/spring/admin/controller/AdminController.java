@@ -3,10 +3,12 @@ package com.kh.spring.admin.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.GsonBuilder;
@@ -17,6 +19,13 @@ import com.kh.spring.admin.model.vo.TreeModel;
 import com.kh.spring.employee.model.service.EmployeeService;
 import com.kh.spring.employee.model.vo.Employee;
 
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.spring.board.common.Pagination;
+import com.kh.spring.board.common.model.vo.PageInfo;
+import com.kh.spring.board.notice.model.service.NoticeService;
+import com.kh.spring.board.notice.model.vo.Notice;
+
 @Controller
 public class AdminController {
 	
@@ -26,7 +35,10 @@ public class AdminController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-	//권한관리창
+  @Autowired
+	private NoticeService noticeService;
+
+  //권한관리창
 	@RequestMapping("authority.ad")
 	public String authorityView(Model model) {
 		ArrayList adminList = adminService.selectAdminList();
@@ -114,6 +126,11 @@ public class AdminController {
 	@RequestMapping("dept.ad")
 	public String deptView() {
 		return "admin/deptAdminView";
+	}
+	
+	@RequestMapping("notice.ad")
+	public String noticeView() {
+		return "admin/noticeAdminView";
 	}
 	
 	@RequestMapping("address.ad")

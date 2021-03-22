@@ -24,12 +24,12 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectList", null, rowBounds);
 	}
 
-	public int updateIncreaseCount(SqlSessionTemplate sqlSession, int noticeNo) {
-		return sqlSession.update("noticeMapper.updateIncreaseCount", noticeNo);
+	public int updateIncreaseCount(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.update("noticeMapper.updateIncreaseCount", nno);
 	}
 
-	public Notice selectBoard(SqlSessionTemplate sqlSession, int noticeNo) {
-		return sqlSession.selectOne("noticeMapper.selectNotice", noticeNo);
+	public Notice selectBoard(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.selectOne("noticeMapper.selectNotice", nno);
 	}
 	
 	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
@@ -40,8 +40,8 @@ public class NoticeDao {
 		return sqlSession.selectOne("noticeMapper.selectNotice", r);
 	}
 
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int noticeNo) {
-		return (ArrayList)sqlSession.selectList("noticeMapper.selectReplyList", noticeNo);
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int nno) {
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectReplyList", nno);
 	}
 
 	
