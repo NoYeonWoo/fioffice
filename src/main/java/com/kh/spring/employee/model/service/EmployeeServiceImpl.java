@@ -1,10 +1,14 @@
 package com.kh.spring.employee.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.kh.spring.admin.model.vo.Department;
+import com.kh.spring.admin.model.vo.Job;
 import com.kh.spring.employee.model.dao.EmployeeDao;
 import com.kh.spring.employee.model.vo.Employee;
 
@@ -32,6 +36,26 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int updateMypage(Employee emp) {
 		int result =employeeDao.updateMypage(sqlSession, emp);
 		return employeeDao.updateMypage(sqlSession,emp);
+	}
+
+	@Override
+	public ArrayList<Job> selectJobList() {
+		// TODO Auto-generated method stub
+		return employeeDao.selectJobList(sqlSession);
+	}
+
+
+	@Override
+	public ArrayList<Employee> selectEmpList() {
+		// TODO Auto-generated method stub
+		return employeeDao.selectEmpList(sqlSession);
+	}
+
+
+	@Override
+	public Employee selectEmployee(String empNo) {
+		// TODO Auto-generated method stub
+		return employeeDao.selectEmployee(sqlSession, empNo);
 	}
 
 }

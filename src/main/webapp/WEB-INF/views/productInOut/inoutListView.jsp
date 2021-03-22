@@ -62,7 +62,7 @@
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>입출고관리</h5>
+                        <h3>입출고관리</h3>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
@@ -77,7 +77,7 @@
 	                                    <th  id="pName" style="width: 20%;">상품명</th>
 	                                    <th  id="quantity" style="width: 12%;">수량</th>
 	                                    <th  id="price" style="width: 13%;">금액</th>
-	                                    <th id="Comment" style="width: 15%;">비고</th> 
+	                                    <th id="comment" style="width: 15%;">비고</th> 
                                     </tr>
                                 </thead>
                                 <tbody>

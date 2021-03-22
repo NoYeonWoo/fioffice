@@ -1,5 +1,10 @@
 package com.kh.spring.employee.controller;
 
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -15,7 +20,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.support.SessionStatus;
+
+import com.google.gson.GsonBuilder;
+import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.admin.model.vo.Department;
+import com.kh.spring.admin.model.vo.Job;
+
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,14 +41,43 @@ import com.kh.spring.employee.model.vo.Employee;
 public class EmployeeController {
 	@Autowired 
 	private EmployeeService employeeService;
-
+	
+	@Autowired
+	private AdminService adminService;
+	
 	@RequestMapping("manageEmp.do")
-	public String manageEmployee() {
+	public String manageEmployee(Model model) {
+		ArrayList<Employee> eList = employeeService.selectEmpList();
+		model.addAttribute("eList",eList);
 		return "employee/manageEmployee";
 	}
+	@ResponseBody
+	@RequestMapping(value="selectEmpList.do", produces="appliction/json; charset=UTF-8")
+	public Object selectEmpList() {
+		  Map<String, Object> result = new HashMap<String, Object>();
+		  result.put("data", employeeService.selectEmpList());
+		  
+		  System.out.println("거쳐감");
+		  return new GsonBuilder().create().toJson(result);
 
+
+		//model.addAttribute("eList",eList);
+		//return new GsonBuilder().create().toJson(eList);
+	}
+	@RequestMapping("selectEmployee")
+	@ResponseBody
+	public Object selectEmployee(String empNo) {
+		Employee emp = employeeService.selectEmployee(empNo);
+		System.out.println(emp.getJoinDate());
+		return emp;
+	}
+	
 	@RequestMapping("insertEmp.do")
-	public String insertEmployee() {
+	public String insertEmployee(Model model) {
+		ArrayList<Department> dList = adminService.selectDeptList();
+		ArrayList<Job> jList = employeeService.selectJobList();
+		model.addAttribute("dList",dList);
+		model.addAttribute("jList",jList);
 		return "employee/newEmployee";
 	}
 
@@ -181,5 +222,11 @@ public class EmployeeController {
 			 return "common/login";
 		 
 	 }
-
+		@RequestMapping("insertNewEmp.do")
+	    public String insertNewEmp(SessionStatus status) {
+			status.setComplete();
+		 
+			 return "common/login";
+		 
+	 }
 }

@@ -154,7 +154,7 @@
 						<a href="javascript:confirm();"
 							class="btn btn-primary btn-icon-split"> <span
 							class="icon text-white-50"> <i class="fas fa-check"></i>
-						</span> <span class="text">등록하기</span>
+						</span> <span class="text">수정하기</span>
 						</a>
 						
 						

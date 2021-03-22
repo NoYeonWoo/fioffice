@@ -45,7 +45,7 @@
 <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>회의실현황</h5>
+                        <h3>회의실현황</h3>
                     </div>
                     <div class="card-body table-border-style">
                     <div class="dt-buttons btn-group flex-wrap">

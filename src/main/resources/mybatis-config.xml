@@ -11,8 +11,12 @@
 		<typeAlias type="com.kh.spring.board.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.board.common.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.work.model.vo.Work" alias="Work"/>
+		<typeAlias type="com.kh.spring.admin.model.vo.Department" alias="Dept"/>
+		<typeAlias type="com.kh.spring.admin.model.vo.Job" alias="Job"/>
+		<typeAlias type="com.kh.spring.admin.model.vo.Authority" alias="Authority"/>
 		<typeAlias type="com.kh.spring.survey.model.vo.Survey" alias="Survey"/>
 		<typeAlias type="com.kh.spring.approval.model.vo.Approval" alias="Approval"/>
+
 	</typeAliases>
 	
 	
@@ -23,7 +27,8 @@
 		<mapper resource="/mappers/employee-mapper.xml"/> 
 		<mapper resource="/mappers/notice-mapper.xml"/>
 		<mapper resource="/mappers/work-mapper.xml"/>
+		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/approval-mapper.xml"/>
-		
+
 	</mappers>
 </configuration>
