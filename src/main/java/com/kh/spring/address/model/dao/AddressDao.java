@@ -30,4 +30,21 @@ public class AddressDao {
 		return sqlSession.insert("addressMapper.insertAddress",a);
 	}
 
+	public Address selectAddress(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("addressMapper.selectAddress",ano);
+	}
+
+	public int deleteAddress(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		System.out.println("delete.add dao ano:: "+ano);
+		return sqlSession.update("addressMapper.deleteAddress",ano);
+	}
+
+	public int updateAddress(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("addressMapper.updateAddress",ano);
+	}
+
+
 }

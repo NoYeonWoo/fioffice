@@ -88,10 +88,11 @@
 							<h5>주소록</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
-									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+									<input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
                         			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
+                        			<a href="detail.add"><button type="button" class="btn  btn-primary">임시상세</button></a>
 
 								</div>
 							</span>
@@ -131,8 +132,6 @@
 										</c:forEach>
 									</tbody>
 								</table>
-								
-								
 							</div>
 						</div>
 					</div>
@@ -208,12 +207,12 @@
 
 	<script>
     	$(function(){
-    		$("#addressList tbody tr").click(function(){
-    			location.href="detail.add?ano=" + $(this).children().eq(0).text();
+    		$("#boardList tbody tr").click(function(){
+    			location.href="detail.bo?bno=" + $(this).children().eq(0).text();
     		});
     	});
     </script>
-	<!-- ?ano=" + $(this).children().eq(0).text(); -->
+
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />

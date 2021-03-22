@@ -11,6 +11,15 @@ public interface  AddressService {
 
 	ArrayList<Address> selectListCount(PageInfo pi);
 
+	
+	
 	int insertAddress(Address a);
+	Address selectAddress(int ano);
+
+	int deleteAddress(int ano);
+
+
+
+	int updateAddress(int ano);
 
 }
