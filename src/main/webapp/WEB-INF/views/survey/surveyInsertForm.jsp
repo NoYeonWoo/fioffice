@@ -115,90 +115,98 @@
             	<div class="card-header py-3">
                		<h5>설문 등록</h5>
            		</div>
-           		
-           		
+
+
            	<div class="card-body" align="center">
-           		
-				<table class="form_type form_reserach001">
+           		<div class="warning">
+                                폭력적이거나 선정적인 문항<br />
+                                타인의 권리를 침해하거나, 명예를 훼손하는 문항<br />
+                                개인정보를 직접적으로 묻는 문항<br /> 
+                                * 다음 항목에 해당되는 설문항목이 포함되어 있을 시 삭제될 수 있습니다.<br/><br /> <br />
+                            </div>
+				<table class="form_type form_reserach">
 				<tbody>
 				<tr>							
 					<th>
 						<span class="title">설문 제목</span>
 					</th>
 					<td>									
-						<input class="txt w_max" type="text" name="title" value="">
+						<input type="text" id="surTitle" name="surTitle" class="form-control">
 					</td>
+				</tr>
+				<tr>
+				<td>
+				<input type="hidden" id="surWriter" class="form-control" value="${loginUser.empName}" name="surWriter" readonly>
+				</td>
 				</tr>
 				<tr>
 					<th>
 						<span class="title">설문 기간</span>
 					</th>
 					<td>
-						<span class="wrap_date">
-							<input id="start-date" type="text" name="start_date" value="2021-03-14" readonly="readonly">
-						</span>
-						~
-						<span class="wrap_date">
-							<input id="end-date" type="text" name="end_date" value="2021-03-15" readonly="readonly">
-						</span>						
+						<input type="date" id="surStart" name="surStart" class="form-control form-control-user">
+					</td>
+					<th>
+						<span class="txt">~</span>
+					</th>
+					<td>
+							<input type="date" id="surEnd" name="surEnd" class="form-control form-control-user">
 					</td>
 				</tr>
-	
-			
-				<tbody>
-					<tr>
-						<th>
-							<span class="title">안내 문구</span></th>
-						<td>
-							<div class="wrap_txtarea">
-								<textarea class="w_large" name="survey_guidance" placeholder="" maxlength="1000"></textarea>
-							</div>
-							</td>
-                        
-					</tr>
+				<tr>
+					<th>
+						<span class="title">안내 문구</span>
+					</th>
+					<td>
+						<input type="text" id="surContent" name="surContent" class="form-control">
+					</td>
+				</tr>
 				
-			<tr>
-				<th><span class="title">질문</span></th>
-				<td>
-					<div class="wrap_txt"><input class="txt w_large" type="text" name="question" value="" maxlength=""></div>
-				</td>
-			</tr>
-			<tr>							
-				<th><span class="title">설문 문항 타입</span></th>
-				<td>									
-					<div class="flexable_info">										
-						<span class="wrap_select">
-							<select name="query_type">
-								<option value="select">객관식</option>
-								<option value="text">주관식</option>
-							</select>
-						</span>	
-					</div>
-				</td>
-			</tr>
-			
-			<tr class="query-answer-row" style="display: table-row;">							
-				<th><span class="title">보기</span></th>
-				<td class="query-answer-container">
-				
-			
-
-
-					<span class="btn-add-querycase wrap_txt disable">
-					<input type="radio" name="radio" value="-1">
-					<input class="txt wfix_max" type="text" readonly="readonly" value="보기 추가하기"></span>
-					<span class="btn-add-querycase-etc btn_wrap btn_creat">
-					<span class="ic_form ic_addlist"></span>
-					<span class="txt">보기 추가</span>
-					</span>
-			
-			
-			</td>
-			
-			
-						</tr>							
+				<tr>
+					<th>
+						<span class="title">설문 질문</span>
+					</th>
+					<td>
+						<input type="text" id="surqContent" name="questionSurvey" class="form-control">
+					</td>
+				</tr>
+				<tr>							
+					<th><span class="title">설문 타입</span></th>
+					<td>									
+						<div class="flexable_info">										
+							<span class="wrap_select">
+								<select id="surqType" class="form-select form-select-lg">
+									<option value="M">객관식</option>
+									<option value="E">주관식</option>
+								</select>
+							</span>	
+						</div>
+					</td>
+				</tr>
 					</tbody>	
 				</table>
+				<div id="selectBox">
+				<table id="surveySelectBox">
+				<tbody>
+				<tr>							
+				<th>
+				 <div class="qbox">
+				
+				<td>
+				<div class="q">
+				<span class="title">1</span></th>
+				<input value="" id="name" name="sur" type="text"
+                                                class="form-control" autocomplete="off">
+                                                </div>
+				</div>
+				</td>
+				<button type="button" id="addq_btn" class="btn btn-primary btn-icon-split">
+                                        <b>+</b>
+                                    </button>
+				</tr>	
+				</tbody>
+				</table>
+				</div>
 				
 				<!-- 버튼 -->
 				<br><br>
@@ -227,7 +235,31 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
-    
+    <script>	   
+	$("#surqType").change(function() {
+		$("#selectBox").toggle();
+	});
+	
+	 $('#addq_btn').on('click', function () {
+    	 var q = $("<div class='q'><span></span><br><input id='name' autocomplete='off' name='itemcontent' type='text' "
+	                +"class='form-control'> <button type='button'  id='minusq_btn' class='btn btn-primary btn-icon-split'><b> x</b></button></div>"
+         );
+        $(this).parent().find('.qbox').append(q);
+    });
+
+    $(document).on('click', '#minusq_btn', function () {
+			 $(this).parent().remove();
+    });
+
+    $(document).on('click', 'button', function () {
+        $('#selectBox').find('.q').each(function (i) {
+            $(this).find('span').text(i + 1);
+        });
+    });
+	
+	
+	 	
+	</script>
    
  
 </body>

@@ -29,6 +29,7 @@
 	  display: inline-block;
 	  margin-left: auto;
 	  margin-right: auto;
+	  padding: 00px 0px 0px 0px;
 	}
 	
 	.pagination a {
@@ -124,7 +125,23 @@
 	.app-board-category .app-category-child>ul>li.app-ative>a{font-weight:600}
 	
 	.app-board-category>li:hover>.app-category-child{display:block}
-
+	
+	
+		div.left {
+	 	
+        float: left;
+        box-sizing: border-box;
+        
+    	}
+    
+    	div.right {
+      
+        float: right;
+        box-sizing: border-box;
+        
+   		}
+   		
+   		
 	</style>
 </head>
 
@@ -290,10 +307,21 @@
     </ul>
 
                 
-                <!--글쓰기 버튼  -->
-                <div><br>
-                <div align="right">
-                <a href="cinsertForm.bo" class="btn btn-primary btn-icon-split">
+       <br><div> <!-- 하단 영역 -->     
+        
+		        <!-- 서치 버튼 -->
+				<div class="left">
+				<br>&nbsp;&nbsp;&nbsp;&nbsp;
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
+					<a href="dsearch.bo" class="app-button app-button-rounded app-button-xs primary">
+						<span class="text" style="color: white">검색</span>
+					</a>
+				</div>
+		
+				<!--글쓰기 버튼  -->
+				
+                <div class="right">
+                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 					</span>
@@ -303,7 +331,9 @@
 				</div>
 				
 				
-              </div>
+        </div> <!-- 하단 영역 -->
+				
+				
               
               <!-- 페이지 영역  -->
                	<div class="row" style="width: 90%; margin-left: 5%;">

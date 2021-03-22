@@ -29,7 +29,7 @@
 
 <body class="">
  
-   <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+   <jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
     
 
@@ -75,14 +75,31 @@
            	<!-- 폼 컨텐츠 영역 -->
 				  <div class="card-body">
 					  <div class="form-group">
-
-					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
-					    <input type="hidden" name="bType" value="B">
-					  </div>
+						<table>
+						<tbody>
+						<tr>
+					    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력해주세요." required>
+					    </tr>
+					    <tr>
+					    <td>
+                        <input type="hidden" name="noticeWriter"  id="noticeWriter" value="${loginUser.empName}">
+                        </td>
+                        </div>
+					 	</tr>
+					 	<tr>
 					    <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
+						  <td>
+						  <textarea class="form-control" id="summernote" name="noticeContent" maxlength="140" rows="7"></textarea>
 						  </div>
-						  
+						  </td>
+						  </tr>
+						  <tr>
+						  <td>
+						  <input type="file" class="form-control" id="originName" name="originName">
+						  </td>
+						  </tr>
+						  </tbody>
+					 	</table>
 					  <div class="row">
 						  <div id="buttons">
 							  	<a href="ninsert.bo" class="btn btn-primary btn-icon-split">
@@ -108,7 +125,7 @@
 
  	<script type="text/javascript">
  	
-    $(document).ready(function() {
+
 
     	$('#summernote').summernote({
     		  height: 500,        
@@ -130,10 +147,35 @@
     			    ['insert',['picture','link']],
     			    ['view', ['fullscreen', 'help']]],
     		fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋움체','바탕체'],
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
-    	});
-    });
-    
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72'],
+		      callbacks: {
+		        	onImageUpload: function(files, editor, welEditable) {
+			            for (var i = files.length - 1; i >= 0; i--) {
+			            	sendFile(files[i], this);
+			            }
+			        }
+		      }
+	      });
+
+		    
+    	function sendFile(file,el) {
+			var form_data = new FormData();
+	      	form_data.append('file', file);
+	      	$.ajax({
+	        	data: form_data,
+	        	type: "POST",
+	        	url: 'getchagePhoto.do',
+	        	cache: false,
+	        	contentType: false,
+	        	enctype: 'multipart/form-data',
+	        	processData: false,
+	        	success: function(data) {
+	        		var renameFile ="${ contextPath }/resources/upload_files/" + data;
+	        		$("#summernote").summernote('insertImage', renameFile);
+
+	        	}
+	      	});
+	    }
     
     
     

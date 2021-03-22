@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -100,7 +101,7 @@
 	
 	<div class="app-board-article-head">
 	<div class="app-board-container">
-	<!-- <img src="" alt=""> -->
+
 	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">${ n.noticeTitle }</h1>
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
@@ -110,13 +111,12 @@
 
 	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">관리자</a>
 	<div class="app-article-meta">
-	
 	<div class="app-article-meta-item">${ n.noticeDate }</div>
 	
 	<div class="app-article-meta-divider"> ・ </div>
 	<div class="app-article-meta-item">조회 수 ${ n.count }</div>
 	<div class="app-article-meta-divider"> ・ </div>
-	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 ${ n.replyCount }</a>
+	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 </a>
 	</div>
 	</div>
 	</div> <div class="tw-flex-1"></div>
@@ -138,6 +138,11 @@
 		</div>
 	
 	<!-- 비율용 -->
+	<form id="postForm" action="" method="post">
+					<input type="hidden" name="nno" value="${ n.noticeNo }">
+					<input type="hidden" name="fileName" value="${ n.changeName }"> 
+	</form>
+	
 		<div class="tw-flex tw-pt-8">
 			<div class="tw-flex-1">
 			<!-- 글수정 -->
@@ -179,22 +184,23 @@
 			</div>
 	  <br>
 		  
-	  <!-- 등록되는 댓글 영역 -->
+	  <!--
+
 		<ul id="app-board-comment-list" class="app-board-comment-list">
 		  <li id="comment_227" class="app-comment-item app-clearfix ">
 		    	<div class="tw-flex-1 tw-pl-4">
 		       		<div class="tw-flex tw-items-center tw-flex-wrap">
 			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">${ n.replyWriter }</span> 
+			   		 		<span class="tw-flex tw-items-center">${ r.replyWriter }</span> 
 			 			 </div>
 		      
 		    		</div>
 			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">${ n.replyContent }</div>
+			              	<div class="comment_227_0 rhymix_content xe_content">${ r.replyContent }</div>
 			         	</div>
 				</div>
 			</li>
-		</ul> 
+		</ul> 등록되는 댓글 영역 -->
 		
       
       

@@ -14,6 +14,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="noticeDate" column="NOTICE_DATE"/>
 		<result property="status" column="STATUS"/>
 		<result property="count" column="COUNT"/>
+		<result property="originName" column="ORIGIN_NAME"/>
+		<result property="changeName" column="CHANGE_NAME"/>
 	</resultMap>
 	
 	<resultMap id="replyResultSet" type="Reply">
@@ -40,8 +42,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<insert id="insertNotice" parameterType="Notice">
 		INSERT INTO NOTICE
-		VALUES(SEQ_NOTINO.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent},
-		SYSDATE, DEFAULT, DEFAULT)
+		VALUES(SEQ_BNO.NEXTVAL, #{noticeWriter}, #{noticeTitle}, #{noticeContent},
+		SYSDATE, DEFAULT, DEFAULT, #{originName}, #{changeName})
 	</insert>
 	
 	<update id="deleteNotice" parameterType="_int">
@@ -101,5 +103,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE REF_BNO=#{noticeNo}
 		AND STATUS='Y'
 	</select>
+	
+	<select id="selectSearchList" resultType="Notice" parameterType="map">
+		SELECT *
+		FROM NOTICE
+		WHERE STATUS='Y'
+		AND (
+		NOTICE_TITLE LIKE #{searchKey}
+		or NOTICE_CONTENT LIKE #{searchKey}
+		)
+	</select>
+	
 	
 </mapper>
