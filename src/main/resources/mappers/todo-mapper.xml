@@ -40,4 +40,29 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
   WHERE TODO_NO=#{todoNo}
 
 </update>
+
+<update id="updateDoing" parameterType="_int">
+  UPDATE 
+  TODO SET 
+  STATUS ='N' 
+  WHERE TODO_NO=#{todoNo}
+
+</update>
+
+
+<update id="updateDone" parameterType="_int">
+  UPDATE 
+  TODO SET 
+  STATUS ='D' 
+  WHERE TODO_NO=#{todoNo}
+
+</update>
+
+<update id="updateDelete" parameterType="_int">
+  UPDATE 
+  TODO SET 
+  STATUS ='L' 
+  WHERE TODO_NO=#{todoNo}
+
+</update>
 </mapper>

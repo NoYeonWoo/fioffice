@@ -49,10 +49,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	UPDATE EMPLOYEE
 	SET 
 	PHONE = #{phone},
-	OFFICE_PHONE = #{officePhone},	
-	AGE = #{age},
 	EMAIL = #{email},
 	ADDRESS = #{address},
+	ORIGIN_NAME=#{originName},
+	CHANGE_NAME=#{changeName}
 	WHERE EMP_NO = #{empNo}
 	
 

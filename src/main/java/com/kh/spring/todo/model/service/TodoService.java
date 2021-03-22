@@ -10,8 +10,13 @@ public interface TodoService {
 
 	 ArrayList<Todo> selectTodo();
 
-	void removeTodo(String todoNo);
 
-	void modifyTodo(String todoNo, String status);
+	int updateDoing(int tno);
+
+	int updateDone(int tno);
+
+	int deleteTodo(int tno);
+
+	ArrayList<Todo> selectMainTodo();
 
 }

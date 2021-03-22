@@ -52,6 +52,7 @@
   <!-- [ breadcrumb ] end -->
           <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
          <div class="row">
+         
          <!-- 근태관리 화면시작 -->
             <div class="col-xl-6 col-md-12">
                <div class="card latest-update-card">
@@ -149,90 +150,116 @@
             
             
             
- <!-- [ Todo-list1 ] start -->
-            <div class="col-xl-6">
-                <div class="card">
+ 			<!-- [ Todo-list1 ] start -->
+                   <div class="col-xl-6 col-md-12">
+                <div class="card table-card">
                     <div class="card-header">
-                        <h5>To Do List</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-3">
-                            <input type="text" name="task-insert" class="form-control add_task_todo" placeholder="Create your task list" required="">
-                            <div class="input-group-append">
-                                <button class="btn waves-effect waves-light btn-secondary" id="add-btn">
-                                    <i class="fa fa-plus"></i>
+                        <h5>Projects</h5>
+                        <div class="card-header-right">
+                            <div class="btn-group card-option">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="feather icon-more-horizontal"></i>
                                 </button>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown-item full-card"><a href="#!"><span><i class="feather icon-maximize"></i> maximize</span><span style="display:none"><i class="feather icon-minimize"></i> Restore</span></a></li>
+                                    <li class="dropdown-item minimize-card"><a href="#!"><span><i class="feather icon-minus"></i> collapse</span><span style="display:none"><i class="feather icon-plus"></i> expand</span></a></li>
+                                    <li class="dropdown-item reload-card"><a href="#!"><i class="feather icon-refresh-cw"></i> reload</a></li>
+                                    <li class="dropdown-item close-card"><a href="#!"><i class="feather icon-trash"></i> remove</a></li>
+                                </ul>
                             </div>
                         </div>
-                        <div class="new-task">
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(1);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(2);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                        <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(3);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                        <span class="custom-control-label">Contrary to popular belief</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(4);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                        <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(5);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                        <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(6);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(7);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                                     
+                            <table class="table table-hover mb-0" id="todoMainList">
+                                <thead>
+                                    <tr>
+                                        <th>
+                                          
+                                        
+                                            ${loginUser.empName } 의 toDo+
+                                        </th>
+                                     
+                                        <th>할일</th>
+                                        <th>Due Date</th>
+                                        <th class="text-right">check</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                   
+                                   
+                                                 
+                                    <tr>
+                                        
+                                        <td>
+                                     
+                                            <div class="chk-option">
+                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
+                                                    <input type="checkbox" class="custom-control-input">
+                                                    <span class="custom-control-label"></span>
+                                                </label>
+                                            </div>
+                                            <div class="d-inline-block align-middle">
+                                                <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40 align-top m-r-15">
+                                                <div class="d-inline-block">
+                                                    <h6>John Deo ${item.todoTitle }</h6>
+                                                    <p class="text-muted m-b-0">${item.todoTitle }</p>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>Able Pro</td>
+                                        <td>Jun, 26</td>
+                                        <td class="text-right"><label class="badge badge-light-danger">Low</label>          </td>             
+                     
+                                 
+                                    </tr>
+                      
+                        
+              
+                                </tbody>
+                            </table>
+                                
                         </div>
                     </div>
                 </div>
             </div>
+            <script>
+      function topList(){
+         $.ajax({
+            url : "todoMainListView.do",
+            type : "get",
+            success : function(todolist) {
+               var value="";
+               if(todolist[i].empNo==<%=loginUser.getEmpNo()%> ){
+               for(var i in todolist){
+      
+                  value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
+                  
+                    '<td width="100px" align="left">'+todolist[i].todoTitle+'</td>'+
+                    '<td width="50px" align="right">'+todolist[i].todoContent+'</td>'+
+      
+                    '</tr>';
+               }        
+                  
+               }
+               $("#todoMainList").html(value);
+            },
+            error : function() {
+               console.log("ajax 통신실패");
+            }
+
+         });
+      }
+      $(function(){
+         topList();
+         <%--setInterval(function(){
+            topList();
+         }, 5000);--%>
+      })
+   </script>
             <!-- [ Todo-list1 ] end -->
+            
             
           
             <!-- 공지사항게시판 시작 -->
@@ -283,7 +310,6 @@
                     
                    
         <!-- 캘린더 -->
-       
         <div class="col-lg-8 col-md-12">
             <div class="card table-card">
                     <div class="card-header">
@@ -299,7 +325,7 @@
             </div>
         </div>
    
-    <!-- 캘린더 일정 -->
+    	<!-- 캘린더 일정 -->
                     <div class="card-body text-center">
                         <div class="table-responsive">
                             <table class="table">
@@ -364,14 +390,9 @@
     }); 
     
     </script>
-    <script
-	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js'
-	type="text/javascript"></script>
-	<script
-	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
-	type="text/javascript"></script>
-
-       <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/todo.js"></script>
+    <script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
+	<script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js' type="text/javascript"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/todo.js"></script>
     <jsp:include page="footer.jsp"/>
 </body>
 </html>
