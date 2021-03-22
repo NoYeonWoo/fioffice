@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="approvalMapper">
+	<resultMap type="Approval" id="approvalResultMap">
+
+		<id property="approvalNo" column="APPROVAL_NO" />
+		<result property="approvalTitle" column="APPROVAL_TITLE" />
+		<result property="approvalContent" column="APPROVAL_CONTENT" />
+        <result property="approvalDate" column="APPROVAL_STARTDATE" />
+		<result property="urgent" column="URGENT" />
+		<result property="orginalName" column="ORIGINNAME_APPROVAL" />
+        <result property="changeName" column="CHANGENAME_APPROVAL" />
+        <result property="status" column="APPROVAL_STATUS" />
+		<result property="firstDate" column="APPROVAL_FIRSTDATE" />
+        <result property="doneDate" column="APPROVAL_DONEDATE" />
+		<result property="empNo" column="EMP_NO" />
+		<result property="formNo" column="FORM_NO" />
+		<result property="firstApprEmp" column="FIRST_APPR_EMP" />
+        <result property="lastAppEmp" column="LAST_APPR_EMP" />
+	</resultMap>
+	
+<insert id="insertApproval" parameterType="Approval">
+INSERT INTO APPROVAL
+VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{orginalName},#{changeName},DEFAULT,#{firstDate}
+,#{doneDate},#{empNo},'2',#{firstApprEmp},#{lastAppEmp})
+
+
+
+</insert>
+
+
+</mapper>

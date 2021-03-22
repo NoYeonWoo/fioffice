@@ -156,23 +156,45 @@ p {
                                                         <c:if test="${ fn:length(todolist)>0}">
 								                        <c:forEach items="${todolist}" var="item">
 								                        <c:if test="${item.status eq 'T'}">
-								                        	<form action="updateTodo.do" accept-charset="utf-8" method="post" class="modiform">
+								                        
 								                        	 <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
+														
 															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+															<div align="right"> <a  onclick="postFormSubmit(2);"><i class="fas fa-trash-alt"></i></a></div>
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
 																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
-																    <input type="hidden" value="${item.todoNo }" name="todoNo">
-																	<input type="hidden" value="N" name="status">
-																	<input class="modiB" type="submit" value="→" name=modi>
-																
+														        <div align="right">
+													                <a  onclick="postFormSubmit(1);"><i class="fas fa-arrow-right"></i></a>
+													               
+													            </div>
+													            
+													            <form id="postForm" action="" method="post">
+																	<input type="hidden" name="tno" value="${ item.todoNo }">
+																	</form>
+																<script>
+																	function postFormSubmit(num){
+																		var postForm = $("#postForm");
+																		
+																		if(num == 1){
+																			postForm.attr("action", "doingTodo.do");
+																		}else{
+																			
+																			
+																			postForm.attr("action", "deleteTodo.do");
+																	
+																		}
+																		postForm.submit();
+																		locaction.reload();
+																	}
+																</script>
 
 
 															</div>
 														</li>
 														
-														</form>
+														
 															</c:if>
 															</c:if>	
                                                   </c:forEach>
@@ -198,18 +220,33 @@ p {
 								                        <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+														<div align="right"> <a  onclick="postFormSubmits(2);"><i class="fas fa-trash-alt"></i></a></div>
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
 																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
-															
-																<form action="mod" accept-charset="utf-8" method="get"
-																	class="modiform">
+													<div align="right">
+													                <a  onclick="postFormSubmits(1);"><i class="fas fa-arrow-right"></i></a>
+													               
+													            </div>
+													            
+													            <form id="postForms" action="" method="post">
+																	<input type="hidden" name="tno" value="${ item.todoNo }">
+																	</form>
+																<script>
+																	function postFormSubmits(num){
+																		var postForms = $("#postForms");
+																		
+																		if(num == 1){
+																			postForms.attr("action", "doneTodo.do");
+																		}else{
+																		
+																			postForms.attr("action", "deleteTodo.do");
 																	
- 																	<input type="hidden" value="${item.todoNo }" name="todoNo">
-																	<input type="hidden" value="D" name="status">
-																	<input class="modiB" type="submit" value="→" name=modi>
-																</form>
-
+																		}
+																		postForms.submit();
+																		
+																	}
+																</script>
 
 															</div>
 														</li>
@@ -239,14 +276,22 @@ p {
 																<p class="subd">기한:${item.todoDoneDate} }</p>
 																<p class="subd">내용:${item.todoContent} }</p>
 															
-																<form action="mod" accept-charset="utf-8" method="get"
-																	class="modiform">
-																	<input type="hidden" value="${item.empNo }" name="empNo">
- 																	<input type="hidden" value="${item.todoNo }" name="todoNo">
-																	<input type="hidden" value="del" name="status">
-																	<input class="modiB" type="submit" value="→" name=modi>
-																</form>
-
+																<div align="right"> <a  onclick="deletetodo();"><i class="fas fa-trash-alt"></i></a></div>
+													            
+													            <form id="deletetodo" action="" method="post">
+																	<input type="hidden" name="tno" value="${ item.todoNo }">
+																	</form>
+																	<script>
+																	function deletetodo(){
+																		var deletetodo = $("#deletetodo");
+																		
+																	
+																		deletetodo.attr("action", "deleteTodo.do");
+																	
+																		
+																		deletetodo.submit();
+																	}
+																</script>
 
 															</div>
 														</li>
@@ -307,85 +352,7 @@ p {
    
    
    
-   	   <!-- todo상세보기  모달시작  -->       
-	                       <div id="detailTodo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalPopoversLabel">할일을 추가해주세요</h5>
-										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-									</div>
-									<form id="insertTodo" method="post" action="insertTodo.do">
-									<div class="modal-body">
-										<h5>제목을 입력해 주세요</h5>
-										<input type="text" id="title" class="form-control" name="todoTitle" value="" required>
-										<hr>
-									    <h5>마감날짜</h5>
-									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
-										<hr>
-									
-										<h5>할일내용 </h5>
-										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
-								
-									</div>
-									</form>
-									<div class="modal-footer">
-										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
-										<button type="submit" class="btn  btn-primary" id="reload" >저장</button>
-									</div>
-									
-								</div>
-							</div>
-							
-							</div>
-   <!-- todo 모달끝  -->  
 
-<!-- 
-<script>
-$(function () {
-	selectTodoList();
-  $("#addTodo").click(function(){
-	$.ajax({
-	   url:"insertTodo.do",
-	   type:"post",
-	   data:{todoTitle:${"#todoTitle"}.val(),
-		     todoDoneDate:${"#todoDoneDate"}.val(),
-		     todoContent:${"#todoContent"}.val()},
-	  success:function(result){
-		      $("#todoTitle").val("");
-		      $("#todoDoneDate").val("");
-		      $("#todoContent").val("");
-	  },error:function(){
-		  console.log("댓글작성 실패")
-	  }	     
-		});
-	
-	  
-	  
-	  
-	  
-  });
-  
-    	
-});
-
- -->
-<script type="text/javascript">
-
-	
-$('#reload').click(function(e)){
-
-
-	if(!confirm('정말로 삭제하시겠습니까?')) return; 
-	
-	
-}
-
-
-
-	
-  </script>
-  
   
   </div>
 
