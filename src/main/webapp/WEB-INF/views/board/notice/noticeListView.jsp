@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -201,92 +201,79 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>공지사항</h5>
+               <h5><br>공지사항</h5>
+                <!--글쓰기 버튼  -->
+                <!-- 관리자만 글쓰기 버튼 보임 -->
+				<c:if test="${ loginUser.empName eq admin }">
+                <div class="right">
+                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
+					<span class="icon text-white-50">
+						<i class="fas fa-plus"></i>
+					</span>
+					<span class="text" style="color: white">&nbsp;글쓰기</span>
+				</a>
+				<br>
+				</div>
+				</c:if>
             </div>
             
              
             
+                
     <!-- 리스트 영역 -->
+  
+    <c:forEach items="${list}" var="n">
+     <div class="noticeList">
+     <input type="hidden" value="${n.noticeNo}">
+    <ul class="app-board-template-list">
+        <li>
+            <a class="tw-flex-1">
+	        <div class="tw-flex-1">
+	          	<div class="app-list-title tw-flex-wrap">
+	            	<span class="tw-mr-1">${n.noticeTitle}</span>
+				</div>
+	          
+	          <div class="app-list-meta">
+	             <span>
+	              <div class="app-list-member" style="color: #;">
+	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+	                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
+	              		</div>
+				</div>
+	            </span>        
+				<span>${n.noticeDate}</span>                    
+	                                                                  
+	            <span>
+			               <span class="tw-mr-1">조회</span>
+			               <span>${n.count}</span>
+			            </span>            
+	         </div>
+         
+        	</div> <!--   <div class="tw-flex-1"> -->
+        	<!-- 댓글 count -->
+		    <div class="app-list-comment">11</div>
+        	</a>
+    	</li>
+    </ul>
+    </div>
+    </c:forEach>
     
-  	
-    
-    	
-   
- 	<!-- 테이블 영역 -->
+
 	<div class="card-body">
-	<!-- 서치 버튼 -->
+	    
+		<br><br><div> <!-- 하단 영역 --> 
+ 
+		
+			<!-- 서치 버튼 -->
 				<div class="left">&nbsp;
 					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="noticeList"></label>
 					<a href="nsearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>
-				</div>
-	    <div class="table-responsive">
-	    
-	    
-	    <br>
-	    <table id="noticeList" class="app-board-template-list" style="border-collapse:collapse">
-		<tbody>
-		
-			<c:forEach items="${ list }" var="n">
-			<tr>
-			
-			<td>
-		    <ul class="app-board-template-list">
-		        <li>
-			        <div class="tw-flex-1">
-			          	<div class="app-list-title tw-flex-wrap">
-			            	<span class="tw-mr-1">${n.noticeTitle}</span>
-						</div>
-		     
-			          <div class="app-list-meta">
-			             <span>
-			              <div class="app-list-member" style="color: #;">
-			                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-			                 		<div class="member_4 tw-inline-flex tw-items-center">관리자</div>
-			              		</div>
-						</div>
-			            </span>
-			            <!-- 날짜 -->
-						<span>${n.noticeDate}</span>
-						
-			            <!-- 조회 -->                                                      
-			            <span>
-			               <span class="tw-mr-1">조회</span>
-			               <span>${n.count}</span>
-			            </span>
-
-			         </div>
-			         </li>
-			             </ul>
-		       </td> 
-		      <td class="noticeNo" style="width: 0.1%;">${ n.noticeNo }</td>
-			
-		       	<td style="width: 05%;"> 
-		        <ul class="app-board-template-list">
-		        <li>
-		        	</div> <!--   <div class="tw-flex-1"> -->
-		        	<!-- 댓글 count -->
-		        	<div class="app-list-comment">11</div>
-		        	
-	    		</li>
-	    		</ul>
-	    		</td>
-	    		 </tr>
-	    		</c:forEach>	
-	    		
-	    </tbody>
-	    </table>
-	
-	
-     </div>
-     
-  
-  
-		<br><br><div> <!-- 하단 영역 -->     
+				</div> 
         		
        <!-- 페이징 영역 -->
-       <div class="left">
+       <div class="right">
   		<div id="pagingArea">
   		
                 <ul class="pagination">
@@ -324,18 +311,7 @@
              </div>
 		        
 		
-				<!--글쓰기 버튼  -->
 				
-				
-                <div class="right">
-                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
-					<span class="icon text-white-50">
-						<i class="fas fa-plus"></i>
-					</span>
-					<span class="text" style="color: white">&nbsp;글쓰기</span>
-				</a>
-				<br>
-				</div>
 
 				
         </div> <!-- 하단 영역 -->
@@ -367,11 +343,11 @@
      <script>
     
 
-    $(function(){
-		$("#noticeList tbody tr").click(function(){
-			location.href="ndetail.bo?nno=" + $(this).children().eq(1).text();
-		});
-	});
+     $(function(){
+ 		$(".noticeList").click(function(){
+ 			location.href="ndetail.bo?nno=" + $(this).children().eq(0).val();
+ 		});
+ 	});
     
    
 	</script>

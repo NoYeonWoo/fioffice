@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="communityMapper">
+
+
+	<resultMap id="CommunityResultSet" type="Community">
+		<id property="cboardNo" column="CBOARD_NO"/>
+		<result property="cboardWriter" column="CBOARD_WRITER"/>
+		<result property="cboardTitle" column="CBOARD_TITLE"/>
+		<result property="cboardContent" column="CBOARD_CONTENT"/>
+		<result property="cboardDate" column="CBOARD_DATE"/>
+		<result property="boardViewCount" column="BOARD_VIEWCOUNT"/>
+		<result property="boardLikeCount" column="BOARD_LIKECOUNT"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<resultMap id="replyResultSet" type="Reply">
+		<id property="replyNo" column="REPLY_NO" />
+		<result property="replyWriter" column="REPLY_WRITER"/>
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="refBoardNo" column="REF_BNO" />
+		<result property="replyDate" column="REPLY_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectCListCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM COMMUNITY
+		WHERE STATUS='Y'
+	</select>
+	
+	<select id="selectCList" resultMap="CommunityResultSet">
+		SELECT *
+		FROM COMMUNITY
+		WHERE STATUS='Y'
+		ORDER BY CBOARD_NO DESC
+	</select>
+	
+	<insert id="insertComm" parameterType="Community">
+		INSERT INTO COMMUNITY
+		VALUES(SEQ_BNO.NEXTVAL, #{cboardWriter}, #{cboardTitle}, #{cboardContent},
+		SYSDATE, DEFAULT, DEFAULT, DEFAULT)
+	</insert>
+	
+	<update id="deleteComm" parameterType="_int">
+		UPDATE COMMUNITY
+		SET STATUS='N'
+		WHERE CBOARD_NO=#{cboardNo}
+	</update>
+	
+	<update id="updateComm" parameterType="Community">
+		UPDATE COMMUNITY
+		SET CBOARD_CONTENT=#{cboardContent},
+			CBOARD_TITLE=#{cboardTitle}
+		WHERE CBOARD_NO=#{cboardNo}
+	</update>
+	
+	<update id="updateIncreaseCount" parameterType="_int">
+		UPDATE COMMUNITY
+		SET BOARD_VIEWCOUNT=BOARD_VIEWCOUNT+1
+		WHERE CBOARD_NO=#{cboardNo}
+	</update>
+	
+	<update id = "recommend">
+		UPDATE COMMUNITY
+		SET BOARD_LIKECOUNT=BOARD_LIKECOUNT+1 
+		WHERE CBOARD_NO=#{cboardNo}
+	</update>
+	
+	<select id="selectComm" resultMap="CommunityResultSet">
+		SELECT *
+		FROM COMMUNITY
+		WHERE CBOARD_NO=#{cboardNo}
+		AND STATUS='Y'
+	</select>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{replyWriter}, #{refBoardNo}, #{replyContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="selectReplyList" resultMap="replyResultSet">
+		SELECT REPLY_NO, REPLY_WRITER, REPLY_CONTENT, REPLY_DATE
+		FROM REPLY
+		WHERE REF_BNO=#{cboardNo}
+		AND STATUS='Y'
+		ORDER BY REPLY_NO
+	</select>
+	
+	<select id="commentCount" resultType="_int">
+		SELECT COUNT(*)
+		FROM REPLY
+		WHERE REF_BNO=#{cboardNo}
+		AND STATUS='Y'
+	</select>
+	
+	<select id="selectSearchList" resultType="Community" parameterType="map">
+		SELECT *
+		FROM COMMUNITY
+		WHERE STATUS='Y'
+		AND (
+		CBOARD_TITLE LIKE #{searchKey}
+		or CBOARD_CONTENT LIKE #{searchKey}
+		)
+	</select>
+	
+	
+</mapper>

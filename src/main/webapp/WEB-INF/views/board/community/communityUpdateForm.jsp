@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,37 +69,35 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="cupdate.bo" method="post" autocomplete="off">
+		
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
                		<h5>커뮤니티</h5>
            		</div>
            		
            	<!-- 폼 컨텐츠 영역 -->
+           	<form id="cupdateForm" method="post" action="cupdate.bo" enctype="multipart/form-data">
 				  <div class="card-body">
 					  <div class="form-group">
-
-					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
-					    <input type="hidden" name="bType" value="B">
+					  
+						<input type="hidden" name="cboardNo" value="${ cb.cboardNo }">
+					    <input type="text" class="form-control" id="subject" name="cboardTitle" value="${ cb.cboardTitle }" required>
+						
 					  </div>
 					    <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
+						    <textarea class="form-control" id="summernote" name="cboardContent" maxlength="140" rows="7">${ cb.cboardContent }</textarea>
 						  </div>
 						  
 					  <div class="row">
 						  <div id="buttons">
-							 	<a href="cupdate.bo" class="btn btn-primary btn-icon-split">
-								<span class="icon text-white-50">
-								</span>
-								<span class="text" style="color: white">등록</span>
-								</a>
-							  <button type="button" onclick="javascript:history.back();" class="btn btn-danger">취소</button>
+							  <button type="submit" class="btn btn-primary">수정</button>
+							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>
+					  
 				 </div>
+				 </form>
 				</div>
-
-			</form>
 		</div>
 	
 	</div> <!--지우지 마세요    div class="row"  -->

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,7 +30,7 @@
 
 <body class="">
  
-   <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+   <jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
     
 
@@ -46,11 +47,7 @@
                         <div class="page-header-title">
                             <h5 class="m-b-10"></h5>
                         </div>
-                        <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                         	<li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         	<li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
-                        </ul>
+                        
                     </div>
                 </div>
             </div>
@@ -68,37 +65,42 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="nupdate.bo" method="post" autocomplete="off">
+		
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
                		<h5>공지사항</h5>
            		</div>
            		
            	<!-- 폼 컨텐츠 영역 -->
+           	<form id="updateForm" method="post" action="nupdate.bo" enctype="multipart/form-data">
 				  <div class="card-body">
 					  <div class="form-group">
-
-					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
-					    <input type="hidden" name="bType" value="B">
+					  
+						<input type="hidden" name="noticeNo" value="${ n.noticeNo }">
+					    <input type="text" class="form-control" id="subject" name="noticeTitle" value="${ n.noticeTitle }" required>
+						
 					  </div>
 					    <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
+						    <textarea class="form-control" id="summernote" name="noticeContent" maxlength="140" rows="7">${ n.noticeContent }</textarea>
 						  </div>
 						  
+						   <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
+                            <c:if test="${ !empty n.originName }">
+	                                                               현재 업로드된 파일 : ${ n.originName } <br>
+	                            <input type="hidden" name="changeName" value="${ n.changeName }">
+	                            <input type="hidden" name="originName" value="${ n.originName }">
+                            </c:if>
+                            
 					  <div class="row">
 						  <div id="buttons">
-							  	<a href="nupdate.bo" class="btn btn-primary btn-icon-split">
-								<span class="icon text-white-50">
-								</span>
-								<span class="text" style="color: white">등록</span>
-								</a>
+							  <button type="submit" class="btn btn-primary">수정</button>
 							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>
+					  
 				 </div>
+				 </form>
 				</div>
-
-			</form>
 		</div>
 	
 	</div> <!--지우지 마세요    div class="row"  -->
