@@ -66,54 +66,38 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="ninsert.bo" method="post" autocomplete="off">
+		
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
                		<h5>공지사항</h5>
            		</div>
            		
            	<!-- 폼 컨텐츠 영역 -->
+           	<form id="boardForm" role="form" action="ninsert.bo" method="post" enctype="multipart/form-data">
 				  <div class="card-body">
 					  <div class="form-group">
-						<table>
-						<tbody>
-						<tr>
+						
 					    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력해주세요." required>
-					    </tr>
-					    <tr>
-					    <td>
+					   
+					   
                         <input type="hidden" name="noticeWriter"  id="noticeWriter" value="${loginUser.empName}">
-                        </td>
-                        </div>
-					 	</tr>
-					 	<tr>
+                       </div>
+                       
 					    <div class="form-group">
-						  <td>
 						  <textarea class="form-control" id="summernote" name="noticeContent" maxlength="140" rows="7"></textarea>
-						  </div>
-						  </td>
-						  </tr>
-						  <tr>
-						  <td>
-						  <input type="file" class="form-control" id="originName" name="originName">
-						  </td>
-						  </tr>
-						  </tbody>
-					 	</table>
+
+						 </div>
+						 <input type="file" id="upfile" class="form-control-file border" name="uploadFile">
 					  <div class="row">
 						  <div id="buttons">
-							  	<a href="ninsert.bo" class="btn btn-primary btn-icon-split">
-								<span class="icon text-white-50">
-								</span>
-								<span class="text" style="color: white">등록</span>
-								</a>
+							  <button type="submit" class="btn btn-primary">등록</button>
 							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>
+					  
 				 </div>
+				 </form>
 				</div>
-
-			</form>
 		</div>
 	
 	</div> <!--지우지 마세요    div class="row"  -->

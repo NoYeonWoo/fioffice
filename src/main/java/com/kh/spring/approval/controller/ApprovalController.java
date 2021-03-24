@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,7 @@ import com.kh.spring.approval.model.vo.Approval;
 //import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 
+
 @Controller
 public class ApprovalController {
 	@Autowired
@@ -29,6 +31,25 @@ public class ApprovalController {
 	@RequestMapping("approvalList.do")
 	public String approvalList() {
 		return "approval/approvalListView";
+	}
+	
+	@RequestMapping("approvalInsertForm.do")
+	public String approvalInsertForm(String deptCode, Model model, HttpSession session) {
+	    
+		Employee emp=(Employee) session.getAttribute("loginUser");
+		deptCode=emp.getDeptCode();
+		Employee fApprEmp=approvalService.selectfApprEmp(deptCode);//중간승인자 불러오기
+		Employee lApprEmp=approvalService.selectlApprEmp();// 마지막 승인자 불러오기 
+		
+		
+		System.out.println("deptCode::" +deptCode);
+		System.out.println("첫번째 결재자 나와라::"+fApprEmp);
+		System.out.println("대표님 나와라::"+lApprEmp);
+		
+		model.addAttribute("firstApprEmp",fApprEmp);
+		model.addAttribute("lastAppEmp",lApprEmp);
+		 
+		return "approval/approvalInsertView";
 	}
 	
 	
@@ -82,13 +103,6 @@ public class ApprovalController {
 		return changeName;
 	}
 	
-	@RequestMapping("approvalInsertForm.do")
-	public String approvalInsertForm(String deptCode) {
-		ArrayList<Employee> empList;
-		
-		
-		return "approval/approvalInsertView";
-	}
 	//결재자가 결재 하기 창으로 넘어감 
 	@RequestMapping("approval.do")
 	public String approval() {

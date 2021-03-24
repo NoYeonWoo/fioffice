@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -142,6 +143,19 @@
    		}
    		
    		
+   	tbody tr:hover td {
+    background: #F8F9FA;
+	}
+
+	.cboardNo {
+   	color: #ffffff;
+	}
+	
+	th, td {
+	padding:20px 0px 0px 0px;
+	}
+   		
+   		
 	</style>
 </head>
 
@@ -189,170 +203,122 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>커뮤니티</h5>
-            </div>
-            
-            
-    <!-- 리스트 영역 -->
-    	
-
-    
-	<div class="app-board-section">
-	
-	
-
-
-    <ul class="app-board-template-list">
-        <li>
-            <a class="tw-flex-1" href="cdetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[자체말머리]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">김영찬</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.09</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>10</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	</a>
-    	</li>
-    </ul>
-
-
-
-    <ul class="app-board-template-list">
-                
-        <li>
-            <a class="tw-flex-1" href="cdetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[자체말머리]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">이윤해</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.08</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>80</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	<!-- 댓글 count -->
-        	<div class="app-list-comment">20</div>
-        	</a>
-    	</li>
-    </ul>
-    
-     <ul class="app-board-template-list">
-                
-        <li>
-            <a class="tw-flex-1" href="cdetail.bo">
-            
-	        <div class="tw-flex-1">
-	          	<div class="app-list-title tw-flex-wrap">
-	            	<span>[자체말머리]
-	            	<span class="tw-mr-1">게시글 제목입니다.</span>
-	            	</span>
-				</div>
-	          
-	          <div class="app-list-meta">
-	             <span>
-	              <div class="app-list-member" style="color: #;">
-	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">노연우</div>
-	              		</div>
-				</div>
-	            </span>        
-				<span title="2021-02-04 01:33:27">2021.03.04</span>                                    
-	                                                                  
-	            <span>
-	               <span class="tw-mr-1">조회</span>
-	               <span>15</span>
-	            </span>              
-	         </div>
-         
-        	</div> <!--   <div class="tw-flex-1"> -->
-        	<!-- 댓글 count -->
-        	<div class="app-list-comment">11</div>
-        	</a>
-    	</li>
-    </ul>
-
-                
-       <br><div> <!-- 하단 영역 -->     
-        
-		        <!-- 서치 버튼 -->
-				<div class="left">
-				<br>&nbsp;&nbsp;&nbsp;&nbsp;
-					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
-					<a href="dsearch.bo" class="app-button app-button-rounded app-button-xs primary">
-						<span class="text" style="color: white">검색</span>
-					</a>
-				</div>
-		
-				<!--글쓰기 버튼  -->
-				
-                <div class="right">
-                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
+               <h5><br>커뮤니티</h5>
+               <div class="right">
+                <a href="cinsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 					</span>
 					<span class="text" style="color: white">&nbsp;글쓰기</span>
-				</a>&nbsp;&nbsp;&nbsp;&nbsp;
+				</a>
 				<br>
 				</div>
+            </div>
+
+    <!-- 리스트 영역 -->
+  
+    <c:forEach items="${list}" var="cb">
+     <div class="cboardList">
+     <input type="hidden" value="${cb.cboardNo}">
+    <ul class="app-board-template-list">
+        <li>
+            <a class="tw-flex-1">
+	        <div class="tw-flex-1">
+	          	<div class="app-list-title tw-flex-wrap">
+	            	<span class="tw-mr-1">${cb.cboardTitle}</span>
+				</div>
+	          
+	          <div class="app-list-meta">
+	             <span>
+	              <div class="app-list-member" style="color: #;">
+	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
+	                 		<div class="member_4 tw-inline-flex tw-items-center">${cb.cboardWriter}</div>
+	              		</div>
+				</div>
+	            </span>        
+				<span>${cb.cboardDate}</span>                    
+	                                                                  
+	            <span>
+			               <span class="tw-mr-1">조회</span>
+			               <span>${cb.boardViewCount}</span>
+			            </span>            
+	         </div>
+         
+        	</div> <!--   <div class="tw-flex-1"> -->
+        	<!-- 댓글 count -->
+		    <div class="app-list-comment">11</div>
+        	</a>
+    	</li>
+    </ul>
+    </div>
+    </c:forEach>
+    
+    	
+   
+ 	
+	<div class="card-body">
+	    
+		<br><br><div> <!-- 하단 영역 --> 
+		
+		<!-- 서치 버튼 -->
+				<div class="left">&nbsp;
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
+					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
+						<span class="text" style="color: white">검색</span>
+					</a>
+				</div>
+        		
+       <!-- 페이징 영역 -->
+       <div class="right">
+  		<div id="pagingArea">
+  		
+                <ul class="pagination">
+                	<c:choose>
+                		<c:when test="${ pi.currentPage ne 1 }">
+                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                	
+                    <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+                    	<c:choose>
+	                		<c:when test="${ pi.currentPage ne p }">
+                    			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ p }">${ p }</a></li>
+	                		</c:when>
+	                		<c:otherwise>
+	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
+	                		</c:otherwise>
+	                	</c:choose>
+                    </c:forEach>
+                    
+                    
+                    <c:choose>
+                		<c:when test="${ pi.currentPage ne pi.maxPage }">
+                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:when>
+                		<c:otherwise>
+                			<li class="page-item disabled"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                		</c:otherwise>
+                	</c:choose>
+                </ul>
+            </div>
+             </div>
+		        
+		
+				<!--글쓰기 버튼  -->
 				
+			
 				
         </div> <!-- 하단 영역 -->
-				
-				
-              
-              <!-- 페이지 영역  -->
-               	<div class="row" style="width: 90%; margin-left: 5%;">
-               		<div class="pagination">
-
-							<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#!">Previous</a></li>
-								<li class="page-item"><a class="page-link" href="#!">1</a></li>
-								<li class="page-item"><a class="page-link" href="#!">2</a></li>
-								<li class="page-item"><a class="page-link" href="#!">3</a></li>
-								<li class="page-item"><a class="page-link" href="#!">Next</a></li>
-							</ul>
-						</nav>
-						
-					
-					</div>
-               </div>
-				
+			
+			<br><br>	
+        
+  	
+          </div>
+  
+  
             </div>
           </div>			
 				
@@ -370,6 +336,20 @@
 
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+    
+    <script>
+
+    $(function(){
+		$(".cboardList").click(function(){
+			location.href="cdetail.bo?cno=" + $(this).children().eq(0).val();
+		});
+	});
+    
+	</script>
+    
+<!-- JS -->
+	<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
+ 	
     
 </body>
 </html>

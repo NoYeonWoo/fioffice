@@ -46,7 +46,7 @@ public class WorkController {
 			int listCount = workService.selectListCount();
 			System.out.println(listCount);
 			
-			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);
+			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 			
 			ArrayList<Work> list = workService.selectListCount(pi);
 			
@@ -71,6 +71,26 @@ public class WorkController {
 	public String viewWorkMain2() {
 		
 		return "work/workMain2";
+	}
+	
+	
+	
+	
+	
+	
+	
+	@RequestMapping("start.work")
+	public String workStart(int eno, HttpServletRequest request) {
+		
+		
+		return null;
+		
+	}
+	
+	@RequestMapping("start.end")
+	public String workEnd(int eno, HttpServletRequest request) {
+		return null;
+		
 	}
 	
 	

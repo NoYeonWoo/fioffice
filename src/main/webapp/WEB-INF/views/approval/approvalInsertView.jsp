@@ -11,6 +11,10 @@
   <!-- include summernote css/js-->
 <link href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.css" rel="stylesheet">
 
+<!--자동완성  -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
+
 </head>
 
 <body class="">
@@ -43,21 +47,25 @@
 <div class="row">
  
 
-			<div class="col-sm-10">
+			<div class="col-md-12">
 			<div class="card">
 			<div class="card-header"><h3 >결재 서류</h3> </div>
 				  <div class="card-body">
 				  	<form action="insertApproval.do" method="post" enctype="Multipart/form-data" id="form">
 					  
 					   <div class="form-group">
-						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empName} (${loginUser.deptName})" name="empNo" readonly style="">
+						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empName}(${loginUser.empPosition} )"  readonly style="">
+						   <input type="hidden" class="form-control" value="${loginUser.empNo}"  name="empNo"  id="empNo" >
 					   </div>
 					   <div class="row">
 						   <div class="form-group col-lg-6">
-						    	<strong>결재자 : </strong><input type="text" class="form-control" value="차장님" name="firstApprEmp" readonly>
+						    	<strong>결재자 : </strong><input type="text" class="form-control"  value="${firstApprEmp.empName}(${firstApprEmp.empPosition})"  readonly>
+						        	   <input type="hidden" class="form-control" value="${firstApprEmp.empNo}"  name="firstApprEmp" id="firstApprEmp" >
 						   </div>
 						   <div class="form-group col-lg-6">
-						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="대표이사님" name="lastAppEmp" readonly>
+						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="${lastAppEmp.empName} 대표이사 " readonly>
+						    	    <input type="hidden" class="form-control" value="${lastAppEmp.empNo}"  name="lastAppEmp" id="lastAppEmp" >
+						    
 						   </div>
 					
 					    </div>
@@ -121,6 +129,10 @@
     });
     
     </script>
+    
+    
+    
+
     
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>

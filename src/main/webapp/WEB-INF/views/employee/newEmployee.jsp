@@ -46,7 +46,7 @@
   <!-- [ breadcrumb ] end -->
   
 
-			<div class="col-lg-10">
+			<div class="col-md-12">
 				<div class="card mb-4">
 					<div class="card-header">
 						<h3>신규 사원 등록</h3>
@@ -113,7 +113,7 @@
                                  <td style="width:10%">개인번호</td>
                                  <td style="width:25%">
 										
-											<input type="text" id="phone1" name="phone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
+											<input type="text" id="phone" name="phone" class="form-control form-control-user" placeholder="(-)포함 입력해주세요" style="width: 50%;"></td>
 										
                                 </tr>
                                 
@@ -142,15 +142,15 @@
                                  <td colspan="3">       
 				             		<div class="form-inline"><!-- 인라인 폼은 가로로 배열된 형태로 폼태그에 form-inling 클래스를 사용합니다.  -->
 									<label> &nbsp; 우편번호 :  </label>
-									<input type="text"  name="post" class="form-control mr-2 postcodify_postcode5" value="${ post }" style="width:25%">
+									<input type="text"  name="post"  id ="post" class="form-control mr-2 postcodify_postcode5" value="${ post }" style="width:25%">
 									<button type="button" class="btn btn-primary" id="postcodify_search_button">검색</button>
 									
 									<br><br><br>
 									<label> &nbsp; 도로명주소 : </label>
-									<input type="text" name="address1" class="form-control postcodify_address" value="${ address1 }" style="width:35%">
+									<input type="text" name="address1" id="address1"class="form-control postcodify_address" value="${ address1 }" style="width:35%">
 								    </div><br>
 								    <label> &nbsp;상세주소 : </label>
-									<input type="text" name="address2" class="form-control postcodify_extra_info" value="${ address2 }" style="width:35%">
+									<input type="text" name="address2" id="address2" class="form-control postcodify_extra_info" value="${ address2 }" style="width:35%">
 				                	</td>
                                 
                                 </tr>
@@ -176,7 +176,7 @@
 						</span> <span class="text">등록하기</span>
 						</a>
 
-						<script type="text/javascript">
+						<script >
 						$("#deptMain").change(function() {
 							$("#deptSub").children().remove();
 							$("#deptSub").append('<option value="">하위부서선택</option>');
@@ -190,7 +190,9 @@
                      						if(subDept==$("#deptMain option:selected").val()){
                      							$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
                      						}
+
                      						</c:when>
+
     			                    		<c:when test="${ fn:length(d.deptCode) == 5 }">
     			                    			if(${fn:substring(d.deptCode,0,3)}==$("#deptMain option:selected").val()){
     			                    				$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
@@ -198,28 +200,43 @@
     		                    			</c:when>
     			                    	</c:choose>
     		                    	</c:forEach>
-					   		}
-						});
+
+    					   		}
+    						});
 							function confirm() {
 								var empName = $("#empName").val();
-								var dept = $("#dept").val();
-								var position = $("#position").val();
+								var resNo = $("#resNo").val();
+								var resNo1 = $("#resNo1").val();
+								var resNo2 = $("#resNo2").val();
+								var deptMain = $("#deptMain").val();							
+								var jobCode = $("#jobCode").val();
 								var joinDate = $("#joinDate").val();
 								var phone = $("#phone").val();
-								var officePhone = $("#officePhone").val();
+								var officePhone = $("#officePhone").val();						
+
 								var email1 = $("#email1").val();
 								var email2 = $("#email2").val();
-								var postcode = $("#postcode").val();
-								if (name == "") {
+								var post = $("#post").val();
+								var address1 = $("#address1").val();
+								var address2 = $("#address2").val();
+								
+								if (empName == "") {
 									alert("이름이 입력되지 않았습니다!");
 									$("$input").focus();
 									return;
 								}
-								if (dept == "") {
+								if (resNo1 == "") {
+									alert("주민번호를 입력해주세요!");
+									$("#resNo1").focus();
+									$("#resNo1").val("");
+									$("#resNo2").val("");
+									return;
+								}
+								if (deptMain == "") {
 									alert("부서코드는 비어있을 수 없습니다!");
 									return;
 								}
-								if (position == "") {
+								if (jobCode == "") {
 									alert("직급은 비어있을 수 없습니다!");
 									return;
 								}
@@ -227,31 +244,19 @@
 									alert("입사일은 비어있을수 없습니다!");
 									return;
 								}
-								if (phone1 == "" || phone2 == ""
-										|| phone3 == "") {
+								if (phone == "" ) {
 									alert("개인번호를 확인해주세요!");
-									$("#phone1").focus();
-									$("#phone1").val("");
-									$("#phone2").val("");
-									$("#phone3").val("");
+									$("#phone").focus();
+									$("#phone").val("");
+							
 									return;
 								}
-								if (phone1 == "" || phone2 == ""
-										|| phone3 == "") {
-									alert("개인번호를 확인해주세요!");
-									$("#phone1").focus();
-									$("#phone1").val("");
-									$("#phone2").val("");
-									$("#phone3").val("");
-									return;
-								}
-								if (empphone1 == "" || empphone2 == ""
-										|| empphone3 == "") {
+						
+								if (officePhone == "" ) {
 									alert("내선번호를 확인해주세요!");
-									$("#empphone1").focus();
-									$("#empphone1").val("");
-									$("#empphone2").val("");
-									$("#empphone3").val("");
+									$("#officePhone").focus();
+									$("#officePhone").val("");
+								
 									return;
 								}
 								if (email1 == "" || email2 == "") {
@@ -261,8 +266,10 @@
 									$("#email2").val("");
 									return;
 								}
-								if (postcode == "") {
+								if (post == "") {
 									alert("우편번호를 입력해주세요!");
+									$("#post").focus();
+									$("#post").val("");
 									return;
 								}
 

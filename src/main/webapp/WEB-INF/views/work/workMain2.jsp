@@ -31,6 +31,8 @@
          <div class="loader-fill">dfdfdf</div>
       </div>
    </div> -->
+   
+   
 
 
 	<!-- [ Pre-loader ] End -->
@@ -92,7 +94,12 @@
 									</div>
 
 									<!-- 시간자리 -->
-
+									
+									<div class="col">
+										
+										<h6>시간</h6>
+										
+									</div>
 
 									<!-- 시간자리 -->
 
@@ -106,7 +113,7 @@
 									</div>
 									<div class="col">
 										
-										<h6></h6>
+										<h6>시간</h6>
 										
 									</div>
 								</div>
@@ -119,7 +126,7 @@
 									</div>
 									<div class="col">
 										
-										<h6>+ 1652 Followers</h6>
+										<h6>시간</h6>
 										
 									</div>
 								</div>
@@ -137,10 +144,16 @@
 
 									<div class="card-body">
 										<button type="button" class="btn  btn-primary bg-twitter btn-lg">출근하기</button>
-										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" class="btn  btn-secondary btn-lg">퇴근하기</button>
+										
 									</div>
-
+									<form action="start.work" method="post" id="goForm">
+    									<input type="hidden" name="eno" value="${loginUser.empNo}">
+    								</form>
+					    			<form action="end.work" method="post" id="deleteAdd">
+    									<input type="hidden" name="eno" value="${loginUser.empNo}">
+    								</form>
 								</div>
 							</div>
 

@@ -21,6 +21,7 @@
 
 <body class="">
 
+
    <jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"></jsp:include>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
    <!--메인 화면 전체시작 -->

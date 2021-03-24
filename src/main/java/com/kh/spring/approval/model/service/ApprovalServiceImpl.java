@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.approval.model.dao.ApprovalDao;
 import com.kh.spring.approval.model.vo.Approval;
+import com.kh.spring.employee.model.vo.Employee;
 
 @Service("approvalService")
 public class ApprovalServiceImpl implements ApprovalService {
@@ -21,6 +22,20 @@ public class ApprovalServiceImpl implements ApprovalService {
 	public int insertApproval(Approval ap) {
 		// TODO Auto-generated method stub
 		return approvalDao.insertApproval(sqlSession,ap);
+	}
+
+
+	@Override
+	public Employee selectfApprEmp(String deptCode) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectfApprEmp(sqlSession,deptCode);
+	}
+
+
+	@Override
+	public Employee selectlApprEmp() {
+		// TODO Auto-generated method stub
+		return approvalDao.selectlApprEmp(sqlSession);
 	}
 
 }

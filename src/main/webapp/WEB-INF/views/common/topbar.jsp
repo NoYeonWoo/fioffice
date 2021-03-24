@@ -52,8 +52,8 @@
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
 									<div class="pro-head">
 									<c:if test="${ !empty sessionScope.loginUser }">
-										<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" class="img-radius" alt="User-Profile-Image">
-										<span>${loginUser.empName}님</span>
+										<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" class="img-radius" alt="User-Profile-Image">
+										<span>${sessionScope.loginUser.empName}님</span>
 										<a href="logout.me" class="dud-logout" title="Logout">
 										<i class="feather icon-log-out"></i>
 										</a>

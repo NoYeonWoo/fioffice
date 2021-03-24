@@ -35,9 +35,17 @@ public class NoticeDao {
 	public int insertNotice(SqlSessionTemplate sqlSession, Notice n) {
 		return sqlSession.insert("noticeMapper.insertNotice", n);
 	}
+	
+	public int deleteNotice(SqlSessionTemplate sqlSession, int nno) {
+		return sqlSession.update("noticeMapper.deleteNotice", nno);
+	}
+
+	public int updateNotice(SqlSessionTemplate sqlSession, Notice n) {
+		return sqlSession.update("noticeMapper.updateNotice", n);
+	}
 
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.selectOne("noticeMapper.selectNotice", r);
+		return sqlSession.selectOne("noticeMapper.insertReply", r);
 	}
 
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int nno) {

@@ -88,7 +88,7 @@
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
                         	<button type="button" class="btn  btn-primary">휴가계</button>
-                        	<a href="view.workMain"><button type="button" class="btn  btn-primary">임시 메인</button></a>
+                        	<a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인</button></a>
                         	
                         </div>
                         </span>
@@ -131,65 +131,16 @@
             <!-- [ stiped-table ] end -->
 
 
-			<div id="pagingArea">
-					<ul class="pagination">
-						<c:choose>
-							<c:when test="${ pi.currentPage ne 1 }">
-								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
-							</c:when>
-							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
-							</c:otherwise>
-						</c:choose>
-
-						<!-- ㅇㅁㄴㅇㅁ노암닝ㅁ너ㅣㅏ어ㅣㅁ넝ㅁ너ㅏ암너         이제 번호 클릭이동 -->
-						
-						<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
-							<c:choose>
-								<c:when test="${ pi.currentPage ne p }">
-									<li class="page-item"><a class="page-link"
-										href="view.add?currentPage=${ p }">${ p }</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="page-item disabled"><a class="page-link"
-										href="">${ p }</a></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
-
-
-						<c:choose>
-							<c:when test="${ pi.currentPage ne pi.maxPage }">
-								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
-							</c:otherwise>
-						</c:choose>
-					</ul>
-				</div>
-
-				<br clear="both">
-				<br> <br>
-				<br>
-			</div>
-			<br>
-			<br>
-		</div>
-
-
+		
 	<div id="pagingArea">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="view.work?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
+									href="view.work?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li><!--이전페이지 -->
 							</c:when>
 							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+								<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -212,11 +163,11 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
-									href="view.work?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.work?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"
-									href="view.work?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.work?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

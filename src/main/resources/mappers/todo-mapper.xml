@@ -21,9 +21,11 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
 
 <select id="selectTodo" parameterType="string" resultMap="todoResultMap">	
  SELECT *
- FROM TODO 
- 
- 
+ FROM TODO
+ <if test="value !=null">
+ WHERE EMP_NO='${value}'
+ AND STAUTS !='L'
+ </if>
 </select>	
 
 <update id="deleteTodo" parameterType="Todo">
