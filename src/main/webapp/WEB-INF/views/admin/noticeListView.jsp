@@ -12,22 +12,11 @@
 <!-- CSS -->
 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
-<!-- JS -->
+<!-- CSS -->
 <script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
 
 	<style>
 	
-	div.left {
-	 
-        float: left;
-        box-sizing: border-box;
-    	}
-    
-    	div.right {
-
-        float: right;
-        box-sizing: border-box;
-   		}
 	
 	:root {
 		--aside-width: 17.625rem;
@@ -42,7 +31,7 @@
 	  display: inline-block;
 	  margin-left: auto;
 	  margin-right: auto;
-	  padding: 10px 0px 0px 0px;
+	  padding: 20px 0px 0px 0px;
 	}
 	
 	.pagination a {
@@ -138,13 +127,40 @@
 	.app-board-category .app-category-child>ul>li.app-ative>a{font-weight:600}
 	
 	.app-board-category>li:hover>.app-category-child{display:block}
+	
+	div.left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        
+    	}
+    
+    	div.right {
+        
+        float: right;
+        box-sizing: border-box;
+        
+   		}
+   	
+   	tbody tr:hover td {
+    background: #F8F9FA;
+	}
 
+	.noticeNo {
+   	color: #ffffff;
+	}
+	
+	th, td {
+	padding:20px 0px 0px 0px;
+	}
+	
+   	
 	</style>
 </head>
 
 <body>
   
-   <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+   <jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
   
    
@@ -162,9 +178,8 @@
                             <h5 class="m-b-10"></h5>
                         </div>
                         <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                          <li class="breadcrumb-item"><a href="clist.bo">커뮤니티</a></li>
-                         <li class="breadcrumb-item"><a href="dlist.bo">부서 게시판</a></li>
+                          <li class="breadcrumb-item"><a href="index.jsp">
+                          <i class="feather icon-home"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -186,11 +201,11 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5><br>${loginUser.deptName} 게시판</h5>
+               <h5><br>공지사항</h5>
                
                <!--글쓰기 버튼  -->
                 <div class="right">
-                <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
+                <a href="ninsertForm.bo" class="btn btn-primary btn-icon-split">
 					<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 					</span>
@@ -198,65 +213,37 @@
 				</a>
 				<br>
 				</div>
+               
             </div>
             
+             
             
-    <!-- 리스트 영역 -->
-    	
-
-
-	<div class="app-board-section">
-	
-	
-	<!-- 카테고리 영역 -->
-		<div class="card-body">
-		<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
-			<li class="nav-item">
-				<a class="nav-link active text-uppercase" id="all-tab" data-toggle="tab" href="" role="tab" aria-controls="all" aria-selected="true">전체</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-uppercase" id="notice-tab" data-toggle="tab" href="" role="tab" aria-controls="notice" aria-selected="false">공지</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-uppercase" id="alarm-tab" data-toggle="tab" href="" role="tab" aria-controls="alarm" aria-selected="false">알림</a>
-			</li>
-			<li class="nav-item">
-				<a class="nav-link text-uppercase" id="star-tab" data-toggle="tab" href="" role="tab" aria-controls="star" aria-selected="false">긴급</a>
-			</li>
-		</ul>
-		</div>
-
-
-    <!-- 리스트 영역 -->
-  	<!-- 로그인한 유저와 부서 코드가 같은 리스트만 출력되도록 -->
- 
-    <c:forEach items="${list}" var="db">
-     <div class="dboardList">
-     <input type="hidden" value="${db.dboardNo}">
-     <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
+       <!-- 리스트 영역 -->
+  
+    <c:forEach items="${list}" var="n">
+     <div class="noticeList">
+     <input type="hidden" value="${n.noticeNo}">
     <ul class="app-board-template-list">
         <li>
             <a class="tw-flex-1">
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	          		<span> [${db.dboardCategory}]
-	            	<span class="tw-mr-1">${db.dboardTitle}</span>
-	            	</span>
+	            	<span class="tw-mr-1">${n.noticeTitle}</span>
 				</div>
 	          
 	          <div class="app-list-meta">
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">${db.dboardWriter}</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">${n.noticeWriter}</div>
 	              		</div>
 				</div>
 	            </span>        
-				<span>${db.dboardDate}</span>                    
+				<span>${n.noticeDate}</span>                    
 	                                                                  
 	            <span>
 			               <span class="tw-mr-1">조회</span>
-			               <span>${db.count}</span>
+			               <span>${n.count}</span>
 			            </span>            
 	         </div>
          
@@ -268,22 +255,19 @@
     </ul>
     </div>
     </c:forEach>
-    	
-   
- 	
+    
+
 	<div class="card-body">
 	    
 		<br><br><div> <!-- 하단 영역 --> 
 		
-		<!-- 서치 버튼 -->
+			<!-- 서치 버튼 -->
 				<div class="left">&nbsp;
-					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
-					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="noticeList"></label>
+					<a href="nsearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>
-				</div>
-
-		  
+				</div>   
         		
        <!-- 페이징 영역 -->
        <div class="right">
@@ -325,7 +309,6 @@
 		        
 		
 				
-
 				
         </div> <!-- 하단 영역 -->
 			
@@ -353,12 +336,12 @@
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
-    <script>
+     <script>
     
 
     $(function(){
-		$(".dboardList").click(function(){
-			location.href="ddetail.bo?dno=" + $(this).children().eq(0).val();
+		$(".noticeList").click(function(){
+			location.href="ndetail.ad?nno=" + $(this).children().eq(0).val();
 		});
 	});
     
@@ -368,6 +351,5 @@
 <!-- JS -->
 	<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
  	
-    
 </body>
 </html>

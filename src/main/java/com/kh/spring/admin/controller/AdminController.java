@@ -35,8 +35,6 @@ public class AdminController {
 	@Autowired
 	private EmployeeService employeeService;
 	
-  @Autowired
-	private NoticeService noticeService;
 
   //권한관리창
 	@RequestMapping("authority.ad")
@@ -128,10 +126,6 @@ public class AdminController {
 		return "admin/deptAdminView";
 	}
 	
-	@RequestMapping("notice.ad")
-	public String noticeView() {
-		return "admin/noticeAdminView";
-	}
 	
 	@RequestMapping("address.ad")
 	public String addressView() {

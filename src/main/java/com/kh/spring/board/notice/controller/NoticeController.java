@@ -46,6 +46,37 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeService;
 	
+	@RequestMapping("notice.ad")
+	public String adminNoticeView(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
+		
+		int listCount = noticeService.selectLictCount();
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+		
+		ArrayList<Notice> list = noticeService.selectList(pi);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pi", pi);
+		
+		return "admin/noticeListView";
+		  
+	}
+	
+	@RequestMapping("ndetail.ad")
+	public ModelAndView adminNoticeSelect(int nno, ModelAndView mv) {
+		int result = noticeService.updateIncreaseCount(nno);
+		
+		if(result > 0) {
+			Notice n = noticeService.selectBoard(nno);
+			
+			mv.addObject("n", n).setViewName("admin/noticeDetailView");
+		}else {
+			
+		}
+		
+		return mv;
+	}
+	
 	@RequestMapping("nlist.bo")
 	public String selectNlist(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
 		
@@ -83,9 +114,9 @@ public class NoticeController {
 		
 		if(changeName != null) {
 		
-		//파일이 저장된 경우
-		n.setOriginName(file.getOriginalFilename());
-		n.setChangeName(changeName);
+			//파일이 저장된 경우
+			n.setOriginName(file.getOriginalFilename());
+			n.setChangeName(changeName);
 		}
 		
 		}
@@ -93,7 +124,7 @@ public class NoticeController {
 		int result = noticeService.insertNotice(n);
 		
 		if(result > 0) {
-		return "redirect:list.bo";
+		return "redirect:notice.ad";
 		}else {
 		throw new CommException("게시물 작성에 실패하였습니다.");
 		}
@@ -133,7 +164,7 @@ public class NoticeController {
 	public String savePhoto(MultipartFile file, HttpServletRequest request) {
 		
 		String root = request.getSession().getServletContext().getRealPath("resources");
-		String savePath = root + "\\upload_files";
+		String savePath = root + "/upload_files/";
 			File folder = new File(savePath);
 		if (!folder.exists()) {
 			folder.mkdirs();
@@ -153,12 +184,7 @@ public class NoticeController {
 	}
 	
 	
-	@RequestMapping("nupdateForm.bo")
-	public String noticeUpdateForm() {
-		
-		return "board/notice/noticeUpdateForm";
-		  
-	}
+	
 	
 	@RequestMapping("ndetail.bo")
 	public ModelAndView selectNotice(int nno, ModelAndView mv) {
@@ -175,6 +201,92 @@ public class NoticeController {
 		return mv;
 	}
 	
+	@RequestMapping("ndelete.bo")
+	public String deleteBoard(int nno, String fileName, HttpServletRequest request, Model model) {
+		
+		int result = noticeService.deleteNotice(nno);
+		System.out.println("넘어옴" + nno);
+		
+		if(result > 0) {
+			if(fileName.equals("")) {
+				deleteFile(fileName, request);
+			}
+			return "redirect:notice.ad";
+		}else {
+			throw new CommException("게시물 삭제에 실패하였습니다.");
+		}
+		
+	}
+	
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources + "/upload_files/";
+		
+		File deleteFile = new File(savePath + fileName);
+		deleteFile.delete();
+		
+		
+	}
+	
+	@RequestMapping("nupdateForm.bo")
+	public ModelAndView updateForm(ModelAndView mv, int nno) {
+		
+		mv.addObject("n", noticeService.selectBoard(nno)).
+		setViewName("board/notice/noticeUpdateForm");
+		
+		return mv;
+		
+	}
+	
+	@RequestMapping("nupdate.bo")
+	public ModelAndView updateBoard(Notice n, ModelAndView mv, HttpServletRequest request,
+									@RequestParam(value="reUploadFile", required=false) MultipartFile file) {
+		
+		// null이 아닌 경우!
+		if(!file.getOriginalFilename().equals("")) { // 새로 넘어온 파일이 있는 경우 
+			
+			if(n.getChangeName() != null) { // 새로 넘어온 파일이 있는데 기존 파일도 있는 경우 -> 업로드 되어 있는 기존 파일 삭제
+				deleteFile(n.getChangeName(), request);
+			}
+			
+			String changeName = saveFile(file, request); // 새로 넘어온 파일을 서버에 업로드 하는 과정
+			
+			n.setOriginName(file.getOriginalFilename());
+			n.setChangeName(changeName);
+			
+			/*
+		       * 1. 기존의 첨부파일 X, 새로 첨부된 파일 X    
+		       *      --> originName : null, changeName : null
+		       * 
+		       * 2. 기존의 첨부파일 X, 새로 첨부된 파일 O      
+		       *      --> 서버에 업로드 후 
+		       *      --> originName : 새로첨부된파일원본명, changeName : 새로첨부된파일수정명
+		       * 
+		       * 3. 기존의 첨부파일 O, 새로 첨부된 파일 X      
+		       *      --> originName : 기존첨부파일원본명, changeName : 기존첨부파일수정명
+		       * 
+		       * 4. 기존의 첨부파일 O, 새로 첨부된 파일 O  
+		       *      --> 서버에 업로드 후   
+		       *      --> originName : 새로첨부된파일원본명, changeName : 새로첨부된파일수정명
+		     */
+			
+		}
+		
+		int result = noticeService.updateNotice(n);
+		
+		System.out.print(result);
+		
+		if(result > 0) {
+			mv.addObject("nno", n.getNoticeNo())
+			.setViewName("redirect:ndetail.ad");
+		}else {
+			throw new CommException("게시물 수정에 실패하였습니다.");
+		}
+		
+		return mv;
+		
+	}
 
 	
 	@ResponseBody
@@ -192,7 +304,7 @@ public class NoticeController {
 		
 		ArrayList <Reply> list = noticeService.selectReplyList(nno);
 		
-		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(list);
+		return new GsonBuilder().setDateFormat("yy년 MM월 dd일 HH:mm").create().toJson(list);
 		
 	}
 		

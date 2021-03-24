@@ -149,7 +149,7 @@
 						
 						 <!-- 일정 등록 -->
 						 
-						<a href="" class="btn  btn-primary btn-lg">
+						<a href="" class="btn  btn-primary btn-lg"  data-toggle="modal" data-target="#addCalendar">
 						<span class="icon text-white-50">
 						<i class="fas fa-plus"></i>
 						</span>
@@ -207,17 +207,25 @@
 	             <div class="modal-body">
 					<form name="insertCalendar" action="cinsert.co" method="post" autocomplete="off">
 					<label for="calDate" class="mr-sm-2">날짜 선택</label>
-						<input type="date" id="calStart" name="calStart" class="form-control form-control-user">
-						<input type="date" id="calEnd" name="calEnd" class="form-control form-control-user">
-						<br><br>
+					
+					<div><div class="left">
+						<input type="date" id="calSdate" name="calSdate" class="form-control form-control-user" style="width:100%;" >
+						<input type="date" id="calEdate" name="calEdate" class="form-control form-control-user" style="width:100%;" >
+
+					</div>
+					<div class="right">
+						<input type="time" id="calSTime" name="calSTime" class="form-control form-control-user" style="width:40%;" >
+						<input type="time" id="calETime" name="calETime" class="form-control form-control-user" style="width:40%;" >
+					</div></div>
+					<br><br><br><br><br>
 						<label for="calTitle" class="mr-sm-2">일정</label>
 	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle"> <br>
 	                    <label for="calContent" class="mr-sm-2">일정 코멘트</label>
 	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
-						<br>
 						<div class="modal-footer">
-							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소하기</button>
-	                    	<button type="submit" class="btn btn-primary">등록하기</button>
+						<br><br><br>
+							<button type="submit" class="btn btn-primary">등록</button>
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	                	</div>
 					</form>	
 				</div>

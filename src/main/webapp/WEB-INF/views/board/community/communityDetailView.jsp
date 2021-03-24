@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,6 +40,13 @@
         box-sizing: border-box;
         
    		}
+   		
+   		thead {
+   		
+   			background-color:#ffffff;
+   		
+   		}
+   		
 
 
 	</style>
@@ -96,25 +104,22 @@
 	
 	<div class="app-board-article-head">
 	<div class="app-board-container">
-	<!-- <img src="" alt=""> -->
-	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">커뮤니티 디테일뷰 테스트</h1>
+
+	<h1 class="tw-font-bold tw-text-3xl md:tw-text-xl">${ cb.cboardTitle }</h1>
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
 	<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
-	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">오수현</a>
+	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ cb.cboardWriter }</a>
 	<div class="app-article-meta">
-	<el-tooltip content="2021-02-04 01:33:27">
-	<div class="app-article-meta-item">2021.03.14</div>
-	</el-tooltip>
+	<div class="app-article-meta-item">${ cb.cboardDate }</div>
+	
 	<div class="app-article-meta-divider"> ・ </div>
-	<div class="app-article-meta-item">조회 수 1</div>
+	<div class="app-article-meta-item">조회 수 ${ cb.boardViewCount }</div>
 	<div class="app-article-meta-divider"> ・ </div>
-	<div class="app-article-meta-item">추천 수 0</div>
-	<div class="app-article-meta-divider app-pc-only"> ・ </div>
-	<a href="#comment" class="app-pc-only app-article-meta-item">댓글 4</a>
+	<a href="#reply" class="app-pc-only app-article-meta-item">댓글 </a>
 	</div>
 	</div>
 	</div> <div class="tw-flex-1"></div>
@@ -131,138 +136,232 @@
 	
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
-			<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /><br>
-			본문 내용입니다.<br>추천은 커뮤니티에만.<br><br>
+			${ cb.cboardContent }<br><br>
+			
 		</div>
 	
 	<!-- 비율용 -->
-		<div class="tw-flex tw-pt-8">
+
+	
+	<div class="tw-flex tw-pt-8">
 			<div class="tw-flex-1">
 			<!-- 글수정 -->
+			<!-- 본인 글만 수정 가능 -->
+			<c:if test="${ loginUser.empName eq cb.cboardWriter }">
 			<div>
 			<div class="right">
-			<a href="cupdateForm.bo" class="app-button app-button-rounded">
-						<span class="text" style="color: #383A3C">글 수정</span>
-			</a>
+			 <button class="app-button app-button-rounded" onclick="postFormSubmit(1);">글 수정</button>
 			</div>
 			<!-- 글삭제 -->
 			<div class="left">
-			<a href="cdelete.bo" class="app-button app-button-rounded">
-						<span class="text" style="color: #383A3C">글 삭제</span>
-			</a>
+			 <button class="app-button app-button-rounded" onclick="postFormSubmit(2);">글 삭제</button>
 			</div>
 			</div>
+			</c:if>
+			 <form id="postForm" action="" method="post">
+					<input type="hidden" name="cno" value="${ cb.cboardNo }">
+			</form>
+				<script>
+					function postFormSubmit(num){
+						var postForm = $("#postForm");
+						
+						if(num == 1){
+							postForm.attr("action", "cupdateForm.bo");
+						}else{
+							postForm.attr("action", "cdelete.bo");
+						}
+						postForm.submit();
+					}
+				</script>
 		</div>
 	</div>
+	
 	
 	<!-- 추천 영역 -->
 	<div class="app-article-footer">
 	
 	<div class="app-article-vote">
 		<div class="card-body">
-			<button type="button" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
-			<span class="app-article-vote__count">0</span>
+		<!-- 자신의 글이 아닐 때만 추천 가능 -->
+		 	<c:if test="${ loginUser.empName != cb.cboardWriter }">
+			<button type="button" id="btnLike" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
+			<span class="likeCt">${ cb.boardLikeCount }</span>
 			</button>
+			</c:if>
 		</div>
 	</div>
 	</div>
+	
+	<script>
+		
+	$(function(){
+		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
+		$("#rec_update").click(function(){
+			$.ajax({
+				url: "RecUpdate.do",
+                type: "POST",
+                data: {
+                    no: ${cb.cboardNo}
+                },
+                success: function () {
+			        recCount();
+                },
+			})
+		})
+		
+		// 게시글 추천수
+	    function recCount() {
+			$.ajax({
+				url: "RecCount.do",
+                type: "POST",
+                data: {
+                    no: ${cb.cboardNo}
+                },
+                success: function (boardLikeCount) {
+                	$(".rec_count").html(boardLikeCount);
+                },
+			})
+	    };
+	    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+	
+	</script>
 	
 		
 
 	
 	
 	
-	<!-- 댓글 영역 -->
-
-   
+<!-- 댓글 영역 -->
    	
-   
-	<div class="app-board-comment-target" id="comment"></div>
+	<table>
+		<thead>
+		<tr>
 		<div class="app-comment-header app-board-container tw-flex tw-items-center">
 			<div class="tw-font-bold tw-text-base tw-mr-2" >댓글</div>
 			    <div class="tw-text-sm">
-			      <span class="tw-text-gray-700">총 </span>
-			      <span class="tw-text-primary tw-text-gray-700">count</span><span class="tw-text-gray-700">개</span>
-			    	
+			      <span class="tw-text-gray-700">총</span>
+			      <span class="tw-text-primary tw-text-gray-700" id="rcount"></span><span class="tw-text-gray-700">개</span>
 			    </div>
-			</div>
+		</div>
+		</tr>
 	  <br>
-		  
-	  <!-- 등록되는 댓글 영역 -->
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">오수현</span> 
-			 			 </div>
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul> 
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">이윤해</span> 
-			 			 </div>
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul> 
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">노연우</span> 
-			 			 </div>
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul>
-		<ul id="app-board-comment-list" class="app-board-comment-list">
-		  <li id="comment_227" class="app-comment-item app-clearfix ">
-		    	<div class="tw-flex-1 tw-pl-4">
-		       		<div class="tw-flex tw-items-center tw-flex-wrap">
-			    		<div class="tw-flex tw-items-center tw-text-sm tw-font-bold ">
-			   		 		<span class="tw-flex tw-items-center">김영찬</span> 
-			 			 </div>
-		      
-		    		</div>
-			            <div class="app-comment-content tw-py-3">
-			              	<div class="comment_227_0 rhymix_content xe_content">댓글 테스트입니다.</div>
-			         	</div>
-				</div>
-			</li>
-		</ul>   
-      
-      
-	<!-- 댓글 작성폼 영역 -->
-	<div class="app-comment-write">
-	<div class="tw-flex">
-	<textarea id="comment-textarea" class="app-textarea" style="resize: none"></textarea>
-	<textarea id="editor-138" name="content" style="display: none;"></textarea>
-	</div>
-	<br>
-			<div>
+	  </thead>
+	  </table>
+
+	 	
+	  <table id="reply" align="center" style="border-collapse:collapse; padding:10px;">
+                <tbody>
+                </tbody>
+      </table>
+
+
+            
+        <!-- 댓글 작성 영역 -->
+		<br>
+		 <table id="replyArea" class="table" align="center">
+                <thead>
+                    <tr>
+                    	<c:if test="${ !empty loginUser }">
+	                        <th colspan="2" style="width:100%">
+	                            <textarea class="app-textarea" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+	                        </th>
+	                        <th style="vertical-align: middle"><button class="btn btn-primary" id="addReply">등록하기</button></th>
+                        </c:if>
+                        <c:if test="${ empty loginUser }">
+                        	<th colspan="2" style="width:100%">
+	                            <textarea class="app-textarea" readonly rows="2" style="resize:none; width:100%">로그인한 사용자만 사용가능한 서비스입니다. 로그인 후 이용해주세요.</textarea>
+	                        </th>
+	                        <th style="vertical-align: middle"><button class="btn btn-primary" disabled>등록하기</button></th>
+                        </c:if>
+                    </tr>
+                    <tr>
+                       <td colspan="3"></td> 
+                    </tr>
+                </thead>
+                <tbody>
+                
+                </tbody>
+            </table>
+            
+	
+	
+
+    
+      <script>
+    	$(function(){
+    		selectReplyList();
+    		
+    		$("#addReply").click(function(){
+        		var cno = ${cb.cboardNo};
+
+    			if($("#replyContent").val().trim().length != 0){
+    				
+    				$.ajax({
+    					url:"rinsert.cbo",
+    					type:"post",
+    					data:{replyContent:$("#replyContent").val(),
+    						  refBoardNo:cno,
+    						  replyWriter:"${loginUser.empName}"},
+    					success:function(result){
+    						if(result > 0){
+    							$("#replyContent").val("");
+    							selectReplyList();
+    							
+    						}else{
+    							alert("댓글등록실패");
+    						}
+    					},error:function(){
+    						console.log("댓글 작성 ajax 통신 실패");
+    					}
+    				});
+    				
+    			}else{
+    				alert("댓글 내용을 입력하세요.");
+    			}
+    			
+    		});
+    	});
+    	
+    	function selectReplyList(){
+    		var cno = ${cb.cboardNo};
+    		$.ajax({
+    			url:"rlist.cbo",
+    			data:{cno:cno},
+    			type:"get",
+    			success:function(list){
+    				$("#rcount").text(list.length);
+    				
+    				var value="";
+    				$.each(list, function(i, obj){
+    					
+    					if("${loginUser.empName}" == obj.replyWriter){
+    						value += "<tr style='background:#F1F3F5'>";
+    					}else{
+    						value += "<tr>";
+    					}
+    					
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriter + "</th>" +
+   								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
+   								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
+    						 "</tr>";
+    				});
+    				$("#reply tbody").html(value);
+    			},error:function(){
+    				console.log("댓글 리스트조회용 ajax 통신 실패");
+    			}
+    		});
+    	}
+    	
+  
+    </script>
+    
+    
+    
+    <!-- 목록 하단 -->
+    
+    <div>
 			 	<div class="right">
-			        <a href="rinsert.bo" class="app-button app-button-rounded app-button-xs primary">
-						<span class="text" style="color: white">댓글 등록</span>
-					</a>
+			       
 				</div>
 				<div class="left">
 			        <a href="clist.bo" class="app-button app-button-rounded app-button-xs primary">
@@ -270,11 +369,11 @@
 					</a>
 				</div>
 			</div>
-		</div>
-	
-	</div> <!-- 댓글 영역-->
-
-	
+		
+			
+	</div>
+	<br>
+    
 	
 	</div> <!-- div class="container-fluid" -->
 	</div> <!-- div class="wrapper" -->
@@ -286,10 +385,3 @@
 	<!-- [ Main Content ] 메인화면 끝 -->
 
     
-    <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
-	
-	
-
-	
-	</body>
-	</html>

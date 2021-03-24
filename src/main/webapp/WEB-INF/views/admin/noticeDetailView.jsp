@@ -57,7 +57,7 @@
 <!-- BODY START -->
 <body>
    
-   <jsp:include page="/WEB-INF/views/common/sidebar.jsp"/>
+   <jsp:include page="/WEB-INF/views/common/adminSidebar.jsp"/>
    <jsp:include page="/WEB-INF/views/common/topbar.jsp"/>
   
    
@@ -141,17 +141,44 @@
 		</div>
 	
 	<!-- 비율용 -->
-	<form id="postForm" action="" method="post">
-					<input type="hidden" name="nno" value="${ n.noticeNo }">
-					<input type="hidden" name="fileName" value="${ n.changeName }"> 
-	</form>
+
 	
 		<div class="tw-flex tw-pt-8">
 			<div class="tw-flex-1">
+			<!-- 글수정 -->
+			<div>
+			<div class="right">
+			 <button class="app-button app-button-rounded" onclick="postFormSubmit(1);">글 수정</button>
+			</div>
+			<!-- 글삭제 -->
+			<div class="left">
+			 <button class="app-button app-button-rounded" onclick="postFormSubmit(2);">글 삭제</button>
+			</div>
+			</div>
+			
+			 <form id="postForm" action="" method="post">
+					<input type="hidden" name="nno" value="${ n.noticeNo }">
+					<input type="hidden" name="fileName" value="${ n.changeName }"> 
+			</form>
+				<script>
+					function postFormSubmit(num){
+						var postForm = $("#postForm");
+						
+						if(num == 1){
+							postForm.attr("action", "nupdateForm.bo");
+						}else{
+							postForm.attr("action", "ndelete.bo");
+						}
+						postForm.submit();
+					}
+				</script>
 		</div>
 	</div>
+
+
 	
 	<!-- 첨부파일 -->
+	<br>
 	<table>
 				<tbody>
 					<th>첨부파일</th>
@@ -165,17 +192,15 @@
                     </td>
                     </tbody>
                     </table>
-
 	</div>
-		
+
+	
 
 	
 	
 	
 	<!-- 댓글 영역 -->
 
-   
-   	
 	<table>
 		<thead>
 		<tr>
@@ -194,12 +219,12 @@
 	 	
 	  <table id="reply" align="center" style="border-collapse:collapse; padding:10px;">
                 <tbody>
+
                 </tbody>
       </table>
 
 
-            
-        <!-- 댓글 작성 영역 -->
+           <!-- 댓글 작성 영역 --> 
 		<br>
 		 <table id="replyArea" class="table" align="center">
                 <thead>
@@ -226,9 +251,11 @@
                 </tbody>
             </table>
             
-	
-	
+           
+      
 
+	
+	<!-- 댓글 영역 -->
     
       <script>
     	$(function(){
@@ -305,7 +332,7 @@
 			       
 				</div>
 				<div class="left">
-			        <a href="nlist.bo" class="app-button app-button-rounded app-button-xs primary">
+			        <a href="notice.ad" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">목록</span>
 					</a>
 				</div>
@@ -313,7 +340,7 @@
 		
 			
 	</div>
-	<br>
+		<br>
     
 	
 	</div> <!-- div class="container-fluid" -->

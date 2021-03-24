@@ -1,5 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -231,7 +232,7 @@
             type : "get",
             success : function(todolist) {
                var value="";
-               if(todolist[i].empNo==<%=loginUser.getEmpNo()%> ){
+              
                for(var i in todolist){
       
                   value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
@@ -365,6 +366,9 @@
 		editable : true,
 		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
 		selectable : true,
+		header : {
+			left : 'agendaDay,agendaWeek,month'
+		},
 		defaultView : 'month',
 		axisFormat : 'h:mm',
 		columnFormat: {
@@ -378,14 +382,7 @@
 			week: "MMM dd일{ '&#8212;'[ MMM] d일}",
 			day: 'yyyy년 MMM d일 dddd'
 		},
-		dayClick: function(date, allDay, jsEvent, view) {
-            
-			if(yesterDate > date){
-				alert("이미 지난 날짜는 선택할 수 없습니다.");
-			}else{			             
-	           $("#reservationTime").modal("show");
-			}
-          }
+
       });
     }); 
     

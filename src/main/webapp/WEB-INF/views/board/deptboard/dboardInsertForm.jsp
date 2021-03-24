@@ -68,49 +68,44 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="dinsert.bo" method="post" autocomplete="off">
+		<form id="boardForm" role="form" action="dinsert.bo" method="post" enctype="multipart/form-data">
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
-               		<h5>부서 게시판</h5>
+               		<h5>${loginUser.deptName} 게시판</h5>
            		</div>
            		
            	<!-- 폼 컨텐츠 영역 -->
 				  <div class="card-body">
 					  <div class="form-group">
-					  <!-- 카테고리 -->
-					<tr>
-					<td><label>카테고리</label></td>
-					<td>
-						<select name="deptCategory" >
+					  <select name="dboardCategory" id="dboardCategory" class="form-control form-control-sm" style="width:10%;"  >
 							<option value="">분류</option>
-		                     <option value="10" style="color : black;">긴급</option>
-		                     <option value="20" style="color : black;">알림</option>
-		                     <option value="30" style="color : black;">공지</option>
+		                     <option value="긴급" style="color : black;">긴급</option>
+		                     <option value="알림" style="color : black;">알림</option>
+		                     <option value="공지" style="color : black;">공지</option>
+		                     <option value="일반" style="color : black;">일반</option>
                   		</select>
-					</td>
-					</tr>
-					    <input type="text" class="form-control" id="subject" name="bTitle" placeholder="제목을 입력해주세요." required>
-					    <input type="hidden" name="bType" value="B">
+
+					    <input type="text" class="form-control" id="dboardTitle" name="dboardTitle" placeholder="제목을 입력해주세요." required>
+					  	 
+					  	 <input type="hidden" name="dboardWriter" id="dboardWriter" value="${loginUser.empName}">
+						 <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptName}">
+						   
 					  </div>
+					  
 					    <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="bContent" maxlength="140" rows="7"></textarea>
-						  </div>
+						    <textarea class="form-control" id="summernote" name="dboardContent" maxlength="140" rows="7"></textarea>
+						</div>
+						
 						  
 					  <div class="row">
 						  <div id="buttons">
-							  	<a href="dinsert.so" class="btn btn-primary btn-icon-split">
-								<span class="icon text-white-50">
-								</span>
-								<span class="text" style="color: white">등록</span>
-								</a>
-								
+							  <button type="submit" class="btn btn-primary">등록</button>
 							  <button type="button" onclick="javascript:history.back();" class="btn btn-secondary">취소</button>
 						  </div>
 					  </div>
 				 </div>
-				</div>
-
 			</form>
+			</div>
 		</div>
 	
 	</div> <!--지우지 마세요    div class="row"  -->
