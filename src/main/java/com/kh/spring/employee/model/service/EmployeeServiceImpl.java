@@ -58,6 +58,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.selectEmployee(sqlSession, empNo);
 	}
 
+  
+	@Override
+	public int updateEmployee(Employee emp) {
+		// TODO Auto-generated method stub
+		return employeeDao.updateEmployee(sqlSession, emp);
+	}
 
 
 }

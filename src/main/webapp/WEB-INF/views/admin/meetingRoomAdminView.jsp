@@ -102,18 +102,18 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newProduct" action="login.me" method="post" autocomplete="off">
+				<form name="newRoom" action="insertRoom.r" method="post" autocomplete="off">
 					<table class="table table-bordered  "  align="center">
                     	<tr>
                     	
                         	<td style="width:20%">회의실</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="roomName" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                             <td style="width:20%">위치</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="location" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                              <td style="width:20%">최대인원수</td>
-                             <td><input type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
+                             <td><input name="limitCount" type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
                         </tr>
 					</table>
 					<div class="modal-footer">

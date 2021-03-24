@@ -38,8 +38,10 @@ public class EmployeeDao {
 		return sqlSession.selectOne("employeeMapper.selectEmployee", empNo);
 	}
 
+	public int updateEmployee(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("employeeMapper.updateEmployee", emp);
+	}
 
-
-	
 
 }

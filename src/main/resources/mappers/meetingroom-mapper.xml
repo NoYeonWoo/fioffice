@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="meetingMapper">
+
+	<resultMap type="MRoom" id="roomResultSet">
+		<id property="roomNo" column="ROOM_NO" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="limitCount" column="LIMIT_NUM" />
+		<result property="location" column="LOCATIOIN" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+</mapper>

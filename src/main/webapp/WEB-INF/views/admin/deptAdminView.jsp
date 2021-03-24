@@ -23,6 +23,9 @@
 .btn{
 	padding:0.5rem 0.95rem !important;
 }
+.nowrap, #detailD{
+   line-height: 15px!important;
+   }
  </style>
 </head>
 
@@ -62,63 +65,26 @@
                     </div>
                     <div class="card-body table-border-style">
                         <div class="dt-responsive dept1 ">
-                            <table id="deptMain" class="table table-striped nowrap">
+                            <table id="deptMain" class="table table-hover nowrap">
                                 <thead>
                                     <tr>
-                                  		<th style="width: 7%;">부서명</th>
-                                        <th style="width: 40%;">부서코드</th>
+                                  		<th style="width: 30%;">부서코드</th>
+                                        <th style="width: 40%;">부서명</th>
                                         <th style="width: 30%;">자세히보기</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                       <td><i class="fas fa-clipboard-list" /><a href="#" onclick="detailDept(); return false;">상세보기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td><i class="fas fa-clipboard-list" /><a href="#" onclick="detailDept(); return false;">상세보기</a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td><i class="fas fa-clipboard-list" /><a href="#" onclick="detailDept(); return false;">상세보기</a></td>
-                                    </tr>
-                                </tbody>
                             </table>
                             </div>
                             <div class="dept2 dt-responsive">
-                            <table id="deptSub" class="table table-striped nowrap">
+                            <table id="deptSub" class="table table-hover nowrap">
                                 <thead>
                                      <tr>
-                                  		<th style="width: 7%;">부서명</th>
-                                        <th style="width: 40%;">부서코드</th>
-                                        <th style="width: 40%;">구성원</th>
+                                  		<th style="width: 20%;">부서코드</th>
+                                        <th style="width: 40%;">부서명</th>
+                                        <th style="width: 10%;">구성원</th>
                                         <th style="width: 30%;">자세히보기</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -137,15 +103,15 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newMain" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered  "  align="center">
+				<form name="newMain" action="insertDept" method="post" autocomplete="off" onsubmit="return check(1);">
+					<table id ="addMain" class="table table-bordered  "  align="center">
                     	<tr>
                     		<td style="width:20%">부서명</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:60%"></td>
+                            <td><input type="text" name = "deptName" id="deptName" class="form-control form-control-sm" style="width:60%"></td>
                         </tr>
                         <tr>
                     		<td style="width:20%">부서코드</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:60%" readonly></td>
+                            <td><input type="text" name = "deptCode" id="deptCode" class="form-control form-control-sm" style="width:60%" readonly></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -166,19 +132,19 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newSub" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered  "  align="center">
+				<form name="newSub" action="insertDept" method="post" autocomplete="off" onsubmit="return check(2);">
+					<table id ="addSub" class="table table-bordered  "  align="center">
                     	<tr>
-                    		<td style="width:20%">상위부서명</td>
-                            <td></td>
+                    		<td style="width:20%" >상위부서명</td>
+                            <td id="deptMain"></td>
                         </tr>
                     	<tr>
                     		<td style="width:20%">부서명</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:60%"></td>
+                            <td><input type="text" name = "deptName" id="deptName" class="form-control form-control-sm" style="width:60%"></td>
                         </tr>
                         <tr>
                     		<td style="width:20%">부서코드</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:60%" readonly></td>
+                            <td><input type="text" name = "deptCode" id="deptCode" class="form-control form-control-sm" style="width:60%" readonly></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -187,6 +153,29 @@
                 	</div>
 				</form>	
 			</div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="detailDept">  
+        <div class="modal-dialog modal-sm modal-dialog-centered" >
+            <div class="modal-content">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h5 class="modal-title" id="title"></h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
+            </div>
+             <div class="modal-body">
+					<table id ="detailD" class="table table-bordered  "  align="center">
+						<thead>
+							<th style="width: 30%">사원명</th>
+							<th style="width: 45%">사번</th>
+							<th style="width: 25%">직급</th>
+						</thead>
+                    	<tbody>
+                    	
+                    	</tbody>
+					</table>
+				</div>
             </div>
         </div>
     </div>
@@ -199,28 +188,114 @@
                 text: '상위부서추가',
                 className: 'btn-primary',
                 action: function(e, dt, node, config) {
+                	$("#addMain #deptCode").val('D'+table1.rows().count());
                 	$("#mainAdd").modal("show");
-                }
-            }]
+                },
+            }],
+            ajax : {
+                url :"deptMainList"
+                    ,type : "POST"
+                    ,dataType : "JSON"
+                    },
+                columns : [
+                   {data: "deptCode"},
+                   {data: "deptName"},
+                   {data: null,
+                      render: function(data, type, row){
+                            if(type=='display'){
+                            	
+                                data = '<i class="fas fa-clipboard-list" /><a href="#" onclick="subList(\''+row['deptCode']+'\',\''+row['deptName']+'\'); return false;">상세보기</a>';
+                            }
+                            return data;
+                        }}
+                ]
         });
-        var table2=$('#deptSub').DataTable({
-            columnDefs: [
-                { orderable: false, targets: [2,3] },
-                { searchable: false, targets: [2,3]}
-              ],
-              dom: '<"float-left"B><"float-right"f>rt<"float-right"p>',
-            buttons: [{
-                text: '하위부서추가',
-                className: 'btn-primary',
-                action: function(e, dt, node, config) {
-                	$("#subAdd").modal("show");
-                }
-            }]
-        });
+       
 	});
-	function detailDept(){
-		
+	function subList(deptCode, deptName){
+		console.log(deptCode);
+		$(".dept2").hide();
+		var table2=$('#deptSub').DataTable({
+			destroy : true,
+	            columnDefs: [
+	                { orderable: false, targets: [2,3] },
+	                { searchable: false, targets: [2,3]}
+	              ],
+	              dom: '<"float-left"B>rt',
+	              language: {
+	            	  zeroRecords:    "하위부서가 존재하지 않습니다."
+	              },
+	            buttons: [{
+	                text: '하위부서추가',
+	                className: 'btn-primary',
+	                action: function(e, dt, node, config) {
+	                	$("#addSub #deptMain").html(deptName);
+	                	if(table2.rows().count() > 9){
+	                		$("#addSub #deptCode").val(deptCode+(table2.rows().count()+1));
+	                	}else if(deptCode=='D99'){
+	                		$("#addSub #deptCode").val(deptCode);
+	                	}else{
+	                		$("#addSub #deptCode").val(deptCode+'0'+(table2.rows().count()+1));
+	                	}
+	                	
+	                	$("#subAdd").modal("show");
+	                }
+	            }],
+	            ajax : {
+	                url :"deptSubList"
+	                    ,type : "POST"
+	                    ,data : {deptCode:deptCode}
+	                    ,dataType : "JSON"
+	                    },
+	                columns : [
+	                   {data: "deptCode"},
+	                   {data: "deptName"},
+	                   {data: "empCount"},
+	                   {data: null,
+	                      render: function(data, type, row){
+	                            if(type=='display'){
+	                                data = '<i class="fas fa-clipboard-list" /><a href=""data-toggle="modal" data-name="'+row['deptName']+'" data-code="'+row['deptCode']+'" data-target="#detailDept">구성원보기</a>';
+	                            }
+	                            return data;
+	                        }}
+	                ]
+	           
+	        });
 		$(".dept2").fadeIn(1000);
+	}
+	$('#detailDept').on('show.bs.modal', function (event) {
+		$("#detailD tbody").children().remove();
+		$("#title").text($(event.relatedTarget).data('name')+" : 구성원목록");
+		$.ajax({
+    		type:"POST",  
+			url:"deptEmpList",
+			async:false,
+			data:{deptCode:$(event.relatedTarget).data('code')},
+			success:function(empList){
+				
+				 $.each(empList, function(i, emp){
+					$('#detailD').append(
+				    	'<tr> <td>'+emp.empName+'</td> <td>'+emp.empNo+'</td> <td>'+emp.empPosition+'</td></tr>' );
+				});
+			},
+			error:function(){
+				console.log("ajax 통신 실패");
+			}
+		});
+	});
+	function check(num){
+		if(num==1){
+			var name=document.newMain;
+		}else{
+			var name=document.newSub;
+		}
+		if(name.deptName.value==""){
+			$(name.deptName).attr("placeholder","부서명을 입력해주세요");
+			name.deptName.focus();
+			return false;
+		}else{
+			return true;
+		}
 	}
 	</script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>

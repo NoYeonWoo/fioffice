@@ -28,6 +28,8 @@
 	
 		<id property="deptCode" column="DEPT_CODE" />
 		<result property="deptName" column="DEPT_NAME" />
+		<result property="empCount" column="EMP_COUNT" />
+		
 	</resultMap>
 	
 	<resultMap type="Authority" id="authResultSet">
@@ -38,6 +40,11 @@
 		<result property="empName" column="EMP_NAME" />
 	</resultMap>
 	
+	<resultMap type="AdminMenu" id="adminResultSet">
+		<id property="adminNo" column="ADMIN_NO" />
+		<result property="adminName" column="ADMIN_NAME" />
+		<result property="adminInfo" column="ADMIN_INFO" />
+	</resultMap>
 	<select id="selectDeptList" resultMap="deptResultSet">
 		SELECT *
 		FROM DEPT
@@ -65,12 +72,45 @@
 		FROM AUTHORITY JOIN EMPLOYEE USING(EMP_NO)	
 	</select>
 	
-	<select id="selectAdminList"  resultType="string">
-		SELECT  ADMIN_NO
+	<select id="selectAdminList"  resultMap="adminResultSet">
+		SELECT *
 		FROM ADMINMENU 	
 	</select>
 	
 	<delete id="deleteAuthority" parameterType="string">
 		DELETE FROM AUTHORITY WHERE AUTH_NO = #{authNo} 
 	</delete>
+	<!--
+	> - &gt;
+	< - &lt;
+	>= - &gt;=
+	<= - &lt;=
+ 	-->
+	<select id="deptMainList" resultMap="deptResultSet">
+	<![CDATA[
+		SELECT *
+		FROM DEPT
+		WHERE LENGTH(DEPT_CODE)<4
+	]]>
+	</select>
+	
+	<select id="deptSubList" parameterType="string" resultMap="deptResultSet">
+	<![CDATA[
+		SELECT A.DEPT_CODE, A.DEPT_NAME, COUNT(B.EMP_NO) EMP_COUNT
+		FROM DEPT A LEFT OUTER JOIN EMPLOYEE B ON (A.DEPT_CODE=B.DEPT_CODE) 
+		WHERE LENGTH(A.DEPT_CODE)>2 AND A.DEPT_CODE LIKE '%'||#{deptCode}||'%'
+		GROUP BY A.DEPT_CODE, A.DEPT_NAME
+	]]>
+	</select>
+	
+	<insert id="insertDept" parameterType="Dept">
+		INSERT INTO DEPT VALUES(#{deptCode},#{deptName})
+	</insert>
+	
+	<select id="deptEmpList" parameterType="string" resultMap="employeeResultSet">
+		SELECT EMP_NO,EMP_NAME,JOB_NAME
+		FROM EMPLOYEE JOIN JOB USING(JOB_CODE)
+		WHERE DEPT_CODE = #{deptCode} AND STATUS='Y'
+		ORDER BY LENGTH(JOB_CODE) DESC, JOB_CODE DESC
+	</select>
 </mapper>

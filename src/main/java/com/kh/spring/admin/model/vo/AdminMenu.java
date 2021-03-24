@@ -6,14 +6,14 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Setter
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Department {
+public class AdminMenu {
 
-	private String deptCode;
-	private String deptName;
-	private int empCount;
+	private String adminNo;
+	private String adminName;
+	private String adminInfo;
 }

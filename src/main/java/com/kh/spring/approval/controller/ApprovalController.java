@@ -103,7 +103,6 @@ public class ApprovalController {
 		return changeName;
 	}
 	
-
 	//결재자가 결재 하기 창으로 넘어감 
 	@RequestMapping("approval.do")
 	public String approval() {

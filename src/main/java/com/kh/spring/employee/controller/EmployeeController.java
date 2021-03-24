@@ -1,15 +1,14 @@
 package com.kh.spring.employee.controller;
 
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,29 +17,28 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.Job;
-
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
-
 import com.kh.spring.employee.model.service.EmployeeService;
 import com.kh.spring.employee.model.vo.Employee;
 
 
 
+
 @SessionAttributes("loginUser")// Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하는 어노테이션 
+
 @Controller
 public class EmployeeController {
 	@Autowired 
@@ -51,8 +49,6 @@ public class EmployeeController {
 	
 	@RequestMapping("manageEmp.do")
 	public String manageEmployee(Model model) {
-		ArrayList<Employee> eList = employeeService.selectEmpList();
-		model.addAttribute("eList",eList);
 		return "employee/manageEmployee";
 	}
 	@ResponseBody
@@ -60,7 +56,6 @@ public class EmployeeController {
 	public Object selectEmpList() {
 		  Map<String, Object> result = new HashMap<String, Object>();
 		  result.put("data", employeeService.selectEmpList());
-		  
 		  System.out.println("거쳐감");
 		  return new GsonBuilder().create().toJson(result);
 
@@ -73,6 +68,9 @@ public class EmployeeController {
 	public Object selectEmployee(String empNo) {
 		Employee emp = employeeService.selectEmployee(empNo);
 		System.out.println(emp.getJoinDate());
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
+		format.format(emp.getJoinDate());
+		emp.setJoinDateS(format.format(emp.getJoinDate()));
 		return emp;
 	}
 	
@@ -85,9 +83,36 @@ public class EmployeeController {
 		return "employee/newEmployee";
 	}
 
+	@RequestMapping("updateEmpForm")
+	public String updateEmpForm(String empNo1, Model model)  {
+		System.out.println(empNo1);
+		Employee emp = employeeService.selectEmployee(empNo1);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
+		format.format(emp.getJoinDate());
+		emp.setJoinDateS(format.format(emp.getJoinDate()));
+		ArrayList<Department> dList = adminService.selectDeptList();
+		ArrayList<Job> jList = employeeService.selectJobList();
+		model.addAttribute("dList",dList);
+		model.addAttribute("jList",jList);
+		model.addAttribute("emp",emp);
+		return "employee/updateEmployee";	 
+	 }
+	 
 	@RequestMapping("updateEmp.do")
-	public String updateEmployee() {
-		return "employee/updateEmployee";
+	public String updateEmp(Employee emp, String post, String address1, String address2, RedirectAttributes redA) {
+		emp.setAddress(post + "/" + address1 + "/" + address2);
+		System.out.println(emp.getDeptCode());
+		System.out.println(emp.toString());
+		int result = employeeService.updateEmployee(emp);
+		System.out.println(result);
+		if(result > 0) {
+			redA.addAttribute("empNo1",emp.getEmpNo());
+			return "redirect:updateEmpForm";
+		}else {
+			return "redirect:/";
+		}
+		
+		
 	}
 	
 	@RequestMapping("mypage.do")
@@ -175,9 +200,6 @@ public class EmployeeController {
      return "employee/login.me";
     
 	 }	
-
-	 
-	 
 	 
 	 
 	 
