@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.todo.model.dao.TodoDao;
 import com.kh.spring.todo.model.vo.Todo;
 
@@ -29,9 +30,9 @@ public class TodoServiceImpl implements TodoService {
 
 
 		@Override
-		public ArrayList<Todo> selectTodo() {
+		public ArrayList<Todo> selectTodo(String empNo) {
 			// TODO Auto-generated method stub
-			return todoDao.selectTodo(sqlSession);
+			return todoDao.selectTodo(sqlSession,empNo);
 		}
 
 
@@ -63,10 +64,11 @@ public class TodoServiceImpl implements TodoService {
 		}
 
 
+
 		@Override
-		public ArrayList<Todo> selectMainTodo() {
+		public ArrayList<Todo> selectMainTodo(String empNo) {
 			// TODO Auto-generated method stub
-			return todoDao.selectMainTodo(sqlSession);
+			return todoDao.selectMainTodo(sqlSession,empNo);
 		}
 
 }

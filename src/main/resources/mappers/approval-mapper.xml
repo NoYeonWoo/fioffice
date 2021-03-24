@@ -18,6 +18,7 @@
 		<result property="formNo" column="FORM_NO" />
 		<result property="firstApprEmp" column="FIRST_APPR_EMP" />
         <result property="lastAppEmp" column="LAST_APPR_EMP" />
+        
 	</resultMap>
 	
 <insert id="insertApproval" parameterType="Approval">
@@ -25,9 +26,6 @@ INSERT INTO APPROVAL
 VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{orginalName},#{changeName},DEFAULT,#{firstDate}
 ,#{doneDate},#{empNo},'2',#{firstApprEmp},#{lastAppEmp})
 
-
-
 </insert>
-
 
 </mapper>

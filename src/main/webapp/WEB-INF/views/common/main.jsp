@@ -1,5 +1,6 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,12 +187,10 @@
                                         <th class="text-right">check</th>
                                     </tr>
                                 </thead>
+                           
                                 <tbody>
-                                   
-                                   
-                                                 
-                                    <tr>
-                                        
+                                     <tr>
+                                      
                                         <td>
                                      
                                             <div class="chk-option">
@@ -200,24 +199,29 @@
                                                     <span class="custom-control-label"></span>
                                                 </label>
                                             </div>
+                                          
                                             <div class="d-inline-block align-middle">
                                                 <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40 align-top m-r-15">
                                                 <div class="d-inline-block">
                                                     <h6>John Deo ${item.todoTitle }</h6>
                                                     <p class="text-muted m-b-0">${item.todoTitle }</p>
                                                 </div>
+                                                    
                                             </div>
+                                   
                                         </td>
+                                            
                                         <td>Able Pro</td>
                                         <td>Jun, 26</td>
                                         <td class="text-right"><label class="badge badge-light-danger">Low</label>          </td>             
                      
                                  
                                     </tr>
-                      
+                     
                         
               
                                 </tbody>
+                                
                             </table>
                                 
                         </div>
@@ -231,18 +235,18 @@
             type : "get",
             success : function(todolist) {
                var value="";
-               if(todolist[i].empNo==<%=loginUser.getEmpNo()%> ){
+              
                for(var i in todolist){
-      
+            	  
                   value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
                   
                     '<td width="100px" align="left">'+todolist[i].todoTitle+'</td>'+
-                    '<td width="50px" align="right">'+todolist[i].todoContent+'</td>'+
-      
+                    '<td width="50px" align="left">'+todolist[i].todoContent+'</td>'+
+                    
                     '</tr>';
                }        
                   
-               }
+               
                $("#todoMainList").html(value);
             },
             error : function() {

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.todo.model.vo.Todo;
 
 
@@ -16,7 +17,7 @@ public class TodoDao {
 		return sqlSession.insert("todoMapper.insertTodo",t);
 	}
 
-	public ArrayList<Todo> selectTodo(SqlSessionTemplate sqlSession) {
+	public ArrayList<Todo> selectTodo(SqlSessionTemplate sqlSession, String empNo) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
 	}
@@ -40,7 +41,7 @@ public class TodoDao {
 		return sqlSession.update("todoMapper.updateDelete",tno);
 	}
 
-	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession) {
+	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession, String empNo) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
 	}

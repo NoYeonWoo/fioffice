@@ -71,7 +71,7 @@
 
 				<!-- 사원관리 테이블  시작 -->
 
-				<div class="col-lg-10">
+				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
 							<h3>사원관리</h3>
