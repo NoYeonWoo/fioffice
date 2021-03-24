@@ -4,6 +4,7 @@ import java.awt.List;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
@@ -20,9 +21,17 @@ public interface AdminService {
 
 	ArrayList<Authority> selectAuthList();
 
-	ArrayList selectAdminList();
+	ArrayList<AdminMenu> selectAdminList();
 
 	int deleteAuthority(String authNo);
+
+	ArrayList<Department> deptMainList();
+
+	ArrayList<Department> deptSubList(String deptCode);
+
+	int insertDept(Department dept);
+
+	ArrayList<Employee> deptEmpList(String deptCode);
 
 	
 

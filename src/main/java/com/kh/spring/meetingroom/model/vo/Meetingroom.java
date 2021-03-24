@@ -1,4 +1,4 @@
-package com.kh.spring.admin.model.vo;
+package com.kh.spring.meetingroom.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -11,9 +11,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Job {
+public class Meetingroom {
 
-	private String jobCode;
-	private String jobName;
+	private int roomNo;
+	private String roomName;
+	private int limitCount;
+	private String location;
+	private String status;
 	
 }

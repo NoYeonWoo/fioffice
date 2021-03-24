@@ -110,7 +110,7 @@
                               <p class="text-muted m-b-0">Congratulations!</p>
                            </div>
                         </div>
-                        <div class="row p-b-0">
+  	                  <div class="row p-b-0">
                            <div class="col-auto text-right update-meta">
                               <p class="text-muted m-b-0 d-inline-flex">2 day ago</p>
                               <i class="feather icon-facebook bg-facebook update-icon"></i>
@@ -231,7 +231,7 @@
             type : "get",
             success : function(todolist) {
                var value="";
-               if(todolist[i].empNo==<%=loginUser.getEmpNo()%> ){
+              
                for(var i in todolist){
       
                   value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
@@ -346,12 +346,12 @@
                                     </tr>
                                     <tr>
                                         <td>getDate();</td>
-                                        <td>등록된 일정이 없습니다.</td>
+              		                    <td>등록된 일정이 없습니다.</td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+      		         </div>
                 </div>
             </div>
 </div>

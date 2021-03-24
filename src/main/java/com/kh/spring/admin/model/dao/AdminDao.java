@@ -7,6 +7,7 @@ import java.util.HashMap;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
@@ -26,12 +27,12 @@ public class AdminDao {
 
 	public int selectAuthority(SqlSessionTemplate sqlSession, String authNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("adminMapper.selectAuthority",authNo);
+		return sqlSession.selectOne("adminMapper.selectAuthority", authNo);
 	}
 	
 	public int insertAuthority(SqlSessionTemplate sqlSession, Authority auth) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("adminMapper.insertAuthority",auth);
+		return sqlSession.insert("adminMapper.insertAuthority", auth);
 	}
 
 	public ArrayList<Authority> selectAuthList(SqlSessionTemplate sqlSession) {
@@ -39,14 +40,34 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAuthList");
 	}
 
-	public ArrayList selectAdminList(SqlSessionTemplate sqlSession) {
+	public ArrayList<AdminMenu> selectAdminList(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("adminMapper.selectAdminList");
 	}
 
 	public int deleteAuthority(SqlSessionTemplate sqlSession, String authNo) {
 		// TODO Auto-generated method stub
-		return sqlSession.delete("adminMapper.deleteAuthority",authNo);
+		return sqlSession.delete("adminMapper.deleteAuthority", authNo);
+	}
+
+	public ArrayList<Department> deptMainList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminMapper.deptMainList");
+	}
+
+	public ArrayList<Department> deptSubList(SqlSessionTemplate sqlSession, String deptCode) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminMapper.deptSubList", deptCode);
+	}
+
+	public int insertDept(SqlSessionTemplate sqlSession, Department dept) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("adminMapper.insertDept", dept);
+	}
+
+	public ArrayList<Employee> deptEmpList(SqlSessionTemplate sqlSession, String deptCode) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminMapper.deptEmpList", deptCode);
 	}
 
 	

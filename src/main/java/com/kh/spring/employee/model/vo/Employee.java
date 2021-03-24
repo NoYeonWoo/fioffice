@@ -25,6 +25,7 @@ public class Employee {
 	private String email;//이메일
 	private String resNo;//주민번호
 	private Date joinDate;//입사일
+	private String joinDateS;
 	private Date entDate;//퇴사일
 	private String originName;//프로필 사진 원본명
 	private String changeName;//프로필사진 수정명

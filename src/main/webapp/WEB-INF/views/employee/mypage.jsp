@@ -77,7 +77,7 @@
 								<tr>
 									<td style="width: 10%">이름</td>
 									<td style="width: 40%"><input type="text"
-										class="form-control form-control-user" style="width: 40%" value="${loginUser.empName}" readonly></td>
+										class="form-control form-control-user" id="empName" name="empName" style="width: 40%" value="${loginUser.empName}" readonly></td>
 								</tr>
 								<tr>
 									 <td style="width:10%">개인번호</td>

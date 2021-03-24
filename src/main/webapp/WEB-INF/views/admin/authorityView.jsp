@@ -99,78 +99,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>기본관리자</td>
-                                        <td>모든권한</td>
-                                        <td> 
-                                        	<ul class="name_tag" id="A001">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>모든권한</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>인사관리</td>
-                                        <td>조직 및 인사관리</td>
-                                        <td>
-                                        	<ul class="name_tag" id="A002">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>인사관리</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>게시판</td>
-                                        <td>공지사항 관리</td>
-                                        <td>
-                                        	<ul class="name_tag" id="A003">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>공지사항</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>회의실</td>
-                                        <td>회의실 관리</td>
-                                        <td>
-                                        	<ul class="name_tag" id="A006">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>회의실</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>캘린더</td>
-                                        <td>전사 및 전체 일정관리</td>
-                                        <td>
-                                        	<ul class="name_tag " id="A004">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>캘린더</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>설문</td>
-                                        <td>전사 설문 관리</td>
-                                        <td>
-                                        	<ul class="name_tag" id="A005">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>설문</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>상품입출고</td>
-                                        <td>상품 입출고 관리</td>
-                                        <td>
-                                        	<ul class="name_tag" id="A007">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>상품입출고</span></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>결재</td>
-                                        <td>결재관리</td>
-                                        <td>
-                                        	<ul class="name_tag">
-                                        	</ul>
-                                        </td>
-                                        <td><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span><span>결재</span></a></td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -205,7 +133,26 @@
     
     
     <script>
-    selectAuth();
+    var treeData;
+    
+	$(document).ready(function(){
+		<c:forEach items="${ adminList }" var="ad">
+    	$('tbody').append('<tr><td style="width:10%">${ad.adminName}</td>'
+    			+'<td style="width:15%">${ad.adminInfo}</td>'
+    			+'<td style="width:55%"> <ul class="name_tag" id="${ad.adminNo}"></ul></td>'
+    			+'<td style="width:20%"><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span>'
+    			+'<span>모든권한</span></a></td></tr>');
+		</c:forEach>
+		selectAuth();
+		$('#oganization').on('show.bs.modal', function (event) {
+			var code = $(event.relatedTarget).data('id');
+			$(".modal-body #adminNo").val(code);
+			selectTree();
+		});
+		selectTree();
+		
+	});
+    
     
     function deleteAuth(authNo){
     	var authNo = authNo;
@@ -247,8 +194,8 @@
 				}
 			});
 	    	<c:forEach items="${ adminList }" var="ad">
-	    	$('#${ad}').append('<li class="creat add_admin">'
-	    	+'<a data-toggle="modal" data-target="#oganization" class="a_tag" data-id="${ad}">'
+	    	$('#${ad.adminNo}').append('<li class="creat add_admin">'
+	    	+'<a data-toggle="modal" data-target="#oganization" class="a_tag" data-id="${ad.adminNo}">'
 	    	+'<span class="pcoded-micon"><i class="feather icon-plus m-l-5"></i></span>'
 	    	+'<span class="txt">운영자 추가</span> '
 	    	+'</a> </li>');
@@ -318,16 +265,7 @@
 			$.fn.zTree.init($("#treeDemo"), setting, treeData);
 		}
 		
-		var treeData;
-		$(document).ready(function(){
-			$('#oganization').on('show.bs.modal', function (event) {
-				var code = $(event.relatedTarget).data('id');
-				$(".modal-body #adminNo").val(code);
-				selectTree();
-			});
-			selectTree();
-			
-		});
+		
 
     </script>
     

@@ -83,9 +83,8 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping("approvalInsertForm.do")
-	public String approvalInsertForm() {
+	public String approvalInsertForm(String deptCode) {
 		ArrayList<Employee> empList;
-		
 		
 		
 		return "approval/approvalInsertView";

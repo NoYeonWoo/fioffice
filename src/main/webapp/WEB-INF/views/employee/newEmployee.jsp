@@ -99,6 +99,9 @@
                                  	<select class="form-control form-control-sm" style="width:30%" name="jobCode" id="jobCode">
                                  	<option value="">직급선택</option>
                                  	<c:forEach items="${ jList }" var="j">	
+                                 			<c:if test="${j.jobCode eq 'J1' }">
+                                 				<option value="${ j.jobCode }" selected>${ j.jobName }</option>
+                                 			</c:if>
 						                        <option value="${ j.jobCode }">${ j.jobName }</option>
 									</c:forEach>
                                  	</select></td>
@@ -175,6 +178,8 @@
 
 						<script type="text/javascript">
 						$("#deptMain").change(function() {
+							$("#deptSub").children().remove();
+							$("#deptSub").append('<option value="">하위부서선택</option>');
 							if($("#deptMain option:selected").val()!=""){
 								console.log($("#deptMain option:selected").val());
 								<c:forEach items="${ dList }" var="d">	
@@ -185,29 +190,23 @@
                      						if(subDept==$("#deptMain option:selected").val()){
                      							$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
                      						}
-			                    		</c:when>
-			                    		<c:when test="${ fn:length(d.deptCode) == 5 }">
-			                    			if(${fn:substring(d.deptCode,0,3)}==$("#deptMain option:selected").val()){
-			                    				$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
-                 							}
-		                    			</c:when>
-			                    	</c:choose>
-		                    	</c:forEach>
+                     						</c:when>
+    			                    		<c:when test="${ fn:length(d.deptCode) == 5 }">
+    			                    			if(${fn:substring(d.deptCode,0,3)}==$("#deptMain option:selected").val()){
+    			                    				$("#deptSub").append('<option value="${ d.deptCode }">${ d.deptName }</option>');
+                     							}
+    		                    			</c:when>
+    			                    	</c:choose>
+    		                    	</c:forEach>
 					   		}
 						});
 							function confirm() {
-								var name = $("#name").val();
+								var empName = $("#empName").val();
 								var dept = $("#dept").val();
 								var position = $("#position").val();
 								var joinDate = $("#joinDate").val();
-								var phone1 = $("#phone1").val();
-								var phone2 = $("#phone2").val();
-								var phone3 = $("#phone3").val();
-								var empphone1 = $("#empphone1").val();
-								var empphone2 = $("#empphone2").val();
-								var empphone3 = $("#empphone3").val();
-								var empphone2 = $("#empphone2").val();
-								var empphone3 = $("#empphone3").val();
+								var phone = $("#phone").val();
+								var officePhone = $("#officePhone").val();
 								var email1 = $("#email1").val();
 								var email2 = $("#email2").val();
 								var postcode = $("#postcode").val();

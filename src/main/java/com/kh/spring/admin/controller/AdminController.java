@@ -2,7 +2,7 @@ package com.kh.spring.admin.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
+import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.TreeModel;
@@ -38,10 +39,11 @@ public class AdminController {
   @Autowired
 	private NoticeService noticeService;
 
-  //권한관리창
+  //--------------------------------------------------------권한--------------------------------------------------------//
+  	//권한관리화면 /관리리스트
 	@RequestMapping("authority.ad")
 	public String authorityView(Model model) {
-		ArrayList adminList = adminService.selectAdminList();
+		ArrayList<AdminMenu> adminList = adminService.selectAdminList();
 		model.addAttribute("adminList",adminList);
 		
 		return "admin/authorityView";
@@ -64,19 +66,16 @@ public class AdminController {
 	    ArrayList<Employee> eList = adminService.selectEmployeeList();
 	    
 	    ArrayList<TreeModel> treeModel = new ArrayList<TreeModel>();
-	    treeModel.add(new TreeModel("D99", "0", "임원진", null, null));
 	    for(int i = 0 ;i < dList.size();i++) {
 	    	String dCode=dList.get(i).getDeptCode();
 	    	String dName=dList.get(i).getDeptName();
-	    	if(!dCode.equals("D99")) {
-	    		if(dCode.length()<=3) {
-	    			treeModel.add(new TreeModel(dCode, "0", dName, null, null));
+	    	if(dCode.length()<=3) {
+	    		treeModel.add(new TreeModel(dCode, "0", dName, null, null));
+	    	}else {
+	    		if(dCode.length()==4) {
+	    			treeModel.add(new TreeModel(dCode, dCode.substring(0, 2), dName, null, null));
 	    		}else {
-	    			if(dCode.length()==4) {
-	    				treeModel.add(new TreeModel(dCode, dCode.substring(0, 2), dName, null, null));
-	    			}else {
-	    				treeModel.add(new TreeModel(dCode, dCode.substring(0, 3), dName, null, null));
-	    			}
+	    			treeModel.add(new TreeModel(dCode, dCode.substring(0, 3), dName, null, null));
 	    		}
 	    	}
 	    }
@@ -85,11 +84,9 @@ public class AdminController {
 	    	String dCode=eList.get(j).getDeptCode();
 	    	String eName=eList.get(j).getEmpName();
 	    	String jName=eList.get(j).getEmpPosition();
-	    	if(dCode==null) {
-	    		treeModel.add(new TreeModel(eCode, "D99", eName+" "+jName, null, null));
-	    	}else {
-	    		treeModel.add(new TreeModel(eCode, dCode, eName+" "+jName, null, null));
-	    	}
+	    	
+	    	treeModel.add(new TreeModel(eCode, dCode, eName+" "+jName, null, null));
+	    
 	    	
 	    }
 	    
@@ -123,9 +120,51 @@ public class AdminController {
 			return String.valueOf(result);
 	}
 	
+	
+	//--------------------------------------------------------부서--------------------------------------------------------//
+	//부서화면
 	@RequestMapping("dept.ad")
 	public String deptView() {
 		return "admin/deptAdminView";
+	}
+	
+	//상위부서리스트
+	@RequestMapping(value="deptMainList", produces="appliction/json; charset=UTF-8")
+	@ResponseBody
+	public Object deptMainList() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", adminService.deptMainList());
+		return new GsonBuilder().create().toJson(result);
+	}
+	
+	//하위부서리스트
+	@RequestMapping(value="deptSubList", produces="appliction/json; charset=UTF-8")
+	@ResponseBody
+	public Object deptSubList(String deptCode) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", adminService.deptSubList(deptCode));
+		return new GsonBuilder().create().toJson(result);
+	}
+	
+	//부서추가
+	@RequestMapping("insertDept")
+	public String insertDept(Department dept) {
+		int result = adminService.insertDept(dept);
+		if(result > 0) {
+			return "admin/deptAdminView";
+		}else {
+			return "redirect:/";
+		}
+		
+	}
+	
+	//부서 구성원리스트
+	@RequestMapping(value="deptEmpList",produces="appliction/json; charset=UTF-8" )
+	@ResponseBody
+	public String deptEmpList(String deptCode) {
+
+		ArrayList<Employee> empList = adminService.deptEmpList(deptCode);
+		return new GsonBuilder().create().toJson(empList);
 	}
 	
 	@RequestMapping("notice.ad")

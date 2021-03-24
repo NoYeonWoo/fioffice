@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.admin.model.dao.AdminDao;
+import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
@@ -47,7 +48,7 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.selectAuthList(sqlSession);
 	}
 	@Override
-	public ArrayList selectAdminList() {
+	public ArrayList<AdminMenu> selectAdminList() {
 		// TODO Auto-generated method stub
 		return adminDao.selectAdminList(sqlSession);
 	}
@@ -55,6 +56,26 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteAuthority(String authNo) {
 		// TODO Auto-generated method stub
 		return adminDao.deleteAuthority(sqlSession,authNo);
+	}
+	@Override
+	public ArrayList<Department> deptMainList() {
+		// TODO Auto-generated method stub
+		return adminDao.deptMainList(sqlSession);
+	}
+	@Override
+	public ArrayList<Department> deptSubList(String deptCode) {
+		// TODO Auto-generated method stub
+		return adminDao.deptSubList(sqlSession,deptCode);
+	}
+	@Override
+	public int insertDept(Department dept) {
+		// TODO Auto-generated method stub
+		return adminDao.insertDept(sqlSession,dept);
+	}
+	@Override
+	public ArrayList<Employee> deptEmpList(String deptCode) {
+		// TODO Auto-generated method stub
+		return adminDao.deptEmpList(sqlSession,deptCode);
 	}
 	
 
