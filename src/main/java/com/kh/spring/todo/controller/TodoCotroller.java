@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.todo.model.service.TodoService;
 import com.kh.spring.todo.model.vo.Todo;
 
@@ -24,25 +25,32 @@ public class TodoCotroller {
 
 
 	@RequestMapping("todoListView.do")
-	public String listTodo(Model m, HttpSession session) throws Exception {
-
-		ArrayList<Todo> todolist = todoService.selectTodo();
+	public String listTodo(String empNo,Model m, HttpSession session) throws Exception {
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		 empNo=emp.getEmpNo();
+		 
+		 System.out.println("접속자:"+empNo);
+			
+		ArrayList<Todo> todolist = todoService.selectTodo(empNo);
+		
+		
 		m.addAttribute("todolist", todolist);
-
-		System.out.println(todolist);
+		
+		System.out.println("todolist"+todolist);
 		return "todo/todoView";
 	}
 	
    
 	@RequestMapping(value="todoMainListView.do",produces ="application/json;charset=UTF-8")
-	public void MainlistTodo(Model m, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
-
-		ArrayList<Todo> todolist =todoService.selectMainTodo();
+	public void MainlistTodo(String empNo,Model m, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		 empNo=emp.getEmpNo();
+		ArrayList<Todo> todolist =todoService.selectMainTodo(empNo);
 		
-
+		System.out.println("todolist main::"+todolist);
 		response.setContentType("application/json;charset=utf-8");
 		new Gson().toJson(todolist,response.getWriter());//
-		System.out.println("todolist main::"+todolist);
+		
 	}
 	
 

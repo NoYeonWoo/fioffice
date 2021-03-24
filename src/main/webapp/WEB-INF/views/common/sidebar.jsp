@@ -63,9 +63,9 @@
             <div class="">
                
                <div class="main-menu-header">
-                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="User-Profile-Image">
+                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="User-Profile-Image">
                   <div class="user-details">
-                     <div id="more-details">${loginUser.empName}님<i class="fa fa-caret-down"></i></div>
+                     <div id="more-details">${sessionScope.loginUser.empName}님<i class="fa fa-caret-down"></i></div>
                   </div>
                </div>
         

@@ -7,10 +7,12 @@ import java.util.Map;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,8 +23,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Department;
@@ -36,7 +40,7 @@ import com.kh.spring.employee.model.vo.Employee;
 
 
 
-
+@SessionAttributes("loginUser")// Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하는 어노테이션 
 @Controller
 public class EmployeeController {
 	@Autowired 
@@ -222,11 +226,6 @@ public class EmployeeController {
 			 return "common/login";
 		 
 	 }
-		@RequestMapping("insertNewEmp.do")
-	    public String insertNewEmp(SessionStatus status) {
-			status.setComplete();
-		 
-			 return "common/login";
-		 
-	 }
+		
+
 }
