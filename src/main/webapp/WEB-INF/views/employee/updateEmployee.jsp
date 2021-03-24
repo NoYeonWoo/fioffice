@@ -51,7 +51,7 @@ td {
 					<br>
 					<br>
 					<div class="card-body">
-						<form name="newEmpForm" method="post" autocomplete="off">
+						<form name="updateEmpForm" method="post" autocomplete="off">
 
 							<table class="table table-bordered">
 
@@ -231,9 +231,9 @@ td {
 									return;
 								}
 
-								document.newEmpForm.method = "post";
-								document.newEmpForm.action = "updateEmp.do";
-								document.newEmpForm.submit();
+								document.updateEmpForm.method = "post";
+								document.updateEmpForm.action = "updateEmp.do";
+								document.updateEmpForm.submit();
 							}
 							function optionDeptSub(){
 								var subDept;
