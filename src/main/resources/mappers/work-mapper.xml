@@ -29,4 +29,13 @@
 	
 	</select>
 	
+	<insert id="startWork" parameterType="Work">
+	
+		INSERT INTO ADDRESS
+		VALUES(SEQ_WORK_NO.NEXTVAL, #{workStart}, null, #{addressEmail}, #{addressComName}, #{addressJob}, SYSDATE,
+		default,#{empNo})
+	
+	
+	</insert>
+	
 </mapper>
