@@ -206,7 +206,7 @@ public class EmployeeController {
 	 
 		private void deleteFile(String fileName, HttpServletRequest request) {
 			String resources = request.getSession().getServletContext().getRealPath("resources");
-			String savePath = resources + "\\upload_files\\";		
+			String savePath = resources + "/upload_files/";
 			
 			File deleteFile=new File(savePath+fileName);
 			deleteFile.delete();
@@ -216,7 +216,7 @@ public class EmployeeController {
 
 		private String saveFile(MultipartFile file, HttpServletRequest request) {
 			String resources = request.getSession().getServletContext().getRealPath("resources");
-			String savePath = resources + "\\upload_files\\";
+			String savePath = resources + "/upload_files/";
 			
 			System.out.println("savaPath::" + savePath);
             

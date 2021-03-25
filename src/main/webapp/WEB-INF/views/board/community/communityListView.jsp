@@ -262,7 +262,7 @@
 		
 		<!-- 서치 버튼 -->
 				<div class="left">&nbsp;
-					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
+					<label><input type="txt" id="keyword" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
 					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>

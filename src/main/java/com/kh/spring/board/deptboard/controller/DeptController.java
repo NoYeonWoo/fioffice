@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -29,7 +30,7 @@ import com.kh.spring.board.deptboard.model.service.DeptService;
 import com.kh.spring.board.deptboard.model.vo.DeptBoard;
 import com.kh.spring.common.exception.CommException;
 
-
+@SessionAttributes("loginUser")
 @Controller
 public class DeptController {
 	
@@ -44,7 +45,6 @@ public class DeptController {
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
 		
 		ArrayList<DeptBoard> list = deptService.selectList(pi);
-		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		

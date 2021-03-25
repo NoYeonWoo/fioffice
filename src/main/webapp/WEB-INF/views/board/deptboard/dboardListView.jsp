@@ -187,7 +187,7 @@
           <div class="card shadow mb-4">
             <div class="card-header py-3">
                <h5><br>${loginUser.deptName} 게시판</h5>
-               
+               <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
                <!--글쓰기 버튼  -->
                 <div class="right">
                 <a href="dinsertForm.bo" class="btn btn-primary btn-icon-split">
@@ -207,6 +207,7 @@
 
 	<div class="app-board-section">
 	
+     <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
 	
 	<!-- 카테고리 영역 -->
 		<div class="card-body">
@@ -232,8 +233,6 @@
  
     <c:forEach items="${list}" var="db">
      <div class="dboardList">
-     <input type="hidden" value="${db.dboardNo}">
-     <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
     <ul class="app-board-template-list">
         <li>
             <a class="tw-flex-1">

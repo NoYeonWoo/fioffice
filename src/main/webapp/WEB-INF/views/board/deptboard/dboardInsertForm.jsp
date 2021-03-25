@@ -88,7 +88,7 @@
 					    <input type="text" class="form-control" id="dboardTitle" name="dboardTitle" placeholder="제목을 입력해주세요." required>
 					  	 
 					  	 <input type="hidden" name="dboardWriter" id="dboardWriter" value="${loginUser.empName}">
-						 <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptName}">
+						 <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
 						   
 					  </div>
 					  

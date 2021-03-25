@@ -64,6 +64,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CBOARD_NO=#{cboardNo}
 	</update>
 	
+	<update id="updateLikeCount" parameterType="_int">
+		UPDATE COMMUNITY
+		SET BOARD_LIKECOUNT=BOARD_LIKECOUNT+1
+		WHERE CBOARD_NO=#{cboardNo}
+	</update>
+	
 	<update id = "recommend">
 		UPDATE COMMUNITY
 		SET BOARD_LIKECOUNT=BOARD_LIKECOUNT+1 
@@ -106,6 +112,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or CBOARD_CONTENT LIKE #{searchKey}
 		)
 	</select>
-	
 	
 </mapper>
