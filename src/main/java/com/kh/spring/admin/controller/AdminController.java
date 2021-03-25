@@ -84,8 +84,6 @@ public class AdminController {
 	    	String jName=eList.get(j).getEmpPosition();
 	    	
 	    	treeModel.add(new TreeModel(eCode, dCode, eName+" "+jName, null, null));
-	    
-	    	
 	    }
 	    
 	    return treeModel;
@@ -115,7 +113,7 @@ public class AdminController {
 
 		int result = adminService.deleteAuthority(authNo);
 		
-			return String.valueOf(result);
+		return String.valueOf(result);
 	}
 	
 	
@@ -146,12 +144,14 @@ public class AdminController {
 	
 	//부서추가
 	@RequestMapping("insertDept")
-	public String insertDept(Department dept) {
+	public String insertDept(Department dept, Model model) {
 		int result = adminService.insertDept(dept);
 		if(result > 0) {
+			model.addAttribute("msg", "부서추가 성공");
 			return "admin/deptAdminView";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg", "부서추가 실패");
+			return "admin/deptAdminView";
 		}
 		
 	}
@@ -165,10 +165,12 @@ public class AdminController {
 		return new GsonBuilder().create().toJson(empList);
 	}
 	
+
 	//@RequestMapping("notice.ad")
 	public String noticeView() {
 		return "admin/noticeAdminView";
 	}
+
 
 	
 	@RequestMapping("address.ad")
@@ -186,10 +188,7 @@ public class AdminController {
 		return "admin/surveyAdminView";
 	}
 	
-	@RequestMapping("meetingRoom.ad")
-	public String meetingRoomView() {
-		return "admin/meetingRoomAdminView";
-	}
+	
 	
 	
 }

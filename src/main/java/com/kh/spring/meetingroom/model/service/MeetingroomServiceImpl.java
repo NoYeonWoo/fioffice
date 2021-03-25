@@ -1,5 +1,7 @@
 package com.kh.spring.meetingroom.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,11 @@ public class MeetingroomServiceImpl implements MeetingroomService {
 	public int insertRoom(Meetingroom room) {
 		// TODO Auto-generated method stub
 		return meetingDao.insertRoom(sqlSession, room);
+	}
+	@Override
+	public ArrayList<Meetingroom> selectRoomList() {
+		// TODO Auto-generated method stub
+		return meetingDao.selectRoomList(sqlSession);
 	}
 
 }

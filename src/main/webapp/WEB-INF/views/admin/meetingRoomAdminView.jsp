@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,27 +63,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                        <td>사용중</td>
+                                <c:forEach items="${ rList }" var="r" varStatus="status">
+                                	<tr>
+                                        <td>${ status.count }</td>
+                                        <td>${ r.roomName }</td>
+                                        <td>${ r.location }</td>
+                                        <td>${ r.limitCount }명</td>
+                                        <c:choose>
+                                        	<c:when test="${r.status eq 'Y'}">
+                                        		<td>사용중</td>
+                                        	</c:when>
+                                        	<c:when test="${r.status eq 'S'}">
+                                        		<td>사용중지</td>
+                                        	</c:when>
+                                        	<c:otherwise>
+                                        		<td>폐쇄</td>
+                                        	</c:otherwise>
+                                        </c:choose>
                                     </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                        <td>@mdo</td>
-                                    </tr>
+                                </c:forEach>
                                 </tbody>
                             </table>
                         </div>
@@ -107,13 +106,13 @@
                     	<tr>
                     	
                         	<td style="width:20%">회의실</td>
-                            <td><input name="roomName" type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="roomName" id="roomName" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                             <td style="width:20%">위치</td>
-                            <td><input name="location" type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="location" id="location" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                              <td style="width:20%">최대인원수</td>
-                             <td><input name="limitCount" type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
+                             <td><input name="limitCount" id="limitCount" type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -126,7 +125,7 @@
         </div>
     </div>
 
-<div class="modal fade" id="roomUpdate">  
+<div class="modal fade" id="roomDetail">  
         <div class="modal-dialog modal-md modal-dialog-centered">
             <div class="modal-content">
             <!-- Modal Header -->
@@ -135,20 +134,20 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newProduct" action="login.me" method="post" autocomplete="off">
+				<form name="detailRoom" action="updateRoom.r" method="post" autocomplete="off" onsubmit="">
 					<table class="table table-bordered  table-detail"  align="center">
                     	<tr>
                         	<td style="width:20%">회의실</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="roomName" id="roomName" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                             <td style="width:20%">위치</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input name="location" id="location" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                              <td style="width:20%">최대인원수</td>
-                             <td><input type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
+                             <td><input name="limitCount" id="limitCount" type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
                         </tr><tr>
                              <td style="width:20%">상태</td>
-                             <td><input type="checkbox" name="using" value="사용여부" class="mr-2"/>사용중</td>
+                             <td><input name="status" id="status" type="checkbox" value="" class="mr-2"/>사용중</td>
                         </tr>
                         
 					</table>
@@ -162,18 +161,19 @@
         </div>
     </div>
     <script>
+
     $("#roomList tr").click(function(){
     	//$("#productList td:nth-child(2)").text("");
-        $(".table-detail tr:nth-child(1) input").val($(this).children().eq(1).text());
-        $(".table-detail tr:nth-child(2) input").val($(this).children().eq(2).text());
-        $(".table-detail tr:nth-child(3) input").val($(this).children().eq(3).text());
-        $(".table-detail tr:nth-child(4) input").val($(this).children().eq(4).text());
-        if($(this).children().eq(4).text()=="사용중"){
-				$(".table-detail input:checkbox[name='using']").prop("checked", true);   
+    	var td = $(this).children();
+        $("#roomDetail #roomName").val(td.eq(1).text());
+        $("#roomDetail #location").val(td.eq(2).text());
+        $("#roomDetail #limitCount").val(td.eq(3).text().slice(0,-1));
+        if(td.eq(4).text()=="사용중"){
+				$("#roomDetail #status").prop("checked", true);
 			}else{
-				$(".table-detail input:checkbox[name='using']").prop("checked", false); 
+				$("#roomDetail #status").prop("checked", false); 
 			}
-        $("#roomUpdate").modal("show");
+        $("#roomDetail").modal("show");
     });
     </script>
     
