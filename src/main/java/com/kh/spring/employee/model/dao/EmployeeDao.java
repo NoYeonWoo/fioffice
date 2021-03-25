@@ -1,6 +1,7 @@
 package com.kh.spring.employee.model.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,11 @@ public class EmployeeDao {
 	public int updateEmployee(SqlSessionTemplate sqlSession, Employee emp) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("employeeMapper.updateEmployee", emp);
+	}
+
+	public int updateEntDate(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("employeeMapper.updateEntDate", emp);
 	}
 
 

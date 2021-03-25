@@ -1,6 +1,7 @@
 package com.kh.spring.employee.model.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.Job;
@@ -19,6 +20,8 @@ public interface EmployeeService {
 	Employee selectEmployee(String empNo);
 
 	int updateEmployee(Employee emp);
+
+	int updateEntDate(Employee emp);
 
 		
 }

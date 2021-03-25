@@ -3,7 +3,6 @@ package com.kh.spring.employee.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -11,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Department;
@@ -47,13 +43,19 @@ public class EmployeeController {
 	@Autowired
 	private AdminService adminService;
 	
+	
+	//--------------------------------------------------------사원관리--------------------------------------------------------//
+	
+	//사원관리 화면
 	@RequestMapping("manageEmp.do")
 	public String manageEmployee(Model model) {
 		return "employee/manageEmployee";
 	}
+	
+	//사원리스트
 	@ResponseBody
 	@RequestMapping(value="selectEmpList.do", produces="appliction/json; charset=UTF-8")
-	public Object selectEmpList() {
+	public String selectEmpList() {
 		  Map<String, Object> result = new HashMap<String, Object>();
 		  result.put("data", employeeService.selectEmpList());
 		  System.out.println("거쳐감");
@@ -63,17 +65,21 @@ public class EmployeeController {
 		//model.addAttribute("eList",eList);
 		//return new GsonBuilder().create().toJson(eList);
 	}
+	
+	//사원선택(상세보기, 수정)
 	@RequestMapping("selectEmployee")
 	@ResponseBody
 	public Object selectEmployee(String empNo) {
 		Employee emp = employeeService.selectEmployee(empNo);
-		System.out.println(emp.getJoinDate());
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
-		format.format(emp.getJoinDate());
 		emp.setJoinDateS(format.format(emp.getJoinDate()));
+		if(emp.getEntDate()!=null) {
+			emp.setEntDateS(format.format(emp.getEntDate()));
+		}
 		return emp;
 	}
 	
+	//사원추가
 	@RequestMapping("insertEmp.do")
 	public String insertEmployee(Model model) {
 		ArrayList<Department> dList = adminService.selectDeptList();
@@ -82,11 +88,12 @@ public class EmployeeController {
 		model.addAttribute("jList",jList);
 		return "employee/newEmployee";
 	}
-
+	
+	//사원수정화면
 	@RequestMapping("updateEmpForm")
-	public String updateEmpForm(String empNo1, Model model)  {
-		System.out.println(empNo1);
-		Employee emp = employeeService.selectEmployee(empNo1);
+	public String updateEmpForm(String empNo, Model model)  {
+		System.out.println(empNo);
+		Employee emp = employeeService.selectEmployee(empNo);
 		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
 		format.format(emp.getJoinDate());
 		emp.setJoinDateS(format.format(emp.getJoinDate()));
@@ -97,22 +104,37 @@ public class EmployeeController {
 		model.addAttribute("emp",emp);
 		return "employee/updateEmployee";	 
 	 }
-	 
+	
+	//사원수정
 	@RequestMapping("updateEmp.do")
-	public String updateEmp(Employee emp, String post, String address1, String address2, RedirectAttributes redA) {
+	public String updateEmp(Employee emp, String post, String address1, String address2, Model model) {
 		emp.setAddress(post + "/" + address1 + "/" + address2);
 		System.out.println(emp.getDeptCode());
 		System.out.println(emp.toString());
 		int result = employeeService.updateEmployee(emp);
 		System.out.println(result);
 		if(result > 0) {
-			redA.addAttribute("empNo1",emp.getEmpNo());
-			return "redirect:updateEmpForm";
+			model.addAttribute("empNo",emp.getEmpNo());
+			return "forward:updateEmpForm";
 		}else {
 			return "redirect:/";
 		}
 		
 		
+	}
+	
+	//사원탈퇴
+	@RequestMapping("updateEntDate")
+	@ResponseBody
+	public String updateEntDate(Employee emp) {
+		System.out.println(emp.getEntDateS());
+		System.out.println(emp.getEmpNo());
+		System.out.println(emp.getEntDateS().getClass().getName());
+		emp.setEntDate(java.sql.Date.valueOf(emp.getEntDateS()));
+		int result = employeeService.updateEntDate(emp);
+		System.out.println(emp.getEntDate().getClass().getName());
+		
+		return String.valueOf(result);
 	}
 	
 	@RequestMapping("mypage.do")

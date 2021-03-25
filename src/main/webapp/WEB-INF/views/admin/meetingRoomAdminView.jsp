@@ -11,6 +11,13 @@
 .table-hover>tbody>tr:hover{
 		cursor:pointer
 }
+
+#roomList  td, th {
+	padding: 0.75rem !important;
+   }
+.form-control[readonly]{
+	background-color: #fff !important;
+}
  </style>
 </head>
 
@@ -43,7 +50,7 @@
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
-<div class="col-md-12">
+<div class="col-lg-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3>회의실현황</h3>
@@ -56,15 +63,16 @@
                                 <thead>
                                     <tr>
                                   		<th style="width: 7%;">NO</th>
-                                        <th style="width: 40%;">회의실명</th>
-                                        <th style="width: 30%;">위치</th>
+                                        <th style="width: 28%;">회의실명</th>
+                                        <th style="width: 35%;">위치</th>
                                         <th style="width: 10%;">최대인원수</th>
-                                        <th style="width: 13%;">상태</th>
+                                        <th style="width: 20%;">상태</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 <c:forEach items="${ rList }" var="r" varStatus="status">
                                 	<tr>
+                                		<input type="hidden" id="roomNo" value="${r.roomNo }">
                                         <td>${ status.count }</td>
                                         <td>${ r.roomName }</td>
                                         <td>${ r.location }</td>
@@ -78,6 +86,7 @@
                                         	</c:when>
                                         	<c:otherwise>
                                         		<td>폐쇄</td>
+                                        		<input type="hidden" id="deleteDate" value="${r.closureDate }">
                                         	</c:otherwise>
                                         </c:choose>
                                     </tr>
@@ -104,7 +113,6 @@
 				<form name="newRoom" action="insertRoom.r" method="post" autocomplete="off">
 					<table class="table table-bordered  "  align="center">
                     	<tr>
-                    	
                         	<td style="width:20%">회의실</td>
                             <td><input name="roomName" id="roomName" type="text" class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
@@ -134,7 +142,8 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="detailRoom" action="updateRoom.r" method="post" autocomplete="off" onsubmit="">
+				<form name="detailRoom" action="updateRoom.r" method="post" autocomplete="off" onsubmit="return check();">
+					<input type="hidden" name = "roomNo" id="roomNo" value="">
 					<table class="table table-bordered  table-detail"  align="center">
                     	<tr>
                         	<td style="width:20%">회의실</td>
@@ -147,34 +156,67 @@
                              <td><input name="limitCount" id="limitCount" type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>명</span></td>
                         </tr><tr>
                              <td style="width:20%">상태</td>
-                             <td><input name="status" id="status" type="checkbox" value="" class="mr-2"/>사용중</td>
+                             <td id="dStatus"></td>
+                             <input type="hidden" name="status" id="status" value="">
                         </tr>
                         
 					</table>
 					<div class="modal-footer">
                     	<button type="submit" class="btn btn-primary">수정하기</button>
-                    	<button type="button" class="btn btn-danger" data-dismiss="modal">삭제하기</button>
+                    	<button type="button" onclick="$('#deleteForm').submit();" class="btn btn-danger" data-dismiss="modal">삭제하기</button>
                 	</div>
 				</form>	
 			</div>
             </div>
         </div>
     </div>
+    <form action="deleteRoom.r" method="post" id="deleteForm" onsubmit="return deletecheck();">
+   		<input type="hidden" name = "roomNo" id="roomNo" value="">
+    </form>
     <script>
 
     $("#roomList tr").click(function(){
     	//$("#productList td:nth-child(2)").text("");
     	var td = $(this).children();
-        $("#roomDetail #roomName").val(td.eq(1).text());
-        $("#roomDetail #location").val(td.eq(2).text());
-        $("#roomDetail #limitCount").val(td.eq(3).text().slice(0,-1));
-        if(td.eq(4).text()=="사용중"){
-				$("#roomDetail #status").prop("checked", true);
-			}else{
-				$("#roomDetail #status").prop("checked", false); 
-			}
+    	$("#roomDetail #roomNo").val(td.eq(0).val());
+    	$("#deleteForm #roomNo").val(td.eq(0).val());
+        $("#roomDetail #roomName").val(td.eq(2).text());
+        $("#roomDetail #location").val(td.eq(3).text());
+        $("#roomDetail #limitCount").val(td.eq(4).text().slice(0,-1));
+        $('#dStatus').children().remove();
+        $('#dStatus').text("");
+        if(td.eq(5).text()=="폐쇄"){
+        	$("#roomDetail input").prop('readonly', true);
+			$("#roomDetail .modal-footer button").attr('disabled',true).hide();
+			$('#dStatus').append('폐쇄됨    (폐쇄날짜 : '+td.eq(6).val()+')');
+        }else{
+        	$("#roomDetail input").prop('readonly', false);
+        	$("#roomDetail .modal-footer button").attr('disabled',false).show();
+        	 if(td.eq(5).text()=="사용중"){
+             	$('#dStatus').append(
+             		'<input name="using" id="using" type="checkbox" value="" checked class="mr-2"/>사용중');
+     		}else{
+     			$('#dStatus').append(
+     				'<input name="using" id="using" type="checkbox" value="" class="mr-2"/>사용중');
+     		}
+        }	
         $("#roomDetail").modal("show");
     });
+    function check(){
+    	if($("#roomDetail #using").is(':checked')){
+        	$("#roomDetail #status").val('Y');
+        }else{
+        	$("#roomDetail #status").val('S');
+        }
+    	return true;
+    	
+    }
+    function deletecheck(){
+    	if(confirm("폐쇄 후 복구가 불가능 합니다. 그래도 삭제하시겠습니까?")) {
+    		return true;
+    	}
+    	return false;
+    }
     </script>
     
     <jsp:include page="../common/footer.jsp"/>

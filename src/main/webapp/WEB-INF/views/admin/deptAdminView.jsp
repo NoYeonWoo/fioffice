@@ -7,14 +7,16 @@
  <style>
  .dept1 {
   float:left;
-  width:48%;
+  width:45%;
   margin:auto;
+  padding-left:3rem;
 
  }
  .dept2 {
   float:right;
-  width:48%;
+  width:45%;
   margin:auto;
+  padding-right:3rem;
  }
   .btn-primary{
 	background-color: #B8ACD0 !important;
@@ -26,6 +28,9 @@
 .nowrap, #detailD{
    line-height: 15px!important;
    }
+.dt-center {
+    text-align: center;
+}
  </style>
 </head>
 
@@ -58,7 +63,7 @@
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
- <div class="col-md-12">
+ <div class="col-md-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3>부서관리</h3>
@@ -80,8 +85,8 @@
                                 <thead>
                                      <tr>
                                   		<th style="width: 20%;">부서코드</th>
-                                        <th style="width: 40%;">부서명</th>
-                                        <th style="width: 10%;">구성원</th>
+                                        <th style="width: 35%;">부서명</th>
+                                        <th style="width: 15%;">구성원</th>
                                         <th style="width: 30%;">자세히보기</th>
                                     </tr>
                                 </thead>
@@ -184,6 +189,10 @@
 		$(".dept2").hide();
         var table1=$('#deptMain').DataTable({
               dom: '<"float-left"B>rt',
+              columnDefs: [
+	                { orderable: false, targets: [2] },
+	                { className : "dt-center", targets:"_all"}
+	              ],
             buttons: [{
                 text: '상위부서추가',
                 className: 'btn-primary',
@@ -219,7 +228,7 @@
 			destroy : true,
 	            columnDefs: [
 	                { orderable: false, targets: [2,3] },
-	                { searchable: false, targets: [2,3]}
+	                { className : "dt-center", targets:"_all"}
 	              ],
 	              dom: '<"float-left"B>rt',
 	              language: {

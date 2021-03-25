@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +9,15 @@
    width: 50%;
    left-margin: 5px;
 }
+.card-body {
+  margin: 0rem 2rem 3rem 2rem;
+}
 #employeeList td,th{
    padding:0.75rem !important;
-   }   
+   }
+.dt-center {
+    text-align: center;
+}
 </style>
 
 <link rel="stylesheet"
@@ -55,7 +60,7 @@
 
             <!-- 사원관리 테이블  시작 -->
 
-            <div class="col-lg-10">
+            <div class="col-lg-10 mx-auto">
                <div class="card">
                   <div class="card-header">
                      <h3>사원관리</h3>
@@ -92,14 +97,13 @@
                      <button type="button" class="close" data-dismiss="modal">&times;</button>
                   </div>
                   <div class="modal-body">
-                        <form name="updateEmpForm" action="updateEmpForm" method="post" autocomplete="off">
-							<input type="hidden" id="empNo1" name="empNo1">
+                       
                            <table class="table table-bordered table-detail">	
                               <tr>
                                  <td style="width: 15%">이름</td>
                                  <td style="width: 35%" id="empName"></td>
                                  <td style="width: 15%">사번</td>
-                                 <td style="width: 35%" id="empNo"></td>
+                                 <td style="width: 35%" id="empNo1"></td>
                               </tr>
                               <tr>
                                  <td>부서</td>
@@ -126,23 +130,49 @@
 
                               <tr>
                                  <td><button type="button" class="btn-sm  btn-danger"
-                                       onclick="endFunction()">퇴사처리</button></td>
-                                 <td colspan="3"><input type="date" id="endDate"
-                                    name="endDate" class="form-control form-control-user"
-                                    style="width: 50%;"></td>
+                                       onclick="endFunction()" style="width:100%;">퇴사처리</button></td>
+                                 <td colspan="3" id="entTd"></td>
                               </tr>
                            </table>
-                      		<div class="modal-footer">
-                     			<button class="btn btn-primary " type="submit" style="float: right">
-                        		<i class="fas fa-file-signature"></i>수정하기</button>
-							</div>
-                        </form>
+                            <form name="updateEmpForm" action="updateEmpForm" method="post" autocomplete="off">
+								<input type="hidden" id="empNo" name="empNo">
+                      			<div class="modal-footer">
+                     				<button class="btn btn-primary " type="submit" style="float: right">
+                        			<i class="fas fa-file-signature"></i>수정하기</button>
+								</div>
+                       		</form>
 
                         <!-- jQuery와 Postcodify를 로딩한다. 주소입력 -->
                         <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
                         <script>
                         	function endFunction() {
-                          		confirm("퇴사를 진행하시겠습니까?");
+                        		console.log($("#empNo1").html());
+                        		if($('#entDate').val() !=""){
+	                        		if(confirm("퇴사를 진행하시겠습니까?")){
+	                        			$.ajax({
+	                        	              type:"POST",  
+	                        	              url:"updateEntDate",  
+	                        	              async:false,
+	                        	              data:{entDateS:$('#entDate').val(),
+	                        	            		empNo:$("#empNo1").html()
+	                        	              },
+	                        	              success:function(result){
+	                        	            	  if(result > 0){
+		                                        	  alert("퇴사 처리가 완료 되었습니다.");
+		                                        	  location.reload();
+	                        	            	  }else{
+	                        	            		  alert("퇴사 실패!");
+	                        	            	  }
+	                        	            },   
+	                        	            error:function(e){  
+	                        	               console.log(e.responseText);  
+	                        	           }
+	                        	      	});
+	                        		}
+	                        	}else{
+	                        		alert("퇴사일자를 선택하세요!!");
+	                        	}
+
                         	}
                      	</script>
                      </div>
@@ -162,7 +192,8 @@
         var table=$('#employeeList').DataTable({
             columnDefs: [
                 { orderable: false, targets: [1,5] },
-                { searchable: false, targets: [4,5]}
+                { searchable: false, targets: [4,5]},
+                { className : "dt-center", targets:"_all"}
               ],
               dom: 'frtip',
               order: [[ 0, 'asc' ]],
@@ -207,9 +238,9 @@
               async:false,
               data:{empNo:$(event.relatedTarget).data('id')},
               success:function(emp){
-                 emp.joinDate=moment();
                   $("#empName").html(emp.empName);
-                  $("#empNo").html(emp.empNo);
+                  $("#empNo").val(emp.empNo);
+                  $("#empNo1").html(emp.empNo);
                   $("#deptName").html(emp.deptName);
                   $("#empPosition").html(emp.empPosition);
                   $("#joinDate").html(emp.joinDateS);
@@ -217,18 +248,32 @@
                   $("#officePhone").html(emp.officePhone);
                   $("#email").html(emp.email);
                   $("#address").html(emp.address);
-                  $("#empNo1").val(emp.empNo);
+                  $("#address").html(emp.address);
+                  entStatus(emp.entDateS); 
                   
               },   
               error:function(e){  
                   console.log(e.responseText);  
               }
-       });
+       		});
         });   
         
         
    });
-   
+   function entStatus(entDate){
+	   $(".modal-body button").attr("disabled",false);
+	   $('#entTd').children().remove();
+       $('#entTd').text("");
+       console.log(entDate);
+	   if(typeof entDate!="undefined"){
+		  $("#entTd").html(entDate);
+     	  $(".modal-body button").attr("disabled",true);
+	   }else{
+		   $("#entTd").append('<input type="date" id="entDate"'
+	               +'name="entDate" class="form-control form-control-user"'
+	                   +'style="width: 30%;">');
+	   }
+   }
    </script>
    <script
       src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
