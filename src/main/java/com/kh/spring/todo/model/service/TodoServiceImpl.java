@@ -30,9 +30,9 @@ public class TodoServiceImpl implements TodoService {
 
 
 		@Override
-		public ArrayList<Todo> selectTodo(String empNo) {
+		public ArrayList<Todo> selectTodo(Employee emp) {
 			// TODO Auto-generated method stub
-			return todoDao.selectTodo(sqlSession,empNo);
+			return todoDao.selectTodo(sqlSession,emp);
 		}
 
 
@@ -66,9 +66,9 @@ public class TodoServiceImpl implements TodoService {
 
 
 		@Override
-		public ArrayList<Todo> selectMainTodo(String empNo) {
+		public ArrayList<Todo> selectMainTodo(Employee emp) {
 			// TODO Auto-generated method stub
-			return todoDao.selectMainTodo(sqlSession,empNo);
+			return todoDao.selectMainTodo(sqlSession,emp);
 		}
 
 }

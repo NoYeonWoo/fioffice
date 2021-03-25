@@ -166,6 +166,12 @@ public class AdminController {
 	}
 	
 
+	//@RequestMapping("notice.ad")
+	public String noticeView() {
+		return "admin/noticeAdminView";
+	}
+
+
 	
 	@RequestMapping("address.ad")
 	public String addressView() {

@@ -43,49 +43,46 @@
 <div class="row">
  
 
-			<div class="col-md-12">
+			<div class="col-md-10">
 			<div class="card">
 			<div class="card-header"><h3 >결재 서류</h3> </div>
 				  <div class="card-body">
 				  	<form action="insertApproval.do" method="post" enctype="Multipart/form-data" id="form">
 					  
 					   <div class="form-group">
-						   <strong>기안자 : </strong><input type="text" class="form-control" value="( ${loginEmp.empNo} ) ${loginEmp.empName}" name="empNo" readonly>
+						   <strong>기안자 : </strong><input type="text" class="form-control" value="${ap.empName} ( ${ap.empPosition})" name="empNo" readonly>
 					   </div>
 					   <div class="row">
 						   <div class="form-group col-lg-6">
-						    	<strong>결재자 : </strong><input type="text" class="form-control" value="${gEmp}" name="approvalEmp" readonly>
+						    	<strong>결재자 : </strong><input type="text" class="form-control" value="${ap.firstApprEmp}" name="approvalEmp" readonly>
 						   </div>
 						   <div class="form-group col-lg-6">
-						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="${hEmp}" name="hEmp" readonly>
+						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="${ap.lastAppEmp}" name="hEmp" readonly>
 						   </div>
 					
 					    </div>
 					  <div class="form-group">
-					    	<input type="text" class="form-control" name="apTitle" placeholder="제목을 입력해주세요" autocomplete="off" required>
+					    	<input type="text" class="form-control" name="apTitle" placeholder="제목을 입력해주세요" autocomplete="off" readonly>
 					   	</div>
 					   
-						 <div class="form-group form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                       <label class="form-check-label" for="exampleCheck1">긴급</label>
-                       </div>
+			
 					  
 					
 					  
 				  <div class="form-group">
-						    <textarea class="form-control" id="summernote" name="apContent" maxlength="140" rows="7" autocomplete="off"></textarea>
+						    <textarea class="form-control" id="" name="apContent" maxlength="140" rows="7" autocomplete="off" readonly></textarea>
 						 </div>
 			         
 			          
 			          
-                     <input type="file" class="form-control" id="" name="">
+                     <input type="file" class="form-control" id="" name="" readonly >
                   
 			          
 			          <br><br>	  
 					  <div class="row">
 						  <div id="buttons">
-							  <button type="button" id="submitBtn" class="btn btn-primary">전송</button>
-							  <button type="button" onclick="location.href='approvalList.do'" class="btn btn-danger">취소</button>
+							
+							  <button type="button" onclick="location.href='approvalList.do'" class="btn btn-danger" style="float: right">확인</button>
 						  </div>
 					  </div>
 					 </form>
@@ -119,7 +116,7 @@
     });
     
     </script>
-    
+
     
     <script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.8/summernote.js"></script>
     <script src="${pageContext.request.contextPath}/resources/summernote/summernote-lite.js"></script>

@@ -217,7 +217,7 @@ p {
                                                               <c:if test="${ fn:length(todolist)>0}">
 								                        <c:forEach items="${todolist}" var="item">
 								                        <c:if test="${item.status eq 'N'}">
-								                        <c:if test="${item.empNo eq loginUser.empNo }">
+								                 
 														<li>
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
 														<div align="right"> <a  onclick="postFormSubmits(2);"><i class="fas fa-trash-alt"></i></a></div>
@@ -251,7 +251,7 @@ p {
 															</div>
 														</li>
 														</c:if>	
-															</c:if>	
+															
                                                   </c:forEach>
 												</c:if>	
 													</ul>

@@ -1,5 +1,7 @@
 package com.kh.spring.approval.model.service;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,5 +39,25 @@ public class ApprovalServiceImpl implements ApprovalService {
 		// TODO Auto-generated method stub
 		return approvalDao.selectlApprEmp(sqlSession);
 	}
+
+
+
+
+
+	@Override
+	public ArrayList<Approval> selectyList(Employee emp) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectyList(sqlSession,emp);
+	}
+
+
+	@Override
+	public Approval selectdetailapproval(int ano) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectdetailapproval(sqlSession,ano);
+	}
+
+
+
 
 }

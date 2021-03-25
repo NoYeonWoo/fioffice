@@ -128,6 +128,11 @@
     	});
     });
     
+	$(document).on('click','#submitBtn',function(){
+		if(confirm("정말로 제출하시겠습니까?\n기안 후엔 수정이 불가능합니다.")){
+			$("#form").submit();
+		}					
+	});
     </script>
     
     
