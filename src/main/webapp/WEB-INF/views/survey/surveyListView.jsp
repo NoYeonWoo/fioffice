@@ -131,7 +131,7 @@
 		<!-- 타이틀 영역 -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-               <h5>설문</h5>
+               <h3>설문</h3>
             </div>
             
             

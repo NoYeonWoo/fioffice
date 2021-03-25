@@ -87,7 +87,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE EMP_NO = #{empNo}
 </update>
 
-
+<update id="updateEntDate" parameterType="Employee">
+	UPDATE EMPLOYEE
+	SET ENT_DATE=#{entDate},
+	STATUS='N'
+	WHERE EMP_NO = #{empNo}
+</update>
 <select id="selectlApprEmp" resultMap="employeeResultSet" >
 SELECT EMP_NAME, EMP_NO, DEPT_CODE 
 FROM EMPLOYEE  WHERE JOB_CODE='J10'

@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -16,7 +15,7 @@
 	padding: 3rem 7rem 3rem 7rem;
 }
 #calendar {
-  padding: 0rem 7rem 3rem 7rem;
+  padding: 5rem 12rem 5rem 12rem;
 }
 .fc .fc-ltr{
 	height:600px;
@@ -71,23 +70,24 @@ select::-ms-expand {
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
-			<div class="col-sm-12">
-                <div class="card">
+			<div class="col-sm-10 mx-auto">
+                <div class="card" style="min-height: 100vh;" >
                     <div class="card-header">
-                        <h5>회의실예약</h5>
+                        <h3>회의실예약</h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" >
                     	<div class="roomSelect">
                     		<select id="meetingroom" class="form-select form-select-lg" aria-label=".form-select-lg example">
                     			<option value="">--회의실선택--</option>
-                    			<option value="R1">1번회의실</option>
-                    			<option value="R2">2번회의실</option>
-                    			<option value="R3">3번회의실</option>
+                    			<c:forEach items="${ rList }" var="r">	
+                                 	<option value="${ r.roomNo }">${ r.roomName }</option>
+					            </c:forEach>
                     		</select>
                     		<button type="button" data-toggle="modal" data-target="#myReservation" class="btn btn-primary" style="float:right">내 예약보기</button>
                 		</div> 
-                		<div id="calendarWrapper">
-			           		<div id="calendar">
+                		<hr style="border: 3px #B8ACD0 solid; width:88%; border-radius: 2em;">
+                	<div id="calendarWrapper">
+			           	<div id="calendar">
 			           	</div>
                     </div>
                 </div>
@@ -109,9 +109,9 @@ select::-ms-expand {
 				<form name="resInsert" action="login.me" method="post" autocomplete="off">
 				<div class=" mb-4">
 				 	<label for="rTitle" class=" mr-sm-2">시간선택 :</label>
-                        <div class="btn-group mb-1" role="group" aria-label="button groups">
+                        <div class="btn-group mb-1">
                         	<c:forEach begin="9" end="17" var="p">
-                           <button type="button" class="btn  btn-primary">${p}시</button>
+                           <div class="btn btn-primary">${p}시</div>
                            </c:forEach>
     					</div>
     				</div>
@@ -179,7 +179,10 @@ select::-ms-expand {
 	$(document).ready(function(){
    		$("#meetingroom").val("");
    		
-   		var today = new Date();
+		
+	    }); 
+	function calrendarView(){
+		var today = new Date();
 		var yesterDate = today.getTime() - (1 * 24 * 60 * 60 * 1000);
 
 		var calendar = $('#calendar').fullCalendar( {
@@ -199,18 +202,20 @@ select::-ms-expand {
 		            //rSelectDateFun(date);
 				}
 	          }
+		
 	      });
-		$("#calendar").hide();
-	    }); 
-	
+		
+	}
 	$("#meetingroom").change(function() {
-		$("#calendar").hide();
+		$("#calendar").children().remove();
 		if($("#meetingroom option:selected").val()!=""){
-		mNo = $("#meetingroom option:selected").val();
+		rNo = $("#meetingroom option:selected").val();
+		calrendarView();
+		$("#calendar").hide();
    		$("#calendar").fadeIn(1000);}
-   		if(date!=""){
-   		rSelectDateFun(date);
-   		}
+   		//if(date!=""){
+   		//rSelectDateFun(date);
+   		//}
 	});
 	
 	 	

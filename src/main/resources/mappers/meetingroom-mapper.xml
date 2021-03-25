@@ -7,10 +7,11 @@
 		<result property="roomName" column="ROOM_NAME" />
 		<result property="limitCount" column="LIMIT_NUM" />
 		<result property="location" column="LOCATION" />
+		<result property="closureDate" column="CLOSURE_DATE" />
 		<result property="status" column="STATUS" />
 	</resultMap>
 	
-	<select id="selectRoomList" resultMap="roomResultSet">
+	<select id="selectAllRoomList" resultMap="roomResultSet">
 		SELECT * 
 		FROM ROOM
 	</select>
@@ -21,8 +22,30 @@
 		#{roomName},
 		#{limitCount},
 		DEFAULT,
-		#{location}
+		#{location},
+		NULL
 		)
 	</insert>
 	
+	<update id="updateRoom" parameterType="MRoom">
+		UPDATE ROOM
+		SET ROOM_NAME =#{roomName},
+			LIMIT_NUM =#{limitCount},
+			LOCATION =#{location},
+			STATUS =#{status}
+		WHERE ROOM_NO = #{roomNo}
+	</update>
+	
+	<update id="deleteRoom" parameterType="_int">
+		UPDATE ROOM
+		SET STATUS ='N',
+			CLOSURE_DATE = SYSDATE
+		WHERE ROOM_NO = #{roomNo}
+	</update>
+	
+	<select id="selectRoomList" resultMap="roomResultSet">
+		SELECT ROOM_NO, ROOM_NAME 
+		FROM ROOM
+		WHERE STATUS = 'Y'
+	</select>
 </mapper>

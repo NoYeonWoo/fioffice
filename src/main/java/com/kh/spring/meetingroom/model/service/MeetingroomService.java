@@ -8,6 +8,12 @@ public interface MeetingroomService {
 
 	int insertRoom(Meetingroom room);
 
+	ArrayList<Meetingroom> selectAllRoomList();
+
+	int updateRoom(Meetingroom room);
+
+	int deleteRoom(int roomNo);
+
 	ArrayList<Meetingroom> selectRoomList();
 
 }

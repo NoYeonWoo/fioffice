@@ -82,7 +82,7 @@
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
-<div class="col-md-12">
+<div class="col-md-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
                         <h3>권한관리</h3>

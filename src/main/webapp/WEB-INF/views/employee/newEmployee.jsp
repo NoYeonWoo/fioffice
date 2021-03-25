@@ -46,7 +46,7 @@
   <!-- [ breadcrumb ] end -->
   
 
-			<div class="col-md-12">
+			<div class="col-md-10 mx-auto">
 				<div class="card mb-4">
 					<div class="card-header">
 						<h3>신규 사원 등록</h3>

@@ -127,7 +127,7 @@ public class AdminController {
 	//상위부서리스트
 	@RequestMapping(value="deptMainList", produces="appliction/json; charset=UTF-8")
 	@ResponseBody
-	public Object deptMainList() {
+	public String deptMainList() {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("data", adminService.deptMainList());
 		return new GsonBuilder().create().toJson(result);
@@ -136,7 +136,7 @@ public class AdminController {
 	//하위부서리스트
 	@RequestMapping(value="deptSubList", produces="appliction/json; charset=UTF-8")
 	@ResponseBody
-	public Object deptSubList(String deptCode) {
+	public String deptSubList(String deptCode) {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("data", adminService.deptSubList(deptCode));
 		return new GsonBuilder().create().toJson(result);

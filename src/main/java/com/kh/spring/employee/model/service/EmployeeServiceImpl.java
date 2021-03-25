@@ -1,6 +1,7 @@
 package com.kh.spring.employee.model.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,6 +64,13 @@ public class EmployeeServiceImpl implements EmployeeService {
 	public int updateEmployee(Employee emp) {
 		// TODO Auto-generated method stub
 		return employeeDao.updateEmployee(sqlSession, emp);
+	}
+
+
+	@Override
+	public int updateEntDate(Employee emp) {
+		// TODO Auto-generated method stub
+		return employeeDao.updateEntDate(sqlSession, emp);
 	}
 
 

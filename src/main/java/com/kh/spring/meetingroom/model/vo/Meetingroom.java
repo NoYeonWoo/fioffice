@@ -1,5 +1,7 @@
 package com.kh.spring.meetingroom.model.vo;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,7 @@ public class Meetingroom {
 	private String roomName;
 	private int limitCount;
 	private String location;
+	private Date closureDate;
 	private String status;
 	
 }

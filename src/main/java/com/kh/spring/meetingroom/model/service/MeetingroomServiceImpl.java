@@ -22,9 +22,24 @@ public class MeetingroomServiceImpl implements MeetingroomService {
 		return meetingDao.insertRoom(sqlSession, room);
 	}
 	@Override
+	public ArrayList<Meetingroom> selectAllRoomList() {
+		// TODO Auto-generated method stub
+		return meetingDao.selectAllRoomList(sqlSession);
+	}
+	@Override
+	public int updateRoom(Meetingroom room) {
+		// TODO Auto-generated method stub
+		return meetingDao.updateRoom(sqlSession, room);
+	}
+	@Override
+	public int deleteRoom(int roomNo) {
+		// TODO Auto-generated method stub
+		return meetingDao.deleteRoom(sqlSession, roomNo);
+	}
+	@Override
 	public ArrayList<Meetingroom> selectRoomList() {
 		// TODO Auto-generated method stub
-		return meetingDao.selectRoomList(sqlSession);
+		return  meetingDao.selectRoomList(sqlSession);
 	}
 
 }

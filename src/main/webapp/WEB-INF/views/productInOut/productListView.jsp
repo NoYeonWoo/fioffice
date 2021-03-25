@@ -52,8 +52,8 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  <!-- Basic Button table start -->
-          <div class="col-sm-12">
-                <div class="card">
+          <div class="col-sm-12" >
+                <div class="card" >
                     <div class="card-header">
                         <h3>상품관리</h3>
                     </div>
