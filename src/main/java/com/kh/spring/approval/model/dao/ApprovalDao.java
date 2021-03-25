@@ -1,5 +1,7 @@
 package com.kh.spring.approval.model.dao;
 
+import java.util.ArrayList;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -24,6 +26,16 @@ public class ApprovalDao {
 	public Employee selectlApprEmp(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("employeeMapper.selectlApprEmp");
+	}
+
+	public ArrayList<Approval> selectyList(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectyList",emp);
+	}
+
+	public Approval selectdetailapproval(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("approvalMapper.selectdetailapproval",ano);
 	}
 
 }

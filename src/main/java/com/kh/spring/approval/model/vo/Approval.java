@@ -29,6 +29,7 @@ public class Approval {
 	private Date doneDate;//마지막 최종 결재날짜
 	private String empNo;//결재올린자(상신자)
 	private String formNo;//결재 양식번호
+	private String formName;//결재 양식이름
 	private String firstApprEmp;//첫번째 결재자
 	private String lastAppEmp;//마지막 결재자(대표이사)
 	

@@ -6,7 +6,23 @@
 		<id property="roomNo" column="ROOM_NO" />
 		<result property="roomName" column="ROOM_NAME" />
 		<result property="limitCount" column="LIMIT_NUM" />
-		<result property="location" column="LOCATIOIN" />
+		<result property="location" column="LOCATION" />
 		<result property="status" column="STATUS" />
 	</resultMap>
+	
+	<select id="selectRoomList" resultMap="roomResultSet">
+		SELECT * 
+		FROM ROOM
+	</select>
+	
+	<insert id="insertRoom" parameterType="MRoom">
+		INSERT INTO ROOM VALUES (
+		SEQ_ROOM.NEXTVAL,
+		#{roomName},
+		#{limitCount},
+		DEFAULT,
+		#{location}
+		)
+	</insert>
+	
 </mapper>

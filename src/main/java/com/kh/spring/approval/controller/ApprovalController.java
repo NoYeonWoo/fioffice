@@ -15,9 +15,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.approval.model.service.ApprovalService;
 import com.kh.spring.approval.model.vo.Approval;
+import com.kh.spring.common.exception.CommException;
 //import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 
@@ -27,12 +29,29 @@ public class ApprovalController {
 	@Autowired
 	private ApprovalService approvalService;
 	
-	
+	//사이드바에 전자결재 버튼을 누루면 리스트가 같이 들어올거임 
 	@RequestMapping("approvalList.do")
-	public String approvalList() {
+	public String approvalList(Employee emp, Model m, HttpSession session) {
+		//deptcode 와 유저 넘기는 거 잊지 말자 
+		emp=(Employee) session.getAttribute("loginUser");
+		
+
+		//기안문서인데 중지
+		ArrayList<Approval> rlist = new ArrayList<Approval>();// status가 R라서  reject는  R 로 들어감 
+		//기안문서 완료
+		ArrayList<Approval> clist = new ArrayList<Approval>();// status가 C라서 결재승인 confirm  는 C  로 들어감 
+		
+	
+		System.out.println(emp);
+		//기안문서-내가 올린문서 중 진행중
+		ArrayList<Approval> ylist=approvalService.selectyList(emp);
+		System.out.println("진행중문서::"+ylist);
+		m.addAttribute("ylist",ylist);
+		
 		return "approval/approvalListView";
 	}
 	
+	//결재하기 버튼을 누루면 첫결재자와 대표가 들어감 
 	@RequestMapping("approvalInsertForm.do")
 	public String approvalInsertForm(String deptCode, Model model, HttpSession session) {
 	    
@@ -109,9 +128,27 @@ public class ApprovalController {
 		return "approval/approvalView";
 	}
 	
-	//상신인이 볼수 있는 결재 문서 상세보기 
+	//상신인이 볼수 있는 결재 문서 상세보기 여기에는 업데이트도 없고 보기만 가능 
+//	@RequestMapping("approvalDetailView.do")
+//	public String approvalDetailView() {
+//		return "approval/approvalDetailView";
+//		
+//		
+//	}
+	
+	
 	@RequestMapping("approvalDetailView.do")
-	public String approvalDetailView() {
-		return "approval/approvalDetailView";
+	public ModelAndView selectBoard(int ano, ModelAndView mv) {
+		
+      Approval ap = approvalService.selectdetailapproval(ano);
+		  
+	        System.out.println("상세보기 "+ap);
+			
+			mv.addObject("ap", ap).setViewName("approval/approvalDetailView");
+
+		
+	
+		return mv;
+
 	}
 }
