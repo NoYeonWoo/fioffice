@@ -27,11 +27,11 @@ public class TodoCotroller {
 	@RequestMapping("todoListView.do")
 	public String listTodo(String empNo,Model m, HttpSession session) throws Exception {
 		Employee emp= (Employee) session.getAttribute("loginUser");
-		 empNo=emp.getEmpNo();
 		 
-		 System.out.println("접속자:"+empNo);
+		 
+		 System.out.println("접속자:"+emp);
 			
-		ArrayList<Todo> todolist = todoService.selectTodo(empNo);
+		ArrayList<Todo> todolist = todoService.selectTodo(emp);
 		
 		
 		m.addAttribute("todolist", todolist);
@@ -44,8 +44,8 @@ public class TodoCotroller {
 	@RequestMapping(value="todoMainListView.do",produces ="application/json;charset=UTF-8")
 	public void MainlistTodo(String empNo,Model m, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
 		Employee emp= (Employee) session.getAttribute("loginUser");
-		 empNo=emp.getEmpNo();
-		ArrayList<Todo> todolist =todoService.selectMainTodo(empNo);
+		 
+		ArrayList<Todo> todolist =todoService.selectMainTodo(emp);
 		
 		System.out.println("todolist main::"+todolist);
 		response.setContentType("application/json;charset=utf-8");

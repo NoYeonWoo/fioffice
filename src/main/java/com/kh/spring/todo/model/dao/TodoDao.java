@@ -17,9 +17,9 @@ public class TodoDao {
 		return sqlSession.insert("todoMapper.insertTodo",t);
 	}
 
-	public ArrayList<Todo> selectTodo(SqlSessionTemplate sqlSession, String empNo) {
+	public ArrayList<Todo> selectTodo(SqlSessionTemplate sqlSession, Employee emp) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
+		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo",emp);
 	}
 
 
@@ -41,9 +41,9 @@ public class TodoDao {
 		return sqlSession.update("todoMapper.updateDelete",tno);
 	}
 
-	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession, String empNo) {
+	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession, Employee emp) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo");
+		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo",emp);
 	}
 
 

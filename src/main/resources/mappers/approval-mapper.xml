@@ -16,6 +16,7 @@
         <result property="doneDate" column="APPROVAL_DONEDATE" />
 		<result property="empNo" column="EMP_NO" />
 		<result property="formNo" column="FORM_NO" />
+		<result property="formName" column="FORM_NAME" />
 		<result property="firstApprEmp" column="FIRST_APPR_EMP" />
         <result property="lastAppEmp" column="LAST_APPR_EMP" />
         
@@ -28,4 +29,22 @@ VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent
 
 </insert>
 
+<select id="selectyList" resultMap="approvalResultMap">
+   SELECT*
+   FROM APPROVAL 
+   JOIN APPROVAL_TYPE USING (FORM_NO)
+   JOIN EMPLOYEE USING (EMP_NO)
+   WHERE EMP_NO=#{empNo}
+
+</select>
+
+
+<select id="selectdetailapproval"  parameterType="_int" resultMap="approvalResultMap">
+        SELECT *
+		FROM APPROVAL   
+		JOIN EMPLOYEE USING (EMP_NO)
+		WHERE APPROVAL_STATUS='Y'
+		AND APPROVAL_NO=#{approvalNo}
+		
+</select>
 </mapper>

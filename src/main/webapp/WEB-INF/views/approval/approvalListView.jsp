@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,27 +43,28 @@
 					  
 							</div>
 						<div class="card-body">
-						    <caption>● 결재 진행 > 진행 문서</caption> <br><br>
-							<table class="table table-bordered" style="text-align: center; width:80%;" >
+						    ● 결재 진행 > 진행 문서 <br><br>
+							<table class="table table-bordered" id="boardList" style="text-align: center; width:80%;" >
 								<tr>
 									<th style="width:10%;">품의 번호</th>
 					             	<th style="width:10%;">기안일</th>
-									<th>결재양식</th>						
-									<th>긴급</th>
+									<!--  <th style="width:10%;">결재양식</th>		-->				
+									<th style="width:10%;">긴급</th>
 									<th>제목</th>
 									
 								</tr>
 
 								<tbody>
-
+	                 <c:forEach items="${ ylist }" var="yl">
 								<tr>
-										<td >데이터가 없습니다.</td>
-							            <td >데이터가 없습니다.</td>
-							            <td >데이터가 없습니다.</td>
-						 	            <td >데이터가 없습니다.</td>
-						          	   <td >데이터가 없습니다.</td>
+										<td >${yl.approvalNo }</td>
+							      		<td >${yl.approvalDate }</td>
+							          <!--   <td >${yl.formName }</td> -->
+						 	          	<td >${yl.urgent }</td>
+						          	   	<td >${yl.approvalTitle }</td>
+						          	     
 									</tr>
-
+                    </c:forEach>
 								</tbody>
 							</table>
 							
@@ -85,6 +87,7 @@
 							            <td >데이터가 없습니다.</td>
 						 	            <td >데이터가 없습니다.</td>
 						          	   <td >데이터가 없습니다.</td>
+						          	   
 									</tr>
 
 								</tbody>
@@ -109,7 +112,8 @@
 							            <td >데이터가 없습니다.</td>
 							            <td >데이터가 없습니다.</td>
 						 	            <td >데이터가 없습니다.</td>
-						          	   <td >데이터가 없습니다.</td>
+						          	     <td >데이터가 없습니다.</td>
+						          	    
 									</tr>
 
 								</tbody>
@@ -134,22 +138,51 @@
 									<th>기안자</th>
 									<th>제목</th>
 									<th>상태</th>
-									<th></th>
+									
 								</tr>
 
 								<tbody>
-
+                                   	<c:forEach items="${ list }" var="b">
 									<tr>
 										<td >데이터가 없습니다.</td>
 							            <td >데이터가 없습니다.</td>
 							            <td >데이터가 없습니다.</td>
 						 	            <td >데이터가 없습니다.</td>
 						          	   <td >데이터가 없습니다.</td>
-						          	   <td ><i class="fas fa-clipboard-list"/><a  href="approval.do"  >상세보기</a></td>
+						          	  
 						          	   
 						          	   
 				
 									</tr>
+									</c:forEach>
+								</tbody>
+							</table>
+							
+							<caption>● 결재 진행 > 결재 문서</caption> <br><br>
+							<table class="table table-bordered" style="text-align: center;">
+							<tr>
+									<th>품의 번호</th>
+									<th>기안일</th>
+									<th>기안자</th>
+									<th>제목</th>
+									<th>상태</th>
+									
+								</tr>
+
+								<tbody>
+                                   	<c:forEach items="${ list }" var="b">
+									<tr>
+										<td >데이터가 없습니다.</td>
+							            <td >데이터가 없습니다.</td>
+							            <td >데이터가 없습니다.</td>
+						 	            <td >데이터가 없습니다.</td>
+						          	   <td >데이터가 없습니다.</td>
+						          	  
+						          	   
+						          	   
+				
+									</tr>
+									</c:forEach>
 								</tbody>
 							</table>
 							
@@ -158,8 +191,14 @@
 					</div>
 				</div>
 
-
-
+<script>
+$(function(){
+	$("#boardList tbody tr").click(function(){
+		location.href="approvalDetailView.do?ano=" + $(this).children().eq(0).text();
+	});
+});
+</script>
+     
 
 
 

@@ -165,7 +165,7 @@ public class AdminController {
 		return new GsonBuilder().create().toJson(empList);
 	}
 	
-	@RequestMapping("notice.ad")
+	//@RequestMapping("notice.ad")
 	public String noticeView() {
 		return "admin/noticeAdminView";
 	}
