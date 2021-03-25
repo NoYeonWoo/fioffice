@@ -28,15 +28,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectDListCount" resultType="_int">
 		SELECT COUNT(*)
-		FROM DEPTBOARD
-		WHERE STATUS='Y'
+		FROM DEPTBOARD A
+		INNER JOIN DEPT B ON B.DEPT_CODE = A.DEPT_CODE
+		WHERE A.DEPT_CODE = #{loginUser.deptCode}
+		AND A.STATUS = 'Y'
 	</select>
 	
 	<select id="selectDList" resultMap="DeptboardResultSet">
 		SELECT *
-		FROM DEPTBOARD
-		WHERE STATUS='Y' 
-		ORDER BY DBOARD_NO DESC
+		FROM DEPTBOARD A
+		INNER JOIN DEPT B ON B.DEPT_CODE = A.DEPT_CODE
+		WHERE A.DEPT_CODE = #{loginUser.deptCode}
+		AND A.STATUS = 'Y'
+		ORDER BY A.DBOARD_NO DESC
 	</select>
 
 	<insert id="insertDboard" parameterType="Deptboard">

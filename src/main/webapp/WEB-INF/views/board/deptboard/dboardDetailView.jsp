@@ -109,7 +109,7 @@
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
-	<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /> </div>
+	<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
 	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ db.dboardWriter }</a>

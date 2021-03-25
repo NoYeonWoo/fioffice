@@ -109,7 +109,7 @@
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
-	<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="Profile" /> </div>
+	<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
 	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ cb.cboardWriter }</a>
@@ -182,49 +182,46 @@
 	
 	<div class="app-article-vote">
 		<div class="card-body">
+		
 		<!-- 자신의 글이 아닐 때만 추천 가능 -->
+		<!--  
 		 	<c:if test="${ loginUser.empName != cb.cboardWriter }">
-			<button type="button" id="btnLike" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
+			<button type="button" id="like_btn" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
 			<span class="likeCt">${ cb.boardLikeCount }</span>
 			</button>
 			</c:if>
+		-->
 		</div>
 	</div>
 	</div>
 	
 	<script>
 		
-	$(function(){
-		// 추천버튼 클릭시(추천 추가 또는 추천 제거)
-		$("#rec_update").click(function(){
-			$.ajax({
-				url: "RecUpdate.do",
-                type: "POST",
-                data: {
-                    no: ${cb.cboardNo}
-                },
-                success: function () {
-			        recCount();
-                },
-			})
-		})
-		
-		// 게시글 추천수
-	    function recCount() {
-			$.ajax({
-				url: "RecCount.do",
-                type: "POST",
-                data: {
-                    no: ${cb.cboardNo}
-                },
-                success: function (boardLikeCount) {
-                	$(".rec_count").html(boardLikeCount);
-                },
-			})
-	    };
-	    recCount(); // 처음 시작했을 때 실행되도록 해당 함수 호출
+	 /* 좋아요 버튼 클릭 */
+	  $(document).on('click', '.like_btn',function(){
+		  var cno = ${cb.cboardNo};
+		 $.ajax({
+			   type : "get",
+			   url : "clickLikes",
+			   data : {cboardNo:cno,},
+			   dataType : "json",
+			   success : function(data) {
+				  let result = data.result;
+				  if(result == "like"){
+					  alert("추천해 주셔서 감사합니다.")		  
+				  }else{
+					  alert("추천이 취소되었습니다.")
+				  }
+			   },
+			   error : function(){
+				   alert("오류발생");  
+			   }
+		 }); 
+		  
+	  });
 	
 	</script>
+	
 	
 		
 

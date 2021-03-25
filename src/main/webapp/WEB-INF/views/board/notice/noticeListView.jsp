@@ -230,7 +230,7 @@
             <a class="tw-flex-1">
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span class="tw-mr-1">${n.noticeTitle}</span>
+	            	<i class="fas feather icon-bell"><span class="tw-mr-1"> ${n.noticeTitle}</span></i>
 				</div>
 	          
 	          <div class="app-list-meta">

@@ -19,7 +19,7 @@
 		<typeAlias type="com.kh.spring.survey.model.vo.Survey" alias="Survey"/>
 		<typeAlias type="com.kh.spring.approval.model.vo.Approval" alias="Approval"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.AdminMenu" alias="AdminMenu"/>
-		<typeAlias type="com.kh.spring.meetingroom.model.vo.MeetingRoom" alias="MRoom"/>
+		<typeAlias type="com.kh.spring.meetingroom.model.vo.Meetingroom" alias="MRoom"/>
 	</typeAliases>
 	
 	

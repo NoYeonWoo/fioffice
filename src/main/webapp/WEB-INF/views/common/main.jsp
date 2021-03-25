@@ -271,39 +271,22 @@
                 <div class="card">
                     <div class="card-header">
                         <h5>공지사항</h5>
+                        <a href="nlist.bo" align="right"> <i class="fas feather icon-bell"></i>&nbps;더보기</a>
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>First Name</th>
-                                        <th>Last Name</th>
-                                        <th>Username</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Mark</td>
-                                        <td>Otto</td>
-                                        <td>@mdo</td>
-                                    </tr>
-                                    <tr>
-                                        <td>2</td>
-                                        <td>Jacob</td>
-                                        <td>Thornton</td>
-                                        <td>@fat</td>
-                                    </tr>
-                                    <tr>
-                                        <td>3</td>
-                                        <td>Larry</td>
-                                        <td>the Bird</td>
-                                        <td>@twitter</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <table>
+							<c:forEach var="n" items="${nlist}" begin="0" end="5">
+							  <tr align="center"> 
+							      <td align="left" style="padding-left: 10px; width: 60%;">
+							           <a href="href="ndetail.bo?nno=" + $(this).children().eq(0).val();">
+							      </td>
+							  </tr>
+							</c:forEach>
+							  <tr>
+							  	<td class="moreTD"><a href="nlist.bo"> <i class="fas fa-location-arrow"></i>더보기</a> </td>
+							  </tr>
+						 </table>
                         </div>
                     </div>
                 </div>
