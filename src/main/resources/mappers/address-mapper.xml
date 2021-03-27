@@ -14,8 +14,30 @@
 		<result column="ADDRESS_ADDRESS" property="addressAddress"/>
 		<result column="ADDRESS_MEMO" property="addressMemo"/>
 		<result column="STATUS" property="status"/>
+		<result column="EMP_NO" property="empNum"/>
 	</resultMap>
 	
+	<resultMap type="Employee" id="employeeResultSet">
+		<id property="empNo" column="EMP_NO" />
+		<result property="empPwd" column="EMP_PWD" />
+		<result property="empName" column="EMP_NAME" />
+		<result property="phone" column="PHONE" />
+		<result property="address" column="ADDRESS" />
+		<result property="officePhone" column="OFFICE_PHONE" />
+		<result property="email" column="EMAIL" />
+		<result property="resNo" column="RES_NO" />
+		<result property="joinDate" column="JOIN_DATE" />
+		<result property="entDate" column="ENT_DATE" />
+		<result property="originName" column="ORIGIN_NAME" />
+		<result property="changeName" column="CHANGE_NAME" />
+	    <result property="status" column="STATUS" />
+	    <result property="deptCode" column="DEPT_CODE" />
+	    <result property="jobCode" column="JOB_CODE" />
+	    <result property="deptName" column="DEPT_NAME" />
+	    <result property="empPosition" column="JOB_NAME" />
+	    <result property="deptCode" column="DEPT_CODE" />
+	    <result property="jobCode" column="JOB_CODE" />
+  	</resultMap>
 	
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
@@ -23,15 +45,41 @@
 		WHERE STATUS='Y'
 	
 	</select>
+	<select id="selectListCount2" resultType="_int">
+		SELECT COUNT(*)
+		FROM EMPLOYEE
+		WHERE STATUS='Y'
+		
 	
+	</select>
 	
 	<select id="selectList" resultMap="addressResultSet">
 		SELECT *
 		FROM ADDRESS
 		WHERE STATUS = 'Y'
+		AND EMP_NO=#{empNum}
 		ORDER BY ADDRESS_NO DESC
+		
 	
 	</select>
+	<select id="selectList2" resultMap="employeeResultSet">
+		SELECT *
+		FROM EMPLOYEE
+		WHERE STATUS = 'Y'
+		ORDER BY EMP_NO DESC
+	
+	</select>
+	
+	<select id="selectAddressNum" resultMap="employeeResultSet">
+		SELECT *
+		FROM EMPLOYEE
+		WHERE STATUS = 'Y'
+		AND EMP_NO=#{empNum}
+		ORDER BY EMP_NO DESC
+	
+	</select>
+	
+	
 	
 	
 	<!--sdsd -->
@@ -55,16 +103,23 @@
 	
 		INSERT INTO ADDRESS
 		VALUES(SEQ_ADDRESS_NO.NEXTVAL, #{addressName}, #{addressPhone}, #{addressEmail}, #{addressComName}, #{addressJob}, #{addressTel}, #{addressDept},#{addressAddress},
-		#{addressMemo},default)
+		#{addressMemo},default,#{empNum})
 	
 	
 	</insert>
 	
 	
 	<update id="updateAddress" parameterType="Address">
-		UPDATE BOARD
-		SET ADDRESS_NAME=#{addressName}, ADDESS_PHONE=#{addressPhone}, ADDRESS_EMAIL=#{addressEmail} , ADDRESS_COM_NAME=#{addressComName} , ADDRESS_JOB=#{addressJob} , ADDRESS_TEL=#{addressTel} ,
-		 ADDRESS_DEPT=#{addressDept} , ADDRESS_ADDRESS=#{addressAddress}, ADDRESS_MEMO=#{addressMemo}
+		UPDATE ADDRESS
+		SET ADDRESS_NAME=#{addressName},
+		ADDESS_PHONE=#{addressPhone},
+		ADDRESS_EMAIL=#{addressEmail} ,
+		ADDRESS_COM_NAME=#{addressComName},
+		ADDRESS_JOB=#{addressJob},
+		ADDRESS_TEL=#{addressTel} ,
+		ADDRESS_DEPT=#{addressDept},
+		ADDRESS_ADDRESS=#{addressAddress},
+		ADDRESS_MEMO=#{addressMemo}
 		
 		WHERE ADDRESS_NO=#{addressNo}
 	

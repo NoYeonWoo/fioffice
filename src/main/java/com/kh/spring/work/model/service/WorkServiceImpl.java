@@ -31,7 +31,29 @@ public class WorkServiceImpl implements WorkService {
 		// TODO Auto-generated method stub
 		return workDao.selectListCount(sqlSession,pi);
 	}
-	
+
+	@Override
+	public Work selectWork(String eno) {
+		return workDao.selectWork(sqlSession,eno);
+	}
+
+	@Override
+	public int insertWork(Work work) {
+		// TODO Auto-generated method stub
+		return workDao.startWork(sqlSession,work);
+	}
+
+	@Override
+	public Work updateSumWork(String eno) {
+		// TODO Auto-generated method stub
+		return workDao.updateSumWork(sqlSession,eno);
+	}
+
+	@Override
+	public int updateWork(Work work) {
+		// TODO Auto-generated method stub
+		return workDao.updateWork(sqlSession,work);
+	}
 	
 	
 	

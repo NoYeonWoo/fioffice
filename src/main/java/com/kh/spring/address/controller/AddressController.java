@@ -29,6 +29,7 @@ import com.kh.spring.address.model.service.AddressService;
 import com.kh.spring.address.model.vo.Address;
 import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.employee.model.vo.Employee;
 
 @Controller
 public class AddressController {
@@ -36,20 +37,50 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
-	@RequestMapping("view.add")
-	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model) {
-		
-		
-	
-		int listCount = addressService.selectListCount();
+	@RequestMapping("view.add2")
+	public String selectList2(@RequestParam(value="currentPage",required=false, defaultValue="1")  int currentPage, Model model) {
+		int listCount = addressService.selectListCount2();
 		//System.out.println(listCount);
 		
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 		
-		ArrayList<Address> list = addressService.selectListCount(pi);
+		ArrayList<Employee> list = addressService.selectListCount2(pi);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pi",pi);
+		
+
+		return "address/addressView2";
+		
+	}
+	
+	
+	@RequestMapping("view.add")
+	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage,@RequestParam("eno")String eno,Model model) {
+		
+
+		//a.setEmpNum(eno);//eno
+		
+		//Employee loginUser=(Employee)model.getAttribute("loginUser");
+		//System.out.println(loginUser.toString());
+		//int listCount = addressService.selectListCount(loginUser.getEmpNo());
+		int listCount = addressService.selectListCount(eno);
+	    //System.out.println("로긴유저 문자열"+loginUser.toString());
+	    
+		
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
+		//ArrayList<Address> list = addressService.selectList(pi,loginUser.getEmpNo());
+		ArrayList<Address> list = addressService.selectList(pi,eno);
+		
+
+	    //ArrayList<Address> list = deptService.selectListCount(pi,loginUser.getDeptCode());
+
+
+		
+		model.addAttribute("list",list);
+		model.addAttribute("pi",pi);
+		
+
 		
 
 		return "address/addressView3";
@@ -63,7 +94,7 @@ public class AddressController {
 		
 		Address a = addressService.selectAddress(ano);
 		
-		System.out.println("address컨트롤러 detail ano  "+ano);
+		//System.out.println("address컨트롤러 detail ano  "+ano);
 		mv.addObject("a",a).setViewName("address/addressDetail");
 		return mv;
 		
@@ -76,7 +107,7 @@ public class AddressController {
 		int result =addressService.deleteAddress(ano);
 
 		System.out.println("delete.add 리설트  "+result);
-		return "redirect:view.add";
+		return "redirect:view.add2";
 		
 		
 	}
@@ -87,19 +118,20 @@ public class AddressController {
 		
 		Address a = addressService.selectAddress(ano);
 		
-		System.out.println("address컨트롤러 goupdate ano asdkasjkldasdjlkasd::  "+ano);
-		mv.addObject("a",a).setViewName("address/addressDetail");
+		//System.out.println("address컨트롤러 goupdate ano asdkasjkldasdjlkasd::  "+ano);
+		mv.addObject("a",a).setViewName("address/addressUpdate");
 		return mv;
 		
 	}
 	
 	@RequestMapping("update.add")
-	public String updateAddress(@RequestParam("ano") int ano ,HttpServletRequest request, Model model) {
+	public String updateAddress(@ModelAttribute Address a,HttpServletRequest request, Model model) {
 		
-		int result =addressService.updateAddress(ano);
-		
+		int result =addressService.updateAddress(a);
+		System.out.println("delete.add result :: "+result);
+		System.out.println("delete.add result ano:: "+a);
 				
-		return "redirect:view.add";
+		return "redirect:view.add2";
 		
 		
 	}
@@ -107,24 +139,24 @@ public class AddressController {
 	
 	
 	@RequestMapping("goinsert.add")
-	public String goviewInsert( ){
+	public String goviewInsert(){
 		
 		
 		return "address/addressInsert";
 		
 	}
 	@RequestMapping("insert.add")
-	public String viewinsert(@ModelAttribute Address a){
+	public String viewinsert(@ModelAttribute Address a,HttpServletRequest request){
 		
 		int result = addressService.insertAddress(a);
 		System.out.println("address컨트롤러 insert 리설트  "+result);
 
 		
 			if(result>0) {
-				return "redirect:view.add";
+				return "redirect:view.add2";
 				
 			}else {
-				return "redirect:view.add";
+				return "redirect:view.add2";
 			}
 
 		

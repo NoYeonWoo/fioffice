@@ -25,4 +25,24 @@ public class WorkDao {
 		return (ArrayList)sqlSession.selectList("workMapper.selectList", null, rowBounds); 
 	}
 
+	public Work selectWork(SqlSessionTemplate sqlSession, String eno) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("workMapper.selectWork"); 
+	}
+
+	public int startWork(SqlSessionTemplate sqlSession, Work work) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("workMapper.startWork"); 
+	}
+
+	public Work updateSumWork(SqlSessionTemplate sqlSession, String eno) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public int updateWork(SqlSessionTemplate sqlSession, Work work) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("workMapper.endWork"); 
+	}
+
 }

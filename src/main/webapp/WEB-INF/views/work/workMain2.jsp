@@ -1,6 +1,8 @@
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -68,6 +70,26 @@
 			
 			<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 			<div class="row">
+			
+			
+			
+			
+				<c:set var="today" value="<%=new java.util.Date()%>" />
+				<!-- 현재날짜 -->
+				<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+				
+				<form action="start.work" method="post" id="startWork">
+    				<input type="hidden" name="eno" id = "eno" value="${loginUser.empNo}">
+    				<input type="hidden" name="timeNow" id="timeNow" value="${date}" />
+    			</form>
+    			<form action="end.work" method="post" id="endWork">
+    				<input type="hidden" name="eno" id = "eno" value="${loginUser.empNo}">
+    				<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />
+    			</form>
+    			
+    			
+    			
+    			
 				<!-- 근태관리 화면시작 -->
 				<div class="col-xl-6 col-md-12">
 					<div class="card latest-update-card">
@@ -77,9 +99,8 @@
 								<div class="btn-group card-option">
 									<div
 										style="width: 160%; height: 160%; line-height: 160%; color: #666; font-size: 160%; text-align: center;"
-										id="clock"></div>
-
-
+										id="clock">
+									</div>
 								</div>
 							</div>
 						</div>
@@ -96,8 +117,9 @@
 									<!-- 시간자리 -->
 									
 									<div class="col">
+
 										
-										<h6>시간</h6>
+										<h6>asdgasdg</h6>
 										
 									</div>
 
@@ -143,17 +165,13 @@
 								<div class="col-md-12">
 
 									<div class="card-body">
-										<button type="button" class="btn  btn-primary bg-twitter btn-lg">출근하기</button>
+										<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" class="btn  btn-secondary btn-lg">퇴근하기</button>
+										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork').submit();">퇴근하기</button>
 										
+
 									</div>
-									<form action="start.work" method="post" id="goForm">
-    									<input type="hidden" name="eno" value="${loginUser.empNo}">
-    								</form>
-					    			<form action="end.work" method="post" id="deleteAdd">
-    									<input type="hidden" name="eno" value="${loginUser.empNo}">
-    								</form>
+									
 								</div>
 							</div>
 
@@ -162,6 +180,7 @@
 						</div>
 						</div>
 
+<!-- ----------------------------------------------------------- onclick="location.href='start.work'" -->
 
 						<!-- [ Todo-list1 ] start -->
 						<div class="col-xl-6">

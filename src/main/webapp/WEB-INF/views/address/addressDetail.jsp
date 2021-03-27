@@ -51,6 +51,7 @@
  
  						<form action="goupdate.add" method="post" id="goForm">
     						<input type="hidden" name="ano" value="${a.addressNo}">
+    						<input type="hidden" name="eno" value="${loginUser.empNo}">
     					</form>
 					    <form action="delete.add" method="post" id="deleteAdd">
     						<input type="hidden" name="ano" value="${a.addressNo}">

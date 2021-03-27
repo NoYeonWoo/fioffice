@@ -78,6 +78,10 @@
 
 			<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 			<div class="row">
+			
+			<form action="view.add" method="post" id="goAdd">
+    				<input type="hidden" name="eno" id ="eno" value="${loginUser.empNo}">
+    			</form>
 
 
 
@@ -88,11 +92,10 @@
 							<h5>주소록</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
-									<input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
-                        			<a href ="insert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
-                        			<a href="detail.add"><button type="button" class="btn  btn-primary">임시상세</button></a>
+                        			<button type="button" class="btn  btn-primary" onclick="$('#goAdd').submit();">내 주소록</button></a>
 
 								</div>
 							</span>
@@ -103,35 +106,33 @@
 								<table class="table table-striped" id="addressList">
 									<thead>
 										<tr>
-											<th>번호</th>
+											<th>사번</th>
 											<th>이름</th>
-											<th>휴대폰번호</th>
-											<th>이메일</th>
-											<th>회사이름</th>
-											<th>직급</th>
+											<th>전화번호</th>
+											<th>주소</th>
 											<th>내선전화</th>
+											<th>이메일</th>
+											<th>직급</th>
 											<th>부서</th>
-											<th>회사주소</th>
-											<th>메모</th>
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${ list }" var="a">
+										<c:forEach items="${ list }" var="e">
 											<tr>
-												<td>${ a.addressNo }</td>
-												<td>${ a.addressName }</td>
-												<td>${ a.addressPhone }</td>
-												<td>${ a.addressEmail }</td>
-												<td>${ a.addressComName }</td>
-												<td>${ a.addressJob }</td>
-												<td>${ a.addressTel }</td>
-												<td>${ a.addressDept }</td>
-												<td>${ a.addressAddress }</td>
-												<td>${ a.addressMemo }</td>
+												<td>${ e.empNo }</td>
+												<td>${ e.empName }</td>
+												<td>${ e.phone }</td>
+												<td>${ e.address }</td>
+												<td>${ e.officePhone }</td>
+												<td>${ e.email }</td>
+												<td>${ e.deptCode }</td>
+												<td>${ e.jobCode }</td>
 											</tr>
 										</c:forEach>
 									</tbody>
 								</table>
+								
+								
 							</div>
 						</div>
 					</div>
@@ -145,10 +146,10 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage-1 }">Previous</a></li><!--이전페이지 -->
+									href="view.add2?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li><!--이전페이지 -->
 							</c:when>
 							<c:otherwise>
-								<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+								<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 
@@ -158,7 +159,7 @@
 							<c:choose>
 								<c:when test="${ pi.currentPage ne p }">
 									<li class="page-item"><a class="page-link"
-										href="view.add?currentPage=${ p }">${ p }</a></li>
+										href="view.add2?currentPage=${ p }">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item disabled"><a class="page-link"
@@ -171,11 +172,11 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add2?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"
-									href="view.add?currentPage=${ pi.currentPage+1 }">Next</a></li>
+									href="view.add2?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>
@@ -204,15 +205,16 @@
 	<!--지우지 마세요    div class="pcoded-main-container"  -->
 	<!-- [ Main Content ] 메인화면 끝 -->
 
-
+	<!-- 
 	<script>
     	$(function(){
-    		$("#boardList tbody tr").click(function(){
-    			location.href="detail.bo?bno=" + $(this).children().eq(0).text();
+    		$("#addressList tbody tr").click(function(){
+    			location.href="detail.add?ano=" + $(this).children().eq(0).text();
     		});
     	});
     </script>
-
+    -->
+	<!-- ?ano=" + $(this).children().eq(0).text(); -->
 
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
