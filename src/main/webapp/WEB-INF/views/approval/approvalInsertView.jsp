@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,10 +59,12 @@
 						   <input type="hidden" class="form-control" value="${loginUser.empNo}"  name="empNo"  id="empNo" >
 					   </div>
 					   <div class="row">
+				
 						   <div class="form-group col-lg-6">
 						    	<strong>결재자 : </strong><input type="text" class="form-control"  value="${firstApprEmp.empName}(${firstApprEmp.empPosition})"  readonly>
-						        	   <input type="hidden" class="form-control" value="${firstApprEmp.empNo}"  name="firstApprEmp" id="firstApprEmp" >
+						        	      <input type="hidden" class="form-control" value="${firstApprEmp.empNo}"  name="firstApprEmp" id="firstApprEmp" >
 						   </div>
+					
 						   <div class="form-group col-lg-6">
 						    	<strong>최종결재자 : </strong><input type="text" class="form-control" value="${lastAppEmp.empName} 대표이사 " readonly>
 						    	    <input type="hidden" class="form-control" value="${lastAppEmp.empNo}"  name="lastAppEmp" id="lastAppEmp" >

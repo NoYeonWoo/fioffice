@@ -38,4 +38,24 @@ public class ApprovalDao {
 		return sqlSession.selectOne("approvalMapper.selectdetailapproval",ano);
 	}
 
+	public ArrayList<Approval> selectfaList(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectfaList",emp);
+	}
+
+	public ArrayList<Approval> selectclist(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("approvalMapper.selectclist",emp);
+	}
+
+	public Employee selectinsertEmp(SqlSessionTemplate sqlSession,Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("employeeMapper.selectinsertEmp",emp);
+	}
+
+	public Employee selectfApprEmpDetail(SqlSessionTemplate sqlSession, String firstapp) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("employeeMapper.selectfApprEmpDetail",firstapp);
+	}
+
 }

@@ -61,14 +61,23 @@
          <div class="navbar-content scroll-div " >
          
             <div class="">
-               
+          
+            
+          
+             
+              
                <div class="main-menu-header">
+                   <c:if test="${sessionScope.loginUser.changeName eq null }">
+                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="User-Profile-Image">
+                   </c:if>
+                 <c:if test="${sessionScope.loginUser.changeName ne null }">
                   <img class="img-radius" src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="User-Profile-Image">
+                  </c:if>
                   <div class="user-details">
                      <div id="more-details">${sessionScope.loginUser.empName}님<i class="fa fa-caret-down"></i></div>
                   </div>
                </div>
-        
+       
                <div class="collapse" id="nav-user-link">
                   <ul class="list-unstyled">
                      <c:if test="${ !empty sessionScope.loginUser }">
