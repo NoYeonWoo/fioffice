@@ -85,12 +85,13 @@
 				<div class="col-xl-12">
 					<div class="card">
 						<div class="card-header">
-							<h5>주소록</h5>
+							<h5>내주소록</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
 									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
+                        			<input type="hidden" name="eno" value="${loginUser.empNo}">
                         			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
 
 								</div>

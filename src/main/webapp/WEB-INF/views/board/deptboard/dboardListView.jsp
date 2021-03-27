@@ -207,8 +207,7 @@
 
 	<div class="app-board-section">
 	
-     <input type="hidden" name="deptCode" id="deptCode" value="${loginUser.deptCode}">
-	
+
 	<!-- 카테고리 영역 -->
 		<div class="card-body">
 		<ul class="nav nav-tabs mb-3" id="myTab" role="tablist">
@@ -233,7 +232,7 @@
  
     <c:forEach items="${list}" var="db">
      <div class="dboardList">
-     <input type="hidden" value="${db.dboardNo }">
+     <input type="hidden" value="${db.dboardNo}">
     <ul class="app-board-template-list">
         <li>
             <a class="tw-flex-1">
@@ -248,7 +247,7 @@
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">${db.dboardWriter}</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">${db.dboardWriterName}</div>
 	              		</div>
 				</div>
 	            </span>        
@@ -262,7 +261,7 @@
          
         	</div> <!--   <div class="tw-flex-1"> -->
         	<!-- 댓글 count -->
-		    <div class="app-list-comment">11</div>
+		    <div class="app-list-comment">${ db.replyCount }</div>
         	</a>
     	</li>
     </ul>
@@ -292,7 +291,7 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
                 		</c:when>
                 		<c:otherwise>
                 			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
@@ -302,7 +301,7 @@
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -313,10 +312,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

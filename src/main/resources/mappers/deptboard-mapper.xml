@@ -8,6 +8,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="DeptboardResultSet" type="Deptboard">
 		<id property="dboardNo" column="DBOARD_NO"/>
 		<result property="dboardWriter" column="DBOARD_WRITER"/>
+		<result property="dboardWriterName" column="EMP_NAME"/>
 		<result property="deptCode" column="DEPT_CODE"/>
 		<result property="dboardCategory" column="DBOARD_CATEGORY"/>
 		<result property="dboardTitle" column="DBOARD_TITLE"/>
@@ -15,6 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="dboardDate" column="DBOARD_DATE"/>
 		<result property="status" column="STATUS"/>
 		<result property="count" column="COUNT"/>
+		<result property="profile" column="CHANGE_NAME"/>
+		<result property="replyCount" column="REPLY_COUNT"/>
 	</resultMap>
 	
 	<resultMap id="replyResultSet" type="Reply">
@@ -27,21 +30,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 	</resultMap>
 	
-	<select id="selectDListCount" parameterType="string" resultType="_int">
+	<select id="selectDListCount" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
-		FROM DEPTBOARD A
-		INNER JOIN DEPT B ON B.DEPT_CODE = A.DEPT_CODE
-		WHERE A.DEPT_CODE = #{deptCode}
-		AND A.STATUS = 'Y'
+		FROM DEPTBOARD
+		WHERE DEPT_CODE=#{deptCode}
+		AND STATUS='Y'
 	</select>
 	
-	<select id="selectDList" parameterType="string" resultMap="DeptboardResultSet">
-		SELECT *
-		FROM DEPTBOARD A
-		INNER JOIN DEPT B ON B.DEPT_CODE = A.DEPT_CODE
-		WHERE A.DEPT_CODE = #{deptCode}
-		AND A.STATUS = 'Y'
-		ORDER BY A.DBOARD_NO DESC
+	<select id="selectDList" parameterType="String" resultMap="DeptboardResultSet">
+		SELECT A.*,NVL((SELECT COUNT(*) FROM REPLY
+		WHERE REF_BNO = A.DBOARD_NO AND STATUS='Y'
+		GROUP BY DBOARD_NO),0) REPLY_COUNT, EMP_NAME
+		FROM DEPTBOARD A LEFT JOIN EMPLOYEE ON DBOARD_WRITER=EMP_NO
+		WHERE a.dept_code = #{deptCode}
+      	AND A.STATUS = 'Y'
+      	ORDER BY DBOARD_NO DESC
 	</select>
 
 	<insert id="insertDboard" parameterType="Deptboard">
@@ -71,10 +74,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectDboard" resultMap="DeptboardResultSet">
-		SELECT *
-		FROM DEPTBOARD
-		WHERE DBOARD_NO=#{dboardNo}
-		AND STATUS='Y'
+		SELECT A.*, B.EMP_NAME, B.CHANGE_NAME 
+		FROM DEPTBOARD A INNER JOIN EMPLOYEE B ON A.DBOARD_WRITER=B.EMP_NO
+		WHERE A.DBOARD_NO=#{dboardNo}
+		AND A.STATUS='Y'
 	</select>
 	
 	<insert id="insertReply" parameterType="Reply">
@@ -84,12 +87,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
 		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
-		FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
-		WHERE REF_BNO=#{dboardNo}
-		AND A.STATUS='Y'
-		ORDER BY REPLY_NO
+	  FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
+	  WHERE REF_BNO=#{dboardNo}
+	  AND A.STATUS='Y'
+	  ORDER BY REPLY_NO
 	</select>
-	
 	
 	<select id="selectSearchList" resultType="Deptboard" parameterType="map">
 		SELECT *

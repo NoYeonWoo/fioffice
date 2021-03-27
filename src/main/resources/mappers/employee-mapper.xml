@@ -92,19 +92,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	STATUS='N'
 	WHERE EMP_NO = #{empNo}
 </update>
+  
 <select id="selectlApprEmp" resultMap="employeeResultSet" >
 SELECT EMP_NAME, EMP_NO, DEPT_CODE 
 FROM EMPLOYEE  WHERE JOB_CODE='J10'
 
 </select>
 
+<select id="selectinsertEmp" resultMap="employeeResultSet"  parameterType="Employee" >
+SELECT *
+FROM EMPLOYEE  
+JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
+WHERE EMP_NO=#{empNo}
+</select>
+
 
 <select id="selectfApprEmp" resultMap="employeeResultSet" parameterType="string" >
-SELECT EMP_NAME, EMP_NO,JOB_CODE, DEPT_CODE ,JOB_NAME
+SELECT EMP_NAME, EMP_NO,JOB_CODE, DEPT_CODE ,JOB_NAME,DEPT_NAME
 FROM (SELECT * FROM EMPLOYEE
-<if test="value !=null">
- WHERE DEPT_CODE='${value}'</if> ORDER BY LENGTH(JOB_CODE) DESC, JOB_CODE DESC) 
+ WHERE DEPT_CODE=#{deptCode} ORDER BY LENGTH(JOB_CODE) DESC, JOB_CODE DESC) 
 JOIN JOB USING (JOB_CODE)
+JOIN DEPT USING (DEPT_CODE)
 WHERE ROWNUM= 1
 
 </select>
@@ -131,5 +139,11 @@ FROM EMPLOYEE
 		#{jobCode},
 		#{deptCode})
 </insert>
+
+<select id="selectfApprEmpDetail" resultMap="employeeResultSet"  parameterType="string">
+SELECT EMP_NAME, EMP_NO, DEPT_CODE 
+JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
+FROM EMPLOYEE  WHERE EMP_NO#{empNo}
+</select>
 
 </mapper>

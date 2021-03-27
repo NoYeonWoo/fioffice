@@ -9,7 +9,7 @@
 	text-align:center;
 	margin: auto;
 }
-#textbig{ 
+#addressMemo{ 
 	height:300px; 
     resize:none;
 
@@ -49,7 +49,7 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  
- 
+
  
  
  <!-- [ Main Content ] start -->
@@ -60,24 +60,25 @@
                         <h5>Basic Component</h5>
                     </div>
                     <div class="card-body">
-                        <form method="post">
+                        <form method="post" action="update.add" id="updateAdd">
+                        	<input type="hidden" name="addressNo" value="${a.addressNo}">
                             <div class="row">
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">이름</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressName }">
+                                        <input type="text" class="form-control" id="addressName" name="addressName" value="${ a.addressName }">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">휴대폰번호</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressPhone }">
+                                        <input type="text" class="form-control" id="addressPhone" name="addressPhone" value="${ a.addressPhone }">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Email">이메일</label>
-                                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="${ a.addressEmail }">
+                                        <input type="email" class="form-control" id="addressEmail" name="addressEmail" aria-describedby="emailHelp" value="${ a.addressEmail }">
                                     </div>
                                 </div>
                             </div>
@@ -87,19 +88,19 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">회사이름</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressComName }">
+                                        <input type="text" class="form-control" id="addressComName" name="addressComName" value="${ a.addressComName }">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">직급</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressJob }">
+                                        <input type="text" class="form-control" id="addressJob" name="addressJob" value="${ a.addressJob }">
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">내선전화</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressTel }">
+                                        <input type="text" class="form-control" id="addressTel" name="addressTel" value="${ a.addressTel }">
                                     </div>
                                 </div>
                             </div>
@@ -109,13 +110,13 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">부서</label>
-                                        <input type="text" class="form-control" id="Text" aria-describedby="" value="${ a.addressDept }">
+                                        <input type="text" class="form-control" id="addressDept" name="addressDept" aria-describedby="" value="${ a.addressDept }">
                                     </div>
                                 </div>
                                 <div class="col-sm-8">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">회사주소</label>
-                                        <input type="text" class="form-control" id="Text" value="${ a.addressAddress }">
+                                        <input type="text" class="form-control" id="addressAddress" name="addressAddress" value="${ a.addressAddress }">
                                     </div>
                                 </div>
                                 
@@ -128,7 +129,7 @@
                             <div class="input-group-prepend">
                                 <span class="input-group-text">메모</span>
                             </div>
-                            <textarea id="textbig" class="form-control" aria-label="With textarea" readonly="readonly">${ a.addressMemo }</textarea>
+                            <textarea id="addressMemo" name="addressMemo" class="form-control" aria-label="With textarea">${ a.addressMemo }</textarea>
                         </div>
                         
                         
@@ -137,9 +138,9 @@
                         
                         <div class="row" id="center">
                         <div class="col-md-12">
-
+						<input type="hidden" name="empNum" value="${loginUser.empNo}">
 					<div class="card-body">
-						<button type="button" class="btn  btn-primary btn-lg">수정하기</button>
+						<button type="submit" class="btn  btn-primary btn-lg">수정하기</button>
 					</div>
 
 					</div>

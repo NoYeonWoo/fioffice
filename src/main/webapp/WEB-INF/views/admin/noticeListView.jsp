@@ -228,14 +228,14 @@
             <a class="tw-flex-1">
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<span class="tw-mr-1">${n.noticeTitle}</span>
+	            	<i class="fas feather icon-bell"></i><span class="tw-mr-1"> ${n.noticeTitle}</span>
 				</div>
 	          
 	          <div class="app-list-meta">
 	             <span>
 	              <div class="app-list-member" style="color: #;">
 	                	<div class="app-avatar" style="width: 1.25rem; height: 1.25rem;">
-	                 		<div class="member_4 tw-inline-flex tw-items-center">${n.noticeWriter}</div>
+	                 		<div class="member_4 tw-inline-flex tw-items-center">${n.noticeWriterName}</div>
 	              		</div>
 				</div>
 	            </span>        
@@ -249,7 +249,7 @@
          
         	</div> <!--   <div class="tw-flex-1"> -->
         	<!-- 댓글 count -->
-		    <div class="app-list-comment">11</div>
+		    <div class="app-list-comment">${n.replyCount}</div>
         	</a>
     	</li>
     </ul>

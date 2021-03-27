@@ -61,14 +61,23 @@
          <div class="navbar-content scroll-div " >
          
             <div class="">
-               
+          
+            
+          
+             
+              
                <div class="main-menu-header">
+                   <c:if test="${sessionScope.loginUser.changeName eq null }">
+                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="User-Profile-Image">
+                   </c:if>
+                 <c:if test="${sessionScope.loginUser.changeName ne null }">
                   <img class="img-radius" src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="User-Profile-Image">
+                  </c:if>
                   <div class="user-details">
                      <div id="more-details">${sessionScope.loginUser.empName}님<i class="fa fa-caret-down"></i></div>
                   </div>
                </div>
-        
+       
                <div class="collapse" id="nav-user-link">
                   <ul class="list-unstyled">
                      <c:if test="${ !empty sessionScope.loginUser }">
@@ -85,7 +94,10 @@
                    <label>My portal</label>
                </li>
                <li class="nav-item">
-                   <a href="cmain.co" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
+                   <a href="cmain.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
+               </li>
+                <li class="nav-item">
+                   <a href="clist.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
                </li>
                <li class="nav-item">
                    <a href="view.work" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
@@ -213,6 +225,7 @@
    <!-- [ navigation menu ] end -->
    
    <!-- Required Js -->
+   
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>

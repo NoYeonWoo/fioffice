@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -17,6 +19,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -27,9 +30,12 @@ import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.community.model.service.CommunityService;
 import com.kh.spring.board.community.model.vo.Community;
+import com.kh.spring.board.community.model.vo.Likes;
 import com.kh.spring.board.notice.model.vo.Notice;
 import com.kh.spring.common.exception.CommException;
+import com.kh.spring.employee.model.vo.Employee;
 
+@SessionAttributes("loginUser")
 @Controller
 public class CommunityController {
 	
@@ -247,6 +253,46 @@ public class CommunityController {
 		
 		return new GsonBuilder().setDateFormat("yy년 MM월 dd일 HH:mm").create().toJson(list);
 		
+	}
+	
+	//좋아요 버튼
+	@RequestMapping("clickLikes")
+	@ResponseBody
+	public Map<String, Object> likesButton(HttpServletRequest request, @RequestParam("cboardNo") int cno, Model model) {	
+		
+		Employee loginUser=(Employee)model.getAttribute("loginUser");
+		
+		System.out.println("넘어옴");
+		System.out.println(cno);
+		
+		Likes likevo = new Likes();
+		likevo.setEmpNo(loginUser.getEmpNo());
+		likevo.setCboardNo(cno);
+		
+		System.out.println(likevo.getEmpNo());
+		System.out.println(cno);
+		
+		Map<String, Object> data = new HashMap<String, Object>();
+		String result = "";
+		
+		if(loginUser.getEmpNo() == null) {
+			result = "fail";
+			data.put("result", result);
+			return data; //로그인 후 추천 가능
+		} else {
+			String already = communityService.selectLikes(likevo);
+			if(already == null) {
+				int in = communityService.insertLikes(likevo);
+				if(in > 0) {
+				result = "like";
+				}
+				}
+			else {
+				result = "likeReady";	
+			}
+		}
+		data.put("result", result);
+		return data;  //좋아요 처리 완료
 	}
 		
 	

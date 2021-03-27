@@ -1,6 +1,8 @@
 package com.kh.spring.common;
 
-import com.kh.spring.board.common.model.vo.PageInfo;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.spring.address.model.vo.PageInfo;
 
 public class Pagination {
 	

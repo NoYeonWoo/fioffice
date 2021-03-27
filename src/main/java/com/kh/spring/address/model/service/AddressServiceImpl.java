@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.spring.address.model.dao.AddressDao;
 import com.kh.spring.address.model.vo.Address;
 import com.kh.spring.address.model.vo.PageInfo;
+import com.kh.spring.employee.model.vo.Employee;
 
 @Service("addressService")
 public class AddressServiceImpl implements AddressService {
@@ -21,9 +22,14 @@ public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
 	
 	@Override
-	public int selectListCount() {
+	public int selectListCount(String eno) {
 		// TODO Auto-generated method stub
-		return addressDao.selectListCount(sqlSession);
+		return addressDao.selectListCount(sqlSession,eno);
+	}
+	@Override
+	public ArrayList<Address> selectList(PageInfo pi, String eno) {
+		// TODO Auto-generated method stub
+		return addressDao.selectList(sqlSession,pi,eno);
 	}
 
 	@Override
@@ -53,12 +59,37 @@ public class AddressServiceImpl implements AddressService {
 	}
 
 	@Override
-	public int updateAddress(int ano) {
+	public int updateAddress(Address a) {
 		// TODO Auto-generated method stub
-		return addressDao.updateAddress(sqlSession,ano);
+		System.out.println("update.add  ano:: "+a);
+		return addressDao.updateAddress(sqlSession,a);
+	}
+
+	@Override
+	public ArrayList<Employee> selectListCount2(PageInfo pi) {
+		// TODO Auto-generated method stub
+		return addressDao.selectListCount2(sqlSession,pi);
+	}
+
+	@Override
+	public int selectListCount2() {
+		// TODO Auto-generated method stub
+		return addressDao.selectListCount2(sqlSession);
 	}
 
 
+	
+
+	/*
+	@Override
+	public String selectAddressNum(String eno) {
+		// TODO Auto-generated method stub
+		return addressDao.selectAddressNum(sqlSession,eno);
+	}
+	*/
+	
+
+	
 
 
 

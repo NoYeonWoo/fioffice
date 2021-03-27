@@ -12,6 +12,8 @@
 		<result column="WORK_DATE" property="workDate"/>
 		<result column="STATUS" property="status"/>
 		<result column="EMP_NO" property="empNo"/>
+		<result column="EMP_SUM" property="empSum"/>
+		<result column="EMP_DAY_RESET" property="empDayReset"/>
 	</resultMap>
 	
 	
@@ -29,13 +31,95 @@
 	
 	</select>
 	
-	<insert id="startWork" parameterType="Work">
+	<select id="selectWork" parameterType="Work">
 	
+		SELECT WORK_STACK, WORK_EXCEED, WORK_REMAIN
+ 		FROM (SELECT *FROM WORK WHERE EMP_NO='951220103' ORDER BY WORK_NO ASC)
+ 		WHERE ROWNUM=1;
+		<!--
 		INSERT INTO ADDRESS
 		VALUES(SEQ_WORK_NO.NEXTVAL, #{workStart}, null, #{addressEmail}, #{addressComName}, #{addressJob}, SYSDATE,
 		default,#{empNo})
+		-->
 	
+	</select>
+	
+	
+	
+	<insert id="startWork" parameterType="Work">
+		
+
+		INSERT INTO WORK
+		VALUES(SEQ_WORK_NO.NEXTVAL,
+		SYSDATE,
+		null,
+		#{workstart.addressEmail},
+		#{workstart.addressComName},
+		#{workstart.addressJob},
+		SYSDATE,
+		default,
+		#{empNo},
+		NULL,
+		default
+		)
+
 	
 	</insert>
+	
+	
+	<update id="endWork" parameterType="Work">
+		
+
+		UPDATE WORK
+    	SET WORK_END =SYSDATE
+    	WHERE EMP_NO='#{empNo}' AND WORK_DATE = SYSDATE;
+    	
+    	UPDATE WORK
+    	SET   WORK_SUM= ROUND((WORK_END-WORK_START)*24*60)
+    	WHERE EMP_NO='#{empNo}' AND WORK_DATE = SYSDATE;
+		
+		
+		UPDATE WORK 
+   		SET WORK_STACK = WORK_STACK+WORK_SUM,
+   		
+   		<choose>
+        <when test=" WORK_REMAIN != 0">
+        	<choose>
+            <when test=" 0 > WORK_REMAIN -WORK_SUM">
+                WORK_EXCEED = 절대값(WORK_REMAIN-WORK_SUM),
+                WORK_REMAIN = 0,
+            </when>
+            <otherwise>
+                WORK_REMAIN = WORK_REMAIN-WORK_SUM,
+            </otherwise>
+            </choose>
+        </when>
+        <otherwise>
+        	WORK_EXCEED = WORK_EXCEED + WORK_SUM,
+        </otherwise>
+        </choose>
+    	WHERE EMP_NO='#{empNo}'' AND WORK_DATE = SYSDATE;
+
+	</update>
+
+
+
+
+	<!-- 
+	<when test="WORK_REMAIN-WORK_SUM < 0">
+	<choose>
+
+	<when test = "조건">//조건1
+		위에 조건이 맞을시 실행할 구문
+	</when>
+
+
+	<otherwise>
+		조건1이 틀릴경우 실행할 구문
+	</otherwise>
+
+	</choose>
+	 -->
+	
 	
 </mapper>

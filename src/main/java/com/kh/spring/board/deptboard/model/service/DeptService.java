@@ -25,7 +25,7 @@ public interface DeptService {
 	int insertReply(Reply r);
 
 	ArrayList<Reply> selectReplyList(int dno);
-	
+
 
 }
  

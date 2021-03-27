@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,12 +11,10 @@
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
    
  <!-- CSS -->
-<link
-	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
-	rel='stylesheet' />
-<link
-	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css'
-	rel='stylesheet' media='print' />
+  <link rel="stylesheet" href='${pageContext.request.contextPath}/resources/fullcalendar/test/vendor/css/bootstrap-datetimepicker.min.css' />
+  <script src="${pageContext.request.contextPath}/resources/fullcalendar/test/vendor/js/bootstrap-datetimepicker.min.js"></script>
+
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
 
 <style>
@@ -142,7 +140,7 @@
                    
                     	<div>
                     	
-                   <!-- left -->
+                   <!-- 일정 등록 div -->
                     	
                    <div class="left">
                    <div class="card-body" align="center">
@@ -160,14 +158,14 @@
 						<ul class="pcoded-submenu">
 						<li>
 							<p class="title">
-								<a href="" data-category="progress">
+								<a href="" data-category="10">
 									<span class="txt" title="내 일정">내 일정</span>
 								</a>
 							</p>
 						</li>
 						<li>
 							<p class="title">
-								<a href="" data-category="finished">
+								<a href="" data-category="20">
 									<span class="txt" title="부서 일정">부서 일정</span>
 								</a>
 							</p>
@@ -176,7 +174,7 @@
 					
 						
 					</div>
-					</div>
+					</div>  <!-- left div 끝 -->
 						
 						
 						
@@ -186,12 +184,9 @@
 		                <div class="pd-20 card-box mb-30" align="center">
 		               	<div id="calendarWrapper">
 			           		<div id="calendar">
-			           	</div>
-                 			
+			           		</div>
                			<br>
         				</div>
-        				
-        				
 						</div>
 						</div>
 						
@@ -204,30 +199,39 @@
 	                <h5 class="modal-title">일정 등록</h5>
 	                <button type="button" class="close" data-dismiss="modal">&times;</button>
 	            </div>
+	           
 	             <div class="modal-body">
-					<form name="insertCalendar" action="cinsert.co" method="post" autocomplete="off">
-					<label for="calDate" class="mr-sm-2">날짜 선택</label>
-					
-					<div><div class="left">
-						<input type="date" id="calSdate" name="calSdate" class="form-control form-control-user" style="width:100%;" >
-						<input type="date" id="calEdate" name="calEdate" class="form-control form-control-user" style="width:100%;" >
-
+					<form name="insertCalendar" action="cinsert.ca" method="post">
+					<h6>일정 카테고리 선택</h6>
+					<div><select name="calCate" id="calCate" class="form-control form-control-sm" style="width:20%;"  >
+							<option value="">분류</option>
+		                     <option value="10" style="color : black;">내 일정</option>
+		                     <option value="20" style="color : black;">부서 일정</option>
+                  	</select></div>
+                  	<br>
+					<h6>시작 날짜 선택</h6>
+					<div>
+						<input type="date" id="calSDate" name="calSDate" class="form-control form-control-user" style="width:100%;" >
 					</div>
-					<div class="right">
-						<input type="time" id="calSTime" name="calSTime" class="form-control form-control-user" style="width:40%;" >
-						<input type="time" id="calETime" name="calETime" class="form-control form-control-user" style="width:40%;" >
-					</div></div>
-					<br><br><br><br><br>
-						<label for="calTitle" class="mr-sm-2">일정</label>
+						<br>
+					<h6>종료 날짜 선택</h6>
+					<div>
+					<input type="date" id="calEdate" name="calEDate" class="form-control form-control-user" style="width:100%;" >
+					</div>
+					<br>
+						<h6>일정</h6>
 	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle"> <br>
-	                    <label for="calContent" class="mr-sm-2">일정 코멘트</label>
+	                    <h6>일정 코멘트</h6>
 	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
+	                    
+	                     <input type="text" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
 						<div class="modal-footer">
 						<br><br><br>
 							<button type="submit" class="btn btn-primary">등록</button>
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 	                	</div>
 					</form>	
+					
 				</div>
 	            </div>
 	        </div>
@@ -257,9 +261,9 @@
     $(document).ready(function(){
     	
     	var today = new Date();
-		var yesterDate = today.getTime() - (1 * 24 * 60 * 60 * 1000);
 		
 	var calendar = $('#calendar').fullCalendar( {
+		plugins: ['interaction'],
 		header : {
 			left : 'agendaDay,agendaWeek,month'
 		},
@@ -269,15 +273,29 @@
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
-		dayClick: function(date, allDay, jsEvent, view) {
-			if(yesterDate > date){
-				alert("이미 지난 날짜는 선택할 수 없습니다.");
-			}else{			             
-	           $("#addCalendar").modal("show");
+		events : [ 
+		
+			{
+			id: 2,
+			title : '가나다라마바사아자차카타파하',
+			start : '2021-03-28',
+			end : '2021-03-30'
 			}
+		 ], 
+		 
+		dayClick: function(date, allDay, jsEvent, view) {        
+	           $("#addCalendar").modal("show");
           }
       });
-    }); 
+	
+		calendar.render();
+	
+    });
+    
+  //datetimepicker
+    $("#calSdate, #calEdate").datetimepicker({
+        format: 'YYYY-MM-DD HH:mm'
+    });
     
     </script>
     <script
@@ -286,5 +304,6 @@
 	<script
 	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js'
 	type="text/javascript"></script>
+	
 </body>
 </html>

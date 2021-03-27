@@ -52,7 +52,12 @@
 								<div class="dropdown-menu dropdown-menu-right profile-notification">
 									<div class="pro-head">
 									<c:if test="${ !empty sessionScope.loginUser }">
-										<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" class="img-radius" alt="User-Profile-Image">
+										           <c:if test="${sessionScope.loginUser.changeName eq null }">
+								                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png" alt="User-Profile-Image">
+								                   </c:if>
+								                 <c:if test="${sessionScope.loginUser.changeName ne null }">
+								                  <img class="img-radius" src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="User-Profile-Image">
+								                  </c:if>
 										<span>${sessionScope.loginUser.empName}님</span>
 										<a href="logout.me" class="dud-logout" title="Logout">
 										<i class="feather icon-log-out"></i>

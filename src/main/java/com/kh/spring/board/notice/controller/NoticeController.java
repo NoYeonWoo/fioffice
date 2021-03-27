@@ -58,6 +58,8 @@ public class NoticeController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
+		model.addAttribute("list", list);
+		
 		return "admin/noticeListView";
 		  
 	}
@@ -88,6 +90,8 @@ public class NoticeController {
 		
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
+		
+		System.out.println("notilist : "+list);
 		
 		return "board/notice/noticeListView";
 		  

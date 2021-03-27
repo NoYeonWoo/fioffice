@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.community.model.vo.Community;
+import com.kh.spring.board.community.model.vo.Likes;
 import com.kh.spring.board.notice.model.vo.Notice;
 
 @Repository("communityDao")
@@ -46,7 +47,7 @@ public class CommunityDao {
 	}
 
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.selectOne("communityMapper.insertReply", r);
+		return sqlSession.insert("communityMapper.insertReply", r);
 	}
 
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int cno) {
@@ -57,5 +58,13 @@ public class CommunityDao {
 		return sqlSession.update("communityMapper.recommend", cno);
 	}
 
+	public String selectLikes(SqlSessionTemplate sqlSession, Likes likevo) {
+		return sqlSession.selectOne("communityMapper.selectLikes", likevo);
+	}
+
+	public int insertLikes(SqlSessionTemplate sqlSession, Likes likevo) {
+		return sqlSession.insert("communityMapper.insertLikes", likevo);
+	}
+	
 	
 }

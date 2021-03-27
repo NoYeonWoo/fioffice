@@ -35,19 +35,22 @@ public class ApprovalController {
 		//deptcode 와 유저 넘기는 거 잊지 말자 
 		emp=(Employee) session.getAttribute("loginUser");
 		
-
-		//기안문서인데 중지
-		ArrayList<Approval> rlist = new ArrayList<Approval>();// status가 R라서  reject는  R 로 들어감 
-		//기안문서 완료
-		ArrayList<Approval> clist = new ArrayList<Approval>();// status가 C라서 결재승인 confirm  는 C  로 들어감 
-		
-	
-		System.out.println(emp);
+     	System.out.println(emp);
 		//기안문서-내가 올린문서 중 진행중
-		ArrayList<Approval> ylist=approvalService.selectyList(emp);
-		System.out.println("진행중문서::"+ylist);
-		m.addAttribute("ylist",ylist);
+		ArrayList<Approval> alist=approvalService.selectyList(emp);
+		//기안문서인데 첫번째 결재자용 
+		ArrayList<Approval> falist=approvalService.selectfaList(emp);// 처음 미결재시 status'Y' 결재'A'
+		//기안문서 마지막 결재자
+		ArrayList<Approval> clist=approvalService.selectclist(emp);// 처음 미결재시 status'A' 결재'C'
 		
+		System.out.println("진행중문서::"+alist);
+		System.out.println("첫번째 결재자 문서::"+falist);
+		System.out.println("두번째 결재자 문서::"+clist);
+		
+		
+		m.addAttribute("alist",alist);
+		m.addAttribute("falist",falist);
+		m.addAttribute("clist",clist);
 		return "approval/approvalListView";
 	}
 	
@@ -57,17 +60,28 @@ public class ApprovalController {
 	    
 		Employee emp=(Employee) session.getAttribute("loginUser");
 		deptCode=emp.getDeptCode();
-		Employee fApprEmp=approvalService.selectfApprEmp(deptCode);//중간승인자 불러오기
-		Employee lApprEmp=approvalService.selectlApprEmp();// 마지막 승인자 불러오기 
 		
+	
+	
+		Employee fApprEmp=approvalService.selectfApprEmp(deptCode);//중간승인자 불러오기
+		
+		Employee lApprEmp=approvalService.selectlApprEmp();// 마지막 승인자 불러오기 
+	
 		
 		System.out.println("deptCode::" +deptCode);
 		System.out.println("첫번째 결재자 나와라::"+fApprEmp);
 		System.out.println("대표님 나와라::"+lApprEmp);
-		
-		model.addAttribute("firstApprEmp",fApprEmp);
+	
+	
+		if( emp.getEmpNo().equals(fApprEmp.getEmpNo()) || fApprEmp.getEmpNo().equals("920223100")){
+			model.addAttribute("firstApprEmp",null);
+			}
+			else {
+			model.addAttribute("firstApprEmp",fApprEmp);
+			}
+	
 		model.addAttribute("lastAppEmp",lApprEmp);
-		 
+
 		return "approval/approvalInsertView";
 	}
 	
@@ -138,14 +152,27 @@ public class ApprovalController {
 	
 	
 	@RequestMapping("approvalDetailView.do")
-	public ModelAndView selectBoard(int ano, ModelAndView mv) {
+	public ModelAndView selectBoard(int ano, ModelAndView mv,String firstapp ,HttpSession session) {
 		
-      Approval ap = approvalService.selectdetailapproval(ano);
-		  
+		Employee emp=(Employee) session.getAttribute("loginUser");
+	
+		
+		Employee lApprEmp=approvalService.selectlApprEmp();// 마지막 승인자 불러오기 
+		
+            Approval ap = approvalService.selectdetailapproval(ano);
+            firstapp=ap.getFirstApprEmp();
+            Employee firstperson=approvalService.selectfApprEmpDetail(firstapp);
 	        System.out.println("상세보기 "+ap);
+	        
+	        
+	    
+	    			mv.addObject("firstApprEmp",firstperson);
+	   
+	    	       mv.addObject("lastAppEmp",lApprEmp);
+	    	       
 			
-			mv.addObject("ap", ap).setViewName("approval/approvalDetailView");
-
+	    	       mv.addObject("ap", ap).setViewName("approval/approvalDetailView");
+	    
 		
 	
 		return mv;

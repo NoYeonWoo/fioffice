@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.community.model.vo.Community;
+import com.kh.spring.board.community.model.vo.Likes;
 import com.kh.spring.board.notice.model.vo.Notice;
 
 public interface CommunityService {
@@ -28,5 +29,9 @@ public interface CommunityService {
 	int deleteCommunity(int cno);
 
 	int updateCommunity(Community cb);
+
+	String selectLikes(Likes likevo);
+
+	int insertLikes(Likes likevo);
 
 }

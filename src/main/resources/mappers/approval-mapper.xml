@@ -15,17 +15,22 @@
 		<result property="firstDate" column="APPROVAL_FIRSTDATE" />
         <result property="doneDate" column="APPROVAL_DONEDATE" />
 		<result property="empNo" column="EMP_NO" />
+		<result property="empName" column="EMP_NAME" />
 		<result property="formNo" column="FORM_NO" />
 		<result property="formName" column="FORM_NAME" />
 		<result property="firstApprEmp" column="FIRST_APPR_EMP" />
         <result property="lastAppEmp" column="LAST_APPR_EMP" />
-        
+        <result property="empPosition" column="JOB_NAME" />
 	</resultMap>
 	
 <insert id="insertApproval" parameterType="Approval">
+
 INSERT INTO APPROVAL
-VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{orginalName},#{changeName},DEFAULT,#{firstDate}
+VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{orginalName},#{changeName}
+,DEFAULT
+,#{firstDate}
 ,#{doneDate},#{empNo},'2',#{firstApprEmp},#{lastAppEmp})
+
 
 </insert>
 
@@ -35,7 +40,25 @@ VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent
    JOIN APPROVAL_TYPE USING (FORM_NO)
    JOIN EMPLOYEE USING (EMP_NO)
    WHERE EMP_NO=#{empNo}
+  
+</select>
 
+<select id="selectfaList" resultMap="approvalResultMap">
+   SELECT*
+   FROM APPROVAL 
+   JOIN APPROVAL_TYPE USING (FORM_NO)
+   JOIN EMPLOYEE USING (EMP_NO)
+   WHERE FIRST_APPR_EMP=#{empNo}
+  
+</select>
+
+<select id="selectclist" resultMap="approvalResultMap">
+   SELECT*
+   FROM APPROVAL 
+   JOIN APPROVAL_TYPE USING (FORM_NO)
+   JOIN EMPLOYEE USING (EMP_NO)
+   WHERE LAST_APPR_EMP=#{empNo}
+  
 </select>
 
 
@@ -43,8 +66,7 @@ VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent
         SELECT *
 		FROM APPROVAL   
 		JOIN EMPLOYEE USING (EMP_NO)
-		WHERE APPROVAL_STATUS='Y'
-		AND APPROVAL_NO=#{approvalNo}
+		WHERE APPROVAL_NO=#{approvalNo}
 		
 </select>
 </mapper>

@@ -110,7 +110,7 @@
 		<div class="container-fluid">
 		
 		<!-- 타이틀 영역 -->
-		<form id="boardForm" role="form" action="cinsert.bo" method="post" autocomplete="off">
+		<form id="boardForm" role="form" action="sinsert.so" method="post" autocomplete="off">
 			<div class="card shadow mb-4">
             	<div class="card-header py-3">
                		<h5>설문 등록</h5>
@@ -136,7 +136,7 @@
 				</tr>
 				<tr>
 				<td>
-				<input type="hidden" id="surWriter" class="form-control" value="${loginUser.empName}" name="surWriter" readonly>
+				<input type="hidden" id="surWriter" class="form-control" value="${loginUser.empNo}" name="surWriter" readonly>
 				</td>
 				</tr>
 				<tr>
@@ -188,22 +188,24 @@
 				<div id="selectBox">
 				<table id="surveySelectBox">
 				<tbody>
-				<tr>							
-				<th>
-				 <div class="qbox">
-				
-				<td>
-				<div class="q">
-				<span class="title">1</span></th>
-				<input value="" id="name" name="sur" type="text"
-                                                class="form-control" autocomplete="off">
-                                                </div>
-				</div>
-				</td>
+				<tr>
 				<button type="button" id="addq_btn" class="btn btn-primary btn-icon-split">
-                                        <b>+</b>
-                                    </button>
-				</tr>	
+                <b>+</b>
+                </button>
+                
+				<div class="qbox">
+				<tr>
+				<div class="q">
+				<td style="width:80%;">
+				<span>1</span>
+				<button type='button' id='minusq_btn' class='btn btn-primary btn-icon-split'>
+                <b>x</b></button>
+				<input value="" id="surOTitle" name="sur" type="text"
+                                                class="form-control" autocomplete="off">                   
+                </td>
+                </div>
+				</tr>
+ 
 				</tbody>
 				</table>
 				</div>
@@ -219,7 +221,7 @@
 					<span class="text" style="color: white">작성</span>
 					</a>
 				</div>
-			</div>
+				</div>
 			</div>
 			</form>
 
@@ -231,7 +233,10 @@
            </div>
           
         
-    
+        <tr><div class='q'><td style='width:80%;'><br><button type='button' id='minusq_btn' class='btn btn-primary btn-icon-split'>
+    	<b>x</b></button><input value='' id='surOTitle' name='sur' type='text' class='form-control' autocomplete='off'></td></div></tr>"
+  
+
     
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
@@ -241,8 +246,8 @@
 	});
 	
 	 $('#addq_btn').on('click', function () {
-    	 var q = $("<div class='q'><span></span><br><input id='name' autocomplete='off' name='itemcontent' type='text' "
-	                +"class='form-control'> <button type='button'  id='minusq_btn' class='btn btn-primary btn-icon-split'><b> x</b></button></div>"
+    	 var q = $("<tr><div class='q'><td style='width:80%;'><span></span><br><button type='button' id='minusq_btn' class='btn btn-primary btn-icon-split'>"
+    	 +"<b>x</b></button><input value='' id='surOTitle' name='sur' type='text' class='form-control' autocomplete='off'></td></div></tr>"
          );
         $(this).parent().find('.qbox').append(q);
     });

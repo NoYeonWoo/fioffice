@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,6 +30,7 @@ import com.kh.spring.common.Pagination;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 
+
 @SessionAttributes("loginUser")
 @Controller
 public class DeptController {
@@ -38,17 +40,19 @@ public class DeptController {
 	
 	@RequestMapping("dlist.bo")
 	public String ListView(@RequestParam(value="currentPage", required=false, defaultValue="1") 
-	int currentPage, Model model) {
-		Employee loginUser=(Employee)model.getAttribute("loginUser");
-		int listCount = deptService.selectLictCount(loginUser.getDeptCode());
-		System.out.println(loginUser.toString());
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		ArrayList<DeptBoard> list = deptService.selectList(pi,loginUser.getDeptCode());
-		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);
-		
-		return "board/deptboard/dboardListView";
-		  
+	   int currentPage, Model model) {
+	   Employee loginUser=(Employee)model.getAttribute("loginUser");
+	   int listCount = deptService.selectLictCount(loginUser.getDeptCode());
+	   System.out.println(loginUser.toString());
+	     
+	   PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+	   ArrayList<DeptBoard> list = deptService.selectList(pi,loginUser.getDeptCode());
+	      
+	   model.addAttribute("list", list);
+	   model.addAttribute("pi", pi);
+	      
+	   return "board/deptboard/dboardListView";
+	        
 	}
 	
 	@RequestMapping("ddetail.bo")
