@@ -225,7 +225,7 @@
 									$("$input").focus();
 									return;
 								}
-								if (resNo1 == "") {
+								if (resNo1 == "" ) {
 									alert("주민번호를 입력해주세요!");
 									$("#resNo1").focus();
 									$("#resNo1").val("");

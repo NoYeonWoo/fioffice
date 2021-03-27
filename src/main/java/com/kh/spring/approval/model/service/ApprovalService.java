@@ -17,6 +17,14 @@ public interface ApprovalService  {
 
 	Approval selectdetailapproval(int ano);
 
+	ArrayList<Approval> selectfaList(Employee emp);
+
+	ArrayList<Approval> selectclist(Employee emp);
+
+	Employee selectinsertEmp(Employee emp);
+
+	Employee selectfApprEmpDetail(String firstapp);
+
 
 
 }
