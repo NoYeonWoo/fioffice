@@ -4,9 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.File;
 import java.io.IOException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -38,11 +39,11 @@ public class WorkController {
 
 	@RequestMapping("view.work")
 	//viewwork
-	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model) {
+	public String selectList(/*@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model*/) {
 
 			
 			
-		
+			/*
 			int listCount = workService.selectListCount();
 			System.out.println(listCount);
 			
@@ -52,7 +53,7 @@ public class WorkController {
 			
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);
-
+	*/
 		
 		return "work/workTest";
 	}
@@ -76,20 +77,49 @@ public class WorkController {
 	
 	
 	
-	
+	////////////////////////////////////////////////////////////////시작
 	
 	
 	@RequestMapping("start.work")
-	public String workStart(int eno, HttpServletRequest request) {
+	public String workStart(String eno,String timeNow, HttpServletRequest request) {
 		
+		System.out.println(timeNow);//2021-03-27 03:41:43
+		System.out.println(timeNow.getClass().getName());//java.lang.String
+		System.out.println(eno);//951220103
+		// 찍어보기
+
+		System.out.println("time위"+timeNow);
+		Date timeNow2=java.sql.Date.valueOf(timeNow);
+		System.out.println("time아래"+timeNow2);
+		//work.setEmpNo(eno);
+		//work.setWorkStart(timeNow);
 		
-		return null;
+		//int result = workService.insertWork(work);
+		
+		//if (result>0) {
+		//	return "location.reload";
+		//}else {
+			return "location.reload";
+		//}
 		
 	}
 	
-	@RequestMapping("start.end")
-	public String workEnd(int eno, HttpServletRequest request) {
-		return null;
+	@RequestMapping("end.work")
+	public String workEnd(String eno,Date timeNow, HttpServletRequest request) {
+		
+		//SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		//Date timeNow = transFormat.parse(time);
+		Work work = workService.selectWork(eno);
+		work.setEmpNo(eno);
+		work.setWorkEnd(timeNow);
+		
+		int result = workService.updateWork(work);
+		
+		if (result>0) {
+			return "location.reload";
+		}else {
+			return "location.reload";
+		}
 		
 	}
 	

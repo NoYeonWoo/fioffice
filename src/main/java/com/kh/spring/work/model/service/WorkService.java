@@ -13,4 +13,14 @@ public interface WorkService {
 
 	ArrayList<Work> selectListCount(PageInfo pi);
 
+	Work selectWork(String eno);
+
+	int insertWork(Work work);
+
+
+	Work updateSumWork(String eno);
+
+	int updateWork(Work work);
+
+
 }

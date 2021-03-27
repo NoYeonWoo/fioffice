@@ -50,7 +50,6 @@
  
  
  
- 
  <!-- [ Main Content ] start -->
         
             <div class="col-xl-12">
@@ -92,7 +91,7 @@
                                 <div class="col-sm-4">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">직급</label>
-                                        <input type="text" class="form-control" iid="addressJob" name="addressJob" placeholder="" >
+                                        <input type="text" class="form-control" id="addressJob" name="addressJob" placeholder="" >
                                     </div>
                                 </div>
                                 <div class="col-sm-4">
@@ -136,7 +135,7 @@
                         
                         <div class="row" id="center">
                         <div class="col-md-12">
-
+						<input type="hidden" name="empNum" value="${loginUser.empNo}">
 					<div class="card-body">
 						<button type="submit" class="btn  btn-primary btn-lg">추가하기</button>
 					</div>
