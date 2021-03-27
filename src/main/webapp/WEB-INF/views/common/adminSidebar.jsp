@@ -37,7 +37,7 @@
                    <ul class="pcoded-submenu">
                        <li><a href="dept.ad">부서관리</a></li>
                        <li><a href="manageEmp.do">사원관리</a></li>
-                       <li><a href="insertEmp.do">사원추가</a></li>
+                       <li><a href="insertEmpForm">사원추가</a></li>
                    </ul>
                </li>
                

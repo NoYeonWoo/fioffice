@@ -239,7 +239,7 @@
 	                className: 'btn-primary',
 	                action: function(e, dt, node, config) {
 	                	$("#addSub #deptMain").html(deptName);
-	                	if(table2.rows().count() > 9){
+	                	if(table2.rows().count().toString().length > 1){
 	                		$("#addSub #deptCode").val(deptCode+(table2.rows().count()+1));
 	                	}else if(deptCode=='D99'){
 	                		$("#addSub #deptCode").val(deptCode);

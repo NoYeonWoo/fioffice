@@ -1,7 +1,5 @@
 package com.kh.spring.board.deptboard.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -9,9 +7,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,12 +22,11 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.GsonBuilder;
-import com.google.gson.JsonIOException;
-import com.kh.spring.board.common.Pagination;
 import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.deptboard.model.service.DeptService;
 import com.kh.spring.board.deptboard.model.vo.DeptBoard;
+import com.kh.spring.common.Pagination;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 
@@ -42,21 +39,21 @@ public class DeptController {
 	private DeptService deptService;
 	
 	@RequestMapping("dlist.bo")
-	   public String ListView(@RequestParam(value="currentPage", required=false, defaultValue="1") 
+	public String ListView(@RequestParam(value="currentPage", required=false, defaultValue="1") 
 	   int currentPage, Model model) {
-	      Employee loginUser=(Employee)model.getAttribute("loginUser");
-	      int listCount = deptService.selectLictCount(loginUser.getDeptCode());
-	      System.out.println(loginUser.toString());
+	   Employee loginUser=(Employee)model.getAttribute("loginUser");
+	   int listCount = deptService.selectLictCount(loginUser.getDeptCode());
+	   System.out.println(loginUser.toString());
 	     
-	      PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-	      ArrayList<DeptBoard> list = deptService.selectList(pi,loginUser.getDeptCode());
+	   PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
+	   ArrayList<DeptBoard> list = deptService.selectList(pi,loginUser.getDeptCode());
 	      
-	      model.addAttribute("list", list);
-	      model.addAttribute("pi", pi);
+	   model.addAttribute("list", list);
+	   model.addAttribute("pi", pi);
 	      
-	      return "board/deptboard/dboardListView";
+	   return "board/deptboard/dboardListView";
 	        
-	   }
+	}
 	
 	@RequestMapping("ddetail.bo")
 	public ModelAndView selectBoard(int dno, ModelAndView mv) {
@@ -222,6 +219,7 @@ public class DeptController {
 	@ResponseBody
 	@RequestMapping("rinsert.dbo")
 	public String insertReply(Reply r) {
+		System.out.println(r.toString());
 		int result = deptService.insertReply(r);
 		
 		return String.valueOf(result);

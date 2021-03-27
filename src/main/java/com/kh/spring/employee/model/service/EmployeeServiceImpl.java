@@ -74,4 +74,18 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
+	@Override
+	public int insertEmployee(Employee emp) {
+		// TODO Auto-generated method stub
+		return employeeDao.insertEmployee(sqlSession, emp);
+	}
+
+
+	@Override
+	public int selectEmpCount() {
+		// TODO Auto-generated method stub
+		return employeeDao.selectEmpCount(sqlSession);
+	}
+
+
 }

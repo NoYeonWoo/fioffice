@@ -146,7 +146,6 @@
                         <script src="//d1p7wdleee1q2z.cloudfront.net/post/search.min.js"></script>
                         <script>
                         	function endFunction() {
-                        		console.log($("#empNo1").html());
                         		if($('#entDate').val() !=""){
 	                        		if(confirm("퇴사를 진행하시겠습니까?")){
 	                        			$.ajax({

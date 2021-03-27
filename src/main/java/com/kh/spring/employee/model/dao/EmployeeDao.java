@@ -49,5 +49,15 @@ public class EmployeeDao {
 		return sqlSession.update("employeeMapper.updateEntDate", emp);
 	}
 
+	public int insertEmployee(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("employeeMapper.insertEmployee", emp);
+	}
+
+	public int selectEmpCount(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("employeeMapper.selectEmpCount");
+	}
+
 
 }

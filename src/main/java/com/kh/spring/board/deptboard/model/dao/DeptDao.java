@@ -14,7 +14,7 @@ import com.kh.spring.board.deptboard.model.vo.DeptBoard;
 public class DeptDao {
 
 	public int selectLictCount(SqlSessionTemplate sqlSession, String deptCode) {
-		return sqlSession.selectOne("deptboardMapper.selectDListCount");
+		return sqlSession.selectOne("deptboardMapper.selectDListCount", deptCode);
 	}
 
 	public ArrayList<DeptBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String deptCode) {

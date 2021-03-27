@@ -87,10 +87,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
 		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
-	    FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
-	    WHERE REF_BNO=#{dboardNo}
-	    AND A.STATUS='Y'
-	    ORDER BY REPLY_NO
+	  FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
+	  WHERE REF_BNO=#{dboardNo}
+	  AND A.STATUS='Y'
+	  ORDER BY REPLY_NO
 	</select>
 	
 	<select id="selectSearchList" resultType="Deptboard" parameterType="map">

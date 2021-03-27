@@ -23,5 +23,9 @@ public interface EmployeeService {
 
 	int updateEntDate(Employee emp);
 
+	int insertEmployee(Employee emp);
+
+	int selectEmpCount();
+
 		
 }
