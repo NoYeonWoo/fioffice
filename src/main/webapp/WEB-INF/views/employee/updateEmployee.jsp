@@ -195,8 +195,8 @@ td {
 						});
 							function confirm() {
 								var empName = $("#empName").val();
+								var deptCode = $("#deptCode").val();
 								var jobCode = $("#jobCode").val();
-								var joinDate = $("#joinDate").val();
 								var phone = $("#phone").val();
 								var email = $("#email").val();
 								var post = $("#post").val();
@@ -207,15 +207,11 @@ td {
 									return;
 								}
 								if (deptCode == "") {
-									alert("직급은 비어있을 수 없습니다!");
+									alert("부서는 비어있을 수 없습니다!");
 									return;
 								}
 								if (jobCode == "") {
 									alert("직급은 비어있을 수 없습니다!");
-									return;
-								}
-								if (joinDate == "") {
-									alert("입사일은 비어있을수 없습니다!");
 									return;
 								}
 								if (phone == "") {

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="proInoutMapper">
+
+<resultMap type="Client" id="clientResultSet">
+	<id property="cliNo" column="CLI_NO"/>
+	<result property="cliName" column="CLI_NAME"/>
+	<result property="corporateNo" column="CORPORATE_NO"/>
+	<result property="address" column="ADDRESS"/>
+	<result property="master" column="MASTER"/>
+	<result property="phone" column="PHONE"/>
+	<result property="comment" column="COMMENT"/>
+	<result property="sortation" column="SORTATION"/>
+	<result property="status" column="STATUS"/>
+</resultMap>
+
+<select id="selectClientList" resultMap="clientResultSet">
+	SELECT *
+	FROM CLIENT
+</select>
+
+<insert id="insertClient">
+	INSERT INTO CLIENT VALUES(
+		#{cliNo},
+		#{cliName},
+		#{corporateNo},
+		#{address},
+		#{master},
+		#{phone},
+		#{sortation},
+		#{comment},
+		DEFAULT) 
+</insert>
+
+<select id="selectClient" parameterType="string" resultMap="clientResultSet">
+	SELECT *
+	FROM CLIENT
+	WHERE CLI_NO = #{cliNo}
+</select>
+
+<update id="updateClient" parameterType="Client">
+	UPDATE CLIENT
+	SET 
+	CLI_NAME= #{cliName},
+	CORPORATE_NO= #{corporateNo},
+	ADDRESS= #{address},
+	"MASTER"= #{master},
+	PHONE= #{phone},
+	SORTATION= #{sortation},
+	"COMMENT"= #{comment}
+	WHERE CLI_NO = #{cliNo}
+</update>
+
+<update id="deleteClient" parameterType="string">
+	UPDATE CLIENT
+	SET 
+	STATUS = 'N'
+	WHERE CLI_NO = #{cliNo}
+</update>
+</mapper>

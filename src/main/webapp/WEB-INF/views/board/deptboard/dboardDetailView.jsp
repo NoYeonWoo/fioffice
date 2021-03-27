@@ -247,7 +247,7 @@
     					type:"post",
     					data:{replyContent:$("#replyContent").val(),
     						  refBoardNo:dno,
-    						  replyWriter:"${loginUser.empName}"},
+    						  replyWriter:"${loginUser.empNo}"},
     					success:function(result){
     						if(result > 0){
     							$("#replyContent").val("");
@@ -286,7 +286,7 @@
     						value += "<tr>";
     					}
     					
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriter + "</th>" +
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
    								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
    								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";

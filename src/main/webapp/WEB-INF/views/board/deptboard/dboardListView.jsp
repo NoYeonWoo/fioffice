@@ -233,6 +233,7 @@
  
     <c:forEach items="${list}" var="db">
      <div class="dboardList">
+     <input type="hidden" value="${db.dboardNo }">
     <ul class="app-board-template-list">
         <li>
             <a class="tw-flex-1">

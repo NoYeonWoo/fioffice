@@ -79,8 +79,8 @@ public class EmployeeController {
 		return emp;
 	}
 	
-	//사원추가
-	@RequestMapping("insertEmp.do")
+	//사원추가화면
+	@RequestMapping("insertEmpForm")
 	public String insertEmployee(Model model) {
 		ArrayList<Department> dList = adminService.selectDeptList();
 		ArrayList<Job> jList = employeeService.selectJobList();
@@ -105,6 +105,30 @@ public class EmployeeController {
 		return "employee/updateEmployee";	 
 	 }
 	
+	//사원추가
+	@RequestMapping("insertEmp.do")
+	public String insertEmployee(Employee emp, String post, String address1, String address2,String resNo1, String resNo2, String email1, String email2,Model model) {
+		emp.setAddress(post + "/" + address1 + "/" + address2);
+		emp.setEmail(email1+"@"+email2);
+		emp.setResNo(resNo1+"-"+resNo2);
+		
+		int eno = employeeService.selectEmpCount()+101;
+		emp.setEmpNo(resNo1+eno);
+		emp.setEmpPwd(resNo1+eno);
+		System.out.println(emp.toString());
+		int result = employeeService.insertEmployee(emp);
+		System.out.println(result);
+		if(result > 0) {
+			model.addAttribute("msg", "사원을 성공적으로 추가하였습니다.");
+			return "forward:manageEmp.do";
+		}else {
+			model.addAttribute("msg", "사원추가에 실패하였습니다.");
+			return "forward:insertEmp.do";
+		}
+			
+			
+	}
+		
 	//사원수정
 	@RequestMapping("updateEmp.do")
 	public String updateEmp(Employee emp, String post, String address1, String address2, Model model) {
@@ -127,13 +151,8 @@ public class EmployeeController {
 	@RequestMapping("updateEntDate")
 	@ResponseBody
 	public String updateEntDate(Employee emp) {
-		System.out.println(emp.getEntDateS());
-		System.out.println(emp.getEmpNo());
-		System.out.println(emp.getEntDateS().getClass().getName());
 		emp.setEntDate(java.sql.Date.valueOf(emp.getEntDateS()));
 		int result = employeeService.updateEntDate(emp);
-		System.out.println(emp.getEntDate().getClass().getName());
-		
 		return String.valueOf(result);
 	}
 	

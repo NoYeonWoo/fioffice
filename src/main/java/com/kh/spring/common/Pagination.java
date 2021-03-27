@@ -1,6 +1,6 @@
 package com.kh.spring.common;
 
-import com.kh.spring.address.model.vo.PageInfo;
+import com.kh.spring.board.common.model.vo.PageInfo;
 
 public class Pagination {
 	

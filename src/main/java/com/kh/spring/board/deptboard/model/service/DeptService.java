@@ -8,9 +8,9 @@ import com.kh.spring.board.deptboard.model.vo.DeptBoard;
 
 public interface DeptService {
 
-	int selectLictCount();
+	int selectLictCount(String deptCode);
 
-	ArrayList<DeptBoard> selectList(PageInfo pi);
+	ArrayList<DeptBoard> selectList(PageInfo pi, String deptCode);
 
 	int updateIncreaseCount(int dno);
 

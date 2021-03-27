@@ -18,6 +18,7 @@ public class Client {
 	private String address;
 	private String master;
 	private String phone;
-	private String sortaion;
+	private String sortation;
 	private String comment;
+	private String status;
 }

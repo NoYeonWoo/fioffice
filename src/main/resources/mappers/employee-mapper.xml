@@ -75,7 +75,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE EMP_NO=#{empNo}
 </select>
 
-  
 <update id="updateEmployee" parameterType="Employee">
 	UPDATE EMPLOYEE
 	SET EMP_NAME = #{empName},
@@ -109,5 +108,28 @@ JOIN JOB USING (JOB_CODE)
 WHERE ROWNUM= 1
 
 </select>
+
+<select id="selectEmpCount" resultType="_int">
+SELECT COUNT(*)
+FROM EMPLOYEE
+</select>
+
+<insert id="insertEmployee">
+	INSERT INTO EMPLOYEE VALUES(
+		#{empNo},
+		#{empPwd},
+		#{empName},
+		#{phone},
+		#{officePhone},
+		#{address},
+		#{resNo},
+		#{joinDate},
+		NULL,
+		NULL,
+		NULL,
+		DEFAULT,
+		#{jobCode},
+		#{deptCode})
+</insert>
 
 </mapper>
