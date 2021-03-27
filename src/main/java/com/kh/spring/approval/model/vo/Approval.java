@@ -27,7 +27,9 @@ public class Approval {
 	private String status;//파일의 상태 ()
 	private Date firstDate;//첫번째 결재날
 	private Date doneDate;//마지막 최종 결재날짜
-	private String empNo;//결재올린자(상신자)
+	private String empNo;//결재올린자(상신자 사원번호)
+	private String empName;//결재올린자(상신자 이름 )
+	private String empPosition;//결재올린자(상신자 직급 )
 	private String formNo;//결재 양식번호
 	private String formName;//결재 양식이름
 	private String firstApprEmp;//첫번째 결재자

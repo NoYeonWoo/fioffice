@@ -58,6 +58,34 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 
+	@Override
+	public ArrayList<Approval> selectfaList(Employee emp) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectfaList(sqlSession,emp);
+	}
+
+
+	@Override
+	public ArrayList<Approval> selectclist(Employee emp) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectclist(sqlSession,emp);
+	}
+
+
+	@Override
+	public Employee selectinsertEmp(Employee emp) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectinsertEmp(sqlSession,emp);
+	}
+
+
+	@Override
+	public Employee selectfApprEmpDetail(String firstapp) {
+		// TODO Auto-generated method stub
+		return approvalDao.selectfApprEmpDetail(sqlSession,firstapp);
+	}
+
+
 
 
 }
