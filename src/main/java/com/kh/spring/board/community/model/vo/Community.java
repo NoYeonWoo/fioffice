@@ -23,5 +23,8 @@ public class Community {
 	public int boardViewCount;
 	public int boardLikeCount;
 	public String status;
+	private String profile;
+	private int replyCount;
+	private String cboardWriterName;
 	
 }

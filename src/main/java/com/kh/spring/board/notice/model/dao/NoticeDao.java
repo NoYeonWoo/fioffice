@@ -45,7 +45,7 @@ public class NoticeDao {
 	}
 
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.selectOne("noticeMapper.insertReply", r);
+		return sqlSession.insert("noticeMapper.insertReply", r);
 	}
 
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int nno) {

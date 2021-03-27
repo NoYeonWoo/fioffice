@@ -8,35 +8,47 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<resultMap id="CommunityResultSet" type="Community">
 		<id property="cboardNo" column="CBOARD_NO"/>
-		<result property="cboardWriter" column="CBOARD_WRITER"/>
+		<result property="cboardWriter" column="CBOARD_WRITER"/> <!-- 사번 -->
+		<result property="cboardWriterName" column="EMP_NAME"/>
 		<result property="cboardTitle" column="CBOARD_TITLE"/>
 		<result property="cboardContent" column="CBOARD_CONTENT"/>
 		<result property="cboardDate" column="CBOARD_DATE"/>
 		<result property="boardViewCount" column="BOARD_VIEWCOUNT"/>
 		<result property="boardLikeCount" column="BOARD_LIKECOUNT"/>
 		<result property="status" column="STATUS"/>
+		<result property="profile" column="CHANGE_NAME"/>
+		<result property="replyCount" column="REPLY_COUNT"/>
 	</resultMap>
 	
 	<resultMap id="replyResultSet" type="Reply">
 		<id property="replyNo" column="REPLY_NO" />
 		<result property="replyWriter" column="REPLY_WRITER"/>
+		<result property="replyWriterName" column="EMP_NAME"/>
 		<result property="replyContent" column="REPLY_CONTENT" />
 		<result property="refBoardNo" column="REF_BNO" />
 		<result property="replyDate" column="REPLY_DATE"/>
 		<result property="status" column="STATUS"/>
 	</resultMap>
 	
-	<select id="selectCListCount" resultType="_int">
+	<resultMap id="likesResultSet" type="Likes">
+		<id property="likeNo" column="REPLY_NO" />
+		<result property="cboardNo" column="CBOARD_NO"/>
+		<result property="empNo" column="EMP_NO"/>
+	</resultMap>
+	
+	<select id="selectCListCount" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
 		FROM COMMUNITY
 		WHERE STATUS='Y'
 	</select>
 	
-	<select id="selectCList" resultMap="CommunityResultSet">
-		SELECT *
-		FROM COMMUNITY
-		WHERE STATUS='Y'
-		ORDER BY CBOARD_NO DESC
+	<select id="selectCList" parameterType="String" resultMap="CommunityResultSet">
+		SELECT A.*,NVL((SELECT COUNT(*) FROM REPLY
+		WHERE REF_BNO = A.CBOARD_NO AND STATUS='Y'
+		GROUP BY CBOARD_NO),0) REPLY_COUNT, EMP_NAME
+		FROM COMMUNITY A LEFT JOIN EMPLOYEE ON CBOARD_WRITER=EMP_NO
+      	WHERE A.STATUS = 'Y'
+      	ORDER BY CBOARD_NO DESC
 	</select>
 	
 	<insert id="insertComm" parameterType="Community">
@@ -77,10 +89,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</update>
 	
 	<select id="selectComm" resultMap="CommunityResultSet">
-		SELECT *
-		FROM COMMUNITY
-		WHERE CBOARD_NO=#{cboardNo}
-		AND STATUS='Y'
+		SELECT A.*, B.EMP_NAME, B.CHANGE_NAME
+		FROM COMMUNITY A INNER JOIN EMPLOYEE B ON A.CBOARD_WRITER=B.EMP_NO
+		WHERE A.CBOARD_NO=#{cboardNo}
+		AND A.STATUS='Y'
 	</select>
 	
 	<insert id="insertReply" parameterType="Reply">
@@ -89,19 +101,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
-		SELECT REPLY_NO, REPLY_WRITER, REPLY_CONTENT, REPLY_DATE
-		FROM REPLY
-		WHERE REF_BNO=#{cboardNo}
-		AND STATUS='Y'
-		ORDER BY REPLY_NO
+		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
+	    FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
+	    WHERE REF_BNO=#{cboardNo}
+	    AND A.STATUS='Y'
+	    ORDER BY REPLY_NO
 	</select>
 	
-	<select id="commentCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM REPLY
-		WHERE REF_BNO=#{cboardNo}
-		AND STATUS='Y'
-	</select>
 	
 	<select id="selectSearchList" resultType="Community" parameterType="map">
 		SELECT *
@@ -112,5 +118,40 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		or CBOARD_CONTENT LIKE #{searchKey}
 		)
 	</select>
+	
+	<!-- 좋아요 갯수 조회 --> 
+	 <select id="countLikes" parameterType="_int" resultType="Likes">
+	 	SELECT *
+	 	FROM LIKES
+	 	WHERE CBOARD_NO=#{cboardNo}
+	 </select>
+	 	
+	 <!-- 좋아요 확인 -->
+	 <select id="selectLikes" parameterType="Likes" resultType="string">
+	 	SELECT A.EMP_NO
+	 	FROM LIKES A INNER JOIN EMPLOYEE B ON A.EMP_NO = B.EMP_NO
+	 	WHERE CBOARD_NO =# {cboardNo}
+	 	AND B.EMP_NO =# {cboardWriter};
+	 </select>
+	 	
+	 <!-- 좋아요 생성 -->
+	 <insert id="insertLikes" parameterType="Likes">
+	 	INSERT INTO LIKES
+	 	values(SEQ_LIKES.NEXTVAL, #{cboardNo}, #{cboardWriter})
+	 </insert>
+	 
+	  <!-- 종아요 수 업데이트 -->
+	 <update id="likesUpdate" parameterType="_int">
+	 	UPDATE COMUNITY
+	 	SET BOARD_LIKECOUNT = BOARD_LIKECOUNT + 1
+	 	WHERE CBOARD_NO =# {cboardNo}
+	 </update>
+	 
+	 <!-- 좋아요 갯수 업데이트 -->
+	 <update id="updateLikes" parameterType="Community">
+	 	update COMUNITY
+	 	SET BOARD_LIKECOUNT = #{BOARD_LIKECOUNT}
+	 	WHERE CBOARD_NO =# {cboardNo}
+	 </update>
 	
 </mapper>

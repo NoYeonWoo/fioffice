@@ -109,10 +109,10 @@
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
-	<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="Profile" /> </div>
+	<img src="${pageContext.request.contextPath}/resources/upload_files/${ db.profile }" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
-	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ db.dboardWriter }</a>
+	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ db.dboardWriterName }</a>
 	<div class="app-article-meta">
 	<div class="app-article-meta-item">${ db.dboardDate }</div>
 	
@@ -137,7 +137,7 @@
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
 			${ db.dboardContent }<br><br>
-			
+			${ r.replyWriterName }
 		</div>
 	
 	<!-- 비율용 -->
@@ -147,7 +147,7 @@
 			<div class="tw-flex-1">
 			<!-- 글수정 -->
 			<!-- 본인 글만 수정 가능 -->
-			<c:if test="${ loginUser.empName eq db.dboardWriter }">
+			<c:if test="${ loginUser.empNo eq db.dboardWriter }">
 			<div>
 			<div class="right">
 			 <button class="app-button app-button-rounded" onclick="postFormSubmit(1);">글 수정</button>
@@ -209,7 +209,7 @@
                     <tr>
                     	<c:if test="${ !empty loginUser }">
 	                        <th colspan="2" style="width:100%">
-	                            <textarea class="app-textarea" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
+	                             <textarea class="app-textarea" id="replyContent" rows="2" style="resize:none; width:100%"></textarea>
 	                        </th>
 	                        <th style="vertical-align: middle"><button class="btn btn-primary" id="addReply">등록하기</button></th>
                         </c:if>
@@ -247,7 +247,7 @@
     					type:"post",
     					data:{replyContent:$("#replyContent").val(),
     						  refBoardNo:dno,
-    						  replyWriter:"${loginUser.empName}"},
+    						  replyWriter:"${loginUser.empNo}"},
     					success:function(result){
     						if(result > 0){
     							$("#replyContent").val("");
@@ -276,17 +276,16 @@
     			type:"get",
     			success:function(list){
     				$("#rcount").text(list.length);
-    				
     				var value="";
     				$.each(list, function(i, obj){
     					
-    					if("${loginUser.empName}" == obj.replyWriter){
+    					if("${loginUser.empNo}" == obj.replyWriter){
     						value += "<tr style='background:#F1F3F5'>";
     					}else{
     						value += "<tr>";
     					}
     					
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriter + "</th>" +
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
    								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
    								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";

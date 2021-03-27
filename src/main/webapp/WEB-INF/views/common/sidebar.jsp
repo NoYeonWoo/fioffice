@@ -85,7 +85,10 @@
                    <label>My portal</label>
                </li>
                <li class="nav-item">
-                   <a href="cmain.co" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
+                   <a href="cmain.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
+               </li>
+                <li class="nav-item">
+                   <a href="clist.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
                </li>
                <li class="nav-item">
                    <a href="view.work" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
@@ -213,6 +216,7 @@
    <!-- [ navigation menu ] end -->
    
    <!-- Required Js -->
+   
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>

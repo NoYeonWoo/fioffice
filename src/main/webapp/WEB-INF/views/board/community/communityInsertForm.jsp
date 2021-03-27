@@ -82,7 +82,8 @@
 					    <input type="text" class="form-control" id="cboardTitle" name="cboardTitle" placeholder="제목을 입력해주세요." required>
 					   
 					   
-                        <input type="hidden" name="cboardWriter"  id="cboardWriter" value="${loginUser.empName}">
+                        <input type="hidden" name="cboardWriter"  id="cboardWriter" value="${loginUser.empNo}">
+                       <input type="hidden" name="changeName" id="changeName" value="${loginUser.changeName}">
                        </div>
                        
 					    <div class="form-group">

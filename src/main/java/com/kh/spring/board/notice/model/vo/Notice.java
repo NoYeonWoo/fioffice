@@ -17,6 +17,7 @@ public class Notice {
 
 	private int noticeNo;
 	private String noticeWriter;
+	private String replyWriterName;
 	private String noticeTitle;
 	private String noticeContent;
 	private Date noticeDate;
@@ -24,5 +25,7 @@ public class Notice {
 	private int count;
 	private String originName;
 	private String changeName;
+	private int replyCount;
+	private String noticeWriterName;
 	
 }
