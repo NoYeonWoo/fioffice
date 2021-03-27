@@ -271,7 +271,7 @@
     					type:"post",
     					data:{replyContent:$("#replyContent").val(),
     						  refBoardNo:nno,
-    						  replyWriter:"${loginUser.empName}"},
+    						  replyWriter:"${loginUser.empNo}"},
     					success:function(result){
     						if(result > 0){
     							$("#replyContent").val("");
@@ -304,13 +304,13 @@
     				var value="";
     				$.each(list, function(i, obj){
     					
-    					if("${loginUser.empName}" == obj.replyWriter){
+    					if("${loginUser.empNo}" == obj.replyWriter){
     						value += "<tr style='background:#F1F3F5'>";
     					}else{
     						value += "<tr>";
     					}
     					
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriter + "</th>" +
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
    								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
    								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";

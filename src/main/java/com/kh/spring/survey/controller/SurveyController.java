@@ -59,22 +59,4 @@ public class SurveyController {
 		  
 	}
 	
-
-	/*@RequestMapping("slist.so")
-	public String selectNlist(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
-		
-		System.out.println("설문 리스트 조회");
-		int listCount = surveyService.selectLictCount();
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage, 10, 10);
-		
-		ArrayList<Survey> list = surveyService.selectList(pi);
-		
-		model.addAttribute("list", list);
-		model.addAttribute("pi", pi);
-		
-		return "survey/surveyListView";
-		  
-	}*/
-	
 }

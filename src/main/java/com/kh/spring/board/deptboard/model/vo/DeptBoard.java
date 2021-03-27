@@ -23,6 +23,8 @@ public class DeptBoard {
 	public Date dboardDate;
 	public String status;
 	public int count;
-	
+	private String profile;
+	private int replyCount;
+	private String dboardWriterName;
 	
 }

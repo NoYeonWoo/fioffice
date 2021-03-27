@@ -109,10 +109,10 @@
 	<div class="tw-flex tw-items-end">
 	<div class="app-board-article-profile tw-flex tw-items-center">
 	<div class="app-profile-image app-avatar">
-	<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}" alt="Profile" /> </div>
+	<img src="${pageContext.request.contextPath}/resources/upload_files/${ cb.profile }" alt="Profile" /> </div>
 		<div class="tw-flex-1 app-profile-body">
 
-	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ cb.cboardWriter }</a>
+	<a class="tw-flex tw-items-center tw-font-bold tw-text-sm link member_4 author">${ cb.cboardWriterName }</a>
 	<div class="app-article-meta">
 	<div class="app-article-meta-item">${ cb.cboardDate }</div>
 	
@@ -137,7 +137,7 @@
 	<div class="app-article-content app-clearfix">
 		<div class="document_138_4 rhymix_content xe_content">
 			${ cb.cboardContent }<br><br>
-			
+			${ obj.replyWriter }
 		</div>
 	
 	<!-- 비율용 -->
@@ -147,7 +147,7 @@
 			<div class="tw-flex-1">
 			<!-- 글수정 -->
 			<!-- 본인 글만 수정 가능 -->
-			<c:if test="${ loginUser.empName eq cb.cboardWriter }">
+			<c:if test="${ loginUser.empNo eq cb.cboardWriter }">
 			<div>
 			<div class="right">
 			 <button class="app-button app-button-rounded" onclick="postFormSubmit(1);">글 수정</button>
@@ -184,13 +184,13 @@
 		<div class="card-body">
 		
 		<!-- 자신의 글이 아닐 때만 추천 가능 -->
-		<!--  
-		 	<c:if test="${ loginUser.empName != cb.cboardWriter }">
-			<button type="button" id="like_btn" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
+	 
+		 	<c:if test="${ loginUser.empNo != cb.cboardWriter }">
+			<button type="button" id="addLike" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
 			<span class="likeCt">${ cb.boardLikeCount }</span>
 			</button>
 			</c:if>
-		-->
+
 		</div>
 	</div>
 	</div>
@@ -198,27 +198,29 @@
 	<script>
 		
 	 /* 좋아요 버튼 클릭 */
-	  $(document).on('click', '.like_btn',function(){
-		  var cno = ${cb.cboardNo};
-		 $.ajax({
-			   type : "get",
-			   url : "clickLikes",
-			   data : {cboardNo:cno,},
-			   dataType : "json",
-			   success : function(data) {
-				  let result = data.result;
-				  if(result == "like"){
-					  alert("추천해 주셔서 감사합니다.")		  
-				  }else{
-					  alert("추천이 취소되었습니다.")
-				  }
-			   },
-			   error : function(){
-				   alert("오류발생");  
-			   }
-		 }); 
-		  
-	  });
+	 $("#addLike").click(function(){
+	  var cboardNo = ${ cb.cboardNo };
+	 $.ajax({
+		   type : "get",
+		   url : "clickLikes",
+		   data : {"cboardNo" : cboardNo},
+		   dataType : "json",
+		   success : function(data) {
+			   let result = data.result;
+			  if(result == "fail")
+				  alert("로그인 후 이용해 주세요.")
+			  else if(result == "like")
+				  alert("추천해 주셔서 감사합니다.")
+			  else
+				  alert("추천이 이미 완료되었습니다.")
+		   },
+		   error : function(){
+			   alert("오류발생");
+			   
+		   }
+	 }); 
+	  
+	 });
 	
 	</script>
 	
@@ -298,7 +300,7 @@
     					type:"post",
     					data:{replyContent:$("#replyContent").val(),
     						  refBoardNo:cno,
-    						  replyWriter:"${loginUser.empName}"},
+    						  replyWriter:"${loginUser.empNo}"},
     					success:function(result){
     						if(result > 0){
     							$("#replyContent").val("");
@@ -331,13 +333,13 @@
     				var value="";
     				$.each(list, function(i, obj){
     					
-    					if("${loginUser.empName}" == obj.replyWriter){
+    					if("${loginUser.empNo}" == obj.replyWriter){
     						value += "<tr style='background:#F1F3F5'>";
     					}else{
     						value += "<tr>";
     					}
     					
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriter + "</th>" +
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
    								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
    								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";

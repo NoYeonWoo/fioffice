@@ -11,6 +11,7 @@
 		<typeAlias type="com.kh.spring.board.notice.model.vo.Notice" alias="Notice"/>
 		<typeAlias type="com.kh.spring.board.deptboard.model.vo.DeptBoard" alias="Deptboard"/>
 		<typeAlias type="com.kh.spring.board.community.model.vo.Community" alias="Community"/>
+		<typeAlias type="com.kh.spring.board.community.model.vo.Likes" alias="Likes"/>
 		<typeAlias type="com.kh.spring.board.common.model.vo.Reply" alias="Reply"/>
 		<typeAlias type="com.kh.spring.work.model.vo.Work" alias="Work"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.Department" alias="Dept"/>
@@ -20,6 +21,7 @@
 		<typeAlias type="com.kh.spring.approval.model.vo.Approval" alias="Approval"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.AdminMenu" alias="AdminMenu"/>
 		<typeAlias type="com.kh.spring.meetingroom.model.vo.Meetingroom" alias="MRoom"/>
+		<typeAlias type="com.kh.spring.mainCalendar.model.vo.Calendar" alias="Calendar"/>
 	</typeAliases>
 	
 	
@@ -35,5 +37,6 @@
 		<mapper resource="/mappers/admin-mapper.xml"/>
 		<mapper resource="/mappers/approval-mapper.xml"/>
 		<mapper resource="/mappers/meetingroom-mapper.xml"/>
+		<mapper resource="/mappers/calendar-mapper.xml"/>
 	</mappers>
 </configuration>

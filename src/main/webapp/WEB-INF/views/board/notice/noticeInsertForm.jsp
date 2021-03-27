@@ -80,7 +80,7 @@
 					    <input type="text" class="form-control" id="noticeTitle" name="noticeTitle" placeholder="제목을 입력해주세요." required>
 					   
 					   
-                        <input type="hidden" name="noticeWriter"  id="noticeWriter" value="${loginUser.empName}">
+                        <input type="hidden" name="noticeWriter"  id="noticeWriter" value="${loginUser.empNo}">
                        </div>
                        
 					    <div class="form-group">

@@ -13,15 +13,15 @@ import com.kh.spring.board.deptboard.model.vo.DeptBoard;
 @Repository("deptDao")
 public class DeptDao {
 
-	public int selectLictCount(SqlSessionTemplate sqlSession) {
+	public int selectLictCount(SqlSessionTemplate sqlSession, String deptCode) {
 		return sqlSession.selectOne("deptboardMapper.selectDListCount");
 	}
 
-	public ArrayList<DeptBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi) {
+	public ArrayList<DeptBoard> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String deptCode) {
 		int offset = (pi.getCurrentPage() -1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("deptboardMapper.selectDList", null, rowBounds);
+		return (ArrayList)sqlSession.selectList("deptboardMapper.selectDList", deptCode, rowBounds);
 	}
 
 	public int updateIncreaseCount(SqlSessionTemplate sqlSession, int dno) {
@@ -45,7 +45,7 @@ public class DeptDao {
 	}
 
 	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
-		return sqlSession.selectOne("deptboardMapper.insertReply", r);
+		return sqlSession.insert("deptboardMapper.insertReply", r);
 	}
 
 	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int dno) {

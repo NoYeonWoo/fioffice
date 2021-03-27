@@ -9,6 +9,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<resultMap id="NoticeResultSet" type="Notice">
 		<id property="noticeNo" column="NOTICE_NO"/>
 		<result property="noticeWriter" column="NOTICE_WRITER"/>
+		<result property="noticeWriterName" column="EMP_NAME"/>
 		<result property="noticeTitle" column="NOTICE_TITLE"/>
 		<result property="noticeContent" column="NOTICE_CONTENT"/>
 		<result property="noticeDate" column="NOTICE_DATE"/>
@@ -16,27 +17,31 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="count" column="COUNT"/>
 		<result property="originName" column="ORIGIN_NAME"/>
 		<result property="changeName" column="CHANGE_NAME"/>
+		<result property="replyCount" column="REPLY_COUNT"/>
 	</resultMap>
 	
 	<resultMap id="replyResultSet" type="Reply">
 		<id property="replyNo" column="REPLY_NO" />
 		<result property="replyWriter" column="REPLY_WRITER"/>
+		<result property="replyWriterName" column="EMP_NAME"/>
 		<result property="replyContent" column="REPLY_CONTENT" />
 		<result property="refBoardNo" column="REF_BNO" />
 		<result property="replyDate" column="REPLY_DATE"/>
 		<result property="status" column="STATUS"/>
 	</resultMap>
 	
-	<select id="selectListCount" resultType="_int">
+	<select id="selectListCount" parameterType="String" resultType="_int">
 		SELECT COUNT(*)
 		FROM NOTICE
 		WHERE STATUS='Y'
 	</select>
 	
-	<select id="selectList" resultMap="NoticeResultSet">
-		SELECT *
-		FROM NOTICE
-		WHERE STATUS='Y'
+	<select id="selectList" parameterType="String" resultMap="NoticeResultSet">
+		SELECT A.*,NVL((SELECT COUNT(*) FROM REPLY
+		WHERE REF_BNO = A.NOTICE_NO AND STATUS='Y'
+		GROUP BY NOTICE_NO),0) REPLY_COUNT, EMP_NAME
+		FROM NOTICE A LEFT JOIN EMPLOYEE ON NOTICE_WRITER=EMP_NO
+      	AND A.STATUS = 'Y'
 		ORDER BY NOTICE_NO DESC
 	</select>
 	
@@ -92,11 +97,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
-		SELECT REPLY_NO, REPLY_WRITER, REPLY_CONTENT, REPLY_DATE
-		FROM REPLY
-		WHERE REF_BNO=#{noticeNo}
-		AND STATUS='Y'
-		ORDER BY REPLY_NO
+		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
+	    FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
+	    WHERE REF_BNO=#{noticeNo}
+	    AND A.STATUS='Y'
+	    ORDER BY REPLY_NO
 	</select>
 	
 	<select id="commentCount" resultType="_int">

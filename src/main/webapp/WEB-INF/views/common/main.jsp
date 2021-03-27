@@ -269,29 +269,28 @@
             <!-- 공지사항게시판 시작 -->
             <div class="col-xl-12">
                 <div class="card">
-                    <div class="card-header">
+                     <div class="card-header">
                         <h5>공지사항</h5>
-                        <a href="nlist.bo" align="right"> <i class="fas feather icon-bell"></i>&nbps;더보기</a>
-                    </div>
-                    <div class="card-body table-border-style">
-                        <div class="table-responsive">
-                            <table>
-							<c:forEach var="n" items="${nlist}" begin="0" end="5">
-							  <tr align="center"> 
-							      <td align="left" style="padding-left: 10px; width: 60%;">
-							           <a href="href="ndetail.bo?nno=" + $(this).children().eq(0).val();">
-							      </td>
-							  </tr>
-							</c:forEach>
-							  <tr>
-							  	<td class="moreTD"><a href="nlist.bo"> <i class="fas fa-location-arrow"></i>더보기</a> </td>
-							  </tr>
-						 </table>
+                        <div class="card-header-right">
+                            <div class="btn-group card-option">
+                                <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="feather icon-more-horizontal"></i>
+                                </button>
+                                <ul class="list-unstyled card-option dropdown-menu dropdown-menu-right">
+                                    <li class="dropdown-item full-card"><a href="nlist.bo" class="dropdown-item full-card"><span><i class="fas feather icon-bell"></i>더보기</span>
+                                    </a>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </div>
-                    </div>
-                       <!-- 공지사항게시판 끝 -->       
+                    
+                    
+                    
+                    
+                 </div>
+      		</div>
+
+                	<!-- 공지사항게시판 끝 -->       
                     
              
                     

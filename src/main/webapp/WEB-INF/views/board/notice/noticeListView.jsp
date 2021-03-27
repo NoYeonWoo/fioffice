@@ -230,7 +230,7 @@
             <a class="tw-flex-1">
 	        <div class="tw-flex-1">
 	          	<div class="app-list-title tw-flex-wrap">
-	            	<i class="fas feather icon-bell"><span class="tw-mr-1"> ${n.noticeTitle}</span></i>
+	            	<i class="fas feather icon-bell"></i><span class="tw-mr-1"> ${n.noticeTitle}</span>
 				</div>
 	          
 	          <div class="app-list-meta">
@@ -251,7 +251,7 @@
          
         	</div> <!--   <div class="tw-flex-1"> -->
         	<!-- 댓글 count -->
-		    <div class="app-list-comment">11</div>
+		    <div class="app-list-comment">${n.replyCount}</div>
         	</a>
     	</li>
     </ul>

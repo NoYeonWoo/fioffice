@@ -17,9 +17,10 @@ import lombok.ToString;
 
 public class Reply {
 	private int replyNo;
-	private String replyWriter;
+	private String replyWriter; //사번 연결
 	private String refBoardNo;
 	private String replyContent;
 	private Timestamp replyDate;
-	private String status;
+	private String status; //
+	private String replyWriterName; //댓글 작성자 이름
 }

@@ -22,13 +22,13 @@ public class DeptServiceImpl implements DeptService {
 	private DeptDao deptDao;
 	
 	@Override
-	public ArrayList<DeptBoard> selectList(PageInfo pi) {
-		return deptDao.selectList(sqlSession, pi);
+	public ArrayList<DeptBoard> selectList(PageInfo pi, String deptCode) {
+		return deptDao.selectList(sqlSession, pi, deptCode);
 	}
 	
 	@Override
-	public int selectLictCount() {
-		return deptDao.selectLictCount(sqlSession);
+	public int selectLictCount(String deptCode) {
+		return deptDao.selectLictCount(sqlSession, deptCode);
 	}
 
 	@Override

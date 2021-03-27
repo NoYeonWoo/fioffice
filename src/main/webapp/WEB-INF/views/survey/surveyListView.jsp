@@ -202,7 +202,7 @@
             
  
             <tbody role="alert">
-             <c:forEach items="${ list }" var="s">
+            <c:forEach items="${ list }" var="s">
             <tr>
 	            <td>${s.surNo}</td>
 	            <td>${s.status}</td>
