@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,59 +54,33 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  <!-- Basic Button table start -->
-          <div class="col-sm-12" >
+          <div class="col-sm-10 mx-auto" >
                 <div class="card" >
                     <div class="card-header">
                         <h3>상품관리</h3>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
+                        <select class="form-control form-control-sm" style="width:15%; margin:0rem 1rem 2rem 0rem;"
+                        	name="selectC" id="selectC" onchange="selectpList()">
+                                 		<option value="">거래처선택</option>
+                                 		<c:forEach items="${ cList }" var="c">
+											<c:if test="${c.sortation eq '입고' }">
+											<option value="${ c.cliNo }">${ c.cliName }</option>
+										</c:if>	
+										</c:forEach>
+                                 		</select>
                             	<table id="productList" class="table table-hover row-border  nowrap">
 	                                <thead>
 	                                    <tr>
-	                                    <th  id="pCode" style="width: 15%;">상품코드</th>
-	                                    <th  id="pName" style="width: 20%;">상품명</th>
-	                                    <th  id="preStock" style="width: 10%">이월재고</th>
-	                                    <th  id="inCount" style="width: 5%;">입고수량</th>
-	                                    <th  id="inPrice" style="width: 10%;">입고단가</th>
-	                                    <th  id="outCount" style="width: 5%;">출고수량</th>
-	                                    <th  id="outPrice" style="width: 10%;">출고단가</th>
-	                                    <th  id="stock" style="width: 10%;">재고</th>
-	                                    <th id="comment" style="width: 15%;">비고</th> 
+	                                    <th style="width: 15%;">상품코드</th>
+	                                    <th style="width: 20%;">상품명</th>
+	                                    <th style="width: 10%">이월재고</th>
+	                                    <th style="width: 10%;">입고단가</th>
+	                                    <th style="width: 10%;">출고단가</th>
+	                                    <th style="width: 10%;">재고</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>  
-	                                <tr>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                    </tr><tr>
-	                                        <td>Gloria Little</td>
-	                                        <td> Administrator</td>
-	                                        <td>New Yo</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                    </tr><tr>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systemsr</td>
-	                                        <td>New rk</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                        <td>59</td>
-	                                        <td>2009/04/10</td>
-	                                        <td>$237,500</td>
-	                                    </tr></tbody>
                             	</table>
                         	</div>
                         </div>
@@ -128,24 +104,35 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newProduct" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered  "  align="center">
+				<form name="newProduct" action="insertProduct" method="post" autocomplete="off" onsubmit="return check();">
+					<table class="table table-bordered"  align="center">
                     	<tr>
-                    	
+                    		<td>거래처 선택</td>
+                    		<td><select class="form-control form-control-sm" style="width: 40%;"
+									name="cliNo" id="cliNo" >
+									<option value="">전체</option>
+									<<c:forEach items="${ cList }" var="c">
+										<c:if test="${c.sortation eq '입고' }">
+											<option value="${ c.cliNo }">${ c.cliName }</option>
+										</c:if>	
+									</c:forEach>
+								</select>
+							</td>
+						</tr><tr>
                         	<td style="width:20%">상품코드</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:40%" placeholder="P0000형식으로 작성해주세요"></td>
+                            <td><input type="text" name="proNo" id="proNo"class="form-control form-control-sm" style="width:40%" readonly></td>
                         </tr><tr>
                             <td style="width:20%">상품명</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
+                            <td><input type="text" name="proName" class="form-control form-control-sm" style="width:40%"></td>
                         </tr><tr>
                              <td style="width:20%">입고단가</td>
-                             <td><input type="text" class="form-control form-control-sm"style="width:25%;float:left"><span>원</span></td>
+                             <td><input type="text" name="inPrice" class="form-control form-control-sm"style="width:25%;float:left"><span>원</span></td>
                         </tr><tr>
                              <td style="width:20%">출고단가</td>
-                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                             <td><input type="text" name="outPrice" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
                         </tr><tr>
                              <td style="width:20%">비고</td>
-                             <td><input type="text" class="form-control form-control-sm"></td>
+                             <td><input type="text" name="comment" class="form-control form-control-sm"></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -158,89 +145,134 @@
         </div>
     </div>
     
-     <div class="modal fade" id="productDetail">  
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">상세보기</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
-            </div>
-             <div class="modal-body">
-				<form name="productUpdate" action="login.me" method="post" autocomplete="off">
-					<table class="table table-bordered table-detail"  align="center">
-                    	<tr>
-                        	<td style="width:20%">상품코드</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
-                        </tr><tr>
-                            <td style="width:20%">상품명</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:40%"></td>
-                        </tr><tr>
-                             <td style="width:20%">이월재고</td>
-                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
-                        </tr><tr>
-                             <td style="width:20%">출고수량</td>
-                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
-                        </tr><tr>
-                             <td style="width:20%">입고단가</td>
-                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
-                        </tr><tr>
-                             <td style="width:20%">출고수량</td>
-                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
-                        </tr><tr>
-                             <td style="width:20%">출고단가</td>
-                             <td><input type="text" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
-                        </tr><tr>
-                             <td style="width:20%">재고</td>
-                             <td><input type="number" class="form-control form-control-sm" style="width:25%"></td>
-                        </tr><tr>
-                             <td style="width:20%">비고</td>
-                             <td><input type="text" class="form-control form-control-sm"></td>
-                        </tr>
-					</table>
-					<div class="modal-footer">
-                    	<button type="submit" class="btn btn-primary">수정하기</button>
-                    	<button type="button" onclick="$('#postForm').submit();" class="btn btn-danger">삭제하기</button>
-                	</div>
-				</form>	
-			</div>
-            </div>
-        </div>
-    </div>
+     
     
     <jsp:include page="../common/footer.jsp"/>
     
 	<script>
 	$(document).ready(function() {
-        var table=$('#productList').DataTable({
+		$("#selectC").val("");
+		selectpList();
+		
+		$(document).on('click', '#productList tbody tr', function() {
+			location.href="detailProduct?proNo=" + $(this).children().eq(0).text();
+	    });
+		
+		$("#cliNo").change(function() {
+			console.log($(this).val());
+			var cliNo = $(this).val();
+			if(cliNo != ""){
+				$.ajax({
+			        type:"POST",  
+			        url:"selectProductCount",  
+			        async:false,
+			        data:{cliNo:cliNo},
+			        success:function(result){
+			        	count=""+(Number(result)+1);
+			        	console.log('P'+cliNo.substring(1)+(count.padStart(3,'0')));
+			        	$("#productAdd #proNo").val('P'+cliNo.substring(1)+(count.padStart(3,'0')));
+			        },   
+			        error:function(e){  
+			            console.log(e.responseText);  
+			        }
+				});
+			}			
+		});
+	});
+	function selectpList(){
+		var table=$('#productList').DataTable({
+        	destroy : true,
             columnDefs: [
-                { orderable: false, targets: [3,4,5,6,8] },
-                { searchable: false, targets: [2,3,4,5,6,7]}
+                { orderable: false, targets: [2,5] },
+                { searchable: false, targets: [2,3,4,5]}
               ],
               dom: '<"float-left"B><"float-right"f>rtip',
             buttons: [{
                 text: '상품추가',
                 className: 'btn-primary',
                 action: function(e, dt, node, config) {
+                	 $("#cliNo").val("");
                 	$("#productAdd").modal("show");
                 }
-            }]
-        });
-        
-        $("#productList tr").click( function(){
-        	//$("#productList td:nth-child(2)").text("");
-            $(".table-detail tr:nth-child(1) input").val(table.row(this).data()[0]);
-            $(".table-detail tr:nth-child(2) input").val(table.row(this).data()[1]);
-            $(".table-detail tr:nth-child(3) input").val(table.row(this).data()[2]);
-            $(".table-detail tr:nth-child(4) input").val(table.row(this).data()[3]);
-            $(".table-detail tr:nth-child(5) input").val(table.row(this).data()[4]);
-            $(".table-detail tr:nth-child(6) input").val(table.row(this).data()[5]);
-            $(".table-detail tr:nth-child(7) input").val(table.row(this).data()[6]);
-            $(".table-detail tr:nth-child(8) input").val(table.row(this).data()[7]);
-            $(".table-detail tr:nth-child(9) input").val(table.row(this).data()[8]);
-            $("#productDetail").modal("show");
-        });
-	});
+            },{
+                text: '전체삭제',
+                className: 'btn-danger',
+                action: function(e, dt, node, config) {
+                	if(confirm("전체 삭제 후 복구 할 수 없습니다. 정말로 삭제할까요?")){
+                		$.ajax({
+        			        type:"POST",  
+        			        url:"deleteAllProduct",  
+        			        async:false,
+        			        data:{cliNo:$("#selectC").val()},
+        			        success:function(result){
+        			     		if(result>0){
+        			     			alert("삭제가 완료되었습니다.");
+        			     			selectpList();
+        			     		}else{
+        			     			alert("삭제를 실패하였습니다.");
+        			     		}
+        			        }
+        				});
+                	}
+                }
+            }],language: {
+          	  zeroRecords: "상품이 존재하지 않습니다."
+            },
+	        ajax : {
+                url :"selectProductList"
+                ,type : "POST"
+                ,data:{cliNo:$("#selectC").val()}
+                ,dataType : "JSON"
+                },
+            columns : [
+               	{data: "proNo"},
+               	{data: "proName"},
+               	{data: "preStock",
+                   	render: function(data, type, row){
+                         if(type=='display') data = data+"개"
+                         return data;}},
+               	{data: "inPrice",
+                   	render: function(data, type, row){
+                         if(type=='display') data = data+"원"
+                         return data;}},
+               	{data: "outPrice",
+                   	render: function(data, type, row){
+                         if(type=='display') data = data+"원"
+                         return data;}},
+               	{data: "stock",
+						render: function(data, type, row){
+                       		if(type=='display') data = data+"개"
+                            return data;}}
+               ]
+	    });
+		$("#productList").hide();
+		$("#productList").fadeIn(1000);
+	}
+	function check() {
+		var name=document.productAdd;
+		console.log(name.cliNo.value);
+		if(name.cliNo.value==null){
+			alert("거래처를 선택해주세요.");
+			return false;
+		}else if(name.proName.value==""){
+			$(name.proName).attr("placeholder","상품명을 입력해주세요");
+			name.proName.focus();
+			return false;
+		}else if(name.inPrice.value==""){
+			$(name.inPrice).attr("placeholder","입고단가를 입력해주세요");
+			name.inPrice.focus();
+			return false;
+		}else if(name.outPrice.value==""){
+			$(name.outPrice).attr("placeholder","출고단가를  입력해주세요");
+			name.outPrice.focus();
+			return false;
+		}else if(confirm("추가하시겠습니까?")){
+			return true;
+		}else{
+			return false;
+		}
+		
+	}
 	</script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>

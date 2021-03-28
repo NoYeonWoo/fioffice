@@ -67,8 +67,6 @@
 		FROM EMPLOYEE  WHERE JOB_CODE='J10'
 		
 	</select>
-	
-
 
 <!-- 처음 결재 올리기  -->
 	<insert id="insertApproval" parameterType="Approval">
@@ -88,6 +86,7 @@
 		SELECT*
 		FROM APPROVAL
 		JOIN APPROVAL_TYPE USING (FORM_NO)
+
 		JOIN EMPLOYEE USING (EMP_NO)
 		WHERE EMP_NO=#{empNo}
 		

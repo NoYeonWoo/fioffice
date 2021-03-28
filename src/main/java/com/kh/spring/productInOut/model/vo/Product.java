@@ -21,4 +21,6 @@ public class Product {
 	private String outPrice;
 	private String stock;
 	private String comment;
+	private String cliNo;
+	private String cliName;
 }
