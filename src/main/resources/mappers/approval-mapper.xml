@@ -57,7 +57,7 @@ VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent
    FROM APPROVAL 
    JOIN APPROVAL_TYPE USING (FORM_NO)
    JOIN EMPLOYEE USING (EMP_NO)
-   WHERE LAST_APPR_EMP=#{empNo}
+   WHERE LAST_APPR_LEVEL=#{empNo}
   
 </select>
 

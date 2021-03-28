@@ -17,12 +17,27 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result property="status" column="STATUS"/>
 </resultMap>
 
+<resultMap type="Product" id="ProductResultSet">
+	<id property="proNo" column="PRO_NO"/>
+	<result property="proName" column="PRO_NAME"/>
+	<result property="preStock" column="PRE_STOCK"/>
+	<result property="inStock" column="IN_STOCK"/>
+	<result property="inPrice" column="IN_PRICE"/>
+	<result property="outStock" column="OUT_STOCK"/>
+	<result property="outPrice" column="OUT_PRICE"/>
+	<result property="stock" column="STOCK"/>
+	<result property="comment" column="COMMENT"/>
+	<result property="cliNo" column="CLI_NO"/>
+	<result property="cliName" column="CLI_NAME"/>
+	
+</resultMap>
+
 <select id="selectClientList" resultMap="clientResultSet">
 	SELECT *
 	FROM CLIENT
 </select>
 
-<insert id="insertClient">
+<insert id="insertClient" >
 	INSERT INTO CLIENT VALUES(
 		#{cliNo},
 		#{cliName},
@@ -31,8 +46,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{master},
 		#{phone},
 		#{sortation},
-		#{comment},
-		DEFAULT) 
+		#{comment}) 
 </insert>
 
 <select id="selectClient" parameterType="string" resultMap="clientResultSet">
@@ -54,10 +68,68 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE CLI_NO = #{cliNo}
 </update>
 
-<update id="deleteClient" parameterType="string">
-	UPDATE CLIENT
-	SET 
-	STATUS = 'N'
+<delete id="deleteClient" parameterType="string">
+	DELETE FROM CLIENT
 	WHERE CLI_NO = #{cliNo}
+</delete>
+
+<select id="selectClientCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM CLIENT
+</select>
+
+<select id="selectProductList" parameterType="map" resultMap="ProductResultSet">
+	SELECT *
+	FROM PRODUCT
+	<if test="cliNo != null">
+	WHERE CLI_NO = #{cliNo}
+	</if>
+</select>
+
+<select id="selectProduct" parameterType="string" resultMap="ProductResultSet">
+	SELECT *
+	FROM PRODUCT JOIN CLIENT USING (CLI_NO)
+	WHERE PRO_NO = #{proNo}
+</select>
+
+<insert id="insertProduct">
+	INSERT INTO PRODUCT VALUES(
+		#{proNo},
+		#{proName},
+		DEFAULT,
+		DEFAULT,
+		#{inPrice},
+		DEFAULT,
+		#{outPrice},
+		DEFAULT,
+		#{comment},
+		#{cliNo}) 
+</insert>
+
+<select id="selectProductCount" parameterType="string" resultType="_int">
+	SELECT COUNT(*)
+	FROM PRODUCT
+	WHERE CLI_NO = #{cliNo}
+</select>
+
+<update id="updateProduct" parameterType="Product">
+	UPDATE PRODUCT
+	SET PRO_NAME = #{proName},
+		IN_PRICE = #{inPrice},
+		OUT_PRICE = #{outPrice},
+		"COMMENT" = #{comment}
+	WHERE PRO_NO = #{proNo}
 </update>
+
+<delete id="deleteProduct" parameterType="string">
+	DELETE FROM PRODUCT
+	WHERE PRO_NO = #{proNo}
+</delete>
+
+<delete id="deleteAllProduct" parameterType="map">
+	DELETE FROM PRODUCT
+	<if test="cliNo != null">
+	WHERE CLI_NO = #{cliNo}
+	</if>
+</delete>
 </mapper>

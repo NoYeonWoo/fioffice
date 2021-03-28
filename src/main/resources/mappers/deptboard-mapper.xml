@@ -30,14 +30,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="status" column="STATUS"/>
 	</resultMap>
 	
-	<select id="selectDListCount" parameterType="String" resultType="_int">
+	<select id="selectDListCount" parameterType="string" resultType="_int">
 		SELECT COUNT(*)
 		FROM DEPTBOARD
 		WHERE DEPT_CODE=#{deptCode}
 		AND STATUS='Y'
 	</select>
 	
-	<select id="selectDList" parameterType="String" resultMap="DeptboardResultSet">
+	<select id="selectDList" parameterType="string" resultMap="DeptboardResultSet">
 		SELECT A.*,NVL((SELECT COUNT(*) FROM REPLY
 		WHERE REF_BNO = A.DBOARD_NO AND STATUS='Y'
 		GROUP BY DBOARD_NO),0) REPLY_COUNT, EMP_NAME

@@ -1,6 +1,7 @@
 package com.kh.spring.productInOut.model.service;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.productInOut.model.dao.ProductInOutDao;
 import com.kh.spring.productInOut.model.vo.Client;
+import com.kh.spring.productInOut.model.vo.Product;
 
 @Service("proInoutService")
 public class ProductInOutServiceImpl implements ProductInOutService {
@@ -41,6 +43,46 @@ public class ProductInOutServiceImpl implements ProductInOutService {
 	public int deleteClient(String cliNo) {
 		// TODO Auto-generated method stub
 		return proInoutDao.deleteClient(sqlSession,cliNo);
+	}
+	@Override
+	public int selectClientCount() {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectClientCount(sqlSession);
+	}
+	@Override
+	public ArrayList<Product> selectProductList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectProductList(sqlSession, map);
+	}
+	@Override
+	public int insertProduct(Product product) {
+		// TODO Auto-generated method stub
+		return proInoutDao.insertProduct(sqlSession, product);
+	}
+	@Override
+	public int selectProductCount(String cliNo) {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectProductCount(sqlSession, cliNo);
+	}
+	@Override
+	public Product selectProduct(String proNo) {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectProduct(sqlSession,proNo);
+	}
+	@Override
+	public int updateProduct(Product product) {
+		// TODO Auto-generated method stub
+		return proInoutDao.updateProduct(sqlSession,product);
+	}
+	@Override
+	public int deleteProduct(String proNo) {
+		// TODO Auto-generated method stub
+		return proInoutDao.deleteProduct(sqlSession,proNo);
+	}
+	@Override
+	public int deleteAllProduct(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return proInoutDao.deleteAllProduct(sqlSession,map);
 	}
 
 }

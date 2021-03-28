@@ -26,7 +26,7 @@ import com.kh.spring.board.common.model.vo.PageInfo;
 import com.kh.spring.board.common.model.vo.Reply;
 import com.kh.spring.board.deptboard.model.service.DeptService;
 import com.kh.spring.board.deptboard.model.vo.DeptBoard;
-import com.kh.spring.common.Pagination;
+import com.kh.spring.board.common.Pagination;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 
