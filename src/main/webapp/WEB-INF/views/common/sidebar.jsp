@@ -96,9 +96,6 @@
                <li class="nav-item">
                    <a href="cmain.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
                </li>
-                <li class="nav-item">
-                   <a href="clist.ca" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-alt"></i></span><span class="pcoded-mtext">캘린더</span></a>
-               </li>
                <li class="nav-item">
                    <a href="view.work" class="nav-link "><span class="pcoded-micon"><i class="fas fa-briefcase"></i></span><span class="pcoded-mtext">근태관리</span></a>
                </li>
@@ -126,7 +123,7 @@
                    <a href="approvalList.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-file-signature"></i></span><span class="pcoded-mtext">전자결재</span></a>
                </li>
                <li class="nav-item">
-                   <a href="view.add" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
+                   <a href="view.add2" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
                </li>
                <li class="nav-item">
                    <a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a><!-- ssdd -->

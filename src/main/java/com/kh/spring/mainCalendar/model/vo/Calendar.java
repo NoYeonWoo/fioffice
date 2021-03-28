@@ -18,12 +18,13 @@ public class Calendar {
 	private String calNo;
 	private String empNo; //사번으로 들어감
 	private String calCate;
+	private String calCateName;
 	private String calTitle;
 	private String calContent;
-	private Date calSDate;
 	private String calSDates;
-	private Date calEDate;
 	private String calEDates;
 	private String calType;
 	private String status;
+	private String calColor;
+	private String deptCode;
 }

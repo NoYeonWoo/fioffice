@@ -284,9 +284,6 @@
                         </div>
                     </div>
                     
-                    
-                    
-                    
                  </div>
       		</div>
 
@@ -317,23 +314,15 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Date</th>
-                                        <th>Calendar</th>
+                                        <th>++ 일정 ++</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                
                                    <tr>
-                                        <td>getDate();</td>
-                                        <td>등록된 일정이 없습니다.</td>
+                                        <td>${ca.cboardTitle }</td>
                                     </tr>
-                                    <tr>
-                                        <td>getDate();</td>
-                                        <td>등록된 일정이 없습니다.</td>
-                                    </tr>
-                                    <tr>
-                                        <td>getDate();</td>
-              		                    <td>등록된 일정이 없습니다.</td>
-                                    </tr>
+                                   
                                 </tbody>
                             </table>
                         </div>
@@ -344,34 +333,112 @@
 <!-- [ Main Content ] 메인화면 끝 -->
 
 
-
-<script>
+  <script>
     $(document).ready(function(){
+    	
+
 	var calendar = $('#calendar').fullCalendar( {
-		editable : true,
-		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-		selectable : true,
+		plugins: ['interaction'],
 		header : {
 			left : 'agendaDay,agendaWeek,month'
 		},
+		editable : false,
+		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+		selectable : true,
 		defaultView : 'month',
-		axisFormat : 'h:mm',
-		columnFormat: {
-			month: 'ddd',
-			week: 'M/d ddd ',
-			day: 'M월d일 dddd',
-			agendaDay : 'dddd d'
-		},
-		titleFormat: {
-			month: 'yyyy년 MMMM',
-			week: "MMM dd일{ '&#8212;'[ MMM] d일}",
-			day: 'yyyy년 MMM d일 dddd'
-		},
+		allDaySlot : false,
+		selectHelper : true,
+		
+		/* 일정 받아옴 */
+		events : [ 
+			<c:forEach items="${list}" var="ca">
+			<c:if test="${ca.empNo eq loginUser.empNo }">
+			{
+			id : '${ca.calNo}',
+			title : '${ca.calTitle }',
+			description : '${ca.calContent}',
+			start : '${ca.calSDates}',
+			end : '${ca.calEDates}',
+			type : '${ca.calCateName}',
+			backgroundColor: '${ca.calColor}',
+			textColor: '#ffffff'
+			}, 
+			</c:if>
+			</c:forEach>
+		 ], 
+		 
+		select: function (startDate, endDate, jsEvent, view) {
+
+		    $(".fc-body").unbind('click');
+		    $(".fc-body").on('click', 'td', function (e) {
+
+		      $("#contextMenu")
+		        .addClass("contextOpened")
+		        .css({
+		          display: "block",
+		          left: e.pageX,
+		          top: e.pageY
+		        });
+		      return false;
+		    });
+
+		    var today = moment();
+
+		  },
+
+		 //일정 클릭시 확인 및 수정이벤트 
+		  eventClick: function (event, jsEvent, view) {
+			  var cano = event.id;
+			  console.log(cano);
+
+		            $.ajax({
+		               type:"POST",  
+		               url:"selectCalendar", 
+		               async:false,
+		               data:{calNo:cano},
+		               success:function(ca){
+		            	   console.log(cano);
+		            	  
+		                   $("#viewCalendar #calNo").val(ca.calNo);
+		                   $("#viewCalendar #empNo").val(ca.empNo);
+		                   $("#viewCalendar #cateName").val(ca.cateName);
+		                   $("#viewCalendar #calTitle").val(ca.calTitle);
+		                   $("#viewCalendar #calContent").val(ca.calContent);
+		                   $("#viewCalendar #calSDates").val(ca.calSDates);
+		                   $("#viewCalendar #calEDates").val(ca.calEDates);
+		                   
+		                   $("#viewCalendar #empNo").val(ca.empNo);
+		                   $("#viewCalendar #calCate").val(ca.calCate);
+		                   $("#viewCalendar #calType").val(ca.calType);
+		                   $("#viewCalendar #calColor").val(ca.calColor);
+		                   $("#viewCalendar #status").val(ca.status);
+		                   
+		               },
+		               
+		               error:function(e){  
+		                   console.log(e.responseText);  
+		               }
+		        		});   
+		            
+		            $("#viewCalendar").modal("show");
+		         
+		  },
+		  
+		 
+		 
+		dayClick: function(date, allDay, jsEvent, view) {        
+	           $("#addCalendar").modal("show");
+          }
 
       });
-    }); 
+	
+		calendar.render();
+	
+    });
     
+   
     </script>
+    
     <script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js' type="text/javascript"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/todo.js"></script>
