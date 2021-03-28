@@ -15,12 +15,16 @@ public interface WorkService {
 
 	Work selectWork(String eno);
 
-	int insertWork(Work work);
+	int insertWork(Work work);// insert 하기
 
 
 	Work updateSumWork(String eno);
 
-	int updateWork(Work work);
+	int updateWork1(String empNo);
+	int updateWork2(String empNo);
+	int updateWork3(String empNo);
+
+	Work selectTimes(String empNo);//String empNo Work w
 
 
 }
