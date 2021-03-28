@@ -53,7 +53,7 @@
 	
 	</select>
 	
-	<select id="selectList" resultMap="addressResultSet">
+	<select id="selectList" resultMap="addressResultSet"><!-- 내주소 -->
 		SELECT *
 		FROM ADDRESS
 		WHERE STATUS = 'Y'

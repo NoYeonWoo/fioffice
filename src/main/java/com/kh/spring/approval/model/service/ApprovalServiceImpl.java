@@ -86,6 +86,30 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 
+	@Override
+	public int updateStatus(int ano) {
+		// TODO Auto-generated method stub
+		return approvalDao.updateStatus(sqlSession,ano);
+	}
+
+
+	@Override
+	public int updateRStatus(int ano) {
+		// TODO Auto-generated method stub
+		return approvalDao.updateRStatus(sqlSession,ano);
+	}
+
+
+	@Override
+	public int updateCStatus(int ano) {
+		// TODO Auto-generated method stub
+		return approvalDao.updateCStatus(sqlSession,ano);
+	}
+
+
+
+
+
 
 
 }

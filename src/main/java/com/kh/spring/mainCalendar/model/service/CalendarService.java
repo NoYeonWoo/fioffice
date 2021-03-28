@@ -10,6 +10,11 @@ public interface CalendarService {
 
 	ArrayList<Calendar> listCalendar(Calendar ca);
 
+	Calendar selectCalendar(String calNo);
+
+	int updateCalendar(Calendar ca);
+
+	int deleteCalendar(int calNo);
 	
 }
  

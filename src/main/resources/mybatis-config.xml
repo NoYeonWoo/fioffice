@@ -25,6 +25,7 @@
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Inout" alias="Inout"/>
 		<typeAlias type="com.kh.spring.mainCalendar.model.vo.Calendar" alias="Calendar"/>
+		<typeAlias type="com.kh.spring.mainCalendar.model.vo.Category" alias="Category"/>
 	</typeAliases>
 	
 	

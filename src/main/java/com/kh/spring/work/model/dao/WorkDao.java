@@ -25,24 +25,41 @@ public class WorkDao {
 		return (ArrayList)sqlSession.selectList("workMapper.selectList", null, rowBounds); 
 	}
 
+	
 	public Work selectWork(SqlSessionTemplate sqlSession, String eno) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("workMapper.selectWork"); 
 	}
+	
 
-	public int startWork(SqlSessionTemplate sqlSession, Work work) {
+	
+	public int startWork(SqlSessionTemplate sqlSession,Work work) {
 		// TODO Auto-generated method stub
-		return sqlSession.insert("workMapper.startWork"); 
+		return sqlSession.insert("workMapper.startWork", work); 
 	}
+	
 
 	public Work updateSumWork(SqlSessionTemplate sqlSession, String eno) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
-	public int updateWork(SqlSessionTemplate sqlSession, Work work) {
+	public int updateWork1(SqlSessionTemplate sqlSession, String empNo) {//Work work
 		// TODO Auto-generated method stub
-		return sqlSession.update("workMapper.endWork"); 
+		return sqlSession.update("workMapper.endWork1",empNo); 
+	}
+	public int updateWork2(SqlSessionTemplate sqlSession, String empNo) {//Work work
+		// TODO Auto-generated method stub
+		return sqlSession.update("workMapper.endWork2",empNo); 
+	}
+	public int updateWork3(SqlSessionTemplate sqlSession, String empNo) {//Work work
+		// TODO Auto-generated method stub
+		return sqlSession.update("workMapper.endWork3",empNo); 
+	}
+
+	public Work selectTimes(SqlSessionTemplate sqlSession, String empNo) {//String empNo Work w
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("workMapper.selectWork",empNo); 
 	}
 
 }

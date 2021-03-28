@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	  <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,16 +54,17 @@
 							<h3>결재서류 상세보기</h3>
 						</div>
 						<div class="card-body">
-							<form action="insertApproval.do" method="post"
-								enctype="Multipart/form-data" id="form">
-
+					
+                              
 								<div class="form-group">
-									<strong>기안자 : </strong><input type="text" class="form-control" 	value="${ap.empName} ( ${ap.empNo}) " name="empNo"readonly>
+									<strong>기안자 : </strong><input type="text" class="form-control"
+										value="${ap.empName} ( ${ap.deptName} ${ap.empPosition}) "
+										name="empNo" readonly>
 								</div>
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<strong>결재자 : </strong><input type="text" class="form-control"
-											value="${firstApprEmp.empName}" 
+											value="${firstApprEmp.empName}(${firstApprEmp.deptName} ${firstApprEmp.empPosition})"
 											name="approvalEmp" readonly>
 									</div>
 									<div class="form-group col-lg-6">
@@ -87,37 +89,70 @@
 								<hr>
 								<div class="form-group" style="height: 500px;">
 									${ap.approvalContent }</div>
-
-
-
-								<input type="download" class="form-control" id="" name="" readonly>
-
-
-								<br>
-								<br>
+                    <div class="form-group">
+                        <strong>첨부파일 : </strong>
+                        <c:if test="${ !empty ap.originalName  }">
+						
+                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ap.changeName}" download="${ap.originalName }">${ ap.originalName  }</a>
+                        </c:if>
+                        <c:if test="${ empty ap.originalName  }">
+                        	첨부파일이 없습니다.
+                        </c:if>
+   	                   </div>
 								<div class="row">
-									<div id="buttons">
-
+								              	<button type="button"
+												onclick="location.href='approvalList.do'"
+												class="btn btn-primary" style="float: right">목록으로</button>
+							
+									<div id="buttons" style="margin-left: 80%;">
+						   	  <c:if test="${sessionScope.loginUser.empNo eq ap.firstApprEmp  }">
 										<button type="button"
-											onclick="location.href='approvalList.do'"
-											class="btn btn-danger" style="float: left ">확인</button>
-									</div>
-								</div>
+											onclick="postFormSubmit(1)"
+											class="btn btn-success">승인1</button>
+											
+											<button type="button"
+											onclick="postFormSubmit(2)"
+											class="btn btn-danger">반려</button>	
+											
+											</c:if>	
+     					   	  <c:if test="${ (sessionScope.loginUser.jobCode eq 'J10') && (ap.status ne 'C')   }">
+											
+										<button type="button"
+											onclick="postFormSubmit(3)"
+											class="btn btn-success">승인</button>		
+											
+												<button type="button"
+											onclick="postFormSubmit(2)"
+											class="btn btn-danger">반려</button>
+                            </c:if>
+									</div> <!--  버튼그룹 끝  -->
+							<form id="postForm"  method="post">
+								<input type="hidden" name="ano" value="${ap.approvalNo}">
+					       
+							
+							
+							</form>		
+									
+							<script type="text/javascript">
+							function postFormSubmit(num) {
+								var postForm =$("#postForm");
+								if(num==1){
+									postForm.attr("action","updateStatus.do");
+								}if(num==2) {
+									postForm.attr("action","updateRStatus.do");
+								}if(num==3){
+									postForm.attr("action","updateCStatus.do");
+									
+								}
+								postForm.submit();
+							}
+							
+							
+							</script>
 								
-								
-								<div class="row">
-									<div id="buttons" style="margin-left: 90%;">
-
-										<button type="button"
-											onclick="location.href='approvalList.do'"
-											class="btn btn-success" >승인</button>
-									 
-										<button type="button"
-											onclick="location.href='approvalList.do'"
-											class="btn btn-danger" >반려</button>		
-									</div>
 								</div>
-							</form>
+						
+						
 
 						</div>
 

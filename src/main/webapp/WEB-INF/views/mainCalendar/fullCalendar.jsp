@@ -10,10 +10,6 @@
  <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
    
- <!-- CSS -->
-  <link rel="stylesheet" href='${pageContext.request.contextPath}/resources/fullcalendar/test/vendor/css/bootstrap-datetimepicker.min.css' />
-  <script src="${pageContext.request.contextPath}/resources/fullcalendar/test/vendor/js/bootstrap-datetimepicker.min.js"></script>
-
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
 
@@ -51,13 +47,7 @@
 	}
 	
 		
-		span.txt{
-	 	 color: #383A3C;
-	}
-	
-	span.txt:hover {
-    color: #B8ACD0;
-	}
+		
 
 	:root {
 		--aside-width: 17.625rem;
@@ -89,6 +79,42 @@
         box-sizing: border-box;
         
    		}
+   		
+	
+	span.mycal {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 5px 10px 5px 10px;
+    margin-left: -1px;
+    height: 100%;
+    background-color: #A0CEDE;
+    color: #fff;
+	}
+	
+	span.deptcal {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 5px 10px 5px 10px;
+    margin-left: -1px;
+    height: 100%;
+    background-color: #88C2B6;
+    color: #fff;
+	}
+	
+	
+	span.allcal {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 5px 10px 5px 10px;
+    margin-left: -1px;
+    height: 100%;
+    background-color: #C4A0A1;
+    color: #fff;
+	}
+	
 
 	
 	
@@ -158,16 +184,17 @@
 						<ul class="pcoded-submenu">
 						<li>
 							<p class="title">
-								<a href="" data-category="10">
-									<span class="txt" title="내 일정">내 일정</span>
-								</a>
+								<span class="mycal">나의 일정</span>
 							</p>
 						</li>
 						<li>
 							<p class="title">
-								<a href="" data-category="20">
-									<span class="txt" title="부서 일정">부서 일정</span>
-								</a>
+								<span class="deptcal">부서 일정</span>
+							</p>
+						</li>
+						<li>
+							<p class="title">
+								<span class="allcal">사내 일정</span>
 							</p>
 						</li>
 					</ul>
@@ -191,7 +218,7 @@
 						</div>
 						
 						
-	<!-- 모달 -->
+	<!-- 일정 등록 모달 -->
 	<div class="modal fade" id="addCalendar">  
 	        <div class="modal-dialog modal-lg modal-dialog-centered">
 	            <div class="modal-content">
@@ -211,12 +238,12 @@
                   	<br>
 					<h6>시작 날짜 선택</h6>
 					<div>
-						<input type="date" id="calSDate" name="calSDate" class="form-control form-control-user" style="width:100%;" >
+						<input type="datetime-local" id="calSDates" name="calSDates" class="form-control form-control-user" style="width:100%;" >
 					</div>
 						<br>
 					<h6>종료 날짜 선택</h6>
 					<div>
-					<input type="date" id="calEdate" name="calEDate" class="form-control form-control-user" style="width:100%;" >
+						<input type="datetime-local" id="calEdates" name="calEDates" class="form-control form-control-user" style="width:100%;" >
 					</div>
 					<br>
 						<h6>일정</h6>
@@ -224,7 +251,7 @@
 	                    <h6>일정 코멘트</h6>
 	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
 	                    
-	                     <input type="text" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
+	                     <input type="hidden" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
 						<div class="modal-footer">
 						<br><br><br>
 							<button type="submit" class="btn btn-primary">등록</button>
@@ -235,8 +262,65 @@
 				</div>
 	            </div>
 	        </div>
-	    </div>
+	    </div> <!-- 모달 끝 -->
+	    
+	<!-- 일정 디테일뷰 확인 모달 -->
+	
+	<div class="modal fade" id="viewCalendar">  
+	        <div class="modal-dialog modal-lg modal-dialog-centered">
+	            <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title">일정 확인</h5>
+	                <button type="button" class="close" data-dismiss="modal">&times;</button>
+	            </div>
+	           
+	             <div class="modal-body">
+					<form name="updateCalendar" action="cupdate.ca" method="post">
+					<input type="hidden" id="calNo" name="calNo">
+					<input type="hidden" id="empNo" name="empNo">
+					<input type="hidden" id="calCate" name="calCate">
+					<input type="hidden" id="calType" name="calType">
+					<input type="hidden" id="calColor" name="calColor">
+					<input type="hidden" id="status" name="status">
+					
+					<h6>시작 날짜 선택</h6>
+					<div>
+						<input type="datetime-local" id="calSDates" name="calSDates" class="form-control form-control-user" style="width:100%;">
+					</div>
+						<br>
+					<h6>종료 날짜 선택</h6>
+					<div>
+						<input type="datetime-local" id="calEDates" name="calEDates" class="form-control form-control-user" style="width:100%;">
+					</div>
+					<br>
+						<h6>일정</h6>
+	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle"> <br>
+	                    <h6>일정 코멘트</h6>
+	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
+	                    
+						<div class="modal-footer">
+						<br><br><br>
+
+							<button type="submit" class="btn btn-primary">수정</button>
+							</form>	
+							
+							 <form name="deleteCalendar" action="cdelete.ca" method="post">
+							<input type="hidden" name="calNo" id="calNo">
+							<button type="submit" class="btn btn-secondary">삭제하기</button>
+	    					</form>
 						
+	                	</div>
+					
+					
+				</div>
+	            </div>
+	        </div>
+	        <!-- 삭제용 폼 -->
+		   
+	   			
+					
+	    </div> <!-- 일정 디테일뷰 확인 모달 끝 -->
+
 						
                       </div>
                   </div>
@@ -260,8 +344,7 @@
     <script>
     $(document).ready(function(){
     	
-    	var today = new Date();
-		
+
 	var calendar = $('#calendar').fullCalendar( {
 		plugins: ['interaction'],
 		header : {
@@ -273,30 +356,95 @@
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
-		events : [ 
 		
+		/* 일정 받아옴 */
+		events : [ 
+			<c:forEach items="${list}" var="ca">
+			<c:if test="${ca.empNo eq loginUser.empNo }">
 			{
-			id: 2,
-			title : '가나다라마바사아자차카타파하',
-			start : '2021-03-28',
-			end : '2021-03-30'
-			}
+			id : '${ca.calNo}',
+			title : '${ca.calTitle }',
+			description : '${ca.calContent}',
+			start : '${ca.calSDates}',
+			end : '${ca.calEDates}',
+			type : '${ca.calCateName}',
+			backgroundColor: '${ca.calColor}',
+			textColor: '#ffffff'
+			}, 
+			</c:if>
+			</c:forEach>
 		 ], 
+		 
+		select: function (startDate, endDate, jsEvent, view) {
+
+		    $(".fc-body").unbind('click');
+		    $(".fc-body").on('click', 'td', function (e) {
+
+		      $("#contextMenu")
+		        .addClass("contextOpened")
+		        .css({
+		          display: "block",
+		          left: e.pageX,
+		          top: e.pageY
+		        });
+		      return false;
+		    });
+
+		    var today = moment();
+
+		  },
+
+		 //일정 클릭시 확인 및 수정이벤트 
+		  eventClick: function (event, jsEvent, view) {
+			  var cano = event.id;
+			  console.log(cano);
+
+		            $.ajax({
+		               type:"POST",  
+		               url:"selectCalendar", 
+		               async:false,
+		               data:{calNo:cano},
+		               success:function(ca){
+		            	   console.log(cano);
+		            	  
+		                   $("#viewCalendar #calNo").val(ca.calNo);
+		                   $("#viewCalendar #empNo").val(ca.empNo);
+		                   $("#viewCalendar #cateName").val(ca.cateName);
+		                   $("#viewCalendar #calTitle").val(ca.calTitle);
+		                   $("#viewCalendar #calContent").val(ca.calContent);
+		                   $("#viewCalendar #calSDates").val(ca.calSDates);
+		                   $("#viewCalendar #calEDates").val(ca.calEDates);
+		                   
+		                   $("#viewCalendar #empNo").val(ca.empNo);
+		                   $("#viewCalendar #calCate").val(ca.calCate);
+		                   $("#viewCalendar #calType").val(ca.calType);
+		                   $("#viewCalendar #calColor").val(ca.calColor);
+		                   $("#viewCalendar #status").val(ca.status);
+		                   
+		               },
+		               
+		               error:function(e){  
+		                   console.log(e.responseText);  
+		               }
+		        		});   
+		            
+		            $("#viewCalendar").modal("show");
+		         
+		  },
+		  
+		 
 		 
 		dayClick: function(date, allDay, jsEvent, view) {        
 	           $("#addCalendar").modal("show");
           }
+
       });
 	
 		calendar.render();
 	
     });
     
-  //datetimepicker
-    $("#calSdate, #calEdate").datetimepicker({
-        format: 'YYYY-MM-DD HH:mm'
-    });
-    
+   
     </script>
     <script
 	src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js'

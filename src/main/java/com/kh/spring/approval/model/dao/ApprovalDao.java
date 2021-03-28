@@ -20,12 +20,12 @@ public class ApprovalDao {
 
 	public Employee selectfApprEmp(SqlSessionTemplate sqlSession, String deptCode) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("employeeMapper.selectfApprEmp",deptCode);
+		return sqlSession.selectOne("approvalMapper.selectfApprEmp",deptCode);
 	}
 
 	public Employee selectlApprEmp(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("employeeMapper.selectlApprEmp");
+		return sqlSession.selectOne("approvalMapper.selectlApprEmp");
 	}
 
 	public ArrayList<Approval> selectyList(SqlSessionTemplate sqlSession, Employee emp) {
@@ -50,12 +50,29 @@ public class ApprovalDao {
 
 	public Employee selectinsertEmp(SqlSessionTemplate sqlSession,Employee emp) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("employeeMapper.selectinsertEmp",emp);
+		return sqlSession.selectOne("approvalMapper.selectinsertEmp",emp);
 	}
 
 	public Employee selectfApprEmpDetail(SqlSessionTemplate sqlSession, String firstapp) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("employeeMapper.selectfApprEmpDetail",firstapp);
+		return sqlSession.selectOne("approvalMapper.selectfApprEmpDetail",firstapp);
 	}
+
+	public int updateStatus(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.updateStatus", ano);
+	}
+
+	public int updateRStatus(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.updateRStatus", ano);
+	}
+
+	public int updateCStatus(SqlSessionTemplate sqlSession, int ano) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.updateCStatus", ano);
+	}
+
+
 
 }

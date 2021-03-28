@@ -79,11 +79,11 @@
 				<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
 				
 				<form action="start.work" method="post" id="startWork">
-    				<input type="hidden" name="eno" id = "eno" value="${loginUser.empNo}">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}"><!-- 원래 eno -->
     				<input type="hidden" name="timeNow" id="timeNow" value="${date}" />
     			</form>
     			<form action="end.work" method="post" id="endWork">
-    				<input type="hidden" name="eno" id = "eno" value="${loginUser.empNo}">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}">
     				<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />
     			</form>
     			
