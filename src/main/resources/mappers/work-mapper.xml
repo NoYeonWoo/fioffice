@@ -31,11 +31,11 @@
 	
 	</select>
 	
-	<select id="selectWork" parameterType="Work">
+	<select id="selectWork" parameterType="Work" resultMap="workResultSet">
 	
 		SELECT WORK_STACK, WORK_EXCEED, WORK_REMAIN
- 		FROM (SELECT *FROM WORK WHERE EMP_NO='951220103' ORDER BY WORK_NO ASC)
- 		WHERE ROWNUM=1;
+ 		FROM (SELECT *FROM WORK WHERE EMP_NO=#{empNo} ORDER BY WORK_NO ASC)
+ 		WHERE ROWNUM=1
 		<!--
 		INSERT INTO ADDRESS
 		VALUES(SEQ_WORK_NO.NEXTVAL, #{workStart}, null, #{addressEmail}, #{addressComName}, #{addressJob}, SYSDATE,
@@ -52,10 +52,10 @@
 		INSERT INTO WORK
 		VALUES(SEQ_WORK_NO.NEXTVAL,
 		SYSDATE,
-		null,
-		#{workstart.addressEmail},
-		#{workstart.addressComName},
-		#{workstart.addressJob},
+		NULL,
+		#{workStack},
+		#{workExceed},
+		#{workRemain},
 		SYSDATE,
 		default,
 		#{empNo},
@@ -67,38 +67,41 @@
 	</insert>
 	
 	
-	<update id="endWork" parameterType="Work">
+	<update id="endWork1" parameterType="Work">
 		
-
+		<!-- ibatis 조심   연속으로할때 ;제외해야하나?-->
 		UPDATE WORK
     	SET WORK_END =SYSDATE
-    	WHERE EMP_NO='#{empNo}' AND WORK_DATE = SYSDATE;
-    	
+    	WHERE EMP_NO=#{empNo} AND TO_CHAR(WORK_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+    </update>
+    
+    <update id="endWork2" parameterType="Work">
     	UPDATE WORK
     	SET   WORK_SUM= ROUND((WORK_END-WORK_START)*24*60)
-    	WHERE EMP_NO='#{empNo}' AND WORK_DATE = SYSDATE;
+    	WHERE EMP_NO=#{empNo} AND TO_CHAR(WORK_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
 		
-		
+	</update>
+	
+	<update id="endWork3" parameterType="Work">
 		UPDATE WORK 
    		SET WORK_STACK = WORK_STACK+WORK_SUM,
-   		
    		<choose>
         <when test=" WORK_REMAIN != 0">
         	<choose>
-            <when test=" 0 > WORK_REMAIN -WORK_SUM">
-                WORK_EXCEED = 절대값(WORK_REMAIN-WORK_SUM),
-                WORK_REMAIN = 0,
-            </when>
-            <otherwise>
-                WORK_REMAIN = WORK_REMAIN-WORK_SUM,
-            </otherwise>
+            	<when test=" 0 > WORK_REMAIN - WORK_SUM">
+                	WORK_EXCEED = ABS(WORK_REMAIN-WORK_SUM),
+                	WORK_REMAIN = 0
+            	</when>
+            	<otherwise>
+                	WORK_REMAIN = WORK_REMAIN-WORK_SUM
+            	</otherwise>
             </choose>
         </when>
         <otherwise>
-        	WORK_EXCEED = WORK_EXCEED + WORK_SUM,
+        	WORK_EXCEED = WORK_EXCEED + WORK_SUM
         </otherwise>
         </choose>
-    	WHERE EMP_NO='#{empNo}'' AND WORK_DATE = SYSDATE;
+    	WHERE EMP_NO=#{empNo} AND TO_CHAR(WORK_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
 
 	</update>
 

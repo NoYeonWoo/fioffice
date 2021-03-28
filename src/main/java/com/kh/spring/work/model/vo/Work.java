@@ -17,14 +17,14 @@ public class Work {
 	public int workNo;
 	public Date workStart;
 	public Date workEnd;
-	public Date workStack;
-	public Date workExceed;
-	public Date workRemain;
+	public int workStack;
+	public int workExceed;
+	public int workRemain;
 	public Date workDate;
 	public String status;
+	public int workSum;//사이
 	public String empNo;
-	public int workSum;
-	public String workDayReset;
+	public String workDayReset;//사이
 
 	
 }
