@@ -22,13 +22,14 @@ public class Approval {
 	private String approvalContent;//결재 내용
 	private Date approvalDate;//결재 올린날(상신일)
 	private String urgent;//긴급여부
-	private String orginalName;//파일 원본명
+	private String originalName;//파일 원본명
 	private String changeName;//파일 수정명 
 	private String status;//파일의 상태 ()
 	private Date firstDate;//첫번째 결재날
 	private Date doneDate;//마지막 최종 결재날짜
 	private String empNo;//결재올린자(상신자 사원번호)
 	private String empName;//결재올린자(상신자 이름 )
+	private String deptName;//결재올린자(상신자 부서 )
 	private String empPosition;//결재올린자(상신자 직급 )
 	private String formNo;//결재 양식번호
 	private String formName;//결재 양식이름

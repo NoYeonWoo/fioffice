@@ -33,6 +33,7 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
 	WHERE TODO_NO=#{todoNo}
 </update>
 
+<!--  
 <update id="updateTodo" parameterType="Todo">
   UPDATE 
   TODO SET 
@@ -40,6 +41,8 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
   WHERE TODO_NO=#{todoNo}
 
 </update>
+-->
+
 
 <update id="updateDoing" parameterType="_int">
   UPDATE 

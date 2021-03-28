@@ -333,7 +333,7 @@ p {
 										<hr>
 									
 										<h5>할일내용 </h5>
-										<textarea class="form-control" required name="todoContent" id="todoContent" rows="10" style="resize:none;"></textarea>
+										<textarea class="form-control" required name="todoContent" id="todoContent" rows="8" style="resize:none;"></textarea>
 								        
 									    <input type="hidden" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
 										<hr>
