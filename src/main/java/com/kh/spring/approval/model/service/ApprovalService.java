@@ -25,6 +25,14 @@ public interface ApprovalService  {
 
 	Employee selectfApprEmpDetail(String firstapp);
 
+	int updateStatus(int ano);
+
+	int updateCStatus(int ano);
+
+	int updateRStatus(int ano);
+
+	
+
 
 
 }
