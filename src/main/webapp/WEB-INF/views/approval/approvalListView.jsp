@@ -58,6 +58,7 @@
 
 							<table class="table table-bordered" id="boardList"
 								style="text-align: center; width: 80%;">
+							<thead>	
 								<tr>
 
 									<th style="width: 10%;">품의 번호</th>
@@ -67,7 +68,7 @@
 									<th>제목</th>
 
 								</tr>
-
+                           </thead>	
 								<tbody>
 									<c:forEach items="${ alist }" var="al">
 										<c:if test="${al.status eq 'Y'}">
@@ -94,6 +95,7 @@
 							<br>
 							<table class="table table-bordered" id="boardList"
 								style="text-align: center; width: 80%;">
+			                 <thead>					
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
@@ -102,7 +104,7 @@
 									<th>제목</th>
 
 								</tr>
-
+                              </thead>
 									<tbody>
 									<c:forEach items="${ alist }" var="al">
 										<c:if test="${al.status eq 'R'}">
@@ -129,6 +131,7 @@
 							<br>
 							<table class="table table-bordered" id="boardList"
 								style="text-align: center; width: 80%;">
+							<thead>	
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
@@ -137,7 +140,9 @@
 									<th>제목</th>
 
 								</tr>
+							</thead>		
 			                <tbody>
+			                     <c:if test="${ fn:length(todolist)>0 && fn:length(todolist)<7}">
 									<c:forEach items="${ alist }" var="al">
 										<c:if test="${al.status eq 'C' }">
 
@@ -152,7 +157,7 @@
 
 										</c:if>
 									</c:forEach>
-
+                               </c:if>
 
 								</tbody>
 							</table>
@@ -174,6 +179,7 @@
 							<br>
 							<br>
 							<table id="boardList" class="table table-bordered" style="text-align: center;">
+							<thead>
 								<tr>
 									<th style="width: 10%;"> 품의 번호</th>
 									<th style="width: 10%;">기안일</th>
@@ -182,7 +188,7 @@
 									<th style="width: 10%;">상태</th>
 
 								</tr>
-
+                            </thead>
 								<tbody>
 									<c:forEach items="${ falist }" var="fa">
 										<c:if test="${fa.status eq 'Y' && fa.firstApprEmp eq loginUser.empNo}">
@@ -204,7 +210,7 @@
 										
 									
 										<c:forEach items="${ clist }" var="cl">
-										<c:if test="${ ((cl.lastAppEmp eq loginUser.empNo) && (cl.firstApprEmp eq null)) || cl.status eq 'A' }">
+										<c:if test="${ (cl.lastAppEmp eq loginUser.empNo)  && (cl.status eq 'A') }">
 										<tr>
 											<td>${cl.approvalNo}</td>
 											<td>${cl.approvalDate}</td>
@@ -226,6 +232,7 @@
 							<br>
 							<br>
 							<table id="boardList" class="table table-bordered" style="text-align: center;">
+							<thead>
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
@@ -234,16 +241,38 @@
 									<th style="width: 10%;" >상태</th>
 
 								</tr>
-
-								<tbody>
-									<c:forEach items="${ alist }" var="al">
-										<c:if test="${al.status eq 'C'}">
+							<thead>	
+							<tbody>
+									<c:forEach items="${ falist }" var="fa">
+										<c:if test="${fa.status eq 'A' && fa.firstApprEmp eq loginUser.empNo}">
 										<tr>
-											<td>데이터가 없습니다.</td>
-											<td>데이터가 없습니다.</td>
-											<td>데이터가 없습니다.</td>
-											<td>데이터가 없습니다.</td>
-											<td>데이터가 없습니다.</td>
+											<td>${fa.approvalNo}</td>
+											<td>${fa.approvalDate}</td>
+											<td>${fa.empName}</td>
+											<td>${fa.approvalTitle}</td>
+											<td></td>
+
+
+
+
+										</tr>
+										</c:if>
+							       </c:forEach>
+								</tbody>
+								
+								
+								<tbody>
+										
+									
+										<c:forEach items="${ clist }" var="cl">
+										<c:if test="${ (cl.lastAppEmp eq loginUser.empNo)  && (cl.status eq 'C') }">
+										<tr>
+											<td>${cl.approvalNo}</td>
+											<td>${cl.approvalDate}</td>
+											<td>${cl.empName}</td>
+											<td>${cl.approvalTitle}</td>
+										
+											<td></td>
 
 
 
@@ -251,7 +280,7 @@
 										</tr>
 										</c:if>
 									</c:forEach>
-								</tbody>
+									</tbody>
 							</table>
 
 
