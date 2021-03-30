@@ -73,7 +73,7 @@
 
 		INSERT INTO APPROVAL
 		VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{originalName},#{changeName}
-		,DEFAULT
+        ,#{status}
 		,#{firstDate}
 		,#{doneDate},#{empNo},'2',#{firstApprEmp},#{lastAppEmp})
 
@@ -165,5 +165,20 @@ WHERE APPROVAL_NO=#{approvalNo}
 
 </update>
 
+<update id="updateApproval" parameterType="Approval">
+UPDATE APPROVAL
+SET APPROVAL_TITLE=#{approvalTitle},
+APPROVAL_CONTENT=#{approvalContent},
+APPROVAL_STARTDATE=SYSDATE,
+URGENT=#{urgent},
+ORIGINNAME_APPROVAL=#{originalName},
+CHANGENAME_APPROVAL=#{changeName},
+APPROVAL_STATUS=default
+WHERE APPROVAL_NO=#{approvalNo}
+</update>
 
+<update id="deleteApproval" parameterType="_int"  >
+DELETE FROM APPROVAL
+WHERE APPROVAL_NO=#{approvalNo}
+</update>
 </mapper>

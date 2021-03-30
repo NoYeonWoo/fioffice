@@ -150,7 +150,90 @@
             <!-- 근태관리화면끝 -->
             
             
-            
+            <!-- [ Todo-list1 ] start 
+            <div class="col-xl-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5>To Do List</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="input-group mb-3">
+                            <input type="text" name="task-insert" class="form-control add_task_todo" placeholder="Create your task list" required="">
+                            <div class="input-group-append">
+                                <button class="btn waves-effect waves-light btn-secondary" id="add-btn">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="new-task">
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
+                                        <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(1);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
+                                        <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(2);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
+                                        <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(3);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
+                                        <span class="custom-control-label">Contrary to popular belief</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(4);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
+                                        <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(5);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
+                                        <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(6);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                            <div class="to-do-list mb-3">
+                                <div class="d-inline-block">
+                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
+                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
+                                        <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
+                                    </label>
+                                </div>
+                                <div class="float-right"><a onclick="delete_todo(7);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- [ Todo-list1 ] end -->-->
  			<!-- [ Todo-list1 ] start -->
                    <div class="col-xl-6 col-md-12">
                 <div class="card table-card">

@@ -32,19 +32,90 @@
 					
 								<div class="col-2" style="margin-left:10%;">
 								<div class="list-group" id="list-tab" role="tablist">
-									<a class="list-group-item list-group-item-action active"
-										id="list-updateForm-list" data-toggle="list"
-										href="#list-updateForm" role="tab" aria-controls="home">내정보</a>
-									<a class="list-group-item list-group-item-action"
+								<a class="list-group-item list-group-item-action active"
 										id="list-updatePwd-list" data-toggle="list"
-										href="#list-updatePwd" role="tab" aria-controls="profile">비밀번호변경</a>
+										href="#list-updatePwd" role="tab" aria-controls="home">비밀번호변경</a>
+									<a class="list-group-item list-group-item-action "
+										id="list-updateForm-list" data-toggle="list"
+										href="#list-updateForm" role="tab" aria-controls="profile">내정보</a>
+									
 								
 								</div>
 							</div>
 	 			
                    <div class="tab-content" id="nav-tabContent">
 
-					<div class="card-body tab-pane fade show active" id="list-updateForm"
+					
+<!-- 비밀번호변경 시작 -->
+      <c:if test="${loginUser.empPwd eq loginUser.empNo }">
+					<div class="tab-pane fade show active" id="list-updatePwd" role="tabpanel" 	aria-labelledby="list-updatePwd-list" style="margin-left:10%; margin-bottom:20%; " >
+
+						<form id="updatePwdForm" action="updatePwd.me" method="post">
+
+
+							<h5>- 비밀번호 변경 -</h5>
+							<hr>
+							<table align="center">
+								<tr>
+									<td><label>현재 비밀번호 </label>
+									<td><input type="password" class="form-control"
+										name="currentPwd" id="userPwd" placeholder="현재 비밀번호 입력"></td>
+								</tr>
+								<tr>
+									<td><label>새 비밀번호</label></td>
+									<td><input type="password" class="form-control"
+										name="newPwd" placeholder="새 비밀번호 입력"></td>
+								</tr>
+					
+							</table>
+
+
+							<br> <br>
+
+							<div class="btns" align="center">
+								<button type="submit" id="updatePwdBtn" class="btn btn-primary btn-primary">변경하기</button>
+							</div>
+							</form>
+							</div>
+</c:if>
+<!-- 비밀번호변경 끝 -->
+
+<!-- 인코딩 비번변경 어쩔수 없이 하드코딩...ㅜㅜ -->
+    <c:if test="${loginUser.empPwd ne loginUser.empNo }">
+					<div class="tab-pane fade show active" id="list-updatePwd" role="tabpanel" 	aria-labelledby="list-profile-list" style="margin-left:10%; margin-bottom:20%; " >
+
+						<form id="updatePwd" action="updatePwdenc.me" method="post">
+
+
+							<h5>- 비밀번호 변경 -</h5>
+							<hr>
+							<table align="center">
+								<tr>
+									<td><label>현재 비밀번호</label>
+									<td><input type="password" class="form-control"
+										name="currentPwd" id="userPwd" placeholder="현재 비밀번호 입력"></td>
+								</tr>
+								<tr>
+									<td><label>새 비밀번호</label></td>
+									<td><input type="password" class="form-control"
+										name="newPwd" placeholder="새 비밀번호 입력"></td>
+								</tr>
+					
+							</table>
+
+
+							<br> <br>
+
+							<div class="btns" align="center">
+								<button type="submit" id="updatePwdBtn" class="btn btn-primary btn-primary">변경하기</button>
+							</div>
+							</form>
+							</div>
+							
+	</c:if>						
+<!-- 인코딩 비번변경 끝어쩔수 없이 하드코딩...ㅜㅜ - -->
+						
+	<div class="card-body tab-pane fade " id="list-updateForm"
 						role="tabpanel" aria-labelledby="list-home-list">
    
   
@@ -212,46 +283,7 @@
 
 		}
 	}
-	  </script>
-<!-- 비밀번호변경 시작 -->
-					<div class="tab-pane fade" id="list-updatePwd" role="tabpanel"
-						aria-labelledby="list-profile-list" style="margin-left:10%; margin-bottom:20%; " >
-
-						<form id="updatePwdForm"
-							action="<%=request.getContextPath()%>/updatePwd.me" method="post">
-
-
-							<h5>- 비밀번호 변경 -</h5>
-							<hr>
-							<table align="center">
-								<tr>
-									<td><label>현재 비밀번호</label>
-									<td><input type="password" class="form-control"
-										name="userPwd" id="userPwd" placeholder="현재 비밀번호 입력"></td>
-								</tr>
-								<tr>
-									<td><label>새 비밀번호</label></td>
-									<td><input type="password" class="form-control"
-										name="newPwd" placeholder="새 비밀번호 입력"></td>
-								</tr>
-								<tr>
-									<td><label>새 비밀번호 확인</label></td>
-									<td><input type="password" class="form-control"
-										name="checkPwd" placeholder="새 비밀번호 확인"></td>
-								</tr>
-							</table>
-
-
-							<br> <br>
-
-							<div class="btns" align="center">
-								<div id="updatePwdBtn" class="btn btn-primary btn-primary"
-									onclick="checkPwd();">변경하기</div>
-							</div>
-
-
-						</form>
-					
+	  </script>				
 					</div>
 					</div>
 				</div>
