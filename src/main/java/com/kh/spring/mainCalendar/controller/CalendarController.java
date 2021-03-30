@@ -39,15 +39,15 @@ public class CalendarController {
 	private CalendarService calendarService;
 	
  
-
+	/* 메인 캘린더 */
 	@RequestMapping("cmain.ca")
 	public String mainView(Calendar ca, Model model, HttpSession session) throws Exception {
 		Employee emp= (Employee)session.getAttribute("loginUser");
 
 		ArrayList<Calendar> list = calendarService.listCalendar(ca);
 
-		System.out.println("DB에 있는 캘린더 : " + list);
-		System.out.println("로그인 : " + emp);
+		//System.out.println("DB에 있는 캘린더 : " + list);
+		//System.out.println("로그인 : " + emp);
 		
 		model.addAttribute("list", list);
 		
@@ -68,7 +68,7 @@ public class CalendarController {
 		return ca;
 	}
 	
-	
+	/* 일정 추가 */
 	@RequestMapping("cinsert.ca")
 	public String insertCalendar(Calendar ca, Model model) {
 		System.out.println("거쳐감");
@@ -116,6 +116,7 @@ public class CalendarController {
 
 	}
 	
+	/* 일정 수정 */
 	@RequestMapping("cupdate.ca")
 	public String updateCalendar(Calendar ca, Model model) {
 		
@@ -130,6 +131,7 @@ public class CalendarController {
 		
 	}
 	
+	/* 일정 삭제 */
 	@RequestMapping("cdelete.ca")
 	public String deleteCalendar(int calNo, HttpServletRequest request, Model model) {
 		

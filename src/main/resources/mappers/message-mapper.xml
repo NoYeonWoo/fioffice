@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="messageMapper">
+
+	<resultMap id="MessageResultSet" type="Message">
+		<id property="msgNo" column="MSG_NO"/>
+		<result property="chatNo" column="CHAT_NO"/>
+		<result property="msgSender" column="MSG_SENDER"/>
+		<result property="msgType" column="MSG_TYPE"/>
+		<result property="msgContent" column="MSG_CONTENT"/>
+		<result property="msgDate" column="MSG_DATE"/>
+		<result property="msgReadStatus" column="MSG_READ_STATUS"/>
+		<result property="msgOrigin" column="MSG_ORIGIN_NAME"/>
+		<result property="msgChange" column="MSG_CHANGE_NAME"/>
+		<result property="msgFileDate" column="MSG_FILE_DATE"/>
+		<result property="msgFileStatus" column="MSG_FILE_STATUS"/>
+		<result property="msgReceiver" column="MSG_RECEIVER"/>
+	</resultMap>
+	
+	<resultMap id="ChatRoomResultSet" type="ChatRoom">
+		<id property="chatRoomNo" column="CHAT_NO"/>
+		<result property="member1" column="MEMBER1"/>
+		<result property="member2" column="MEMBER2"/>
+		<result property="chatRoomStatus" column="CHAT_STATUS"/>
+	</resultMap>
+	
+
+	<!--  
+	<select id="chatroomList" parameterType="string" resultMap="ChatRoomResultSet">
+	
+	</select>
+	
+
+	<select id="selectChatroom" parameterType="string" resultMap="ChatRoomResultSet">
+	
+	</select>
+	
+	<select id="selectMessage" parameterType="string" resultMap="MessageResultSet">
+	
+	</select>
+	
+	<insert id="insertMessage" parameterType="Message">
+	
+	</insert>
+	
+	<update id="deleteChatroom" parameterType="_int">
+	
+	</update>
+	-->
+	
+	
+</mapper>

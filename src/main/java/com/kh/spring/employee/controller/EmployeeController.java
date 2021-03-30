@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,8 +28,11 @@ import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.Job;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.service.EmployeeService;
 import com.kh.spring.employee.model.vo.Employee;
+
+
 
 
 
@@ -43,7 +47,8 @@ public class EmployeeController {
 	@Autowired
 	private AdminService adminService;
 	
-	
+	@Autowired
+	private BCryptPasswordEncoder bCryptPasswordEncoder;
 	//--------------------------------------------------------사원관리--------------------------------------------------------//
 	
 	//사원관리 화면
@@ -167,7 +172,8 @@ public class EmployeeController {
 	}
 	
 	/**
-	 @RequestMapping(value="login.me",method=RequestMethod.POST)
+	 @throws Exception 
+	 * @RequestMapping(value="login.me",method=RequestMethod.POST)
 		public ModelAndView loginEmployee(Employee emp, HttpSession session, ModelAndView mv) {
 		 Employee loginUser;
 		
@@ -187,26 +193,141 @@ public class EmployeeController {
 			}
 	     return mv;
 	 }**/
+	
+	
+/*로그인 암호화 전  */	
 	 @RequestMapping(value="login.me",method=RequestMethod.POST)
    public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
-		 System.out.println("@ModelAttribute(\"userId\") : "+emp.getEmpNo());
-	     System.out.println("@ModelAttribute(\"userPwd\") : "+emp.getEmpPwd());
-	  
-
-	     Employee loginUser;
+		 Employee loginUser = (Employee) session.getAttribute("loginUser");
+	     
+  	     
+	   if(emp.getEmpNo().equals(emp.getEmpPwd())){     
+	   
 	      loginUser=employeeService.loginEmployee(emp);
-	     System.out.println("loginUser:::::"+loginUser);
-	     System.out.println("emp:::::"+emp);
-		 if(loginUser !=null) {
-			 model.addAttribute("loginUser", loginUser);
+	  
+	 		 model.addAttribute("loginUser", loginUser);
 			 session.setAttribute("loginUser", loginUser);
-			 return "common/main"; //redirect:home.do or home.jsp / 
-		 }
-		return null;
+	     	model.addAttribute("msg","비밀번호를 변경해주세요");
+    	   return "employee/mypage";
+	     
+	   }else {
 		 
+		     try {
+		    	  loginUser=employeeService.loginEncEmployee(bCryptPasswordEncoder,emp);
+
+
+					model.addAttribute("loginUser", loginUser);
+					model.addAttribute("msg",loginUser.getEmpName()+"님 환영합니다.");
+					 return "common/main";
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+					model.addAttribute("msg","로그인실패!");
+					 return "common/errorPage";
+				} 
+		   
+	   }
+
+	
 	 }
 	 
 	 
+	 
+
+	 
+	    @RequestMapping(value="updatePwd.me", method=RequestMethod.POST)	
+		 public String updatePwd (@RequestParam("currentPwd")String currentPwd,
+				                                            @RequestParam("newPwd")String newPwd ,HttpSession session,Model model)throws Exception {
+		    
+			 Employee emp=(Employee) session.getAttribute("loginUser");
+			 System.out.println("emp :::"+emp);
+			String OriginPwd= emp.getEmpPwd();
+			System.out.println("Pwd:::"+OriginPwd);
+			
+			String encPwd=bCryptPasswordEncoder.encode(newPwd);
+
+			
+			if((!emp.getEmpPwd().equals(OriginPwd))  ){//뒤가 인코딩 된 psw로 순서를 넣어줘야함
+				
+				throw new Exception("암호를 확인하세요:불일치");
+			}else {
+				emp.setEmpPwd(encPwd);
+				System.out.println("encPwd:::"+encPwd);
+				System.out.println("currentPwd:::"+currentPwd);
+			}
+			int result=employeeService.updatePwd(emp);
+			if(result>0) {
+				 model.addAttribute("loginUser",emp);
+				 session.setAttribute("msg", "비밀번호수정 완료!!!");
+	        	 return "employee/mypage";
+			}else {
+				 model.addAttribute("msg","수정실패!");
+				    	 throw new CommException("회원정보수정에 실패하였습니다");}
+		 }
+		 	
+	
+
+	    
+		 
+	    @RequestMapping(value="updatePwdenc.me", method=RequestMethod.POST)	
+		 public String updatePwdenc (@RequestParam("currentPwd")String currentPwd,
+				                                            @RequestParam("newPwd")String newPwd ,HttpSession session,Model model)throws Exception {
+		    
+			 Employee emp=(Employee) session.getAttribute("loginUser");
+			 System.out.println("emp :::"+emp);
+			String OriginPwd= emp.getEmpPwd();
+			System.out.println("Pwd:::"+OriginPwd);
+			
+			String encPwd=bCryptPasswordEncoder.encode(newPwd);
+
+			
+			if(!bCryptPasswordEncoder.matches(currentPwd,OriginPwd)  ){//뒤가 인코딩 된 psw로 순서를 넣어줘야함
+				
+				throw new Exception("암호를 확인하세요:불일치");
+			}else {
+				emp.setEmpPwd(encPwd);
+				System.out.println("encPwd:::"+encPwd);
+				System.out.println("currentPwd:::"+currentPwd);
+			}
+			int result=employeeService.updatePwd(emp);
+			if(result>0) {
+				 model.addAttribute("loginUser",emp);
+				 session.setAttribute("msg", "비밀번호수정 완료!!!");
+	        	 return "employee/mypage";
+			}else {
+				 model.addAttribute("msg","수정실패!");
+				    	 throw new CommException("회원정보수정에 실패하였습니다");}
+				    	 }
+		 		
+ /*로그인 암호화 후 	
+	 
+	 @RequestMapping(value="login.me",method = RequestMethod.POST)
+	 @ResponseBody
+     public String loginMember(@RequestParam("empNo")String empNo,@RequestParam("empPwd")String empPwd, Model model) throws Exception {
+
+		    Employee emp =new Employee();
+		    emp.setEmpNo(empNo);
+		    emp.setEmpPwd(empPwd);
+		    
+		    
+		    Employee loginUser;
+		       loginUser=employeeService.loginEmployee(emp);
+		       
+		    if (bCryptPasswordEncoder.matches(emp.getEmpPwd(), loginUser.getEmpPwd())) {
+		  
+				
+				model.addAttribute("loginUser", loginUser);
+				if(empNo.equals(empPwd)) {
+					return "changePwd";
+				}
+				return loginUser.getEmpName();
+			} else {
+				return "fail";
+			}
+	 }	 
+	 
+	 */  
+	
 	 @RequestMapping("update.me")
 	 public String updateMypage( Employee emp,HttpServletRequest request, @RequestParam("post")String post,
 			                                              @RequestParam("address1")String address1,                                    

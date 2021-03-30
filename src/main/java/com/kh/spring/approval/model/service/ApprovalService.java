@@ -31,6 +31,10 @@ public interface ApprovalService  {
 
 	int updateRStatus(int ano);
 
+	int updateApproval(Approval ap);
+
+	int deleteApproval(int approvalNo);
+
 	
 
 

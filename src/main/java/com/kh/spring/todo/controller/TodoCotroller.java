@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 import com.kh.spring.todo.model.service.TodoService;
 import com.kh.spring.todo.model.vo.Todo;
 
@@ -85,4 +86,37 @@ public class TodoCotroller {
 
 		return "redirect:todoListView.do";
 	}
+	
+	/*  상세 보기 모달 확인용 */
+	@RequestMapping("selectTodo.do")
+	@ResponseBody
+	public Object selectTodo(String todoNo) {
+		
+	
+		
+		Todo t = todoService.selectTodo(todoNo);
+		System.out.println("넘어옴 : " + t);
+		
+		return t;
+		
+		
+	}
+	
+	
+	
+
+
+@RequestMapping("updateTodo.do")
+public String updateCalendar(Todo t, Model model) {
+	
+	System.out.print("수정된 일정 넘어옴 : " + t);
+	
+	 int result = todoService.updateTodo(t);
+	
+	
+	model.addAttribute(t);
+	
+	return "redirect:todoListView.do";
+	
+}
 }

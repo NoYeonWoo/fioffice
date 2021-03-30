@@ -78,7 +78,7 @@
 				  <div class="card-body">
 					  <div class="form-group">
 					  <select name="dboardCategory" id="dboardCategory" class="form-control form-control-sm" style="width:10%;"  >
-							<option value="">분류</option>
+							<option value="일반">분류</option>
 		                     <option value="긴급" style="color : black;">긴급</option>
 		                     <option value="알림" style="color : black;">알림</option>
 		                     <option value="공지" style="color : black;">공지</option>

@@ -33,33 +33,94 @@
 		<div class="card" >
 			<div class="row align-items-center text-center">
 				<div class="col-md-12">
-				  <form action="login.me" method="post">
+				  <form action="login.me"method="post" >
 					<div class="card-body">
 						<img src="assets/images/logo-dark.png" alt="" class="img-fluid mb-4">
 						<h4 class="mb-3 f-w-400">Sign up</h4>
 						<div class="form-group mb-3">
 							<label class="floating-label" for="Username">Username</label>
-							<input type="text" class="form-control" id="empNo" name="empNo" placeholder="사원번호를 입력하세요">
+							<input type="text" class="form-control" id=login_empNo name="empNo" placeholder="사원번호를 입력하세요">
 						</div>
 					
 						<div class="form-group mb-4">
 							<label class="floating-label" for="Password">Password</label>
-							<input type="password" class="form-control" id="empPwd" name="empPwd" placeholder="비밀번호를 입력하세요">
+							<input type="password" class="form-control" id="login_password" name="empPwd" placeholder="비밀번호를 입력하세요">
 						</div>
-					
-						<button type="submit" class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" value="Login" >Sign up</button>
+						
+						<button type="submit" class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" >Sign up</button>
 						<p class="mb-2">비밀번호를 잊으셨나요? <a href="auth-signin.html" class="f-w-400">비밀번호찾기</a></p>
 					</div>
-					</form>
+				</form>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
-<!-- [ auth-signup ] end -->
+<!-- [ auth-signup ] end 
+
+
+
+	<script type="text/javascript">
+ 	$(function(){
+ 		
+		$("#loginbtn").click(function(){
+			
+		})
+		$.ajax({
+			url:"login.me",
+			data:{empNo:empNo,empPwd:empPwd},
+			type: "POST",
+			success:function(data){
+				if(data=="fail"){
+					alert("로그인에 실패하였습니다.\n아이디 비밀번호를 확인해주세요!");
+				}else if(data=="changePwd"){
+					alert("비밀번호 변경 대상입니다.\n비밀번호를 변경해주세요!");
+					location.href='mypage.do';
+				}else{
+					console.log(data);
+					alert(data+"님, 안녕하세요!");
+					location.href='home.do';
+				}
+			}
+		});
+		
+	});
+		</script>
+
+-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
    <!-- Required Js -->
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"> </script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>

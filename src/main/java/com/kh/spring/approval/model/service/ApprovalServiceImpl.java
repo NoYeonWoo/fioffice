@@ -107,6 +107,20 @@ public class ApprovalServiceImpl implements ApprovalService {
 	}
 
 
+	@Override
+	public int updateApproval(Approval ap) {
+		// TODO Auto-generated method stub
+		return approvalDao.updateApproval(sqlSession,ap);
+	}
+
+
+	@Override
+	public int deleteApproval(int approvalNo) {
+		// TODO Auto-generated method stub
+		return approvalDao.deleteApproval(sqlSession,approvalNo);
+	}
+
+
 
 
 

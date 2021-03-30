@@ -21,7 +21,7 @@ public class Todo {
  private String todoTitle;
  private Date todoInsertDate;
  private String todoContent;
- private Date todoDoneDate;
+ private String todoDoneDate;
  private String status;
  private String empNo;
  
