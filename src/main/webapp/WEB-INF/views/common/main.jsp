@@ -339,9 +339,7 @@
 
 	var calendar = $('#calendar').fullCalendar( {
 		plugins: ['interaction'],
-		header : {
-			left : 'agendaDay,agendaWeek,month'
-		},
+		
 		editable : false,
 		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
 		selectable : true,

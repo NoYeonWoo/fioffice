@@ -17,13 +17,6 @@
 	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/deskapp/vendors/styles/style.css">
 
 <style>
-div.addMsgBtn {
-
-   text-align: center;
-   display: inline-block;
-   padding: 20px;
-
-}
 
 	
 </style>
@@ -84,10 +77,10 @@ div.addMsgBtn {
 							<div class="chat-list bg-light-gray">
 								<div class="chat-search">
 									<span class="ti-search"></span>
-									<input type="text" placeholder="사원 목록입니다.">
+									<input type="text" placeholder="Search Contact">
 								</div>
-								
 								<div class="notification-list chat-notification-list customscroll">
+								
 								<!-- 전체 사원 리스트 -->
 								 <c:forEach items="${list}" var="emp">
 							     <div class="msgEmpList">
@@ -96,8 +89,8 @@ div.addMsgBtn {
 										<li>
 											<a href="" data-toggle="modal" data-id="empNo" data-target="#msgView">
 												<img src="${pageContext.request.contextPath}/resources/upload_files/${emp.changeName}">
-												<h3 class="clearfix" id="empName">${emp.empName} ${emp.empPosition}</h3>
-												<p id="deptName">${emp.deptName}</p>
+												<h3 class="clearfix" id="empName">${emp.empName}</h3>
+												<p id="deptName">${emp.deptName} ${emp.empPosition}</p>
 											</a>
 										</li>
 									</ul>
@@ -105,48 +98,12 @@ div.addMsgBtn {
 									</c:forEach>
 								</div>
 								<!-- 사원 리스트 끝 -->
-						</div> <!-- div class="chat-list bg-light-gray" -->
+							</div>
 							
 						</div>
 						
-						<!-- 채팅방 리스트 -->
-						<div class="chat-list" style="width:75%;">
-								<div class="chat-search">
-									<span class="ti-search"></span>
-									<input type="text" placeholder="채팅방입니다.">
-								</div>
-								<div class="notification-list chat-notification-list customscroll">
-								
-								 <c:forEach items="${list}" var="emp">
-							     <div class="chatRoomList">
-							     <input type="hidden" id="empNo" value="${cr.chatroomNp}">
-									<ul>
-										<li>
-											<a href="" data-toggle="modal" data-id="empNo" data-target="#msgView">
-												<img src="${pageContext.request.contextPath}/resources/upload_files/${emp.changeName}">
-												<h3 class="clearfix" id="empName">${emp.empName} ${emp.empPosition}</h3>
-												<p id="deptName">마지막에 보내진 메세지</p>
-											</a>
-										</li>
-									</ul>
-									</div>
-									</c:forEach>
-								</div>
-							</div>
-						
-						
-					</div>
-                        </div> <!-- 카드 바디 영역 -->
-                        
-                        
-         <!-- 모달 Test  -->
-         <div class="modal fade bd-example-modal-lg" tabindex="-1" id="msgView""
-            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-               <div class="modal-content">
-                  <div class="modal-body">
- 
-							
+						<!-- 메세지 보내는 Area -->
+						<div class="col-lg-9 col-md-8 col-sm-12">
 							<div class="chat-detail">
 								<div class="chat-profile-header clearfix">
 									<div class="left">
@@ -155,8 +112,8 @@ div.addMsgBtn {
 												<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png">
 											</div>
 											<div class="chat-profile-name">
-												<h3 style="color:#8069AE;">상대방 이름 직급</h3>
-												<span>부서</span>
+												<h3 style="color:#8069AE;">상대방 이름</h3>
+												<span>부서 직급</span>
 											</div>
 										</div>
 									</div>
@@ -200,26 +157,93 @@ div.addMsgBtn {
 										<div class="chat_text_area">
 											<textarea placeholder="메세지를 입력해주세요."></textarea>
 										</div>
-										<div>
-										<div class="addMsgBtn">
+										<div class="form-icon">
 			                                <button class="btn btn-primary btn-icon" id="addMsg">
 			                                    <i class="feather icon-message-circle"></i>
 			                                </button>
-			                       	 	</div>
-			                       	 	</div>
+			                            </div>
+									</div>
+								</div>
+							</div>
+						</div> <!-- 메세지 Area 끝 -->
+					</div>
+                        </div> <!-- 카드 바디 영역 -->
+                        
+                        
+         <!-- 모달 Test  -->
+         <div class="modal fade bd-example-modal-lg" tabindex="-1" id="msgView"
+            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+                  <div class="modal-body">
+ 
+								<div class="chat-profile-header clearfix">
+									<div class="left">
+										<div class="clearfix">
+											<div class="chat-profile-photo">
+												<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png">
+											</div>
+											<div class="chat-profile-name">
+												<h3 style="color:#8069AE;">상대방 이름</h3>
+												<span>부서 직급</span>
+											</div>
+										</div>
 									</div>
 									
 								</div>
-						
-						</div> <!-- 메세지 Area 끝 -->
-							
+								<div class="chat-box">
+									<div class="chat-desc customscroll">
+										<ul>
+											<li class="clearfix admin_chat">
+												<span class="chat-img">
+													<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}">
+												</span>
+												<div class="chat-body clearfix">
+													<p>내가 보낸 말풍선</p>
+													<div class="chat_time">09:40PM</div>
+												</div>
+											</li>
+											<li class="clearfix">
+												<span class="chat-img">
+													<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png">
+												</span>
+												<div class="chat-body clearfix">
+													<p>상대방이 보낸 말풍선</p>
+													<div class="chat_time">09:40PM</div>
+												</div>
+											</li>
+											<li class="clearfix admin_chat">
+												<span class="chat-img">
+													<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}">
+												</span>
+												<div class="chat-body clearfix">
+													<p>ㅇㅇ.</p>
+													<div class="chat_time">09:40PM</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									
+									<div class="chat-footer">
+										<div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
+										<div class="chat_text_area">
+											<textarea placeholder="메세지를 입력해주세요."></textarea>
+										</div>
+										<div class="form-icon">
+			                                <button class="btn btn-primary btn-icon" id="addMsg">
+			                                    <i class="feather icon-message-circle"></i>
+			                                </button>
+			                            </div>
+									</div>
+
+							</div>
 						</div>
                  
                   </div>
                </div>
             </div>
             </div>
-         <!-- 모달 끝  -->
+         <!-- 상세보기  모달끝  -->
                         
                         </div>
                     
@@ -257,7 +281,7 @@ div.addMsgBtn {
     	/*
         $.ajax({
            type:"POST",  
-           url:"selectChatroom",  
+           url:"selectEmployee",  
            async:false,
            data:{empNo:$(event.relatedTarget).data('id')},
            success:function(emp){

@@ -130,7 +130,7 @@
 
                </li>
                   <li class="nav-item">
-                   <a href="chat.mo" class="nav-link" target="_blank"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+                   <a href="chat.mo" class="nav-link"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
                
                   <li class="nav-item pcoded-menu-caption">

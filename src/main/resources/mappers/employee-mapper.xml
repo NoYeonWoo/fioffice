@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 </select>
 
 <select id="selectEmpList" resultMap="employeeResultSet">
-	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS
+	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS, CHANGE_NAME
 	FROM EMPLOYEE LEFT JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
 </select>
 
@@ -117,6 +117,15 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		#{deptCode})
 </insert>
 
+
+<!-- 메신저용 사원 리스트 -->
+
+<select id="msgEmpList" resultMap="employeeResultSet">
+	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS, CHANGE_NAME
+	FROM EMPLOYEE LEFT JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
+	WHERE EMP_NO!=#{empNo}
+	AND STATUS='Y'
+</select>
 
 
 </mapper>
