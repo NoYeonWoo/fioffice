@@ -115,9 +115,26 @@
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
 			<scope>test</scope>
-		</dependency>        
-	
-	
+		</dependency>
+		
+		<!-- 이메일 관련1 -->
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
+		
+		<!-- 이메일 관련2 -->               
+		<!-- https://mvnrepository.com/artifact/com.sun.mail/javax.mail -->
+		
+		<dependency>
+    		<groupId>com.sun.mail</groupId>
+    		<artifactId>javax.mail</artifactId>
+    		<version>1.5.1</version>
+		</dependency>
+		
+		
 	
 	
 	<!-- 추가적으로 필요한 라리브러리  -->

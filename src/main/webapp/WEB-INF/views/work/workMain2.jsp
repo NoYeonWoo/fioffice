@@ -2,7 +2,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,11 +81,15 @@
 				
 				<form action="start.work" method="post" id="startWork">
     				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}"><!-- 원래 eno -->
-    				<input type="hidden" name="timeNow" id="timeNow" value="${date}" />
+    				<!--  <input type="hidden" name="timeNow" id="timeNow" value="${date}" />-->
     			</form>
-    			<form action="end.work" method="post" id="endWork">
+    			<form action="end.work1" method="post" id="endWork1">
     				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}">
-    				<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />
+    				<!--<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />-->
+    			</form>
+    			<form action="end.work2" method="post" id="endWork2">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}">
+    				<!--<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />-->
     			</form>
     			
     			
@@ -119,7 +124,14 @@
 									<div class="col">
 
 										
-										<h6>asdgasdg</h6>
+										<h6>
+										
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)%60}"/>분
+										</c:forEach>
+										
+										</h6>
 										
 									</div>
 
@@ -135,7 +147,12 @@
 									</div>
 									<div class="col">
 										
-										<h6>시간</h6>
+										<h6>
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)%60}"/>분
+										</c:forEach>
+										</h6>
 										
 									</div>
 								</div>
@@ -148,7 +165,14 @@
 									</div>
 									<div class="col">
 										
-										<h6>시간</h6>
+										<h6>
+										
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)%60}"/>분
+										</c:forEach>
+										
+										</h6>
 										
 									</div>
 								</div>
@@ -165,9 +189,41 @@
 								<div class="col-md-12">
 
 									<div class="card-body">
+									
+									
+									
+									
+									
+									
+									<!--
+									<c:choose>
+    									<c:when test="${ 0 ne sessionScope.workUser.workEndMin}">
+        									<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
+    									</c:when>
+    									<c:otherwise>
+        									<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+    									</c:otherwise>
+									</c:choose>
+									-->
+                					<!--  
+                					<c:if test="${ null ne sessionScope.workUser.workEnd }">
+	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+	                					qqqqq
+                					</c:if>
+                					
+                					<c:if test="${ null eq sessionScope.workUser.workEnd }">
+	                					<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
+	                					empp
+               		 				</c:if>
+               		 				<c:if test="${ null ne sessionScope.workUser.endWork && null ne sessionScope.workUser.startWork }">
+	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+	                					sdfsdfsdfsd
+                					</c:if>
+									-->
+										
 										<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork').submit();">퇴근하기</button>
+										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
 										
 
 									</div>
@@ -180,6 +236,55 @@
 						</div>
 						</div>
 
+
+<script type="text/javascript">
+<!--
+function topList(){
+    $.ajax({
+       url : "todoMainListView.do",
+       type : "get",
+       success : function(todolist) {
+          var value="";
+         
+          for(var i in todolist){
+       	  
+             value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
+             
+               '<td width="100px" align="left">'+todolist[i].todoTitle+'</td>'+
+               '<td width="50px" align="left">'+todolist[i].todoContent+'</td>'+
+               
+               '</tr>';
+          }        
+             
+          
+          $("#todoMainList").html(value);
+       },
+       error : function() {
+          console.log("ajax 통신실패");
+       }
+
+    });
+ }
+-->
+
+<!--
+function callContent(){
+    var url = "call.html";
+    $.ajax({
+        url:url,
+        type:"get",
+        dataType : "html",
+        success: function(html){
+            $(".ajax_inform").html(html);
+              
+        },
+        error: function(xhr, status, error) {
+            alert(error);
+        }  
+    });
+}
+-->
+</script>
 <!-- ----------------------------------------------------------- onclick="location.href='start.work'" -->
 
 						<!-- [ Todo-list1 ] start -->

@@ -13,13 +13,26 @@
 		<result column="EMAIL_IMPORTANT" property="emailImportant"/>
 		<result column="EMAIL_SEND" property="emailSend"/>
 		<result column="EMAIL_RECEIVE" property="emailReceive"/>
+		<result column="EMAIL_SEND_Email" property="emailSendEmail"/>
+		<result column="EMAIL_RECEIVE_Email" property="emailReceiveEmail"/>
 	</resultMap>
 	
-	<select id="selectList" resultMap="emailResultSet">
+	<select id="selectListCount" resultType="_int">
+	
 		SELECT *
 		FROM EMAIL
-		WHERE EMP_NO =#{empNo}
+		WHERE EMAIL_RECEIVE =#{empNo} and STATUS='Y'
 		ORDER BY EMAIL_TIME DESC
+	
+	</select>
+	<select id="selectList" resultMap="emailResultSet">
+	 
+		SELECT *
+		FROM EMAIL
+		WHERE STATUS = 'Y'
+		AND EMAIL_RECEIVE=#{empNo}
+		ORDER BY EMAIL_NO DESC
+	
 	</select>
 	
 </mapper>

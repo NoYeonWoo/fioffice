@@ -1,6 +1,7 @@
 package com.kh.spring.email.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cglib.core.Local;
 
 import java.io.File;
 import java.io.IOException;
@@ -27,31 +28,33 @@ import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.email.model.service.EmailService;
 import com.kh.spring.email.model.vo.Email;
+import com.kh.spring.employee.model.vo.Employee;
 
 
 
 @Controller
 public class EmailController {
 	
-	//@Autowired EmailService emailService;
 
+	@Autowired
+	private EmailService emailService;
+	
 	@RequestMapping("view.email")
-	public String selectList(/*@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model*/) {
+	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		
+		Employee emp= (Employee) session.getAttribute("loginUser");
 		
-		/*
 		int listCount = emailService.selectListCount();
-		//System.out.println(listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,5);//페이지리밋 10 보드 이미지 5
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);//페이지리밋 10 보드 이미지 5
 		
-		ArrayList<Email> list = emailService.selectListCount(pi);
+		ArrayList<Email> list = emailService.selectListCount(pi,emp);
 		
 		model.addAttribute("list",list);
 		model.addAttribute("pi",pi);
 		
-*/
-		return "email/email";
+
+		return "email/emailTest";
 		
 	}
 
