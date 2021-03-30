@@ -76,7 +76,7 @@ SELECT*
 </select>
 
 <select id="selectEmpList" resultMap="employeeResultSet">
-	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS
+	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS, CHANGE_NAME
 	FROM EMPLOYEE LEFT JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
 </select>
 
@@ -133,7 +133,17 @@ SELECT*
 		SET 
         EMP_PWD=#{empPwd}
         WHERE EMP_NO=#{empNo} 
+  </update>
+  
+  
+<!-- 메신저용 사원 리스트 -->
 
-	</update>
+<select id="msgEmpList" resultMap="employeeResultSet">
+	SELECT EMP_NO, EMP_NAME, DEPT_NAME, JOB_NAME, STATUS, CHANGE_NAME
+	FROM EMPLOYEE LEFT JOIN DEPT USING(DEPT_CODE) JOIN JOB USING(JOB_CODE)
+	WHERE EMP_NO!=#{empNo}
+	AND STATUS='Y'
+</select>
 
+  
 </mapper>

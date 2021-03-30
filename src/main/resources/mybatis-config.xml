@@ -26,6 +26,8 @@
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Inout" alias="Inout"/>
 		<typeAlias type="com.kh.spring.mainCalendar.model.vo.Calendar" alias="Calendar"/>
 		<typeAlias type="com.kh.spring.mainCalendar.model.vo.Category" alias="Category"/>
+		<typeAlias type="com.kh.spring.message.model.vo.Message" alias="Message"/>
+		<typeAlias type="com.kh.spring.message.model.vo.ChatRoom" alias="ChatRoom"/>
 	</typeAliases>
 	
 	
@@ -43,5 +45,6 @@
 		<mapper resource="/mappers/meetingroom-mapper.xml"/>
 		<mapper resource="/mappers/productInout-mapper.xml"/>
 		<mapper resource="/mappers/calendar-mapper.xml"/>
+		<mapper resource="/mappers/message-mapper.xml"/>
 	</mappers>
 </configuration>
