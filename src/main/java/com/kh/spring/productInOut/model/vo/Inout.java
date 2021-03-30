@@ -16,12 +16,15 @@ import lombok.ToString;
 
 public class Inout {
 	private String inoutNo;
-	private String sortaion;
-	private String quantity;
+	private String sortation;
+	private int quantity;
 	private String price;
 	private Date inoutDate;
+	private String inoutDateS;
 	private String comment;
-	private char status;
 	private String cliNo;
 	private String proNo;
+	private String cliName;
+	private String proName;
+	private String status;
 }

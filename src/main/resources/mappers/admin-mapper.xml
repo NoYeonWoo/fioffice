@@ -45,6 +45,21 @@
 		<result property="adminName" column="ADMIN_NAME" />
 		<result property="adminInfo" column="ADMIN_INFO" />
 	</resultMap>
+	
+	<resultMap id="CalendarResultSet" type="Calendar">
+		<id property="calNo" column="CAL_NO"/>
+		<result property="empNo" column="EMP_NO"/>
+		<result property="calCate" column="CAL_CATE"/>
+		<result property="calCateName" column="CATEGORY_TITLE"/>
+		<result property="calTitle" column="CAL_TITLE"/>
+		<result property="calContent" column="CAL_CONTENT"/>
+		<result property="calSDates" column="CAL_SDATE"/>
+		<result property="calEDates" column="CAL_EDATE"/>
+		<result property="calType" column="CAL_TYPE"/>
+		<result property="status" column="STATUS"/>
+		<result property="calColor" column="CATEGORY_COLOR"/>
+	</resultMap>
+	
 	<select id="selectDeptList" resultMap="deptResultSet">
 		SELECT *
 		FROM DEPT
@@ -113,5 +128,11 @@
 		FROM EMPLOYEE JOIN JOB USING(JOB_CODE)
 		WHERE DEPT_CODE = #{deptCode} AND STATUS='Y'
 		ORDER BY LENGTH(JOB_CODE) DESC, JOB_CODE DESC
+	</select>
+	
+	<select id="selectCalendarList">
+		SELECT *
+		FROM CALENDAR
+		WHERE CAL_CATE IN (30,40,50);
 	</select>
 </mapper>

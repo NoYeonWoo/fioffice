@@ -17,6 +17,7 @@
 }
  .modal-content .table td{
    line-height: 35px!important;
+   padding: 0.75rem !important;
    }
 .table-hover>tbody>tr:hover{
 		cursor:pointer
@@ -54,64 +55,63 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  <!-- Basic Button table start -->
-          <div class="col-sm-10 mx-auto" >
-                <div class="card" >
-                    <div class="card-header">
-                        <h3>상품관리</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="dt-responsive table-responsive">
-                        <select class="form-control form-control-sm" style="width:15%; margin:0rem 1rem 2rem 0rem;"
-                        	name="selectC" id="selectC" onchange="selectpList()">
-                                 		<option value="">거래처선택</option>
-                                 		<c:forEach items="${ cList }" var="c">
-											<c:if test="${c.sortation eq '입고' }">
-											<option value="${ c.cliNo }">${ c.cliName }</option>
-										</c:if>	
-										</c:forEach>
-                                 		</select>
-                            	<table id="productList" class="table table-hover row-border  nowrap">
-	                                <thead>
-	                                    <tr>
-	                                    <th style="width: 15%;">상품코드</th>
-	                                    <th style="width: 20%;">상품명</th>
-	                                    <th style="width: 10%">이월재고</th>
-	                                    <th style="width: 10%;">입고단가</th>
-	                                    <th style="width: 10%;">출고단가</th>
-	                                    <th style="width: 10%;">재고</th>
-	                                    </tr>
-	                                </thead>
-                            	</table>
-                        	</div>
-                        </div>
-                	</div>
-            	</div>
+	<div class="col-sm-10 mx-auto" >
+    	<div class="card" >
+        	<div class="card-header">
+            	<h3>상품관리</h3>
+            </div>
+            <div class="card-body">
+                <div class="dt-responsive table-responsive">
+                    <select class="form-control form-control-sm" style="width:15%; margin:0rem 1rem 2rem 0rem;"
+                    name="selectC" id="selectC" onchange="selectpList()">
+                        <option value="">거래처선택</option>
+						<c:forEach items="${ cList }" var="c">
+							<c:if test="${c.sortation eq '입고' }">
+								<option value="${ c.cliNo }">${ c.cliName }</option>
+							</c:if>	
+						</c:forEach>
+					</select>
+                    <table id="productList" class="table table-hover row-border  nowrap">
+	                    <thead>
+	                        <tr>
+	                            <th style="width: 15%;">상품코드</th>
+	                            <th style="width: 20%;">상품명</th>
+	                            <th style="width: 10%;">입고단가</th>
+	                            <th style="width: 10%;">출고단가</th>
+	                            <th style="width: 10%;">재고</th>
+	                        </tr>
+	                    </thead>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
             <!-- Basic Button table end -->
 
 
- </div> <!--지우지 마세요    div class="row"  -->
+</div> <!--지우지 마세요    div class="row"  -->
             </div> <!--지우지 마세요   div class="pcoded-content"  -->
             </div> <!--지우지 마세요    div class="pcoded-main-container"  -->
 <!-- [ Main Content ] 메인화면 끝 -->
 
 
-     <div class="modal fade" id="productAdd">  
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">상품추가</h4>
+<div class="modal fade" id="productAdd">  
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+		<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">상품추가</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
-             <div class="modal-body">
-				<form name="newProduct" action="insertProduct" method="post" autocomplete="off" onsubmit="return check();">
+            <div class="modal-body">
+				<form name="newProduct" action="insertProduct" method="post" autocomplete="off"onsubmit="return check();">
 					<table class="table table-bordered"  align="center">
-                    	<tr>
-                    		<td>거래처 선택</td>
+						<tr>
+							<td>거래처명</td>
                     		<td><select class="form-control form-control-sm" style="width: 40%;"
-									name="cliNo" id="cliNo" >
-									<option value="">전체</option>
-									<<c:forEach items="${ cList }" var="c">
+								name="cliNo" id="cliNo" >
+									<option value="">--선택--</option>
+									<c:forEach items="${ cList }" var="c">
 										<c:if test="${c.sortation eq '입고' }">
 											<option value="${ c.cliNo }">${ c.cliName }</option>
 										</c:if>	
@@ -125,14 +125,14 @@
                             <td style="width:20%">상품명</td>
                             <td><input type="text" name="proName" class="form-control form-control-sm" style="width:40%"></td>
                         </tr><tr>
-                             <td style="width:20%">입고단가</td>
-                             <td><input type="text" name="inPrice" class="form-control form-control-sm"style="width:25%;float:left"><span>원</span></td>
+                            <td style="width:20%">입고단가</td>
+                            <td><input type="text" name="inPrice" class="form-control form-control-sm"style="width:25%;float:left"><span>원</span></td>
                         </tr><tr>
-                             <td style="width:20%">출고단가</td>
-                             <td><input type="text" name="outPrice" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
+                            <td style="width:20%">출고단가</td>
+                            <td><input type="text" name="outPrice" class="form-control form-control-sm" style="width:25%;float:left"><span>원</span></td>
                         </tr><tr>
-                             <td style="width:20%">비고</td>
-                             <td><input type="text" name="comment" class="form-control form-control-sm"></td>
+                            <td style="width:20%">비고</td>
+                            <td><input type="text" name="comment" class="form-control form-control-sm"></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -141,9 +141,9 @@
                 	</div>
 				</form>	
 			</div>
-            </div>
         </div>
     </div>
+</div>
     
      
     
@@ -152,46 +152,47 @@
 	<script>
 	$(document).ready(function() {
 		$("#selectC").val("");
-		selectpList();
-		
-		$(document).on('click', '#productList tbody tr', function() {
-			location.href="detailProduct?proNo=" + $(this).children().eq(0).text();
-	    });
-		
-		$("#cliNo").change(function() {
-			console.log($(this).val());
-			var cliNo = $(this).val();
-			if(cliNo != ""){
-				$.ajax({
-			        type:"POST",  
-			        url:"selectProductCount",  
-			        async:false,
-			        data:{cliNo:cliNo},
-			        success:function(result){
-			        	count=""+(Number(result)+1);
-			        	console.log('P'+cliNo.substring(1)+(count.padStart(3,'0')));
-			        	$("#productAdd #proNo").val('P'+cliNo.substring(1)+(count.padStart(3,'0')));
-			        },   
-			        error:function(e){  
-			            console.log(e.responseText);  
-			        }
-				});
-			}			
-		});
+		selectpList();	
 	});
+	$(document).on('click', '#productList tbody tr', function() {
+		if($(this).children().eq(0).text()!="상품이 존재하지 않습니다."){
+			location.href="detailProduct?proNo=" + $(this).children().eq(0).text();
+		}
+		
+    });
+	
+	$("#cliNo").change(function() {
+		$("#productAdd #proNo").val("");
+		console.log($(this).val());
+		var cliNo = $(this).val();
+		if(cliNo != ""){
+			$.ajax({
+		        type:"POST",  
+		        url:"createProductNo",  
+		        async:false,
+		        data:{cliNo:cliNo},
+		        success:function(result){
+		        	$("#productAdd #proNo").val(result);
+		        },   
+		        error:function(e){  
+		            console.log(e.responseText);  
+		        }
+			});
+		}			
+	});
+	
 	function selectpList(){
 		var table=$('#productList').DataTable({
         	destroy : true,
             columnDefs: [
-                { orderable: false, targets: [2,5] },
-                { searchable: false, targets: [2,3,4,5]}
+                { orderable: false, targets: [4] },
+                { searchable: false, targets: [2,3,4]}
               ],
-              dom: '<"float-left"B><"float-right"f>rtip',
+              dom: '<"float-left"B><"float-right"f>rt<"float-left"i><"float-right"p>',
             buttons: [{
                 text: '상품추가',
                 className: 'btn-primary',
                 action: function(e, dt, node, config) {
-                	 $("#cliNo").val("");
                 	$("#productAdd").modal("show");
                 }
             },{
@@ -227,31 +228,30 @@
             columns : [
                	{data: "proNo"},
                	{data: "proName"},
-               	{data: "preStock",
-                   	render: function(data, type, row){
-                         if(type=='display') data = data+"개"
-                         return data;}},
                	{data: "inPrice",
                    	render: function(data, type, row){
-                         if(type=='display') data = data+"원"
+                         if(type=='display') data = data+"원";
                          return data;}},
                	{data: "outPrice",
                    	render: function(data, type, row){
-                         if(type=='display') data = data+"원"
+                         if(type=='display') data = data+"원";
                          return data;}},
                	{data: "stock",
 						render: function(data, type, row){
-                       		if(type=='display') data = data+"개"
+                       		if(type=='display') data = data+"개";
                             return data;}}
                ]
 	    });
 		$("#productList").hide();
 		$("#productList").fadeIn(1000);
 	}
+	$('.modal').on('hidden.bs.modal', function (e) {
+	    $(this).find('form')[0].reset()
+	});
 	function check() {
-		var name=document.productAdd;
+		var name=document.newProduct;
 		console.log(name.cliNo.value);
-		if(name.cliNo.value==null){
+		if(name.cliNo.value==""){
 			alert("거래처를 선택해주세요.");
 			return false;
 		}else if(name.proName.value==""){

@@ -20,7 +20,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <resultMap type="Product" id="ProductResultSet">
 	<id property="proNo" column="PRO_NO"/>
 	<result property="proName" column="PRO_NAME"/>
-	<result property="preStock" column="PRE_STOCK"/>
 	<result property="inStock" column="IN_STOCK"/>
 	<result property="inPrice" column="IN_PRICE"/>
 	<result property="outStock" column="OUT_STOCK"/>
@@ -29,7 +28,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<result property="comment" column="COMMENT"/>
 	<result property="cliNo" column="CLI_NO"/>
 	<result property="cliName" column="CLI_NAME"/>
-	
+</resultMap>
+
+<resultMap type="Inout" id="InoutResultSet">
+	<id property="inoutNo" column="INOUT_NO"/>
+	<result property="sortation" column="SORTATION"/>
+	<result property="quantity" column="QUANTITY"/>
+	<result property="price" column="PRICE"/>
+	<result property="inoutDate" column="INOUT_DATE"/>
+	<result property="proNo" column="PRO_NO"/>
+	<result property="cliNo" column="CLI_NO"/>
+	<result property="cliName" column="CLI_NAME"/>
+	<result property="proName" column="PRO_NAME"/>
+	<result property="status" column="STATUS"/>
 </resultMap>
 
 <select id="selectClientList" resultMap="clientResultSet">
@@ -73,9 +84,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE CLI_NO = #{cliNo}
 </delete>
 
-<select id="selectClientCount" resultType="_int">
+<select id="checkClientNo" parameterType="string" resultType="_int">
 	SELECT COUNT(*)
 	FROM CLIENT
+	WHERE CLI_NO = #{code}
 </select>
 
 <select id="selectProductList" parameterType="map" resultMap="ProductResultSet">
@@ -92,11 +104,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE PRO_NO = #{proNo}
 </select>
 
+<select id="checkProductNo" parameterType="string" resultType="_int">
+	SELECT COUNT(*)
+	FROM PRODUCT
+	WHERE PRO_NO = #{code}
+</select>
+
 <insert id="insertProduct">
 	INSERT INTO PRODUCT VALUES(
 		#{proNo},
 		#{proName},
-		DEFAULT,
 		DEFAULT,
 		#{inPrice},
 		DEFAULT,
@@ -114,10 +131,20 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 <update id="updateProduct" parameterType="Product">
 	UPDATE PRODUCT
-	SET PRO_NAME = #{proName},
+	<set> PRO_NAME = #{proName},
 		IN_PRICE = #{inPrice},
 		OUT_PRICE = #{outPrice},
+		<if test="inStock != null">
+			IN_STOCK = #{inStock},
+		</if>
+		<if test="outStock != null">
+			OUT_STOCK = #{outStock},
+		</if>
+		<if test="stock != null">
+			STOCK = #{stock},
+		</if>
 		"COMMENT" = #{comment}
+	</set>
 	WHERE PRO_NO = #{proNo}
 </update>
 
@@ -132,4 +159,50 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	WHERE CLI_NO = #{cliNo}
 	</if>
 </delete>
+
+<select id="selectInoutList" parameterType="map" resultMap="InoutResultSet">
+	SELECT A.*,C.CLI_NAME, B.PRO_NAME
+	FROM INOUT A LEFT JOIN PRODUCT B ON(A.PRO_NO=B.PRO_NO)
+	LEFT JOIN CLIENT C ON(B.CLI_NO=C.CLI_NO)
+	<trim prefix="WHERE" prefixOverrides="AND">
+		<if test="proNo != null">
+			A.PRO_NO = #{proNo}
+		</if>
+		<if test="cliNo != null">
+			AND B.CLI_NO = #{cliNo}
+		</if>
+	</trim>
+</select>
+
+<select id="selectInoutCount" resultType="_int">
+	SELECT COUNT(*)
+	FROM INOUT
+</select>
+
+<insert id="insertInout" parameterType="Inout">
+	INSERT INTO
+	INOUT VALUES(
+		#{inoutNo},
+		#{sortation},
+		#{quantity},
+		#{price},
+		#{inoutDate},
+		#{comment},
+		#{cliNo},
+		#{proNo},
+		DEFAULT)
+</insert>
+
+<select id="selectInout" parameterType="string" resultMap="InoutResultSet">
+	SELECT *
+	FROM INOUT
+	WHERE INOUT_NO = #{inoutNo}
+</select>
+
+<update id="deleteInout" parameterType="string">
+	UPDATE INOUT
+	SET
+	STATUS='N'
+	WHERE INOUT_NO = #{inoutNo}
+</update>
 </mapper>

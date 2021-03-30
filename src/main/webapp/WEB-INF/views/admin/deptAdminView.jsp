@@ -18,6 +18,13 @@
   margin:auto;
   padding-right:3rem;
  }
+ 
+ .table td, .table th {
+	border-top: none !important;
+	border-bottom : 1px solid #e2e5e8;
+	
+}
+
   .btn-primary{
 	background-color: #B8ACD0 !important;
     border-color: #B8ACD0 !important;
@@ -170,7 +177,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-					<table id ="detailD" class="table table-bordered  "  align="center">
+					<table id ="detailD" class="table "  align="center">
 						<thead>
 							<th style="width: 30%">사원명</th>
 							<th style="width: 45%">사번</th>

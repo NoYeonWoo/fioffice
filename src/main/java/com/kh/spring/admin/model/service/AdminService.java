@@ -8,6 +8,7 @@ import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 public interface AdminService {
 
@@ -32,6 +33,8 @@ public interface AdminService {
 	int insertDept(Department dept);
 
 	ArrayList<Employee> deptEmpList(String deptCode);
+
+	ArrayList<Calendar> selectCalendarList();
 
 	
 

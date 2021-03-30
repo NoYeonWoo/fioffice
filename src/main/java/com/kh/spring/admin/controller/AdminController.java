@@ -165,15 +165,19 @@ public class AdminController {
 		return new GsonBuilder().create().toJson(empList);
 	}
 	
-	
-	@RequestMapping("address.ad")
-	public String addressView() {
-		return "admin/addressAdminView";
-	}
-	
+
+	//--------------------------------------------------------전사캘린더--------------------------------------------------------//
 	@RequestMapping("calendar.ad")
+	@ResponseBody
 	public String calendarView() {
 		return "admin/calendarAdminView";
+	}
+	
+	@RequestMapping(value="selectCalendarList", produces="appliction/json; charset=UTF-8")
+	public String selectCalendarList() {
+		Map<String, Object> result = new HashMap<String, Object>();
+		result.put("data", adminService.selectCalendarList());
+		return new GsonBuilder().create().toJson(result);
 	}
 	
 	@RequestMapping("survey.ad")

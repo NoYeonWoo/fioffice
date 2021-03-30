@@ -15,9 +15,15 @@
 }
  .modal-content .table td{
    line-height: 35px!important;
+   padding:0.75rem !important;
    }
 .table-hover>tbody>tr:hover{
 		cursor:pointer
+}
+.table td, .table th {
+	border-top: none !important;
+	border-bottom : 1px solid #e2e5e8;
+	padding:1.25rem 0.75rem !important;
 }
 
 label{
@@ -66,44 +72,44 @@ label{
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
-					<table class="table table-bordered table-detail"  align="center">
+						<table class="table  table-detail"  align="center">
 						<tr>
-                        	<td style="width:20%">거래처이름</td>
-                            <td>${product.cliName}</td>
+                        	<td style="width:7%">거래처명</td>
+                        	<td style="width:3%; text-align:center">:</td>
+                            <td colspan="4">${product.cliName}</td>
                         </tr>
 						<tr>
-                        	<td style="width:20%">상품코드</td>
-                            <td>${product.proNo}</td>
-                        </tr>
-						<tr>
-                        	<td style="width:20%">상품코드</td>
-                            <td>${product.proNo}</td>
+                        	<td>상품코드</td>
+                        	<td style="text-align:center">:</td>
+                            <td colspan="4">${product.proNo}</td>
                         </tr><tr>
                             <td>상품명</td>
-                            <td>${product.proName}</td>
+                            <td style="text-align:center">:</td>
+                            <td colspan="4">${product.proName}</td>
                         </tr><tr>
-                             <td>이월재고</td>
-                             <td>${product.preStock}개</td>
-                        </tr><tr>
-                             <td>출고수량</td>
+                             <td>총입고수량</td>
+                             <td style="text-align:center">:</td>
                              <td>${product.inStock}개</td>
-                        </tr><tr>
                              <td>입고단가</td>
+                             <td style="text-align:center">:</td>
                              <td>${product.inPrice}원</td>
                         </tr><tr>
-                             <td>출고수량</td>
+                             <td>총출고수량</td>
+                             <td style="text-align:center">:</td>
                              <td>${product.outStock}개</td>
-                        </tr><tr>
-                             <td>출고단가</td>
+                             <td style="width:7%">출고단가</td>
+                             <td style="width:3%;text-align:center">:</td>
                              <td>${product.outPrice}원</td>
                         </tr><tr>
                              <td>재고</td>
-                             <td>${product.stock}개</td>
+                             <td style="text-align:center">:</td>
+                             <td colspan="4">${product.stock}개</td>
                         </tr><tr>
                              <td>비고</td>
-                             <td>${product.comment}</td>
+                             <td style="text-align:center">:</td>
+                             <td colspan="4">${product.comment}</td>
                         </tr>
-					</table>
+						</table>
 					<div class="btns" align="center">
                     	<button type="button" class="btn btn-light"  onClick="location.href='pList.pio'">목록으로</button>
                     	<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#productUpdate">수정하기</button>
