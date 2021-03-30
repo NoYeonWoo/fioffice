@@ -2,8 +2,10 @@ package com.kh.spring.employee.model.dao;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.admin.model.vo.Department;
@@ -57,6 +59,16 @@ public class EmployeeDao {
 	public int selectEmpCount(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("employeeMapper.selectEmpCount");
+	}
+
+	public Employee loginEncEmployee(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("employeeMapper.loginEncEmployee",emp);
+	}
+
+	public int updatePwd(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("employeeMapper.updatePwEmp",emp);
 	}
 
 

@@ -46,6 +46,16 @@ public class TodoDao {
 		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo",emp);
 	}
 
+	public Todo selectTodo(SqlSessionTemplate sqlSession, String todoNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("todoMapper.selectTodoDetail",todoNo);
+	}
+
+	public int updateTodo(SqlSessionTemplate sqlSession, Todo t) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("todoMapper.updateTodo",t);
+	}
+
 
 
 }

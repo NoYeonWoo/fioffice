@@ -71,4 +71,18 @@ public class TodoServiceImpl implements TodoService {
 			return todoDao.selectMainTodo(sqlSession,emp);
 		}
 
+
+		@Override
+		public Todo selectTodo(String todoNo) {
+			// TODO Auto-generated method stub
+			return todoDao.selectTodo(sqlSession, todoNo);
+		}
+
+
+		@Override
+		public int updateTodo(Todo t) {
+			// TODO Auto-generated method stub
+			return todoDao.updateTodo(sqlSession, t);
+		}
+
 }

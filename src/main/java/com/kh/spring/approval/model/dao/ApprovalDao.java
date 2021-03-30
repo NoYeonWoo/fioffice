@@ -73,6 +73,16 @@ public class ApprovalDao {
 		return sqlSession.update("approvalMapper.updateCStatus", ano);
 	}
 
+	public int updateApproval(SqlSessionTemplate sqlSession, Approval ap) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.updateApproval",ap);
+	}
+
+	public int deleteApproval(SqlSessionTemplate sqlSession, int approvalNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("approvalMapper.deleteApproval", approvalNo);
+	}
+
 
 
 }

@@ -2,9 +2,11 @@ package com.kh.spring.employee.model.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -87,5 +89,30 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.selectEmpCount(sqlSession);
 	}
 
+
+
+	@Override
+	public Employee loginEncEmployee(BCryptPasswordEncoder bCryptPasswordEncoder, Employee emp) throws Exception {
+		// TODO Auto-generated method stub
+		Employee loginUser=employeeDao.loginEncEmployee(sqlSession,emp);
+		
+		
+	System.out.println(loginUser);
+		   if(loginUser==null) {
+			   throw new Exception("loginuser확인하세요");
+		   }
+		    if(!bCryptPasswordEncoder.matches(emp.getEmpPwd(), loginUser.getEmpPwd())) {
+		    	throw new Exception("암호를 확인하세요:불일치 ");
+		    }
+			return loginUser;
+
+	}
+
+
+	@Override
+	public int updatePwd(Employee emp) {
+		// TODO Auto-generated method stub
+		return employeeDao.updatePwd(sqlSession,emp);
+	}
 
 }

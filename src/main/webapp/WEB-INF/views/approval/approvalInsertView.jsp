@@ -61,7 +61,7 @@
 					   <div class="row">
 				
 						   <div class="form-group col-lg-6">
-						    	<strong>결재자 : </strong><input type="text" class="form-control"  value="${firstApprEmp.empName}(${firstApprEmp.empPosition})"  readonly>
+						    	<strong>결재자 : </strong><input type="text" class="form-control"  value="${firstApprEmp.empName} ${firstApprEmp.empPosition}"  readonly>
 						        	      <input type="hidden" class="form-control" value="${firstApprEmp.empNo}"  name="firstApprEmp" id="firstApprEmp" >
 						   </div>
 					
@@ -83,7 +83,7 @@
                        <label class="form-check-label" for="exampleCheck1" style="color:red; " >긴급</label>
                        </div>
 					  
-					
+
 					  
 				  <div class="form-group">
 						    <textarea class="form-control" id="summernote" name="approvalContent" maxlength="140" rows="7" autocomplete="off"></textarea>

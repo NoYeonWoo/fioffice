@@ -3,6 +3,7 @@ package com.kh.spring.todo.model.service;
 import java.util.ArrayList;
 
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 import com.kh.spring.todo.model.vo.Todo;
 
 public interface TodoService {
@@ -19,5 +20,10 @@ public interface TodoService {
 	int deleteTodo(int tno);
 
 	ArrayList<Todo> selectMainTodo(Employee emp);
+
+
+	Todo selectTodo(String todoNo);
+
+	int updateTodo(Todo t);
 
 }
