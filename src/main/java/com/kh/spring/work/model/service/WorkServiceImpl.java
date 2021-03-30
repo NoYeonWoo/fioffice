@@ -1,12 +1,14 @@
 package com.kh.spring.work.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kh.spring.address.model.vo.PageInfo;
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.work.model.dao.WorkDao;
 import com.kh.spring.work.model.vo.Work;
 
@@ -27,9 +29,9 @@ public class WorkServiceImpl implements WorkService {
 	}
 
 	@Override
-	public ArrayList<Work> selectListCount(PageInfo pi) {
+	public ArrayList<Work> selectListCount(PageInfo pi, Employee emp) {//Employee emp
 		// TODO Auto-generated method stub
-		return workDao.selectListCount(sqlSession,pi);
+		return workDao.selectListCount(sqlSession,pi,emp);
 	}
 	
 	@Override
@@ -47,6 +49,18 @@ public class WorkServiceImpl implements WorkService {
 		// TODO Auto-generated method stub
 		return workDao.startWork(sqlSession,work);
 	}
+	
+	@Override
+	public int insertwork2(String empNo) {
+		// TODO Auto-generated method stub
+		return workDao.startWork2(sqlSession,empNo);
+	}
+	@Override
+	public int updatework3(Work work) {
+		// TODO Auto-generated method stub
+		return workDao.startWork3(sqlSession,work);
+	}
+	
 
 	@Override
 	public Work updateSumWork(String eno) {
@@ -55,19 +69,24 @@ public class WorkServiceImpl implements WorkService {
 	}
 
 	@Override
-	public int updateWork1(String empNo) {//Work work
+	public int updateWork1(Work w) {////String empNo Work w
 		// TODO Auto-generated method stub
-		return workDao.updateWork1(sqlSession,empNo);
+		return workDao.updateWork1(sqlSession,w);
 	}
 	@Override
-	public int updateWork2(String empNo) {//Work work
+	public int updateWork2(Work w) {////String empNo Work w
 		// TODO Auto-generated method stub
-		return workDao.updateWork2(sqlSession,empNo);
+		return workDao.updateWork2(sqlSession,w);
 	}
 	@Override
-	public int updateWork3(String empNo) {//Work work
+	public int updateWork3(Work w) {////String empNo Work w
 		// TODO Auto-generated method stub
-		return workDao.updateWork3(sqlSession,empNo);
+		return workDao.updateWork3(sqlSession,w);
+	}
+	@Override
+	public int updateWork4(Work w) {////String empNo Work w
+		// TODO Auto-generated method stub
+		return workDao.updateWork4(sqlSession,w);
 	}
 
 	@Override
@@ -75,6 +94,23 @@ public class WorkServiceImpl implements WorkService {
 		// TODO Auto-generated method stub
 		return workDao.selectTimes(sqlSession,empNo);
 	}
+
+	////////////////////사람찾기
+	@Override
+	public ArrayList<Work> selectUser(Employee emp) {
+		// TODO Auto-generated method stub
+		return workDao.selectUser(sqlSession,emp);
+	}
+
+	@Override
+	public int updateMin(String empNo) {
+		// TODO Auto-generated method stub
+		return workDao.updateMin(sqlSession,empNo);
+	}
+
+
+
+
 
 	
 	

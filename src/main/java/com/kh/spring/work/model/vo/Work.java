@@ -22,9 +22,13 @@ public class Work {
 	public int workRemain;
 	public Date workDate;
 	public String status;
-	public int workSum;//사이
 	public String empNo;
+	public int workSum;//사이
 	public String workDayReset;//사이
+	public String workDay;
+	public int workRemainTotal;
+	public int workStartMin;
+	public int workEndMin;
 
 	
 }

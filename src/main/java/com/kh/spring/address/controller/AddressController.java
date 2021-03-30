@@ -37,7 +37,7 @@ public class AddressController {
 	@Autowired
 	private AddressService addressService;
 
-	@RequestMapping("view.add2")
+	@RequestMapping("view.add2")//전체사원
 	public String selectList2(@RequestParam(value="currentPage",required=false, defaultValue="1")  int currentPage, Model model) {
 		int listCount = addressService.selectListCount2();
 		//System.out.println(listCount);
@@ -55,7 +55,7 @@ public class AddressController {
 	}
 	
 	
-	@RequestMapping("view.add")
+	@RequestMapping("view.add")//개인 주소록
 	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage,@RequestParam("eno")String eno,Model model) {
 		
 
@@ -64,15 +64,12 @@ public class AddressController {
 		//Employee loginUser=(Employee)model.getAttribute("loginUser");
 		//System.out.println(loginUser.toString());
 		//int listCount = addressService.selectListCount(loginUser.getEmpNo());
+		//System.out.println("로긴유저 문자열"+loginUser.toString());
 		int listCount = addressService.selectListCount(eno);
-	    //System.out.println("로긴유저 문자열"+loginUser.toString());
-	    
-		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
-		//ArrayList<Address> list = addressService.selectList(pi,loginUser.getEmpNo());
-		ArrayList<Address> list = addressService.selectList(pi,eno);
-		
 
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
+		ArrayList<Address> list = addressService.selectList(pi,eno);
+		//ArrayList<Address> list = addressService.selectList(pi,loginUser.getEmpNo());
 	    //ArrayList<Address> list = deptService.selectListCount(pi,loginUser.getDeptCode());
 
 
@@ -93,7 +90,6 @@ public class AddressController {
 	public ModelAndView selectAddress(int ano, ModelAndView mv){
 		
 		Address a = addressService.selectAddress(ano);
-		
 		//System.out.println("address컨트롤러 detail ano  "+ano);
 		mv.addObject("a",a).setViewName("address/addressDetail");
 		return mv;
