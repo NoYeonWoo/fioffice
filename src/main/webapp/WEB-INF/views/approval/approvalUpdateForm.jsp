@@ -51,11 +51,12 @@
 				<div class="col-md-10">
 					<div class="card">
 						<div class="card-header">
-							<h3>결재서류 상세보기</h3>
+							<h3>결재서류 수정하기</h3>
 						</div>
 						<div class="card-body">
-					
-                              
+					  <form id="updateForm" method="post" action="updateApproval.do" enctype="multipart/form-data" >
+                              <input type="hidden" name="approvalNo" value="${ap.approvalNo }">
+                            
 								<div class="form-group">
 									<strong>기안자 : </strong><input type="text" class="form-control"
 										value="${ap.empName} ( ${ap.deptName} ${ap.empPosition}) "
@@ -65,44 +66,90 @@
 									<div class="form-group col-lg-6">
 										<strong>결재자 : </strong><input type="text" class="form-control"
 											value="${firstApprEmp.empName} ${firstApprEmp.deptName} ${firstApprEmp.empPosition}"
-											name="approvalEmp" readonly>
+											name="firstApprEmp" disabled>
 									</div>
 									<div class="form-group col-lg-6">
 										<strong>최종결재자 : </strong><input type="text"
 											class="form-control" value="${lastAppEmp.empName} 대표이사"
-											name="hEmp" readonly>
+											name="lastAppEmp" readonly>
 									</div>
 
 								</div>
 								<div class="form-group">
-									<strong>제목 : </strong><input type="text" class="form-control"
-										name="apTitle" value="${ap.approvalTitle }" autocomplete="off"
-										readonly>
+									<strong>제목 : </strong><input type="text" class="form-control" name="approvalTitle" value="${ap.approvalTitle }" autocomplete="off">
 								</div>
-
-
-
-
+								      <div class="form-group form-check">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck1" name="urgent" value="긴급">
+                       <label class="form-check-label" for="exampleCheck1" style="color:red; " >긴급</label>
+                       </div>
 								<div>
 									<strong>내용 : </strong>
-								</div>
-								<hr>
-								<div class="form-group" style="height: 500px;">
-									${ap.approvalContent }</div>
-                    <div class="form-group">
-                        <strong>첨부파일 : </strong>
-                        <c:if test="${ !empty ap.originalName  }">
-						
-                        	<a href="${ pageContext.servletContext.contextPath }/resources/upload_files/${ap.changeName}" download="${ap.originalName }">${ ap.originalName  }</a>
-                        </c:if>
-                        <c:if test="${ empty ap.originalName  }">
-                        	첨부파일이 없습니다.
-                        </c:if>
+							 <textarea class="form-control" id="summernote" name="approvalContent" maxlength="140" rows="7" autocomplete="off">${ap.approvalContent } </textarea></div>
+        	
+        
+                   <div class="form-group">
+                         <strong>첨부파일 : </strong>
+                         <input type="file" id="upfile" class="form-control-file border" name="reUploadFile">
+                            <c:if test="${ !empty ap.originalName }">
+	                                                               현재 업로드된 파일 : ${ ap.originalName } <br>
+	                            <input type="hidden" name="changeName" value="${ ap.changeName }">
+	                            <input type="hidden" name="originalName" value="${ ap.originalName }">
+                            </c:if>
    	                   </div>
-								<div class="row">
-								              	<button type="button"
-												onclick="location.href='approvalList.do'"
-												class="btn btn-primary" style="float: right">목록으로</button>
+						
+							<div >
+							  	 <button type="button" 	onclick="javascript:history.go(-1);"  class="btn btn-primary" >목록으로</button>
+							  	
+					<div id="buttons" class="row">
+					
+					 <button type="submit" class="btn btn-success" style="margin-left: 80%;" id="update">수정하기</button>&nbsp;
+					 
+					     <form name="delete" action="deleteApproval.do" method="post">
+							<input type="hidden" name="approvalNo" id="approvalNo">
+						
+							<button type="submit" class="btn btn-danger" id="delete">삭제하기</button>
+	    					</form>
+        
+                    </div>
+					</div>		
+			   </form>				
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
+							
 							
 									<div id="buttons" style="margin-left: 80%;">
 						   	  <c:if test="${(sessionScope.loginUser.empNo eq ap.firstApprEmp) && (ap.status ne 'A')  }">
@@ -181,6 +228,19 @@
 				placeholder : '최대 2048자까지 쓸 수 있습니다' //placeholder 설정
 
 			});
+		});
+		
+		
+		$(document).on('click','#delete',function(){
+			if(confirm("정말로 삭제하시겠습니까?\n삭제 후엔 복구가 불가능합니다.")){
+				$("#updateForm").submit();
+			}					
+		});
+		
+		$(document).on('click','#update',function(){
+			if(confirm("정말로 제출하시겠습니까?\n기안 후엔 수정이 불가능합니다.")){
+				$("#delete").submit();
+			}					
 		});
 	</script>
 

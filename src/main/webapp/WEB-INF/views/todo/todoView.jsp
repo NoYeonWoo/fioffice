@@ -160,7 +160,7 @@ p {
 								                        	 <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
 														
-															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
 															<div align="right"> <a  onclick="postFormSubmit(2);"><i class="fas fa-trash-alt"></i></a></div>
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
@@ -219,7 +219,7 @@ p {
 								                        <c:if test="${item.status eq 'N'}">
 								                 
 														<li>
-														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
 														<div align="right"> <a  onclick="postFormSubmits(2);"><i class="fas fa-trash-alt"></i></a></div>
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
@@ -271,7 +271,7 @@ p {
 								                        <c:if test="${item.status eq 'D'}">
 								                          <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
-														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo">
+														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
 																<p class="titled">${item.todoTitle }</p>
 																<p class="subd">기한:${item.todoDoneDate} }</p>
 																<p class="subd">내용:${item.todoContent} }</p>
@@ -284,12 +284,8 @@ p {
 																	<script>
 																	function deletetodo(){
 																		var deletetodo = $("#deletetodo");
-																		
-																	
-																		deletetodo.attr("action", "deleteTodo.do");
-																	
-																		
-																		deletetodo.submit();
+																			deletetodo.attr("action", "deleteTodo.do");
+																		    deletetodo.submit();
 																	}
 																</script>
 
@@ -329,7 +325,7 @@ p {
 										<input type="text" id="todoTitle" class="form-control" name="todoTitle" required>
 										<hr>
 									    <h5>마감날짜</h5>
-									    <input type="date" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
+									    <input type="datetime-local" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
 										<hr>
 									
 										<h5>할일내용 </h5>
@@ -351,6 +347,45 @@ p {
    <!-- todo 모달끝  -->   
    
    
+   		   <!-- todo 상세보기 모달  -->       
+                       <div id="detailTodo" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true" >
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalPopoversLabel">할일상세보기</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<form  id="updateTodo.do" method="post" action="updateTodo.do">
+									<div class="modal-body">
+										<h5>제목을 입력해 주세요</h5>
+										<input type="text" id="todoTitle" class="form-control" name="todoTitle"  required>
+										<hr>
+									    <h5>마감날짜</h5>
+									    <input type="datetime-local" id="todoDoneDate" name="todoDoneDate" class="form-control form-control-user">
+										<hr>
+									
+										<h5>할일내용 </h5>
+										<textarea class="form-control" required name="todoContent" id="todoContent" rows="8" style="resize:none;"></textarea>
+								        
+									    <input type="hidden" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
+										<input type="hidden" id="todoNo" name="todoNo">
+										<hr>
+									</div>
+									
+									<div class="modal-footer">
+									
+										<button type="submit" class="btn  btn-primary" id="addTodo">수정</button>
+																</form>
+										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+			
+								</div>
+							</div>
+							
+							</div>
+   <!-- todo 상세보기 모달   -->   
+   
+   
    
 
   
@@ -364,5 +399,42 @@ p {
 	<!-- [ Main Content ] 메인화면 끝 -->
 
 	<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+	
+	 <script>
+    $(document).ready(function(){
+    	
+    	
+    
+    	$('#detailTodo').on('show.bs.modal', function (event) {
+    
+    		
+		            $.ajax({
+		               type:"POST",  
+		               url:"selectTodo.do", 
+		               async:false,
+		               data:{todoNo:$(event.relatedTarget).data('id')},
+		               success:function(t){
+		            	   
+		            	
+		            	  
+		                   $("#detailTodo #todoTitle").val(t.todoTitle);
+		                   $("#detailTodo #todoDoneDate").val(t.todoDoneDate);
+		                   $("#detailTodo #todoContent").val(t.todoContent);
+		                   $("#detailTodo #todoNo").val(t.todoNo);
+		                   $("#detailTodo #todoTitle").html(t.todoTitle);
+		                   $("#detailTodo #todoDoneDate").html(t.todoDoneDate);
+		                   $("#detailTodo #todoContent").html(t.todoContent);
+		                   
+		               },   
+		               error:function(e){  
+		                   console.log(e.responseText);  
+		               }
+		        		});
+		         });
+    	
+    	  });
+</script>
+	
+	
 </body>
 </html>

@@ -2,6 +2,9 @@ package com.kh.spring.employee.model.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.Job;
@@ -26,6 +29,12 @@ public interface EmployeeService {
 	int insertEmployee(Employee emp);
 
 	int selectEmpCount();
+
+
+
+	Employee loginEncEmployee(BCryptPasswordEncoder bCryptPasswordEncoder, Employee emp)throws Exception;
+
+	int updatePwd(Employee emp);
 
 		
 }
