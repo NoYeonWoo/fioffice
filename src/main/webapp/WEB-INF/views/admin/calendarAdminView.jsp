@@ -202,7 +202,25 @@
 	            className: 'btn-danger',
 	            action: function(e, dt, node, config) {
 	            }
-	        }]
+	        }],
+	        ajax : {
+				url :"selectCalendarList"
+                ,type : "POST"
+                ,dataType : "JSON"
+                },
+            columns : [
+            	 {data: null,
+                		render: function(data, type, row){
+                     	if(type=='display'){
+                         	data = '<td></td>';
+                             }
+                             return data;
+                         }},
+				{data: "calType"},
+                {data: "calSDates"},
+                {data: "calTitle"},
+                {data: "calCate"}
+                ]
 	    });
 		$('input[name=all_selected]').on('click', function(){
 			if ($(this).is( ":checked" )) {

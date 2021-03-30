@@ -164,14 +164,24 @@ label{
                 { orderable: false, targets: [2,3,4] },
                 { searchable: false, targets: [5]}
               ],
-	        dom: '<"float-left"B><"float-right"f>rtip',
+	        dom: '<"float-left"B><"float-right"f>rt<"float-left"i><"float-right"p>',
 	        buttons: [{
 	            text: '거래처추가',
 	            className: 'btn-primary',
 	            action: function(e, dt, node, config) {
-	            	var cliCount ="" +(Number('<c:out value="${cliCount}"/>')+1);
-	            	$("#clientAdd #cliNo").val('C'+(cliCount.padStart(3,'0')));
-	            	$("#clientAdd").modal("show");
+	            	$.ajax({
+	    		        type:"POST",  
+	    		        url:"createClientNo",  
+	    		        async:false,
+	    		        success:function(code){
+	    		        	$("#clientAdd #cliNo").val(code);
+	    		        	$("#clientAdd").modal("show");
+	    		        },   
+	    		        error:function(e){  
+	    		            console.log(e.responseText);  
+	    		        }
+	    			});
+	            	
 	            }
 	        }],
 	        language: {

@@ -13,13 +13,24 @@
 .btn{
 	padding:0.5rem 0.95rem !important;
 }
-
+ .modal-content .table td{
+   line-height: 35px!important;
+   padding:0.5rem !important;
+   }
 label{
 	margin:0rem !important;
 }
 .modal-lg{
 	max-width:1000px !important;
 }
+
+.table td, .table th {
+	border-top: none !important;
+	border-bottom : 1px solid #e2e5e8;
+	padding:1.2rem 0.75rem !important;
+	
+}
+
  </style>
 </head>
 
@@ -60,31 +71,38 @@ label{
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
-                            <table class="table table-bordered table-detail " id="clientDetail"  align="center">
+                            <table class="table table-detail " id="clientDetail"  align="center">
 		                    	<tr>
-		                    		<td style="width:20%">거래처코드</td>
-		                            <td>${client.cliNo}</td>
+		                    		<td style="width:7%">거래처코드</td>
+		                    		<td style="width:3%; text-align:center">:</td>
+		                            <td colspan="4">${client.cliNo}</td>
 		                        </tr><tr>
 		                            <td>거래처명</td>
-		                            <td>${client.cliName}</td>
+		                            <td style="text-align:center">:</td>
+		                            <td colspan="4">${client.cliName}</td>
 		                        </tr><tr>
 		                        	<td>구분</td>
-		                            <td>${client.sortation}</td>
+		                        	<td style="text-align:center">:</td>
+		                            <td colspan="4">${client.sortation}</td>
 		                        </tr><tr>
 		                            <td>사업자등록번호</td>
-		                            <td>${client.corporateNo}</td>
+		                            <td style="text-align:center">:</td>
+		                            <td colspan="4">${client.corporateNo}</td>
 		                        </tr><tr>
-		                             <td>담당자</td>
-		                             <td>${client.master}</td>
-		                        </tr><tr>
-		                            <td>연락처</td>
+		                            <td>담당자</td>
+		                            <td style="text-align:center">:</td>
+		                            <td>${client.master}</td>
+		                            <td style="width:7%">연락처</td>
+		                            <td style="width:3%;text-align:center">:</td>
 		                            <td>${client.phone}</td>
 		                        </tr><tr>
 		                            <td>주소</td>
-		                            <td>${client.address}</td>
+		                            <td style="text-align:center">:</td>
+		                            <td colspan="4">${client.address}</td>
 		                        </tr><tr>
 		                             <td>비고</td>
-		                             <td>${client.comment}</td>
+		                             <td style="text-align:center">:</td>
+		                             <td colspan="4">${client.comment}</td>
 		                        </tr>
 							</table>
                         </div>

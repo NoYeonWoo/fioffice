@@ -11,6 +11,7 @@ import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 @Repository("adminDao")
 public class AdminDao {
@@ -68,6 +69,11 @@ public class AdminDao {
 	public ArrayList<Employee> deptEmpList(SqlSessionTemplate sqlSession, String deptCode) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("adminMapper.deptEmpList", deptCode);
+	}
+
+	public ArrayList<Calendar> selectCalendarList(SqlSessionTemplate sqlSession) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("adminMapper.selectCalendarList");
 	}
 
 	

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import com.kh.spring.productInOut.model.vo.Client;
+import com.kh.spring.productInOut.model.vo.Inout;
 import com.kh.spring.productInOut.model.vo.Product;
 
 public interface ProductInOutService {
@@ -18,11 +19,13 @@ public interface ProductInOutService {
 
 	int deleteClient(String cliNo);
 
-	int selectClientCount();
+	int checkClientNo(String code);
 
 	ArrayList<Product> selectProductList(Map<String, Object> map);
 
 	int insertProduct(Product product);
+	
+	int checkProductNo(String code);
 
 	int selectProductCount(String cliNo);
 
@@ -33,5 +36,19 @@ public interface ProductInOutService {
 	int deleteProduct(String proNo);
 
 	int deleteAllProduct(Map<String, Object> map);
+
+	ArrayList<Inout> selectInoutList(Map<String, Object> map);
+
+	int insertInout(Inout inout);
+
+	int selectInoutCount();
+
+	Inout selectInout(String inoutNo);
+
+	int deleteInout(String inoutNo);
+
+	
+
+	
 
 }

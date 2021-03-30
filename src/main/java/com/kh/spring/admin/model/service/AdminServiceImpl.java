@@ -13,6 +13,7 @@ import com.kh.spring.admin.model.vo.AdminMenu;
 import com.kh.spring.admin.model.vo.Authority;
 import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 @Service("adminService")
 public class AdminServiceImpl implements AdminService {
@@ -76,6 +77,11 @@ public class AdminServiceImpl implements AdminService {
 	public ArrayList<Employee> deptEmpList(String deptCode) {
 		// TODO Auto-generated method stub
 		return adminDao.deptEmpList(sqlSession,deptCode);
+	}
+	@Override
+	public ArrayList<Calendar> selectCalendarList() {
+		// TODO Auto-generated method stub
+		return adminDao.selectCalendarList(sqlSession);
 	}
 	
 

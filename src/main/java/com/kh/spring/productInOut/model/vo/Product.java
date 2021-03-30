@@ -14,12 +14,11 @@ import lombok.ToString;
 public class Product {
 	private String proNo;
 	private String proName;
-	private String preStock;
-	private String inStock;
+	private int inStock;
 	private String inPrice;
-	private String outStock;
+	private int outStock;
 	private String outPrice;
-	private String stock;
+	private int stock;
 	private String comment;
 	private String cliNo;
 	private String cliName;

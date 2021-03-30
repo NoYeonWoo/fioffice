@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.productInOut.model.dao.ProductInOutDao;
 import com.kh.spring.productInOut.model.vo.Client;
+import com.kh.spring.productInOut.model.vo.Inout;
 import com.kh.spring.productInOut.model.vo.Product;
 
 @Service("proInoutService")
@@ -45,14 +46,19 @@ public class ProductInOutServiceImpl implements ProductInOutService {
 		return proInoutDao.deleteClient(sqlSession,cliNo);
 	}
 	@Override
-	public int selectClientCount() {
+	public int checkClientNo(String code) {
 		// TODO Auto-generated method stub
-		return proInoutDao.selectClientCount(sqlSession);
+		return proInoutDao.checkClientNo(sqlSession,code);
 	}
 	@Override
 	public ArrayList<Product> selectProductList(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return proInoutDao.selectProductList(sqlSession, map);
+	}
+	@Override
+	public int checkProductNo(String code) {
+		// TODO Auto-generated method stub
+		return proInoutDao.checkProductNo(sqlSession,code);
 	}
 	@Override
 	public int insertProduct(Product product) {
@@ -83,6 +89,31 @@ public class ProductInOutServiceImpl implements ProductInOutService {
 	public int deleteAllProduct(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return proInoutDao.deleteAllProduct(sqlSession,map);
+	}
+	@Override
+	public ArrayList<Inout> selectInoutList(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectInoutList(sqlSession,map);
+	}
+	@Override
+	public int insertInout(Inout inout) {
+		// TODO Auto-generated method stub
+		return proInoutDao.insertInout(sqlSession,inout);
+	}
+	@Override
+	public int selectInoutCount() {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectInoutCount(sqlSession);
+	}
+	@Override
+	public Inout selectInout(String inoutNo) {
+		// TODO Auto-generated method stub
+		return proInoutDao.selectInout(sqlSession,inoutNo);
+	}
+	@Override
+	public int deleteInout(String inoutNo) {
+		// TODO Auto-generated method stub
+		return proInoutDao.deleteInout(sqlSession,inoutNo);
 	}
 
 }

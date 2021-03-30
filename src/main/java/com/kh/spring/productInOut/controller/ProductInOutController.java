@@ -1,5 +1,6 @@
 package com.kh.spring.productInOut.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.GsonBuilder;
 import com.kh.spring.productInOut.model.service.ProductInOutService;
 import com.kh.spring.productInOut.model.vo.Client;
+import com.kh.spring.productInOut.model.vo.Inout;
 import com.kh.spring.productInOut.model.vo.Product;
 
 @Controller
@@ -25,8 +27,6 @@ public class ProductInOutController {
 	//거래처화면
 	@RequestMapping("cList.pio")
 	public String clientListView(Model model) {
-		int cliCount= proInoutService.selectClientCount();
-		model.addAttribute("cliCount",cliCount);
 		return "productInOut/clientListView";
 	}
 	
@@ -47,6 +47,21 @@ public class ProductInOutController {
 		return "productInOut/ClientDetailView";
 	}
 	
+	//거래처코드만들기
+	@RequestMapping("createClientNo")
+	@ResponseBody
+	public String createClientNo() {
+		int result ,ran;
+		String code=null;
+		do {
+			ran =  ((int)(Math.random()*998)+1);
+			code = 'C'+String.format("%03d", ran);
+			result=proInoutService.checkClientNo(code);
+		}while(result>0);
+
+		return code;
+	}	
+		
 	//거래처 추가
 	@RequestMapping("insertClient")
 	public String insertClient(Client client, String post, String address1, String address2, Model model) {
@@ -123,13 +138,20 @@ public class ProductInOutController {
 		return new GsonBuilder().create().toJson(result);
 	}
 	
-	//거래처별 상품개수
-	@RequestMapping(value="selectProductCount", produces="appliction/json; charset=UTF-8")
+	//상품코드만들기
+	@RequestMapping("createProductNo")
 	@ResponseBody
-	public String selectProductCount(String cliNo) {
+	public String createProductNo(String cliNo) {
 		System.out.println(cliNo);
-		int result=proInoutService.selectProductCount(cliNo);
-		return String.valueOf(result);
+		cliNo = cliNo.substring(1); 
+		int result,ran;
+		String code=null;
+		do{
+			ran =  ((int)(Math.random()*9998)+1);
+			code = 'P'+cliNo+String.format("%04d", ran);
+			result=proInoutService.checkProductNo(code);
+		}while(result>0);
+		return code;
 	}	
 		
 	//상품 상세정보
@@ -180,7 +202,7 @@ public class ProductInOutController {
 		if(result > 0) {
 			return "redirect:pList.pio";
 		}else {
-			model.addAttribute("msg","탈퇴를 실패하였습니다.");
+			model.addAttribute("msg","상품삭제를 실패하였습니다.");
 			return "forward:detailClient";
 		}
 			
@@ -198,9 +220,96 @@ public class ProductInOutController {
 	}
 	
 	
-	
+	//--------------------------------------------------------입출고--------------------------------------------------------//
+	//입출고 화면
 	@RequestMapping("ioList.pio")
-	public String inoutListView() {
+	public String inoutListView(Model model) {
+		ArrayList<Client> cList = proInoutService.selectClientList();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("cliNo", null);
+		ArrayList<Product> pList =  proInoutService.selectProductList(map);
+		System.out.println(pList);
+		model.addAttribute("cList",cList);
+		model.addAttribute("pList",pList);
 		return "productInOut/inoutListView";
 	}
+	
+	//입출고리스트
+	@RequestMapping(value="selectInoutList", produces="appliction/json; charset=UTF-8")
+	@ResponseBody
+	public String selectInoutList(String proNo,String cliNo) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if(proNo.equals("")) proNo=null;
+		if(cliNo.equals(""))cliNo=null;
+		map.put("cliNo", cliNo);
+		map.put("proNo", proNo);
+		ArrayList<Inout> iList = proInoutService.selectInoutList(map);
+		for(Inout i : iList) {
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			i.setInoutDateS(format.format(i.getInoutDate()));
+		}
+		result.put("data",iList);
+		System.out.println(result);
+		return new GsonBuilder().create().toJson(result);
+	}
+	
+	//입출고 추가
+	@RequestMapping("insertInout")
+	public String insertInout(String incliNo,Inout inout, Model model) {
+		System.out.println(inout.toString());
+		inout.setInoutNo(String.valueOf(proInoutService.selectInoutCount()+1));
+		//if(inout.getCliNo()=="")inout.setCliNo(null);
+		if(inout.getComment().equals(""))inout.setComment(null);
+		Product product = proInoutService.selectProduct(inout.getProNo());
+		if(inout.getSortation().equals("입고")) {
+			product.setInStock(product.getInStock()+inout.getQuantity());
+			product.setStock(product.getStock()+inout.getQuantity());
+		}else {
+			product.setOutStock(product.getOutStock()+inout.getQuantity());
+			product.setStock(product.getStock()-inout.getQuantity());
+		}
+		int result1 = proInoutService.insertInout(inout);
+		if(result1 > 0) {
+			int result2 = proInoutService.updateProduct(product);
+			if(result2 > 0) {
+				return "redirect:ioList.pio";
+			}else {
+				model.addAttribute("msg","상품수정을 실패하였습니다.");
+				return "forward:ioList.pio";
+			}
+			
+		}else {
+			model.addAttribute("msg","입출고추가를 실패하였습니다.");
+			return "forward:ioList.pio";
+		}
+				
+	}
+	//상품 전체삭제
+	@RequestMapping("deleteInout")
+	public String deleteInout(String proNo,String inoutNo, Model model) {
+		Inout io = proInoutService.selectInout(inoutNo);
+		Product p = proInoutService.selectProduct(proNo);
+		if(io.getSortation().equals("입고")) {
+			if(p.getStock()-io.getQuantity()<0) {
+				model.addAttribute("msg","재고를 확인해주세요.");
+				return "forward:ioList.pio";
+			}else {
+				p.setStock(p.getStock()-io.getQuantity());
+				p.setInStock(p.getInStock()-io.getQuantity());
+			}
+		}else {
+			p.setStock(p.getStock()+io.getQuantity());
+			p.setOutStock(p.getOutStock()-io.getQuantity());
+		}
+			int pUpdate = proInoutService.updateProduct(p);
+			int ioUpdate = proInoutService.deleteInout(inoutNo);
+			if(pUpdate<0||ioUpdate<0) {
+				model.addAttribute("msg","취소를 실패하였습니다.");
+				return "forward:ioList.pio";
+			}
+			model.addAttribute("msg","취소를 성공하였습니다.");
+			return "forward:ioList.pio";
+	}
+	
 }
