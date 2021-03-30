@@ -71,7 +71,7 @@
                            </thead>	
 								<tbody>
 									<c:forEach items="${ alist }" var="al">
-										<c:if test="${al.status eq 'Y'}">
+										<c:if test="${al.status eq 'Y' || al.status eq 'A'}">
 
 											<tr>
 												<td>${al.approvalNo }</td>
@@ -93,7 +93,7 @@
 							<caption>● 결재 진행 > 반려 문서</caption>
 							<br>
 							<br>
-							<table class="table table-bordered" id="boardList"
+							<table class="table table-bordered" id="boardList_update"
 								style="text-align: center; width: 80%;">
 			                 <thead>					
 								<tr>
@@ -102,6 +102,7 @@
 
 									<th style="width: 10%;">긴급</th>
 									<th>제목</th>
+									<th>상태</th>
 
 								</tr>
                               </thead>
@@ -115,7 +116,8 @@
 
 												<td>${al.urgent }</td>
 												<td>${al.approvalTitle }</td>
-
+                                                <td><i class="fas fa-clipboard-list" /><a href=""data-toggle="modal" data-id="'+row['approvalNo']+'" data-target="#detailEmp">수정하기</a></td>
+                                               
 											</tr>
 
 										</c:if>
@@ -142,7 +144,7 @@
 								</tr>
 							</thead>		
 			                <tbody>
-			                     <c:if test="${ fn:length(todolist)>0 && fn:length(todolist)<7}">
+			                    
 									<c:forEach items="${ alist }" var="al">
 										<c:if test="${al.status eq 'C' }">
 
@@ -157,7 +159,7 @@
 
 										</c:if>
 									</c:forEach>
-                               </c:if>
+                            
 
 								</tbody>
 							</table>
@@ -300,7 +302,19 @@
 					});
 				</script>
 
+			<script>
+					$(function() {
+						$("#boardList_update tbody tr")
+								.click(
+										function() {
+											location.href = "approvalUpdateForm.do?ano="
+													+ $(this).children().eq(0)
+															.text();
+										});
+					});
+				</script>
 
+	
 
 
 			</div>

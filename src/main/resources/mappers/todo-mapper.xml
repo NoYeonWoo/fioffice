@@ -68,4 +68,22 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
   WHERE TODO_NO=#{todoNo}
 
 </update>
+
+<select id="selectTodoDetail"  resultMap="todoResultMap" parameterType="string">	
+ SELECT *
+ FROM TODO
+ WHERE TODO_NO=#{todoNo}
+
+</select>	
+
+<update id="updateTodo"  parameterType="Todo">
+	UPDATE 
+	TODO SET
+    TODO_TITLE=#{todoTitle},
+    TODO_DONEDATE=#{todoDoneDate},
+    TODO_CONTENT=#{todoContent}
+	WHERE TODO_NO=#{todoNo}
+
+
+</update>
 </mapper>

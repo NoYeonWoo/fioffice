@@ -12,6 +12,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
@@ -20,6 +22,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -27,11 +30,14 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 
 import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.todo.model.vo.Todo;
 import com.kh.spring.work.model.service.WorkService;
 import com.kh.spring.work.model.vo.Work;
 
@@ -44,22 +50,23 @@ public class WorkController {
 	private WorkService workService;
 
 	@RequestMapping("view.work")
-	//viewwork
-	public String selectList(/*@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model*/) {
+	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 
 			
+			Employee emp= (Employee) session.getAttribute("loginUser");
 			
-			/*
+			
+			
 			int listCount = workService.selectListCount();
-			System.out.println(listCount);
+			//System.out.println(listCount);
 			
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 			
-			ArrayList<Work> list = workService.selectListCount(pi);
+			ArrayList<Work> list = workService.selectListCount(pi,emp);
 			
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);
-	*/
+	
 		
 		return "work/workTest";
 	}
@@ -74,9 +81,15 @@ public class WorkController {
 		
 		return "work/workMain";
 	}
+	
+	
 	@RequestMapping("view.workMain2")
-	public String viewWorkMain2() {
+	public String viewWorkMain2(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(emp);
+		System.out.println("emp 임시"+emp);
+		model.addAttribute("workUser",workUser);
 		return "work/workMain2";
 	}
 	
@@ -87,7 +100,7 @@ public class WorkController {
 	
 	
 	@RequestMapping(value="start.work",method=RequestMethod.POST)//원래 eno timeNow // Work work //@RequestParam("empNo") String empNo
-	public String workStart(Work Times,@RequestParam("empNo") String empNo, HttpServletRequest request, Model model,HttpSession session) {
+	public String workStart(Work Times,@RequestParam("empNo") String empNo, HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
 		
 		
 		//System.out.println(timeNow);//2021-03-27 03:41:43
@@ -141,19 +154,15 @@ public class WorkController {
 		/////////////////////////////////////////////
 		
 		//System.out.println("empNo"+.getEmpNo());//951220103
-		System.out.println("empNo 컨"+empNo);
-		//PreparedStatement pstmt = null;
-		//System.out.println("w 출력 "+empNo);
+		//System.out.println("empNo 컨"+empNo);
 		Work preWork = workService.selectTimes(empNo);
-		System.out.println("preWork :: "+preWork.toString());
-		//System.out.println("list :: "+list);
-		
-		//System.out.println("시간들"+Times);
-		//session.setAttribute("Times", Times);
+		//System.out.println("preWork :: "+preWork.toString());
+
 		
 		Times.setWorkStack(preWork.getWorkStack());
 		Times.setWorkExceed(preWork.getWorkExceed());
 		Times.setWorkRemain(preWork.getWorkRemain());
+		////
 		
 		System.out.println("Times들 :: "+Times.toString());
 		
@@ -162,13 +171,18 @@ public class WorkController {
 		
 		int result= workService.insertWork(Times);
 		
+		int result2 =workService.insertwork2(empNo);//시작(분)넣기
+		
 		//model.addAttribute("loginUser", loginUser);
 		///////////////////////////////
 		
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(emp);
+		model.addAttribute("workUser",workUser);
 		
 		//int result = workService.insertWork(work);
 		
-		if (result>0) {
+		if (result2>0) {
 			return "work/workMain2";
 		}else {
 			return "location.reload";
@@ -176,8 +190,8 @@ public class WorkController {
 		
 	}
 	
-	@RequestMapping("end.work")//@RequestParam("empNo") String empNo
-	public String workEnd(@RequestParam("empNo") String empNo ,String timeNow, HttpServletRequest request) {
+	@RequestMapping("end.work1")//@RequestParam("empNo") String empNo Work w
+	public String workEnd(@ModelAttribute Work w,@RequestParam("empNo") String empNo, HttpServletRequest request, HttpServletResponse response, Model model,HttpSession session) {
 		
 		//SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		//Date timeNow = transFormat.parse(time);
@@ -187,18 +201,102 @@ public class WorkController {
 		//Work work = workService.selectWork(empNo);
 
 		
-		int result = workService.updateWork1(empNo);
-		int result2 = workService.updateWork2(empNo);
-		int result3 = workService.updateWork3(empNo);
+		//int result = workService.updateWork1(empNo);
+		//int result2 = workService.updateWork2(empNo);
+		//int result3 = workService.updateWork3(empNo);
 		
-		if (result>0) {
-			return "work/workMain2";
+		
+		//w.setWorkStack(preWork.getWorkStack());
+		//w.setWorkExceed(preWork.getWorkExceed());
+		//w.setWorkRemain(preWork.getWorkRemain());
+
+		//System.out.println("preWork22 :: "+preWork.toString());
+		
+
+
+		
+		
+		
+		
+		
+		System.out.println("WWWW1 :: "+w.toString());
+		
+		
+		int result = workService.updateWork1(w);
+		System.out.println("WWWW2 :: "+w.toString());
+		int result2 = workService.updateWork2(w);
+		System.out.println("WWWW3 :: "+w.toString());
+		int result3 = workService.updateWork3(w);
+		
+		
+		
+		
+		Work preWork = workService.selectTimes(empNo);
+		w.setWorkStack(preWork.getWorkStack());
+		w.setWorkExceed(preWork.getWorkExceed());
+		w.setWorkRemain(preWork.getWorkRemain());
+		w.setWorkSum(preWork.getWorkSum());
+		w.setWorkRemainTotal(preWork.getWorkRemainTotal());//?? 왜안되
+		w.setWorkDay(preWork.getWorkDay());//이건왜됨
+		w.setWorkDayReset(preWork.getWorkDayReset());
+		
+		//w.setWorkRemain(preWork.getWorkRemainTotal());
+		
+		System.out.println("WWWW4 :: "+w.toString());
+		int result4 = workService.updateWork4(w);
+		System.out.println("WWWWE :: "+w.toString());
+
+		
+		int result5 =workService.updateMin(empNo);//시작(분)넣기
+		
+		
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(emp);
+		model.addAttribute("workUser",workUser);
+		
+		if (result4>0) {//4
+			return "work/workMain2";//"work/workMain2"
 		}else {
-			return "location.reload";
+			return "work/workMain2";
 		}
 		
 	}
 	
+	/*
+	@RequestMapping(value="workmainList.work",produces ="application/json;charset=UTF-8")
+	public void MainlistTodo(String empNo,Model m, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		 
+		ArrayList<Work> todolist =workService.selectMainTodo(emp);
+		
+		System.out.println("todolist main::"+todolist);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(todolist,response.getWriter());//
+		
+	}
+	*/
 	
+	/*
+	@RequestMapping("end.work2")//@RequestParam("empNo") String empNo Work w
+	public String workEnd2(@ModelAttribute Work w,@RequestParam("empNo") String empNo, HttpServletRequest request) {
+		
+		
+		Work preWork = workService.selectTimes(empNo);
+		w.setWorkStack(preWork.getWorkStack());
+		w.setWorkExceed(preWork.getWorkExceed());
+		w.setWorkRemain(preWork.getWorkRemain());
+		w.setWorkSum(preWork.getWorkSum());
+		w.setWorkRemainTotal(preWork.getWorkRemainTotal());//?? 왜안되
+		w.setWorkDay(preWork.getWorkDay());//이건왜됨
+		
+		//w.setWorkRemain(preWork.getWorkRemainTotal());
+		System.out.println("WWWW4 :: "+w.toString());
+		int result4 = workService.updateWork4(w);
+		System.out.println("WWWWE :: "+w.toString());
+		
+		return "work/workMain2";
+	
+	}
+	*/
 	////////////////시작
 }

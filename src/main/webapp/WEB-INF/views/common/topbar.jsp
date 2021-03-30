@@ -37,11 +37,7 @@
 
 							<div class="dropdown drp-user">
 							
-								<!-- 메일 외부로
-								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-								<i class="feather icon-mail"></i>
-								</a>
-								-->
+							
 								<c:if test="${ !empty sessionScope.loginUser }">
 								<a >  ${sessionScope.loginUser.empName}님 환영합니다</a>	</c:if>
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown">

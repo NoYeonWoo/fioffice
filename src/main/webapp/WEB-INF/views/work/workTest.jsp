@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,7 +83,7 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>주소록</h5>
+                        <h5>출근기록</h5>
                         <span class="d-block m-t-5">
                         <div class="card-body">
                         <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="검색">
@@ -107,19 +109,43 @@
                                         <th>주잔여</th>
                                         <th>현재날짜</th>
                                         <th>지각유무</th>
+                                        <th>요일</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 										<c:forEach items="${ list }" var="w">
 											<tr>
 												<td>${ w.empNo }</td>
+												
+												<td><fmt:formatDate value="${w.workStart}" pattern="yyyy-MM-dd"/></td>
+												<td><fmt:formatDate value="${w.workEnd}" pattern="yyyy-MM-dd"/></td>
+												<!--
 												<td>${ w.workStart }</td>
 												<td>${ w.workEnd }</td>
+												-->
+												
+												<td>
+												<fmt:parseNumber integerOnly="true" value="${(w.workStack/60)}"/>시
+												<fmt:parseNumber integerOnly="true" value="${(w.workStack/60)%60}"/>분
+												</td>
+												<td>
+												<fmt:parseNumber integerOnly="true" value="${(w.workExceed/60)}"/>시
+												<fmt:parseNumber integerOnly="true" value="${(w.workExceed/60)%60}"/>분
+												</td>
+												<td>
+												<fmt:parseNumber integerOnly="true" value="${(w.workRemain/60)}"/>시
+												<fmt:parseNumber integerOnly="true" value="${(w.workRemain/60)%60}"/>분
+												</td>
+												
+												
+												<!--
 												<td>${ w.workStack }</td>
 												<td>${ w.workExceed }</td>
 												<td>${ w.workRemain }</td>
+												-->
 												<td>${ w.workDate }</td>
 												<td>${ w.status }</td>
+												<td>${ w.workDay }</td>
 											</tr>
 										</c:forEach>
 									</tbody>
@@ -176,6 +202,8 @@
 				<br clear="both">
 				<br> <br>
 				<br>
+				
+				
 			</div>
 			<br>
 			<br>

@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.spring.approval.model.service.ApprovalService;
 import com.kh.spring.approval.model.vo.Approval;
+
 import com.kh.spring.common.exception.CommException;
 //import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
@@ -68,7 +69,7 @@ public class ApprovalController {
 		System.out.println("대표님 나와라::" + lApprEmp);
 
 		if (emp.getEmpNo().equals(fApprEmp.getEmpNo()) || fApprEmp.getEmpNo().equals("920223100")) {
-			model.addAttribute("firstApprEmp", lApprEmp);
+			model.addAttribute("firstApprEmp", null);
 		} else {
 			model.addAttribute("firstApprEmp", fApprEmp);
 		}
@@ -79,9 +80,9 @@ public class ApprovalController {
 	}
 
 	@RequestMapping("insertApproval.do")
-	public String approvalInsert(Approval ap, HttpServletRequest request, Model model,
+	public String approvalInsert(Approval ap, HttpServletRequest request, Model model, HttpSession session,
 			@RequestParam(name = "uploadFile", required = false) MultipartFile file) {
-
+		Employee emp = (Employee) session.getAttribute("loginUser");
 		if (!file.getOriginalFilename().equals("")) {
 			String changeName = saveFile(file, request);
 
@@ -90,11 +91,23 @@ public class ApprovalController {
 				ap.setChangeName(changeName);
 			}
 		}
-
+		
+		if(ap.getFirstApprEmp().equals("")) {
+			ap.setStatus("A");
+		}
+		if(!ap.getFirstApprEmp().equals("")) {
+			ap.setStatus("Y");
+		}
+		  System.out.println(ap.getFirstApprEmp().equals(""));
+		  System.out.println(ap.getFirstApprEmp().equals(null));
+		  System.out.println(ap.getFirstApprEmp()==(null));
+		  System.out.println(ap.getFirstApprEmp()==(""));
+        System.out.println("첫번째 결재자"+ap.getFirstApprEmp());
+        System.out.println("status: "+ap.getStatus());
 		int result = approvalService.insertApproval(ap);
-
+	
 		if (result > 0) {
-
+            System.out.println("ap.getStatus"+ap.getStatus());
 			return "redirect:approvalList.do";
 		} else {
 
@@ -140,7 +153,7 @@ public class ApprovalController {
 //	}
 
 	@RequestMapping("approvalDetailView.do")
-	public ModelAndView selectBoard(int ano, ModelAndView mv, String firstapp, HttpSession session) {
+	public ModelAndView selectApproval(int ano, ModelAndView mv, String firstapp, HttpSession session) {
 
 		Employee emp = (Employee) session.getAttribute("loginUser");
 
@@ -192,6 +205,101 @@ public class ApprovalController {
 		return "redirect:approvalList.do";
 		
 	
+	}
+	
+	@RequestMapping("approvalUpdateForm.do")
+	   public ModelAndView updateForm(int ano , ModelAndView mv ,HttpSession session,String firstapp) {
+		
+		Employee emp = (Employee) session.getAttribute("loginUser");
+
+		Employee lApprEmp = approvalService.selectlApprEmp();// 마지막 승인자 불러오기
+		
+      
+		Approval ap = approvalService.selectdetailapproval(ano);// 결재상세페이지 불러오기
+     
+		firstapp = ap.getFirstApprEmp(); // 결재 문서의 첫번째결재자의 empNo 비교 후 그사람의 정보 끌어오기 이유는: deptName과 jobPostion이 필요함
+		Employee firstperson = approvalService.selectfApprEmpDetail(firstapp);
+        System.out.println(firstapp);
+        System.out.println(firstperson);
+		System.out.println("상세보기 " + ap);
+		
+
+		mv.addObject("firstApprEmp", firstperson);
+		mv.addObject("lastAppEmp", lApprEmp);
+
+		
+		
+		mv.addObject("ap",approvalService.selectdetailapproval(ano)).setViewName("approval/approvalUpdateForm");
+		 System.out.println("firstapp"+firstapp);
+	        System.out.println("firstperson"+firstperson);
+		   
+		return mv;
+		   
+	   }
+	
+	
+    @RequestMapping("updateApproval.do")
+	public ModelAndView updateApproval(Approval ap,ModelAndView mv, HttpServletRequest request,HttpSession session,String firstapp,
+			                         @RequestParam(value="reUploadFile", required = false)MultipartFile file) {
+    	Employee emp = (Employee) session.getAttribute("loginUser");
+
+		Employee lApprEmp = approvalService.selectlApprEmp();// 마지막 승인자 불러오기
+		firstapp = ap.getFirstApprEmp(); // 결재 문서의 첫번째결재자의 empNo 비교 후 그사람의 정보 끌어오기 이유는: deptName과 jobPostion이 필요함
+		Employee firstperson = approvalService.selectfApprEmpDetail(firstapp);
+		
+
+		if(!file.getOriginalFilename().equals("")) {//새로넘어온 파일이 있는경우
+			
+			if(ap.getChangeName() !=null) {//새로 넘어온 파일이 잇는데 기존에 파일도 있는경우 -> 서버에 업로드 되어있는 파일을 삭제 함 
+				deleteFile(ap.getChangeName(),request);
+			}
+			String changeName=saveFile(file,request);//새로 넘어온 파일을 서버에 업로드 함  
+			ap.setOriginalName(file.getOriginalFilename());
+			ap.setChangeName(changeName);
+		}
+		 System.out.println("firstapp 업뎃후"+firstapp);
+	        System.out.println("firstperson 업뎃후"+firstperson);
+	
+			int result=approvalService.updateApproval(ap);
+
+			  
+		if(result>0) {
+		     System.out.println("ap.getStatus"+ap.getStatus());
+		     System.out.println("업데이트문서1"+ap);
+		 
+			mv.addObject("ano",ap.getApprovalNo()).setViewName("redirect:approvalList.do");
+			 System.out.println("업데이트문서2"+ap);
+		}
+		
+
+		return mv;
+								
+
+	}
+    
+	@RequestMapping("deleteApproval.do")
+	public String deleteApproval(int approvalNo, String fileName, HttpServletRequest request, Model model) {
+
+		int result = approvalService.deleteApproval(approvalNo);
+
+		if (result > 0) {
+			if (!fileName.equals("")) {
+				deleteFile(fileName, request);
+			}
+			return "redirect:approvalList.do";
+		}else {
+			throw new CommException("게시물 삭제에 실패하였습니다");
+		}
+
+	}
+
+	private void deleteFile(String fileName, HttpServletRequest request) {
+		String resources = request.getSession().getServletContext().getRealPath("resources");
+		String savePath = resources + "\\upload_files\\";		
+		
+		File deleteFile=new File(savePath+fileName);
+		deleteFile.delete();
+		
 	}
 	
 }

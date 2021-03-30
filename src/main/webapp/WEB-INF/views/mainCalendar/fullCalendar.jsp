@@ -111,10 +111,20 @@
 	padding: 5px 10px 5px 10px;
     margin-left: -1px;
     height: 100%;
-    background-color: #C4A0A1;
+    background-color: #FAD451;
     color: #fff;
 	}
 	
+	span.holical {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	padding: 5px 10px 5px 10px;
+    margin-left: -1px;
+    height: 100%;
+    background-color: #F8B2A7;
+    color: #fff;
+	}
 
 	
 	
@@ -197,6 +207,11 @@
 								<span class="allcal">사내 일정</span>
 							</p>
 						</li>
+						<li>
+							<p class="title">
+								<span class="holical">사내 휴일</span>
+							</p>
+						</li>
 					</ul>
 					
 						
@@ -217,7 +232,6 @@
 						</div>
 						</div>
 						
-						
 	<!-- 일정 등록 모달 -->
 	<div class="modal fade" id="addCalendar">  
 	        <div class="modal-dialog modal-lg modal-dialog-centered">
@@ -232,7 +246,7 @@
 					<h6>일정 카테고리 선택</h6>
 					<div><select name="calCate" id="calCate" class="form-control form-control-sm" style="width:20%;"  >
 							<option value="">분류</option>
-		                     <option value="10" style="color : black;">내 일정</option>
+		                     <option value="10" style="color : black;">나의 일정</option>
 		                     <option value="20" style="color : black;">부서 일정</option>
                   	</select></div>
                   	<br>
@@ -247,9 +261,9 @@
 					</div>
 					<br>
 						<h6>일정</h6>
-	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle"> <br>
+	                    <input type="text" class="form-control mr-sm-2" id="calTitle" name="calTitle" placeholder="일정명을 입력해주세요."> <br>
 	                    <h6>일정 코멘트</h6>
-	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent">
+	                    <input type="text" class="form-control mr-sm-2" id="calContent" name="calContent" placeholder="일정 코멘트를 입력해주세요.">
 	                    
 	                     <input type="hidden" id="empNo" name="empNo" value="${loginUser.empNo}" class="form-control form-control-user">
 						<div class="modal-footer">
@@ -306,7 +320,7 @@
 							
 							 <form name="deleteCalendar" action="cdelete.ca" method="post">
 							<input type="hidden" name="calNo" id="calNo">
-							<button type="submit" class="btn btn-secondary">삭제하기</button>
+							<button type="submit" class="btn btn-danger">삭제</button>
 	    					</form>
 						
 	                	</div>
@@ -360,7 +374,7 @@
 		/* 일정 받아옴 */
 		events : [ 
 			<c:forEach items="${list}" var="ca">
-			<c:if test="${ca.empNo eq loginUser.empNo }">
+			<c:if test="${ca.empNo eq loginUser.empNo or ca.calCate eq 30}">
 			{
 			id : '${ca.calNo}',
 			title : '${ca.calTitle }',
@@ -396,6 +410,9 @@
 
 		 //일정 클릭시 확인 및 수정이벤트 
 		  eventClick: function (event, jsEvent, view) {
+			  
+			 
+			  
 			  var cano = event.id;
 			  console.log(cano);
 

@@ -64,7 +64,7 @@
 								<div class="row">
 									<div class="form-group col-lg-6">
 										<strong>결재자 : </strong><input type="text" class="form-control"
-											value="${firstApprEmp.empName}(${firstApprEmp.deptName} ${firstApprEmp.empPosition})"
+											value="${firstApprEmp.empName} ${firstApprEmp.deptName} ${firstApprEmp.empPosition}"
 											name="approvalEmp" readonly>
 									</div>
 									<div class="form-group col-lg-6">
@@ -105,7 +105,7 @@
 												class="btn btn-primary" style="float: right">목록으로</button>
 							
 									<div id="buttons" style="margin-left: 80%;">
-						   	  <c:if test="${sessionScope.loginUser.empNo eq ap.firstApprEmp  }">
+						   	  <c:if test="${(sessionScope.loginUser.empNo eq ap.firstApprEmp) && (ap.status ne 'A')  }">
 										<button type="button"
 											onclick="postFormSubmit(1)"
 											class="btn btn-success">승인1</button>
