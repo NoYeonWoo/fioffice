@@ -46,7 +46,7 @@
                    <div class="tab-content" id="nav-tabContent">
 
 					
-<!-- 비밀번호변경 시작 -->
+<!-- 비밀번호변경 시작 (사번으로 비교)-->
       <c:if test="${loginUser.empPwd eq loginUser.empNo }">
 					<div class="tab-pane fade show active" id="list-updatePwd" role="tabpanel" 	aria-labelledby="list-updatePwd-list" style="margin-left:10%; margin-bottom:20%; " >
 
@@ -80,7 +80,7 @@
 </c:if>
 <!-- 비밀번호변경 끝 -->
 
-<!-- 인코딩 비번변경 어쩔수 없이 하드코딩...ㅜㅜ -->
+<!-- 인코딩 비번변경 (암호화후 비교)  -->
     <c:if test="${loginUser.empPwd ne loginUser.empNo }">
 					<div class="tab-pane fade show active" id="list-updatePwd" role="tabpanel" 	aria-labelledby="list-profile-list" style="margin-left:10%; margin-bottom:20%; " >
 
@@ -113,8 +113,17 @@
 							</div>
 							
 	</c:if>						
-<!-- 인코딩 비번변경 끝어쩔수 없이 하드코딩...ㅜㅜ - -->
+<!-- 인코딩 비번변경끝 - -->
+<script type="text/javascript">
+
+
+
+
+
+</script>						
 						
+						
+<!-- 마이페이지시작  -->						
 	<div class="card-body tab-pane fade " id="list-updateForm"
 						role="tabpanel" aria-labelledby="list-home-list">
    

@@ -55,7 +55,19 @@
 				  	<form action="insertApproval.do" method="post" enctype="Multipart/form-data" id="form">
 					  
 					   <div class="form-group">
-						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empName}(${loginUser.empPosition} )"  readonly style="">
+
+					   <strong>결재종류 : </strong>
+					   <select name="formNo" id="formNo" class="form-control form-control-sm" style="width:20%;"  >
+							<option value="">분류</option>
+		                     <option value="1" style="color : black;">휴가계</option>
+		                     <option value="2" style="color : black;">연장근무신청</option>
+		                     <option value="3" style="color : black;">출장품의서</option>
+		                    <option value="3" style="color : black;">채용요청서</option>
+		                     <option value="4" style="color : black;">지출결의서</option>
+                  	      </select>
+					   <br>
+					   
+						   <strong>기안자 : </strong><input type="text" class="form-control" value="${loginUser.empName}(${loginUser.empPosition} ${loginUser.deptName} )"  readonly style="">
 						   <input type="hidden" class="form-control" value="${loginUser.empNo}"  name="empNo"  id="empNo" >
 					   </div>
 					   <div class="row">
@@ -73,7 +85,7 @@
 					
 					    </div>
 					  <div class="form-group">
-					    	<input type="text" class="form-control" name="approvalTitle" placeholder="제목을 입력해주세요" autocomplete="off" required>
+					    	<input type="text" class="form-control" name="approvalTitle" id="approvalTitle"placeholder="제목을 입력해주세요" autocomplete="off" required>
 					   	</div>
 					   
 				
@@ -95,9 +107,9 @@
                   
 			          
 			          <br><br>	  
-					  <div class="row">
+					  <div class="row"  style= "float:right;">
 						  <div id="buttons">
-							  <button type="submit" id="submitBtn" class="btn btn-primary">전송</button>
+							  <button type="submit" id="submitBtn" class="btn btn-primary" >전송</button>
 							  <button type="button" onclick="location.href='approvalList.do'" class="btn btn-danger">취소</button>
 						  </div>
 					  </div>
@@ -131,10 +143,43 @@
     	});
     });
     
+
+	
 	$(document).on('click','#submitBtn',function(){
+		
+		var formNo = $("#formNo").val();
+		var approvalTitle = $("#approvalTitle").val();
+		var summernote = $("#summernote").val();
+		
+		
+		if (formNo == "") {
+			alert("결재종류를 선택해 주세요!");
+			$("#formNo").focus();
+			return false;
+		}
+		if (approvalTitle == "") {
+			alert("제목을 입력해주세요!");
+			$("#approvalTitle").focus();
+			$("#approvalTitle").val("");
+			
+			return false;
+		}
+
+		if (summernote == "") {
+			alert("내용을 입력해 주세요!");
+			$("#summernote").focus();
+			$("#summernote").val("");
+			return false;
+		}
+	
 		if(confirm("정말로 제출하시겠습니까?\n기안 후엔 수정이 불가능합니다.")){
-			$("#form").submit();
-		}					
+	
+		document.form.method = "post";
+		document.form.action = "insertApproval.do";
+		document.form.submit();
+		}else{
+			return false;
+		}
 	});
     </script>
     
