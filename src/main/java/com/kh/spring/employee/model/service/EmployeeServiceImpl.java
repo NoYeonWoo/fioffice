@@ -115,4 +115,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 		return employeeDao.updatePwd(sqlSession,emp);
 	}
 
+
+	@Override
+	public int resetPwd(Employee emp) {
+		// TODO Auto-generated method stub
+		return employeeDao.resetPwd(sqlSession,emp);
+	}
+
 }

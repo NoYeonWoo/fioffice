@@ -23,6 +23,18 @@ VALUES(SEQ_TNO.NEXTVAL,#{todoTitle},SYSDATE,#{todoContent},#{todoDoneDate},DEFAU
  SELECT *
  FROM TODO
  WHERE EMP_NO=#{empNo}
+ ORDER BY TODO_DONEDATE ASC
+
+</select>	
+
+
+
+<select id="selectMainTodo"  resultMap="todoResultMap">	
+ SELECT *
+ FROM TODO
+ WHERE EMP_NO=#{empNo}
+ AND STATUS='T'
+ ORDER BY TODO_DONEDATE ASC
 
 </select>	
 

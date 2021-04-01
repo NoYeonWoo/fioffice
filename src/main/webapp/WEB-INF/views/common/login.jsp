@@ -48,7 +48,8 @@
 						</div>
 						
 						<button type="submit" class="btn btn-primary btn-block mb-4" id="loginbtn" class="logbtn" >Sign up</button>
-						<p class="mb-2">비밀번호를 잊으셨나요? <a href="auth-signin.html" class="f-w-400">비밀번호찾기</a></p>
+						<p class="mb-2">초기 비밀번호는 사원번호입니다 </p>
+						<p class="mb-2">비밀번호를 잊으셨나요? <a href="auth-signin.html" class="f-w-400" data-toggle="modal" data-target="#resetpw">비밀번호초기화</a></p>
 					</div>
 				</form>
 				</div>
@@ -92,11 +93,59 @@
 
 
 
+   
+   		   <!-- todo 상세보기 모달  -->       
+                       <div id="resetpw" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" aria-hidden="true" >
+							<div class="modal-dialog" role="document"  data-target=".bd-example-modal-sm">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalPopoversLabel">비밀번호 초기화</h5>
+										<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									</div>
+									<form  id="resetpw" method="post" action="resetpw.do">
+									<div class="modal-body">
+								
+									    <strong>사번</strong>
+									    <input type="text" id="empNo" name="empNo" class="form-control form-control-user" style="width:70%" required>
+								
+									     <hr>
+										<h5>이메일 </h5>
+										<input type="email" class="form-control" name="email" id="email" style="width:70%" required>
+					
+									</div>
+									
+									<div class="modal-footer">
+									
+										<button type="submit" class="btn  btn-primary" id="updateBtn">초기화</button>
+																
+										<button type="button" class="btn  btn-secondary" data-dismiss="modal">Close</button>
+									</div>
+		                 	</form>
+								</div>
+							</div>
+							
+							</div>
+   <!-- 로그인 초기화 모달   -->   
+   
+   
+
+<script>
 
 
+	
 
+	
+	
+	
+	
+	$(document).on('click','#updateBtn',function() {
+		alert("비밀번호 초기화를 진행합니다.초기화후 비밀번호는 사번입니다.")
+			$("#updatepw").submit();
 
-
+					
+	});
+    </script>
+    
 
 
 

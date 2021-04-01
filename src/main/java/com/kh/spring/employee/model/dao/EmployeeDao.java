@@ -71,5 +71,10 @@ public class EmployeeDao {
 		return sqlSession.update("employeeMapper.updatePwEmp",emp);
 	}
 
+	public int resetPwd(SqlSessionTemplate sqlSession, Employee emp) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("employeeMapper.resetPwd",emp);
+	}
+
 
 }

@@ -17,7 +17,7 @@
 		<result property="empNo" column="EMP_NO" />
 		<result property="empName" column="EMP_NAME" />
 		<result property="formNo" column="FORM_NO" />
-		<result property="formName" column="FORM_NAME" />
+		<result property="formName" column="FORM_NAME" />  
 		<result property="firstApprEmp" column="FIRST_APPR_EMP" />
 		<result property="lastAppEmp" column="LAST_APPR_EMP" />
 		<result property="empPosition" column="JOB_NAME" />
@@ -75,7 +75,7 @@
 		VALUES(SEQ_APPROVAL.NEXTVAL,#{approvalTitle},#{approvalContent},SYSDATE,#{urgent},#{originalName},#{changeName}
         ,#{status}
 		,#{firstDate}
-		,#{doneDate},#{empNo},'2',#{firstApprEmp},#{lastAppEmp})
+		,#{doneDate},#{empNo},#{formNo},#{firstApprEmp},#{lastAppEmp})
 
 
 	</insert>
@@ -83,13 +83,11 @@
 <!-- 결재올린자가 진행중이 문서가 보임 status 상관없이 모두 끌어옴  -->
 	<select id="selectyList" parameterType="Employee" resultMap="approvalResultMap">
 	  <![CDATA[  
-		SELECT*
-		FROM APPROVAL
+    	SELECT*
+		FROM (SELECT * FROM APPROVAL WHERE EMP_NO=#{empNo} ORDER BY APPROVAL_FIRSTDATE DESC) 
 		JOIN APPROVAL_TYPE USING (FORM_NO)
-
 		JOIN EMPLOYEE USING (EMP_NO)
-		WHERE EMP_NO=#{empNo}
-		
+		WHERE ROWNUM <=10
         ]]>   
 	</select>
 
@@ -133,6 +131,7 @@
 		JOIN EMPLOYEE USING (EMP_NO)
 		JOIN JOB USING (JOB_CODE)
 		JOIN DEPT USING (DEPT_CODE)
+		JOIN APPROVAL_TYPE USING (FORM_NO)
 		WHERE APPROVAL_NO=#{approvalNo}
 
 	</select>
@@ -173,7 +172,8 @@ APPROVAL_STARTDATE=SYSDATE,
 URGENT=#{urgent},
 ORIGINNAME_APPROVAL=#{originalName},
 CHANGENAME_APPROVAL=#{changeName},
-APPROVAL_STATUS=default
+FORM_NO=#{formNo},
+APPROVAL_STATUS=#{status}
 WHERE APPROVAL_NO=#{approvalNo}
 </update>
 

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.mainCalendar.model.vo.Calendar;
 import com.kh.spring.todo.model.service.TodoService;
@@ -47,10 +48,11 @@ public class TodoCotroller {
 		Employee emp= (Employee) session.getAttribute("loginUser");
 		 
 		ArrayList<Todo> todolist =todoService.selectMainTodo(emp);
-		
+
 		System.out.println("todolist main::"+todolist);
 		response.setContentType("application/json;charset=utf-8");
-		new Gson().toJson(todolist,response.getWriter());//
+		new GsonBuilder().setDateFormat("yyyy-MM-dd-HH-mm").create().toJson(todolist,response.getWriter());
+		
 		
 	}
 	

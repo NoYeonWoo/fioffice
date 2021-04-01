@@ -144,13 +144,7 @@ public class ApprovalController {
 		return "approval/approvalView";
 	}
 
-	// 상신인이 볼수 있는 결재 문서 상세보기 여기에는 업데이트도 없고 보기만 가능
-//	@RequestMapping("approvalDetailView.do")
-//	public String approvalDetailView() {
-//		return "approval/approvalDetailView";
-//		
-//		
-//	}
+
 
 	@RequestMapping("approvalDetailView.do")
 	public ModelAndView selectApproval(int ano, ModelAndView mv, String firstapp, HttpSession session) {
@@ -208,30 +202,32 @@ public class ApprovalController {
 	}
 	
 	@RequestMapping("approvalUpdateForm.do")
-	   public ModelAndView updateForm(int ano , ModelAndView mv ,HttpSession session,String firstapp) {
+	   public ModelAndView updateForm(int ano , ModelAndView mv ,HttpSession session,String firstapp , String status) {
 		
 		Employee emp = (Employee) session.getAttribute("loginUser");
-
+    
 		Employee lApprEmp = approvalService.selectlApprEmp();// 마지막 승인자 불러오기
-		
-      
+	
+        
 		Approval ap = approvalService.selectdetailapproval(ano);// 결재상세페이지 불러오기
-     
-		firstapp = ap.getFirstApprEmp(); // 결재 문서의 첫번째결재자의 empNo 비교 후 그사람의 정보 끌어오기 이유는: deptName과 jobPostion이 필요함
+       
+		firstapp = ap.getFirstApprEmp(); 
 		Employee firstperson = approvalService.selectfApprEmpDetail(firstapp);
+	
         System.out.println(firstapp);
         System.out.println(firstperson);
 		System.out.println("상세보기 " + ap);
 		
+		 
 
 		mv.addObject("firstApprEmp", firstperson);
 		mv.addObject("lastAppEmp", lApprEmp);
-
-		
-		
+     
+		mv.addObject("status", status);
+		mv.addObject("firstApprEmpNo",ap.getFirstApprEmp());
 		mv.addObject("ap",approvalService.selectdetailapproval(ano)).setViewName("approval/approvalUpdateForm");
-		 System.out.println("firstapp"+firstapp);
-	        System.out.println("firstperson"+firstperson);
+	
+		
 		   
 		return mv;
 		   
@@ -239,35 +235,43 @@ public class ApprovalController {
 	
 	
     @RequestMapping("updateApproval.do")
-	public ModelAndView updateApproval(Approval ap,ModelAndView mv, HttpServletRequest request,HttpSession session,String firstapp,
-			                         @RequestParam(value="reUploadFile", required = false)MultipartFile file) {
+	public ModelAndView updateApproval(Approval ap,ModelAndView mv, HttpServletRequest request,HttpSession session, 
+			                         @RequestParam(value="reUploadFile", required = false)MultipartFile file ) {
     	Employee emp = (Employee) session.getAttribute("loginUser");
+    	
+        
+   		if(!file.getOriginalFilename().equals("")) {//새로넘어온 파일이 있는경우
+   			
+   			if(ap.getChangeName() !=null) {//새로 넘어온 파일이 잇는데 기존에 파일도 있는경우 -> 서버에 업로드 되어있는 파일을 삭제 함 
+   				deleteFile(ap.getChangeName(),request);
+   			}
+   			String changeName=saveFile(file,request);//새로 넘어온 파일을 서버에 업로드 함  
+   			ap.setOriginalName(file.getOriginalFilename());
+   			ap.setChangeName(changeName);
+   	}
 
-		Employee lApprEmp = approvalService.selectlApprEmp();// 마지막 승인자 불러오기
-		firstapp = ap.getFirstApprEmp(); // 결재 문서의 첫번째결재자의 empNo 비교 후 그사람의 정보 끌어오기 이유는: deptName과 jobPostion이 필요함
-		Employee firstperson = approvalService.selectfApprEmpDetail(firstapp);
-		
-
-		if(!file.getOriginalFilename().equals("")) {//새로넘어온 파일이 있는경우
-			
-			if(ap.getChangeName() !=null) {//새로 넘어온 파일이 잇는데 기존에 파일도 있는경우 -> 서버에 업로드 되어있는 파일을 삭제 함 
-				deleteFile(ap.getChangeName(),request);
-			}
-			String changeName=saveFile(file,request);//새로 넘어온 파일을 서버에 업로드 함  
-			ap.setOriginalName(file.getOriginalFilename());
-			ap.setChangeName(changeName);
-		}
-		 System.out.println("firstapp 업뎃후"+firstapp);
-	        System.out.println("firstperson 업뎃후"+firstperson);
+   	
+    	
+       
 	
-			int result=approvalService.updateApproval(ap);
+	    
 
+		if( ap.getFirstApprEmp().equals("")) {
+			ap.setStatus("A");
+		}else {
+			ap.setStatus("Y");
+		}
+		
+	 
+   
+	    
+		int result=approvalService.updateApproval(ap);
+    
 			  
 		if(result>0) {
 		     System.out.println("ap.getStatus"+ap.getStatus());
-		     System.out.println("업데이트문서1"+ap);
-		 
-			mv.addObject("ano",ap.getApprovalNo()).setViewName("redirect:approvalList.do");
+		     System.out.println("업데이트문서1"+ap);           	   
+			 mv.addObject("ano",ap.getApprovalNo()).setViewName("redirect:approvalList.do");
 			 System.out.println("업데이트문서2"+ap);
 		}
 		
