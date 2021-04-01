@@ -55,14 +55,11 @@ public class WorkController {
 			
 			Employee emp= (Employee) session.getAttribute("loginUser");
 			
-			
-			
 			int listCount = workService.selectListCount();
-			//System.out.println(listCount);
-			
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 			
 			ArrayList<Work> list = workService.selectListCount(pi,emp);
+			System.out.println("근태 list 세션 "+list);
 			
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);

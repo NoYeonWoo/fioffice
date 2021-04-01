@@ -38,7 +38,9 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  
- 
+ 				<form action="send.emailgo" method="post" id="goEmailSend">
+    				<input type="hidden" name="eno" id ="eno" value="${loginUser.empNo}">
+    			</form>
  
  
  <!-- [ stiped-table ] start -->
@@ -51,7 +53,8 @@
                         <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
-                        	<a href="send.email"><button type="button" class="btn  btn-primary">보내기</button></a>
+                        	<!-- <a href="send.emailgo"><button type="submit" class="btn  btn-primary">보내기</button></a>-->
+                        	<button type="button" class="btn  btn-primary" onclick="$('#goEmailSend').submit();">내 주소록</button></a>
                         	<a href="detail.email"><button type="button" class="btn  btn-primary">임시상세</button></a>
                         	
                         </div>

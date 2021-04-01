@@ -15,7 +15,8 @@ public interface  AddressService {
 	
 	
 	int insertAddress(Address a);
-	Address selectAddress(int ano);
+	
+	Address selectAddress(int ano);/////detail
 
 	int deleteAddress(int ano);
 

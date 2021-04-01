@@ -4,7 +4,42 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+#boardList {
+	text-align: center;
+}
 
+#boardList>tbody>tr:hover {
+	cursor: pointer;
+}
+
+#pagingArea {
+	width: fit-content;
+	margin: auto;
+}
+/* #pagingArea a{color:black} */
+#searchForm {
+	width: 80%;
+	margin: auto;
+}
+
+#searchForm>* {
+	float: left;
+	margin: 5px;
+}
+
+.select {
+	width: 20%;
+}
+
+.text {
+	width: 53%;
+}
+
+.searchBtn {
+	Width: 20%;
+}
+</style>
 </head>
 
 <body class="">
@@ -39,8 +74,8 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
 			
-			<form action="detail.email" method="post" id="goMail">
-    				<input type="hidden" name="eno" id ="eno" value="${loginUser.empNo}">
+			<form action="send.emailgo" method="post" id="goMail">
+    				<input type="hidden" name="empNo" id ="empNo" value="${loginUser.empNo}">
     			</form>
 
 
@@ -49,13 +84,15 @@
 				<div class="col-xl-12">
 					<div class="card">
 						<div class="card-header">
-							<h5>주소록</h5>
+							<h5>이메일함</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
 									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
-                        			<button type="button" class="btn  btn-primary" onclick="$('#goAdd').submit();">내 주소록</button></a>
+                        			<!-- <a href="send.email"><button type="button" class="btn  btn-primary">보내기</button></a>-->
+                        			<button type="button" class="btn  btn-primary" onclick="$('#goMail').submit();">보내기</button></a>
+                        			<a href="detail.email"><button type="button" class="btn  btn-primary">임시상세</button></a>
 
 								</div>
 							</span>
@@ -63,26 +100,29 @@
 						</div>
 						<div class="card-body table-border-style">
 							<div class="table-responsive">
-								<table class="table table-striped" id="addressList">
+								<table class="table table-striped" id="emailList">
 									<thead>
 										<tr>
+											<th>번호</th>
 											<th>보낸사람</th>
+											<th>보낸사람사번</th>
 											<th>제목</th>
 											<th>네용</th>
 											<th>날짜</th>
-											<th>(상대)이메일</th>
 										</tr>
 									</thead>
 									<tbody>
 										<c:forEach items="${ list }" var="e">
 											<tr>
-												<td>${ e.emailSend }</td>
+												<td>${ e.emailNo }</td>
+												<td>${ e.emailReceiveEmail }</td>
+												<td>${ e.emailReceive }</td>
 												<td>${ e.emailTitle }</td>
 												<td>${ e.emailContent }</td>
 												<td>${ e.emailTime }</td>
-												<td>${ e.emailSendEmail }</td>
 											</tr>
 										</c:forEach>
+										
 									</tbody>
 								</table>
 								
@@ -139,10 +179,10 @@
 				<br clear="both">
 				<br> <br>
 				<br>
-			</div>
+
 			<br>
 			<br>
-		</div>
+
 
 
 
@@ -156,8 +196,8 @@
 <!-- [ Main Content ] 메인화면 끝 -->
 <script>
     	$(function(){
-    		$("#boardList tbody tr").click(function(){
-    			location.href="detail.bo?bno=" + $(this).children().eq(0).text();
+    		$("#emailList tbody tr").click(function(){
+    			location.href="detail.email?eno=" + $(this).children().eq(0).text();
     		});
     	});
     </script>
