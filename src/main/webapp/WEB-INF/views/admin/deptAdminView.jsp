@@ -179,9 +179,11 @@
              <div class="modal-body">
 					<table id ="detailD" class="table "  align="center">
 						<thead>
-							<th style="width: 30%">사원명</th>
-							<th style="width: 45%">사번</th>
-							<th style="width: 25%">직급</th>
+							<tr>
+								<th style="width: 30%">사원명</th>
+								<th style="width: 45%">사번</th>
+								<th style="width: 25%">직급</th>
+							</tr>
 						</thead>
                     	<tbody>
                     	

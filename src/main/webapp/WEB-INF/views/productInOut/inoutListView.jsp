@@ -183,32 +183,7 @@
                         </tr><tr>
                             <td style="width:20%">수량</td>
                             <td><input type="text" name ="quantity" id ="quantity" class="form-control form-control-sm"style="width:25%;float:left;">
-                            <label id="stockLabel">출고가능 수량 : <span id="stock"></span>개</label></td>
-                        
-                        <script>
-                        $("#quantity").on('change keyup paste',function(){
-                        	changePrice();
-                        });
-                        function changePrice() {
-                        	$("#price").val("");
-                        	var num = $("#quantity").val();
-                        	console.log(num);
-                        	var proNo = $('#proNo').val();
-                        	if($("#proNo").val()!=""){
-                                <c:forEach items="${ pList }" var="p">
-                                	if('${p.proNo}' == proNo){
-	        							if($("input[name=sortation]:checked").val() == "입고"){
-	        								$("#price").val(${p.inPrice}*num);
-	        							}else if($("input[name=sortation]:checked").val() == "출고"){
-	        								$("#price").val(${p.outPrice}*num);
-	        								$("#stock").text(${p.stock});
-	        							}
-                        			}
-								</c:forEach>
-                        	}
-						}
-                        </script>
-                        
+                            <label id="stockLabel">출고가능 수량 : <span id="stock"></span>개</label></td>                    
                         </tr><tr>
                             <td style="width:20%">금액</td>
                             <td><input type="text" name ="price" id = "price" class="form-control form-control-sm" style="width:25%;float:left" readonly><span>원</span></td>
@@ -256,7 +231,7 @@
                 { searchable: false, targets: [0,1,2,5,6,7,8]}
 
               ],
-		        order: [[ 1, 'asc' ]],
+		        order: [[ 1, 'desc' ]],
               dom: '<"float-left"B><"float-right"f>rt<"float-left"i><"float-right"p>',
 	        buttons: [{
 	            text: '입출고 추가',
@@ -330,7 +305,27 @@
         	 changePrice();
         }
     });
- 	
+ 	$("#quantity").on('change keyup paste',function(){
+    	changePrice();
+    });
+    function changePrice() {
+    	$("#price").val("");
+    	var num = $("#quantity").val();
+    	console.log(num);
+    	var proNo = $('#proNo').val();
+    	if($("#proNo").val()!=""){
+            <c:forEach items="${ pList }" var="p">
+            	if('${p.proNo}' == proNo){
+					if($("input[name=sortation]:checked").val() == "입고"){
+						$("#price").val('${p.inPrice}'*num);
+					}else if($("input[name=sortation]:checked").val() == "출고"){
+						$("#price").val('${p.outPrice}'*num);
+						$("#stock").text('${p.stock}');
+					}
+    			}
+			</c:forEach>
+    	}
+	}
 	function check() {
 		var name=document.newInout;
 		console.log(($("#stock").text()-name.quantity.value));
@@ -358,7 +353,7 @@
 			return true;
 		}
 		return false;
- 	}
+	}
 	</script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>

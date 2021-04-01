@@ -76,6 +76,16 @@ public class AdminDao {
 		return (ArrayList)sqlSession.selectList("adminMapper.selectCalendarList");
 	}
 
+	public int insertCalendar(SqlSessionTemplate sqlSession, Calendar cal) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("adminMapper.insertCalendar", cal);
+	}
+
+	public int deleteCalendar(SqlSessionTemplate sqlSession, String calNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("adminMapper.deleteCalendar", calNo);
+	}
+
 	
 
 }

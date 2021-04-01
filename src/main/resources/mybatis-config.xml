@@ -21,6 +21,7 @@
 		<typeAlias type="com.kh.spring.approval.model.vo.Approval" alias="Approval"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.AdminMenu" alias="AdminMenu"/>
 		<typeAlias type="com.kh.spring.meetingroom.model.vo.Meetingroom" alias="MRoom"/>
+		<typeAlias type="com.kh.spring.meetingroom.model.vo.Reservation" alias="Reservation"/>
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Client" alias="Client"/>
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Product" alias="Product"/>
 		<typeAlias type="com.kh.spring.productInOut.model.vo.Inout" alias="Inout"/>

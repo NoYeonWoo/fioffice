@@ -1,5 +1,6 @@
 package com.kh.spring.meetingroom.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.meetingroom.model.dao.MeetinroomDao;
 import com.kh.spring.meetingroom.model.vo.Meetingroom;
+import com.kh.spring.meetingroom.model.vo.Reservation;
 
 @Service("meetingroomService")
 public class MeetingroomServiceImpl implements MeetingroomService {
@@ -40,6 +42,21 @@ public class MeetingroomServiceImpl implements MeetingroomService {
 	public ArrayList<Meetingroom> selectRoomList() {
 		// TODO Auto-generated method stub
 		return  meetingDao.selectRoomList(sqlSession);
+	}
+	@Override
+	public ArrayList<Reservation> selectMyReservation(String empNo) {
+		// TODO Auto-generated method stub
+		return  meetingDao.selectMyReservation(sqlSession, empNo);
+	}
+	@Override
+	public ArrayList<Reservation> selectDateReservation(Reservation res) {
+		// TODO Auto-generated method stub
+		return  meetingDao.selectDateReservation(sqlSession, res);
+	}
+	@Override
+	public int insertReservation(Reservation res) {
+		// TODO Auto-generated method stub
+		return  meetingDao.insertReservation(sqlSession, res);
 	}
 
 }

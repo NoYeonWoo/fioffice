@@ -1,8 +1,10 @@
 package com.kh.spring.meetingroom.model.service;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import com.kh.spring.meetingroom.model.vo.Meetingroom;
+import com.kh.spring.meetingroom.model.vo.Reservation;
 
 public interface MeetingroomService {
 
@@ -15,5 +17,11 @@ public interface MeetingroomService {
 	int deleteRoom(int roomNo);
 
 	ArrayList<Meetingroom> selectRoomList();
+
+	ArrayList<Reservation> selectMyReservation(String empNo);
+
+	ArrayList<Reservation> selectDateReservation(Reservation res);
+
+	int insertReservation(Reservation res);
 
 }

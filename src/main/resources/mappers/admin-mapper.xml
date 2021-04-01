@@ -55,7 +55,6 @@
 		<result property="calContent" column="CAL_CONTENT"/>
 		<result property="calSDates" column="CAL_SDATE"/>
 		<result property="calEDates" column="CAL_EDATE"/>
-		<result property="calType" column="CAL_TYPE"/>
 		<result property="status" column="STATUS"/>
 		<result property="calColor" column="CATEGORY_COLOR"/>
 	</resultMap>
@@ -130,9 +129,30 @@
 		ORDER BY LENGTH(JOB_CODE) DESC, JOB_CODE DESC
 	</select>
 	
-	<select id="selectCalendarList">
-		SELECT *
-		FROM CALENDAR
-		WHERE CAL_CATE IN (30,40,50);
+	<select id="selectCalendarList" resultMap="CalendarResultSet">
+		SELECT A.*, CATEGORY_TITLE
+		FROM CALENDAR A JOIN CAL_CATEGORY B ON CAL_CATE=CATEGORY_NO
+        WHERE CAL_CATE IN (30,40)
+        AND STATUS='Y'
 	</select>
+	
+	<insert id="insertCalendar" parameterType="Calendar">
+		INSERT INTO CALENDAR
+		VALUES(
+			SEQ_CAL.NEXTVAL,
+			#{empNo},
+			#{calCate},
+			#{calTitle},
+			NULL,
+			#{calSDates},
+			#{calEDates},
+			DEFAULT	
+		)
+	</insert>
+	
+	<delete id="deleteCalendar" parameterType="string">
+		DELETE
+		FROM CALENDAR
+		WHERE CAL_NO=#{calNo} 
+	</delete>
 </mapper>

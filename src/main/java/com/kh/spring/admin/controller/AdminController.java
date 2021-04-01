@@ -2,6 +2,7 @@ package com.kh.spring.admin.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.admin.model.service.AdminService;
@@ -19,6 +22,8 @@ import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.TreeModel;
 import com.kh.spring.employee.model.service.EmployeeService;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.mainCalendar.model.service.CalendarService;
+import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,6 +33,7 @@ import com.kh.spring.board.notice.model.service.NoticeService;
 import com.kh.spring.board.notice.model.vo.Notice;
 
 @Controller
+@SessionAttributes("msg")
 public class AdminController {
 	
 	@Autowired
@@ -147,11 +153,11 @@ public class AdminController {
 	public String insertDept(Department dept, Model model) {
 		int result = adminService.insertDept(dept);
 		if(result > 0) {
-			model.addAttribute("msg", "부서추가 성공");
-			return "admin/deptAdminView";
+			model.addAttribute("msg", "부서추가에 성공하셨습니다.");
+			return "redirect:dept.ad";
 		}else {
-			model.addAttribute("msg", "부서추가 실패");
-			return "admin/deptAdminView";
+			model.addAttribute("msg", "부서추가에 실패하셨습니다.");
+			return "redirect:dept.ad";
 		}
 		
 	}
@@ -167,19 +173,53 @@ public class AdminController {
 	
 
 	//--------------------------------------------------------전사캘린더--------------------------------------------------------//
+	//캘린더 관리 화면
 	@RequestMapping("calendar.ad")
-	@ResponseBody
 	public String calendarView() {
 		return "admin/calendarAdminView";
 	}
 	
+	//캘린더리스트
 	@RequestMapping(value="selectCalendarList", produces="appliction/json; charset=UTF-8")
+	@ResponseBody
 	public String selectCalendarList() {
 		Map<String, Object> result = new HashMap<String, Object>();
 		result.put("data", adminService.selectCalendarList());
 		return new GsonBuilder().create().toJson(result);
 	}
 	
+	//일정추가
+	@RequestMapping("insertCalendar")
+	public String insertCalendar(Calendar cal, Model model) {
+		System.out.println(cal);
+		int result = adminService.insertCalendar(cal);
+		if(result > 0) {
+			return "redirect:calendar.ad";
+		}else {
+			model.addAttribute("msg", "일정 추가에 실패하셨습니다.");
+			return "redirect:calendar.ad";
+		}
+		
+	}
+	
+	//일정추가
+	@RequestMapping("deleteCalendar")
+	public String deleteCalendar(@RequestParam(value="calNos")String[] calNos, Model model) {
+		String failed="";
+		for(int i = 0; i < calNos.length;i++) {
+			int result = adminService.deleteCalendar(calNos[i]);
+			if(result <= 0) {
+				failed = failed + calNos[i]+ "번";
+			}
+		}
+		if(!(failed.equals(""))) {
+			model.addAttribute("msg", failed+"일정이 취소에 실패하였습니다.");
+			return "redirect:calendar.ad";
+		}
+		model.addAttribute("msg","삭제가 완료되었습니다.");
+		return "redirect:calendar.ad";
+	}
+		
 	@RequestMapping("survey.ad")
 	public String surveyView() {
 		return "admin/surveyAdminView";

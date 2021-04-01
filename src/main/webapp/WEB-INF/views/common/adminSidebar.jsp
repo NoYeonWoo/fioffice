@@ -45,7 +45,6 @@
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">메뉴관리</span></a>
                    <ul class="pcoded-submenu">
                        <li><a href="notice.ad">공지사항</a></li>
-                       <li><a href="layout-horizontal.html">결재</a></li>
                        <li><a href="calendar.ad">캘린더</a></li>
                        <li><a href="survey.ad">설문</a></li>
                        <li><a href="meetingRoom.ad">회의실</a></li>
