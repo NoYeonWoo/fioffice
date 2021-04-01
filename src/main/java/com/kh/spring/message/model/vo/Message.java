@@ -16,18 +16,15 @@ import lombok.ToString;
 public class Message {
 	
 	private int msgNo;
-	private String chatNo; //채팅방 번호
+	private String chatNo;
 	private String msgSender;
 	private String msgReceiver;
-	private String msgType;
 	private String msgContent;
 	private Date msgDate;
 	private String msgReadStatus;
-	private String msgOrigin;
-	private String msgChange;
-	private Date msgFileDate;
-	private String msgFileStatus;
-	
+	private String empName; //받는 사람 이름
+	private String empPosition; //받는 사람
+	private String deptName; //받는 사람
 	
 	
 }
