@@ -9,15 +9,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<id property="msgNo" column="MSG_NO"/>
 		<result property="chatNo" column="CHAT_NO"/>
 		<result property="msgSender" column="MSG_SENDER"/>
-		<result property="msgType" column="MSG_TYPE"/>
 		<result property="msgContent" column="MSG_CONTENT"/>
 		<result property="msgDate" column="MSG_DATE"/>
 		<result property="msgReadStatus" column="MSG_READ_STATUS"/>
-		<result property="msgOrigin" column="MSG_ORIGIN_NAME"/>
-		<result property="msgChange" column="MSG_CHANGE_NAME"/>
-		<result property="msgFileDate" column="MSG_FILE_DATE"/>
-		<result property="msgFileStatus" column="MSG_FILE_STATUS"/>
 		<result property="msgReceiver" column="MSG_RECEIVER"/>
+		<result property="empName" column="EMP_NAME"/>
+		<result property="empPosition" column="JOB_NAME"/>
+		<result property="deptName" column="DEPT_NAME"/>
 	</resultMap>
 	
 	<resultMap id="ChatRoomResultSet" type="ChatRoom">
@@ -28,6 +26,21 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</resultMap>
 	
 
+	<insert id="insertMessage" parameterType="Message">
+		INSERT INTO MESSAGE_MSG
+		VALUES(SEQ_MSG.NEXTVAL,#{msgReceiver},#{msgSender},#{msgContent},#{msgDate},
+		#{msgReadStatus},#{msgReceiver})
+	</insert>
+	
+	
+	<select id="selectMsgDetail" resultMap="MessageResultSet" parameterType="string">	
+	 SELECT *
+	 FROM MESSAGE_MSG A
+	 LEFT JOIN EMPLYEE B USING ON A.MSG_RECEIVER = B.EMP_NO
+	 WHERE msgNo=#{msgNo}
+	</select>	
+	
+	
 	<!--  
 	<select id="chatroomList" parameterType="string" resultMap="ChatRoomResultSet">
 	
@@ -42,9 +55,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	</select>
 	
-	<insert id="insertMessage" parameterType="Message">
 	
-	</insert>
 	
 	<update id="deleteChatroom" parameterType="_int">
 	

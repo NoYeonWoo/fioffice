@@ -14,7 +14,6 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="calContent" column="CAL_CONTENT"/>
 		<result property="calSDates" column="CAL_SDATE"/>
 		<result property="calEDates" column="CAL_EDATE"/>
-		<result property="calType" column="CAL_TYPE"/>
 		<result property="status" column="STATUS"/>
 		<result property="calColor" column="CATEGORY_COLOR"/>
 	</resultMap>
@@ -44,7 +43,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<insert id="insertCalendar" parameterType="Calendar">
 		INSERT INTO CALENDAR
 		VALUES(SEQ_CAL.NEXTVAL,#{empNo},#{calCate},#{calTitle},#{calContent},
-		#{calSDates},#{calEDates},DEFAULT,DEFAULT)
+		#{calSDates},#{calEDates},DEFAULT)
 	</insert>
 	
 	<update id="deleteCalendar" parameterType="_int">

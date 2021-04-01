@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.message.model.dao.MessageDao;
+import com.kh.spring.message.model.vo.Message;
 
 @Service("messageService")
 public class MessageServiceImpl implements MessageService {
@@ -22,6 +23,21 @@ public class MessageServiceImpl implements MessageService {
 	public ArrayList<Employee> msgEmpList(Employee empNo) {
 		return messageDao.msgEmpList(sqlSession, empNo);
 		
+	}
+
+	@Override
+	public int insertMsg(Message msg) {
+		return messageDao.insertMsg(sqlSession, msg);
+	}
+
+	@Override
+	public Message selectMsg(String msgNo) {
+		return messageDao.selectMsg(sqlSession, msgNo);
+	}
+
+	@Override
+	public ArrayList<Message> selectMsgList(int msgNo) {
+		return messageDao.selectMsgList(sqlSession, msgNo);
 	}	 
 	 
 }
