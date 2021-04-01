@@ -29,6 +29,7 @@
     <typeAlias type="com.kh.spring.message.model.vo.Message" alias="Message"/>
 		<typeAlias type="com.kh.spring.message.model.vo.ChatRoom" alias="ChatRoom"/>
     <typeAlias type="com.kh.spring.email.model.vo.Email" alias="Email"/>
+    <typeAlias type="com.kh.spring.email.model.vo.EmailInfo" alias="EmailInfo"/>
 	</typeAliases>
 	
 	
