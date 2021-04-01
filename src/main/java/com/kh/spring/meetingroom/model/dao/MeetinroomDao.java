@@ -1,11 +1,13 @@
 package com.kh.spring.meetingroom.model.dao;
 
+import java.sql.Date;
 import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.spring.meetingroom.model.vo.Meetingroom;
+import com.kh.spring.meetingroom.model.vo.Reservation;
 
 @Repository("meetingroomDao")
 public class MeetinroomDao {
@@ -34,6 +36,21 @@ public class MeetinroomDao {
 	public ArrayList<Meetingroom> selectRoomList(SqlSessionTemplate sqlSession) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("meetingMapper.selectRoomList");
+	}
+
+	public ArrayList<Reservation> selectMyReservation(SqlSessionTemplate sqlSession, String empNo) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("meetingMapper.selectMyReservation",empNo);
+	}
+
+	public ArrayList<Reservation> selectDateReservation(SqlSessionTemplate sqlSession, Reservation res) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("meetingMapper.selectDateReservation",res);
+	}
+
+	public int insertReservation(SqlSessionTemplate sqlSession, Reservation res) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("meetingMapper.insertReservation", res);
 	}
 
 }

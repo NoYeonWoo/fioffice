@@ -23,7 +23,6 @@ public class Calendar {
 	private String calContent;
 	private String calSDates;
 	private String calEDates;
-	private String calType;
 	private String status;
 	private String calColor;
 	private String deptCode;

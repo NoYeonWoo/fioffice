@@ -83,6 +83,16 @@ public class AdminServiceImpl implements AdminService {
 		// TODO Auto-generated method stub
 		return adminDao.selectCalendarList(sqlSession);
 	}
+	@Override
+	public int insertCalendar(Calendar cal) {
+		// TODO Auto-generated method stub
+		return adminDao.insertCalendar(sqlSession,cal);
+	}
+	@Override
+	public int deleteCalendar(String calNo) {
+		// TODO Auto-generated method stub
+		return adminDao.deleteCalendar(sqlSession,calNo);
+	}
 	
 
 }

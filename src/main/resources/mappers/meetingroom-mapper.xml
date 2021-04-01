@@ -11,6 +11,19 @@
 		<result property="status" column="STATUS" />
 	</resultMap>
 	
+	<resultMap type="Reservation" id="resResultSet">
+		<id property="resNo" column="RES_NO" />
+		<result property="resDate" column="RES_DATE" />
+		<result property="staTime" column="STA_TIME" />
+		<result property="endTime" column="END_TIME" />
+		<result property="resTitle" column="RES_TITLE" />
+		<result property="resContent" column="RES_CONTENT" />
+		<result property="roomNo" column="ROOM_NO" />
+		<result property="roomName" column="ROOM_NAME" />
+		<result property="empNo" column="EMP_NO" />
+		<result property="status" column="STATUS" />
+	</resultMap>
+	
 	<select id="selectAllRoomList" resultMap="roomResultSet">
 		SELECT * 
 		FROM ROOM
@@ -48,4 +61,34 @@
 		FROM ROOM
 		WHERE STATUS = 'Y'
 	</select>
+	
+	<select id="selectMyReservation" parameterType="string" resultMap="resResultSet">
+		SELECT A.*,B.ROOM_NAME 
+		FROM ROOM_RES A JOIN ROOM B ON (A.ROOM_NO=B.ROOM_NO)
+        WHERE A.STATUS = 'Y'
+		AND EMP_NO = #{empNo}
+	</select>
+	
+	<select id="selectDateReservation" parameterType="Reservation" resultMap="resResultSet">
+		SELECT STA_TIME, END_TIME
+		FROM ROOM_RES
+		WHERE STATUS = 'Y'
+		AND RES_DATE = #{resDateS}
+		AND ROOM_NO = #{roomNo}
+	</select>
+	
+	<insert id="insertReservation" parameterType="Reservation">
+		INSERT INTO ROOM_RES
+		VALUES(
+		SEQ_RES.NEXTVAL,
+		#{resDate},
+		#{staTime},	
+		#{endTime},	
+		#{resTitle},	
+		#{resContent},	
+		#{roomNo},	
+		#{empNo},
+		DEFAULT	
+		)
+	</insert>
 </mapper>

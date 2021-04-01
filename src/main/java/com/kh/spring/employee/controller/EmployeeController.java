@@ -37,8 +37,7 @@ import com.kh.spring.employee.model.vo.Employee;
 
 
 
-@SessionAttributes("loginUser")// Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하는 어노테이션 
-
+@SessionAttributes({"loginUser", "msg"})// Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하는 어노테이션 
 @Controller
 public class EmployeeController {
 	@Autowired 
@@ -63,10 +62,7 @@ public class EmployeeController {
 	public String selectEmpList() {
 		  Map<String, Object> result = new HashMap<String, Object>();
 		  result.put("data", employeeService.selectEmpList());
-		  System.out.println("거쳐감");
 		  return new GsonBuilder().create().toJson(result);
-
-
 		//model.addAttribute("eList",eList);
 		//return new GsonBuilder().create().toJson(eList);
 	}
@@ -125,10 +121,10 @@ public class EmployeeController {
 		System.out.println(result);
 		if(result > 0) {
 			model.addAttribute("msg", "사원을 성공적으로 추가하였습니다.");
-			return "forward:manageEmp.do";
+			return "redirect:manageEmp.do";
 		}else {
 			model.addAttribute("msg", "사원추가에 실패하였습니다.");
-			return "forward:insertEmp.do";
+			return "redirect:manageEmp.do";
 		}
 			
 			
@@ -143,10 +139,12 @@ public class EmployeeController {
 		int result = employeeService.updateEmployee(emp);
 		System.out.println(result);
 		if(result > 0) {
+			model.addAttribute("msg", "사원수정에 성공하였습니다.");
 			model.addAttribute("empNo",emp.getEmpNo());
 			return "forward:updateEmpForm";
 		}else {
-			return "redirect:/";
+			model.addAttribute("msg", "사원수정에 실패하였습니다.");
+			return "redirect:updateEmpForm";
 		}
 		
 		
@@ -156,6 +154,7 @@ public class EmployeeController {
 	@RequestMapping("updateEntDate")
 	@ResponseBody
 	public String updateEntDate(Employee emp) {
+		System.out.println(emp.getEntDateS());
 		emp.setEntDate(java.sql.Date.valueOf(emp.getEntDateS()));
 		int result = employeeService.updateEntDate(emp);
 		return String.valueOf(result);

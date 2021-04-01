@@ -70,56 +70,12 @@
 	                                    <tr>
 	                                    <th id="check" style="width: 7%; text-align: center;">
 	                                    <input type="checkbox" name="all_selected"></th>
-	                                    <th  id="cDatetype" style="width: 10%;">달력</th>
-	                                    <th  id="cDate" style="width: 15%;">날짜</th>
+	                                    <th  id="cDate" style="width: 25%;">날짜</th>
 	                                    <th  id="cTitle" style="width: 58%;">제목</th>
 	                                    <th  id="cType" style="width: 10%;">휴일여부</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>  
-	                                <tr>
-	                                		<td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                        <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                       <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                        <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                        <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                        <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr><tr>
-	                                        <td></td>
-	                                        <td>Gloria Little</td>
-	                                        <td>Systems Administrator</td>
-	                                        <td>New York</td>
-	                                        <td>59</td>
-	                                    </tr></tbody>
+	                                
                             	</table>
                         	</div>
                         </div>
@@ -138,26 +94,24 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
              <div class="modal-body">
-				<form name="newInout" action="login.me" method="post" autocomplete="off">
+				<form name="newCalender" action="insertCalendar" method="post" autocomplete="off">
 					<table class="table table-bordered  "  align="center">
+                    	<input type="hidden" name="empNo" class="form-control form-control-sm" value="${sessionScope.loginUser.empNo}">
                     	<tr>
-                            <td style="width:20%">달력</td>
-                             <td><input type="radio" name="dateType" id="solar" value="양력">
-                    			 <label for="solar">양력</label> &nbsp;&nbsp;
-                    			 <input type="radio" name="dateType" id="lunar" value="음력">
-                    			 <label for="lunar">음력</label></td>
+                        	<td style="width:20%">시작날짜</td>
+                            <td><input type="date" name="calSDates"  class="form-control form-control-sm" style="width:50%"></td>
                         </tr><tr>
-                        	<td style="width:20%">날짜</td>
-                            <td><input type="date" id="date" name="date"  class="form-control form-control-sm" style="width:50%"></td>
-                        </tr><tr>
+                        	<td style="width:20%">끝날짜</td>
+                            <td><input type="date" name="calEDates"  class="form-control form-control-sm" style="width:50%"></td>
+                        </tr> <tr>
                             <td style="width:20%">제목</td>
-                            <td><input type="text" class="form-control form-control-sm" style="width:80%"></td>
+                            <td><input type="text" name="calTitle"  class="form-control form-control-sm" style="width:80%"></td>
                         </tr><tr>
                             <td style="width:20%">휴일여부</td>
-                            <td><input type="radio" name="type" id="holiday" value="휴일">
-                    			 <label for="lift">휴일</label> &nbsp;&nbsp;
-                    			 <input type="radio" name="type" id="anniversary" value="기념일">
-                    			 <label for="lunar">기념일</label></td>
+                            <td><input type="radio" name="calCate" id="holiday" value="30">
+                    			 <label for="lift">전사일정</label> &nbsp;&nbsp;
+                    			 <input type="radio" name="calCate" id="anniversary" value="40">
+                    			 <label for="lunar">휴일</label></td>
                         </tr>
 					</table>
 					<div class="modal-footer">
@@ -181,15 +135,14 @@
 		            className: 'select-checkbox',
 		            targets:   0
 		        },
-		        
-                { orderable: false, targets: [0,1,4]},
+                { orderable: false, targets: [0]},
 
               ],
               select: {
 		            style:    'multi',
 		            selector: 'td:first-child'
 		        },
-		        order: [[ 2, 'asc' ]],
+		        order: [[ 1, 'asc' ]],
               dom: '<"float-left"B>rtp',
 	        buttons: [{
 	            text: '추가',
@@ -201,8 +154,17 @@
 	            text: '삭제',
 	            className: 'btn-danger',
 	            action: function(e, dt, node, config) {
+	            	var calNos = [];
+	            	var rows = table.rows('.selected').data();
+	            	for(var i = 0;i<rows.length;i++){
+	            		calNos[i]=rows[i]['calNo'];
+	            		
+	            	} console.log(calNos);
+	            	window.location='deleteCalendar?calNos='+calNos;
 	            }
-	        }],
+	        }],language: {
+          	  zeroRecords:    "일정이 존재하지 않습니다."
+            },
 	        ajax : {
 				url :"selectCalendarList"
                 ,type : "POST"
@@ -216,10 +178,17 @@
                              }
                              return data;
                          }},
-				{data: "calType"},
-                {data: "calSDates"},
+                {data: "calSDates",
+                     		render: function(data, type, row){
+                             	if(type=='display'){
+                             		if(data!=row['calEDates']){
+                             			data = data+' ~ '+row['calEDates']
+                             		}
+                            	}
+                			return data;
+         		}},
                 {data: "calTitle"},
-                {data: "calCate"}
+                {data: "calCateName"}
                 ]
 	    });
 		$('input[name=all_selected]').on('click', function(){

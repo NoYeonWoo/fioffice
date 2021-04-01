@@ -36,6 +36,10 @@ public interface AdminService {
 
 	ArrayList<Calendar> selectCalendarList();
 
+	int insertCalendar(Calendar cal);
+
+	int deleteCalendar(String calNo);
+
 	
 
 }

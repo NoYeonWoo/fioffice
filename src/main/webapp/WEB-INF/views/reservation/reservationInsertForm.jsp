@@ -38,6 +38,21 @@ select::-ms-expand {
   /* for IE 11 */
   display: none;
 }
+.cards{
+	background-color: #B8ACD0 !important;
+	border-color: #B8ACD0 !important;
+	color: #fff !important;
+}
+.rcards{
+background-color:rgba(184, 172, 208, 0.5)!important;
+border-color:rgba(184, 172, 208, 0.5)!important;
+cursor:none;
+}
+.selectCards{
+background-color: #B87AD0 !important;
+border-color: #B87AD0 !important;
+
+}
  </style>
 </head>
 
@@ -45,8 +60,8 @@ select::-ms-expand {
    <jsp:include page="../common/sidebar.jsp"/>
    <jsp:include page="../common/topbar.jsp"/>
 <!--메인 화면 전체시작 -->
-   <div class="pcoded-main-container">
-     <div class="pcoded-content">
+<div class="pcoded-main-container">
+<div class="pcoded-content">
      
         
    <!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
@@ -66,105 +81,239 @@ select::-ms-expand {
             </div>
         </div>
   <!-- [ breadcrumb ] end -->
-  
+  	<script>
+		var rNo="";
+		var selectDate = "";
+		var selectTime = [];
+		var empNo ='${loginUser.empNo }';
+	</script>
   
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
-			<div class="col-sm-10 mx-auto">
-                <div class="card" style="min-height: 100vh;" >
-                    <div class="card-header">
-                        <h3>회의실예약</h3>
-                    </div>
-                    <div class="card-body" >
-                    	<div class="roomSelect">
-                    		<select id="meetingroom" class="form-select form-select-lg" aria-label=".form-select-lg example">
-                    			<option value="">--회의실선택--</option>
-                    			<c:forEach items="${ rList }" var="r">	
-                                 	<option value="${ r.roomNo }">${ r.roomName }</option>
-					            </c:forEach>
-                    		</select>
-                    		<button type="button" data-toggle="modal" data-target="#myReservation" class="btn btn-primary" style="float:right">내 예약보기</button>
-                		</div> 
-                		<hr style="border: 3px #B8ACD0 solid; width:88%; border-radius: 2em;">
-                	<div id="calendarWrapper">
-			           	<div id="calendar">
-			           	</div>
-                    </div>
+	<div class="col-sm-10 mx-auto">
+		<div class="card" style="min-height: 100vh;" >
+			<div class="card-header">
+				<h3>회의실예약</h3>
+			</div>
+            <div class="card-body" >
+            	<div class="roomSelect">
+                	<select id="meetingroom" class="form-select form-select-lg" aria-label=".form-select-lg example">
+                    	<option value="">--회의실선택--</option>
+                    	<c:forEach items="${ rList }" var="r">	
+                           	<option value="${ r.roomNo }">${ r.roomName }</option>
+					    </c:forEach>
+                    </select>
+                   	<button type="button" data-toggle="modal" data-target="#myReservation" class="btn btn-primary" style="float:right">내 예약보기</button>
+                </div> 
+                <hr style="border: 3px #B8ACD0 solid; width:88%; border-radius: 2em;">
+                <div id="calendarWrapper">
+			    	<div id="calendar">
+			        </div>
                 </div>
-            </div>
-        </div>
- </div> <!--지우지 마세요    div class="row"  -->
-            </div> <!--지우지 마세요   div class="pcoded-content"  -->
-            </div> <!--지우지 마세요    div class="pcoded-main-container"  -->
+			</div>
+		</div>
+	</div>
+</div> <!--지우지 마세요    div class="row"  -->
+</div> <!--지우지 마세요   div class="pcoded-content"  -->
+</div> <!--지우지 마세요    div class="pcoded-main-container"  -->
 <!-- [ Main Content ] 메인화면 끝 -->
- <div class="modal fade" id="reservationTime">  
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">예약 시간</h4>
+
+
+	<script>
+	$(document).ready(function(){
+		$("#meetingroom").val("");
+	});
+	
+	$("#meetingroom").change(function() {
+		$("#calendar").children().remove();
+		if($("#meetingroom option:selected").val()!=""){
+			rNo = $("#meetingroom option:selected").val();
+			calrendarView();
+			$("#calendar").hide();
+			$("#calendar").fadeIn(1000);
+		}
+			//if(date!=""){
+			//rSelectDateFun(date);
+			//}
+	});
+	
+	function calrendarView(){
+		var today = new Date();
+		var yesterDate = new Date();
+		yesterDate.setDate(yesterDate.getDate()-1);
+		
+		var calendar = $('#calendar').fullCalendar( {
+			editable : false,
+			firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+			selectable : true,
+			defaultView : 'month',
+			dayClick: function(date, allDay, jsEvent, view) {
+	            //날짜 받아옴!
+				if(yesterDate > date){
+					alert("이미 지난 날짜는 선택할 수 없습니다.");
+				}else if(get_date_str(today) == get_date_str(date)){
+					alert("당일예약은 회사에 문의해주세요.");
+				}else{
+		            selectDate=get_date_str(date);
+		            selectDateRes();
+		           $("#addReservation").modal("show");  
+				}
+	          }
+		
+	      });	
+	}
+	function get_date_str(date)
+	{
+	    var sYear = date.getFullYear();
+	    var sMonth = date.getMonth() + 1;
+	    var sDate = date.getDate();
+
+	    sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
+	    sDate  = sDate > 9 ? sDate : "0" + sDate;
+	    return sYear.substring(2) +"/"+ sMonth +"/"+ sDate;
+	}
+	</script>
+	
+	
+<div class="modal fade" id="addReservation">  
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+		<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">예약 시간</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
-             <div class="modal-body">
-				<form name="resInsert" action="login.me" method="post" autocomplete="off">
-				<div class=" mb-4">
-				 	<label for="rTitle" class=" mr-sm-2">시간선택 :</label>
-                        <div class="btn-group mb-1">
-                        	<c:forEach begin="9" end="17" var="p">
-                           <div class="btn btn-primary">${p}시</div>
-                           </c:forEach>
-    					</div>
-    				</div>
-					<label for="rTitle" class="mr-sm-2">회의명 :</label> <!-- 오른쪽 마진 .5rem 크기만큼 -->
-                    <input type="text" class="form-control mr-sm-2" id="rTitle" name="rTitle"> <br> <!--  form-control 아래쪽 마진 -->
-                    <label for="rComment" class="mr-sm-2">설명 : </label>
-                    <textarea  rows="5" class="form-control mb-2 mr-sm-2" id="rComment" name="rComment" ></textarea>
+            <div class="modal-body">
+				<form name="resInsert" action="insertRes.re" method="post" autocomplete="off" onsubmit="return check();">
+					<div class=" mb-4">
+					 	<input type="hidden" name ="empNo" id="empNo" value="">
+					 	<input type="hidden" name ="roomNo" id="roomNo" value="">
+					 	<input type="hidden" name ="resDateS" id="resDateS" value="">
+					 	<input type="hidden" name ="staTime" id="staTime" value="">
+					 	<input type="hidden" name ="endTime" id="endTime" value="">
+					 	<label class=" mr-sm-2">시간선택 :</label>
+	                    <div class="btn-group mb-1" style="margin-left:2rem;">
+	    				</div>
+	    			</div>
+					<label for="resTitle" class="mr-sm-2">회의명 :</label> <!-- 오른쪽 마진 .5rem 크기만큼 -->
+	                <input type="text" class="form-control mr-sm-2" id="resTitle" name="resTitle"> <br> <!--  form-control 아래쪽 마진 -->
+	                <label for="resContent" class="mr-sm-2">설명 : </label>
+	                <textarea  rows="5" class="form-control mb-2 mr-sm-2" id="resContent" name="resContent" ></textarea>
 					<div class="modal-footer">
-                    	<button type="submit" class="btn btn-primary">예약하기</button>
-                    	<button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
-                	</div>
+	                    <button type="submit" class="btn btn-primary">예약하기</button>
+	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소하기</button>
+	                </div>
 				</form>	
 			</div>
-            </div>
         </div>
     </div>
+</div>
     
-    <div class="modal fade" id="myReservation">  
-        <div class="modal-dialog modal-lg modal-dialog-centered">
-            <div class="modal-content">
-            <!-- Modal Header -->
-            <div class="modal-header">
-                <h4 class="modal-title">예약 시간</h4>
+    
+    <script>
+    function selectDateRes(date){
+		$(".btn-group").children().remove();
+		for(var i =9; i<=18; i++){
+			 $(".btn-group").append('<div class="cards btn" id="card'+i+'"><span>'+i+'</span>시</div>');
+		}
+
+		$.ajax({
+			type:"POST",
+			url: "selectDateRes.re",
+			data:{date:selectDate,
+				  rNo:rNo},
+			success:function(resList){
+				for(var i = 0; i<resList.length;i++){
+					for(var j = resList[i].staTime; j <= resList[i].endTime;j++){
+						console.log(j);
+						$("#card"+j).removeClass("cards").addClass("rcards");
+					}
+				}
+			},
+			error:function(e){  
+	            console.log(e.responseText);  
+	        }
+		});
+	}
+	
+	$(document).on('click',".cards",function(){
+		var st=$(this).children('span').text();
+		if($(".btn").is(".selectCards")){
+			if($("#card"+(st-1)).is(".selectCards")||$("#card"+(Number(st)+1)).is(".selectCards")){
+				$(this).addClass("selectCards").removeClass("cards");
+			}else{
+				alert("시간 선택은 연속적으로만 가능합니다.");
+			}
+		}else{
+			$(this).addClass("selectCards").removeClass("cards");
+		}
+			//console.log($(this).is(".selectCards"));
+	});
+	$(document).on('click',".selectCards",function(){
+		var st=$(this).children('span').text();
+		if($("#card"+(st-1)).is(".selectCards")&&$("#card"+(Number(st)+1)).is(".selectCards")){
+			alert("중간시간은 취소 할 수 없습니다.");
+		}else{
+			$(this).removeClass("selectCards").addClass("cards");
+		}
+		
+	});
+	$(document).on('click',".rcards",function(){
+	  	alert("이미 예약된 시간입니다.");
+	});
+	
+	function check(){
+		var count=0;
+		selectTime=[];
+		if($(".btn").is(".selectCards")===false){
+			alert("시간을 선택해주세요.");
+			return false;
+		}if($("#resTitle").val()==""){
+			$("#resTitle").attr("placeholder","제목을 입력해주세요.");
+			$("#resTitle").focus();
+			return false;
+		}if($("#resContent").val()==""){
+			$("#resContent").attr("placeholder","내용을 입력해주세요.");
+			$("#resContent").focus();
+			return false;
+		}
+		$("#empNo").val(empNo);
+		$("#roomNo").val(rNo);
+		$("#resDateS").val(selectDate);
+		for(var i = 9; i<=18; i++ ){
+			if($("#card"+i).is(".selectCards")){
+				selectTime[count]= i;
+				count++;
+			}
+		}
+		$("#staTime").val(Math.min.apply(null,selectTime));
+		$("#endTime").val(Math.max.apply(null,selectTime));
+		return true;
+	}
+    </script>
+    
+    
+<div class="modal fade" id="myReservation">  
+	<div class="modal-dialog modal-lg modal-dialog-centered">
+		<div class="modal-content">
+		<!-- Modal Header -->
+			<div class="modal-header">
+				<h4 class="modal-title">예약 시간</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
-             <div class="modal-body">
+            <div class="modal-body">
 				<form name="resInsert" action="login.me" method="post" autocomplete="off">
 					<table id="rList" class="table table-hover row-border  nowrap">
-	                                <thead>
-	                                    <tr>
-	                                    <th id="rDate" style="width: 20%;">날짜</th>
-	                                    <th id="rTitle" style="width: 40%;">회의명</th>
-	                                    <th id="rRoom" style="width: 20%;">회의실</th>
-	                                    <th id="rTime" style="width: 20%;">시간</th> 
-	                                    </tr>
-	                                </thead>
-	                                <tbody>  
-	                                <tr>
-	                                    <td>Gloria Little</td>
-	                                    <td>Systems Administrator</td>
-	                                    <td>New York</td>
-	                                    <td>59</td>
-	                                </tr><tr>
-	                                    <td>Gloria Little</td>
-	                                    <td> Administrator</td>
-	                                    <td>New Yo</td>
-	                                    <td>59</td>
-	                                </tr><tr>
-	                                    <td>Gloria Little</td>
-                                        <td>Systemsr</td>
-	                                    <td>New rk</td>
-	                                    <td>59</td>
-	                                </tr></tbody>
+	                	<thead>
+	                    	<tr>
+	                        	<th id="rDate" style="width: 20%;">날짜</th>
+	                            <th id="rTitle" style="width: 40%;">회의명</th>
+	                            <th id="rRoom" style="width: 20%;">회의실</th>
+	                            <th id="rTime" style="width: 20%;">시간</th> 
+	                        </tr>
+	                   	</thead>
+	                    <tbody>  
+	                    </tbody>
                     </table>
 					<div class="modal-footer">
                     	<button type="submit" class="btn btn-primary">수정하기</button>
@@ -172,53 +321,35 @@ select::-ms-expand {
                 	</div>
 				</form>	
 			</div>
-            </div>
-        </div>
-    </div>
-	<script>	   
-	$(document).ready(function(){
-   		$("#meetingroom").val("");
-   		
-		
-	    }); 
-	function calrendarView(){
-		var today = new Date();
-		var yesterDate = today.getTime() - (1 * 24 * 60 * 60 * 1000);
-
-		var calendar = $('#calendar').fullCalendar( {
-			editable : false,
-			firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
-			selectable : true,
-			defaultView : 'month',
-			dayClick: function(date, allDay, jsEvent, view) {
-	             //alert('Clicked on: ' + date);
-	            //날짜 받아옴!
-				if(yesterDate > date){
-					alert("이미 지난 날짜는 선택할 수 없습니다.");
-				}else{			             
-		            //date=info.dateStr;
-		            //$(".secondArea").fadeIn(1000);
-		           $("#reservationTime").modal("show");
-		            //rSelectDateFun(date);
+		</div>
+	</div>
+</div>
+	<script>
+	$("#myReservation").on('show.bs.modal',function(e){
+		$("#rList tbody").children().remove();
+		for(var i=9;i<=18;i++){
+			
+		}
+		$.ajax({
+			type:"POST",
+			url: "selectMyRes.re",
+			data:{empNo:empNo},
+			dataType: "JSON",
+			success:function(resList){
+				for(var i = 0; i<resList.length;i++){
+					$("#rList tbody").append(
+							'<tr><td>'+resList[i].resDateS+'</td><td>'+resList[i].resTitle+'</td><td>'
+							+resList[i].roomName+'</td><td>'+resList[i].staTime+'시 ~'+resList[i].endTime+'시</td></tr>')
 				}
-	          }
-		
-	      });
-		
-	}
-	$("#meetingroom").change(function() {
-		$("#calendar").children().remove();
-		if($("#meetingroom option:selected").val()!=""){
-		rNo = $("#meetingroom option:selected").val();
-		calrendarView();
-		$("#calendar").hide();
-   		$("#calendar").fadeIn(1000);}
-   		//if(date!=""){
-   		//rSelectDateFun(date);
-   		//}
+			},
+			error:function(e){  
+	            console.log(e.responseText);  
+	        }
+		});
+	}); 
+	$('.modal').on('hidden.bs.modal', function (e) {
+	    $(this).find('form')[0].reset()
 	});
-	
-	 	
 	</script>
 
    

@@ -10,6 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.productInOut.model.service.ProductInOutService;
@@ -18,6 +20,7 @@ import com.kh.spring.productInOut.model.vo.Inout;
 import com.kh.spring.productInOut.model.vo.Product;
 
 @Controller
+@SessionAttributes("msg")
 public class ProductInOutController {
 	
 	@Autowired
@@ -71,46 +74,51 @@ public class ProductInOutController {
 		}
 		int result = proInoutService.insertClient(client);
 		if(result > 0) {
+			model.addAttribute("msg","거래처추가를 성공하였습니다.");
 			return "redirect:cList.pio";
 		}else {
 			model.addAttribute("msg","거래처추가를 실패하였습니다.");
-			return "forward:cList.pio";
+			return "redirect:cList.pio";
 		}
 		
 	}
 
 	//거래처 수정
 	@RequestMapping("updateClient")
-	public String updateClient(Client client, String post, String address1, String address2, Model model) {
+	public String updateClient(Client client, String post, String address1, String address2, Model model,RedirectAttributes rd) {
 		client.setAddress(post + "/" + address1 + "/" + address2);
 		if(client.getComment().equals("")) {
 			client.setComment(null);
 		}
 		int result = proInoutService.updateClient(client);
 		if(result > 0) {
-			model.addAttribute("cliNo",client.getCliNo());
-			return "forward:detailClient";
+			rd.addAttribute("cliNo",client.getCliNo());
+			model.addAttribute("msg","거래처수정을 성공하였습니다.");
+			return "redirect:detailClient";
 		}else {
+			rd.addAttribute("cliNo",client.getCliNo());
 			model.addAttribute("msg","거래처수정을 실패하였습니다.");
-			return "forward:detailClient";
+			return "redirect:detailClient";
 		}
 	}
 	
 	//거래처 삭제
 	@RequestMapping("deleteClient")
-	public String deleteClient(String cliNo, Model model) {
+	public String deleteClient(String cliNo, Model model,RedirectAttributes rd) {
 		int count = proInoutService.selectProductCount(cliNo);
 		if(count <= 0) {
 			int result = proInoutService.deleteClient(cliNo);
 			if(result > 0) {
 				return "redirect:cList.pio";
 			}else {
+				rd.addAttribute("cliNo",cliNo);
 				model.addAttribute("msg","삭제를 실패하였습니다.");
-				return "forward:detailClient";
+				return "redirect:detailClient";
 			}
 		}else {
+			rd.addAttribute("cliNo",cliNo);
 			model.addAttribute("msg","거래처 관련 상품이 남아있습니다.");
-			return "forward:detailClient";
+			return "redirect:detailClient";
 		}
 		
 	}
@@ -173,37 +181,38 @@ public class ProductInOutController {
 			return "redirect:pList.pio";
 		}else {
 			model.addAttribute("msg","상품추가를 실패하였습니다.");
-			return "forward:pList.pio";
+			return "redirect:pList.pio";
 		}
 			
 	}
 	
 	//거래처 수정
 	@RequestMapping("updateProduct")
-	public String updateProduct(Product product, Model model) {
+	public String updateProduct(Product product, Model model, RedirectAttributes rd) {
 		if(product.getComment().equals("")) {
 			product.setComment(null);
 		}
 		int result = proInoutService.updateProduct(product);
 		if(result > 0) {
-			model.addAttribute("proNo",product.getProNo());
-			return "forward:detailProduct";
+			rd.addAttribute("proNo",product.getProNo());
+			return "redirect:detailProduct";
 		}else {
 			model.addAttribute("msg","상품수정을 실패하였습니다.");
-			return "forward:detailProduct";
+			return "redirect:detailProduct";
 		}
 	}
 		
 	//상품 삭제
 	@RequestMapping("deleteProduct")
-	public String deleteProduct(String proNo, Model model) {
+	public String deleteProduct(String proNo, Model model, RedirectAttributes rd) {
 		
 		int result = proInoutService.deleteProduct(proNo);
 		if(result > 0) {
 			return "redirect:pList.pio";
 		}else {
+			rd.addAttribute("proNo",proNo);
 			model.addAttribute("msg","상품삭제를 실패하였습니다.");
-			return "forward:detailClient";
+			return "redirect:detailProduct";
 		}
 			
 	}
@@ -276,12 +285,12 @@ public class ProductInOutController {
 				return "redirect:ioList.pio";
 			}else {
 				model.addAttribute("msg","상품수정을 실패하였습니다.");
-				return "forward:ioList.pio";
+				return "redirect:ioList.pio";
 			}
 			
 		}else {
 			model.addAttribute("msg","입출고추가를 실패하였습니다.");
-			return "forward:ioList.pio";
+			return "redirect:ioList.pio";
 		}
 				
 	}
@@ -293,7 +302,7 @@ public class ProductInOutController {
 		if(io.getSortation().equals("입고")) {
 			if(p.getStock()-io.getQuantity()<0) {
 				model.addAttribute("msg","재고를 확인해주세요.");
-				return "forward:ioList.pio";
+				return "redirect:ioList.pio";
 			}else {
 				p.setStock(p.getStock()-io.getQuantity());
 				p.setInStock(p.getInStock()-io.getQuantity());
@@ -306,10 +315,10 @@ public class ProductInOutController {
 			int ioUpdate = proInoutService.deleteInout(inoutNo);
 			if(pUpdate<0||ioUpdate<0) {
 				model.addAttribute("msg","취소를 실패하였습니다.");
-				return "forward:ioList.pio";
+				return "redirect:ioList.pio";
 			}
 			model.addAttribute("msg","취소를 성공하였습니다.");
-			return "forward:ioList.pio";
+			return "redirect:ioList.pio";
 	}
 	
 }
