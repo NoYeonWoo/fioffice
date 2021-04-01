@@ -37,6 +37,7 @@ import com.kh.spring.employee.model.vo.Employee;
 
 
 
+
 @SessionAttributes({"loginUser", "msg"})// Model에 loginUser라는 키값으로 객체가 추가되면 자동으로 세션에 추가하는 어노테이션 
 @Controller
 public class EmployeeController {
@@ -196,41 +197,38 @@ public class EmployeeController {
 	
 /*로그인 암호화 전  */	
 	 @RequestMapping(value="login.me",method=RequestMethod.POST)
-   public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
-		 Employee loginUser = (Employee) session.getAttribute("loginUser");
-	     
-  	     
-	   if(emp.getEmpNo().equals(emp.getEmpPwd())){     
-	   
-	      loginUser=employeeService.loginEmployee(emp);
-	  
-	 		 model.addAttribute("loginUser", loginUser);
-			 session.setAttribute("loginUser", loginUser);
-	     	model.addAttribute("msg","비밀번호를 변경해주세요");
-    	   return "employee/mypage";
-	     
-	   }else {
-		 
-		     try {
-		    	  loginUser=employeeService.loginEncEmployee(bCryptPasswordEncoder,emp);
-
-
-					model.addAttribute("loginUser", loginUser);
-					model.addAttribute("msg",loginUser.getEmpName()+"님 환영합니다.");
-					 return "common/main";
-				} catch (Exception e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-					model.addAttribute("msg","로그인실패!");
-					 return "common/errorPage";
-				} 
+	   public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
+			 Employee loginUser = (Employee) session.getAttribute("loginUser");
+		     
+	  	     
+		   if(emp.getEmpNo().equals(emp.getEmpPwd())){     
 		   
-	   }
+				loginUser = employeeService.loginEmployee(emp);
+              if(loginUser.getEmpName()!= null) {
+				model.addAttribute("loginUser", loginUser);
+				session.setAttribute("loginUser", loginUser);
+				model.addAttribute("msg", "비밀번호를 변경해주세요");
+				return "employee/mypage";
+              }else {
+            	  model.addAttribute("msg", "로그인을 진행해 주세요");
+              }
+		   }else {
+			   loginUser=employeeService.loginEncEmployee(bCryptPasswordEncoder,emp);
+			    if(loginUser!= null) {
+			    	  
+						model.addAttribute("loginUser", loginUser);
+						model.addAttribute("msg",loginUser.getEmpName()+"님 환영합니다.");
+						 return "common/main";
+			    }else {
+						model.addAttribute("msg","로그인실패!");
+						return"redirect:/";
+			    }
+			   
+		   }
+		return null;
 
-	
+		
 	 }
-	 
-	 
 	 
 
 	 
@@ -281,8 +279,8 @@ public class EmployeeController {
 
 			
 			if(!bCryptPasswordEncoder.matches(currentPwd,OriginPwd)  ){//뒤가 인코딩 된 psw로 순서를 넣어줘야함
-				
-				throw new Exception("암호를 확인하세요:불일치");
+				 model.addAttribute("msg", "암호를 확인하세요:불일치");
+				//throw new Exception("암호를 확인하세요:불일치");
 			}else {
 				emp.setEmpPwd(encPwd);
 				System.out.println("encPwd:::"+encPwd);
@@ -294,10 +292,42 @@ public class EmployeeController {
 				 session.setAttribute("msg", "비밀번호수정 완료!!!");
 	        	 return "employee/mypage";
 			}else {
-				 model.addAttribute("msg","수정실패!");
+				session.setAttribute("msg","수정실패!");
 				    	 throw new CommException("회원정보수정에 실패하였습니다");}
 				    	 }
 		 		
+	    
+	    
+	    
+	    @RequestMapping(value="resetpw.do", method=RequestMethod.POST)	
+		 public String resetPwd ( Employee emp, @RequestParam("empNo")String empNo,
+				                                            @RequestParam("email")String email ,HttpSession session,Model model)throws Exception {
+		    
+		
+			 System.out.println("empNo :::"+empNo);
+    		System.out.println("email:::"+email);
+			
+	
+			if((emp.getEmpNo().equals(empNo)) && emp.getEmail().equals(email) ){
+				
+		     
+			int result=employeeService.resetPwd(emp);
+			System.out.println(result);
+			if(result>0) {
+				 model.addAttribute("emp",emp);
+				 session.setAttribute("msg", "비밀번호초기화 완료! 사번으로 로그인해 주세요 ");
+	        	 return "redirect:/";
+			}else {
+				session.setAttribute("msg","수정실패!");
+				 return "redirect:/";
+		 }
+		 	
+	
+	    
+			}
+			return null;
+	    }
+	    
  /*로그인 암호화 후 	
 	 
 	 @RequestMapping(value="login.me",method = RequestMethod.POST)

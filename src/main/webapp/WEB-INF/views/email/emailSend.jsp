@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,7 +9,7 @@
 	text-align:center;
 	margin: auto;
 }
-#textbig{ 
+#emailContent{ 
 	height:800px; 
     resize:none;
 
@@ -57,33 +58,42 @@
             <div class="col-xl-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>Basic Component</h5>
+                        <h5>이메일 보내기</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="EmailSend" action="send.email" method="post">
                             <div class="row">
-                                <div class="col-sm-6">
+                                <div class="col-sm-9">
                                     <div class="form-group">
-                                        <label class="floating-label" for="Text">보낸사람</label>
-                                        <input type="text" class="form-control" id="Text" value="">
+                                        <label class="floating-label" for="Text">받는사람</label>
+                                        <input type="hidden" name="emailReceiveEmail" value="${emailInfo2.emailEmail}">
+                                        <input type="text" class="form-control" id="empNo" name="empNo" value="" placeholder="상대방 사번을 쓰시오">
                                     </div>
                                 </div>
-                                <div class="col-sm-6">
+                                <div class="col-sm-3">
                                     <div class="form-group">
-                                        <label class="floating-label" for="Text">시간</label>
-                                        <input type="text" class="form-control" id="Text" placeholder="">
+                                        <label class="floating-label" for="Text">중요성</label>
+                                        <label class="form-control">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                        	<input type="radio" class="" id="emailImportant" name="emailImportant" value="Y">Y
+                                        	<input type="radio" class="" id="emailImportant" name="emailImportant" value="N">N
+                                        </label>
+                                        <!--
+                                        <input type="radio" class="form-control" id="emailImportant" name="emailImportant" value="Y">Y
+                                        <input type="radio" class="form-control" id="emailImportant" name="emailImportant" value="N">N
+                                        -->
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label class="floating-label" for="Email">제목</label>
-                                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="">
+                                        <label class="floating-label" for="Email">이메일</label>
+                                        <input type="hidden" name="emailReceive" value="${emailInfo2.empNo}">
+                                        <input type="email" class="form-control" id="emailSendEmail" name='emailSendEmail' aria-describedby="emailTitle" placeholder="상대방 이메일을 쓰시오">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <label class="floating-label" for="Email">파일</label>
-                                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="">
+                                        <label class="floating-label" for="Text">제목</label>
+                                        <input type="text" class="form-control" id="emailTitle" name="emailTitle" placeholder="">
                                     </div>
                                 </div>
                                 
@@ -98,9 +108,9 @@
                             
                                 <div class="input-group">
                             	<div class="input-group-prepend">
-                                <span class="input-group-text">메모</span>
+                                <span class="input-group-text">내용</span>
                            	 	</div>
-                            	<textarea id="textbig" class="form-control" aria-label="With textarea" ></textarea>
+                            	<textarea id="emailContent" name="emailContent" class="form-control" aria-label="With textarea" ></textarea>
                         		</div>
                         
                         	</div>
@@ -108,9 +118,24 @@
                         
                         	<div class="row" id="center">
                         	<div class="col-md-12">
+                        	
+                        	
+                        	<!--
+                        	<input type="hidden" name="empNo" value="${emailInfo.empNo}">
+                        	<input type="hidden" name="emailEmail" value="${emailInfo.emailEmail}">
+                        	<input type="hidden" name="emailId" value="${emailInfo.emailId}">
+                        	<input type="hidden" name="emailPwd" value="${emailInfo.emailPwd}">
+                        	<input type="hidden" name="emailHost" value="${emailInfo.emailHost}">
+                        	<input type="hidden" name="emailPort" value="${emailInfo.emailPort}">
+                        	-->${loginUser.empNo}
+                        	${emailInfo2.emailEmail}
+                        	${emailInfo2.emailEmail}
+                        	${email.emailTitle}
+                        	<input type="text" name="emailReceiveEmail" value="${emailInfo2.emailEmail}">
+                        	
 
 							<div class="card-body">
-								<button type="button" class="btn  btn-primary btn-lg">보내기</button>
+								<button type="button" class="btn  btn-primary btn-lg" onclick="$('#EmailSend').submit();">전송하기</button></a>
 							</div>
 
 								</div>

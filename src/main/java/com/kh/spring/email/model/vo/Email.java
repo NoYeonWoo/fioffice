@@ -20,10 +20,14 @@ public class Email {
 	public String emailTime;
 	public String status;
 	public String emailImportant;
-	public String emailSend;
-	public String emailReceive;
 	
+	
+	public String empNo;// 로그인한놈
 	public String emailSendEmail;
+	
+	
+	
+	public String emailReceive;// 타인
 	public String emailReceiveEmail;
 
 	

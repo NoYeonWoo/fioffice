@@ -230,6 +230,7 @@
               ]
     
         });
+        
         $('#detailEmp').on('show.bs.modal', function (event) {
            $.ajax({
               type:"POST",  

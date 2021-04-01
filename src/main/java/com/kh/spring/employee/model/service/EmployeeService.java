@@ -36,5 +36,7 @@ public interface EmployeeService {
 
 	int updatePwd(Employee emp);
 
+	int resetPwd(Employee emp);
+
 		
 }

@@ -12,7 +12,7 @@ import com.kh.spring.employee.model.vo.Employee;
 
 @Repository("addressDao")
 public class AddressDao {
-
+//////////////////////////
 	public int selectListCount(SqlSessionTemplate sqlSession,String eno) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("addressMapper.selectListCount",eno);
@@ -20,12 +20,11 @@ public class AddressDao {
 
 	public ArrayList<Address> selectListCount(SqlSessionTemplate sqlSession, PageInfo pi) {
 		// TODO Auto-generated method stub
-		
 		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("addressMapper.selectList", null, rowBounds); 
 	}
-
+/////////////////////////
 	public int insertAddress(SqlSessionTemplate sqlSession, Address a) {
 		// TODO Auto-generated method stub
 		return sqlSession.insert("addressMapper.insertAddress",a);

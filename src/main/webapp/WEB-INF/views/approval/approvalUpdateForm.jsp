@@ -56,7 +56,17 @@
 						<div class="card-body">
 					  <form id="updateForm" method="post" action="updateApproval.do" enctype="multipart/form-data" >
                               <input type="hidden" name="approvalNo" value="${ap.approvalNo }">
-                            
+                              <input type="hidden" name="apstatus" value="${ap.status }">
+                               <strong>결재종류 : </strong>
+						 <select name="formNo" id="formNo" class="form-control form-control-sm" style="width:20%;" id="tutor_graduateStatus"  target = "${ap.formNo }" >
+							<option value="">분류</option>
+		                     <option value="1" style="color : black;">휴가계</option>
+		                     <option value="2" style="color : black;">연장근무신청</option>
+		                     <option value="3" style="color : black;">출장품의서</option>
+		                    <option value="3" style="color : black;">채용요청서</option>
+		                     <option value="4" style="color : black;">지출결의서</option>
+                  	      </select>
+                  	      <br>
 								<div class="form-group">
 									<strong>기안자 : </strong><input type="text" class="form-control"
 										value="${ap.empName} ( ${ap.deptName} ${ap.empPosition}) "
@@ -67,11 +77,13 @@
 										<strong>결재자 : </strong><input type="text" class="form-control"
 											value="${firstApprEmp.empName} ${firstApprEmp.deptName} ${firstApprEmp.empPosition}"
 											name="firstApprEmp" disabled>
+											<input type="hidden"  value="${firstApprEmp.empNo}" name="firstApprEmp">
 									</div>
 									<div class="form-group col-lg-6">
 										<strong>최종결재자 : </strong><input type="text"
 											class="form-control" value="${lastAppEmp.empName} 대표이사"
 											name="lastAppEmp" readonly>
+										<input type="hidden"  value="${lastAppEmp.empNo}" name="lastAppEmp">	
 									</div>
 
 								</div>
@@ -114,65 +126,6 @@
 					</div>		
 			   </form>				
 							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-							
-									<div id="buttons" style="margin-left: 80%;">
-						   	  <c:if test="${(sessionScope.loginUser.empNo eq ap.firstApprEmp) && (ap.status ne 'A')  }">
-										<button type="button"
-											onclick="postFormSubmit(1)"
-											class="btn btn-success">승인1</button>
-											
-											<button type="button"
-											onclick="postFormSubmit(2)"
-											class="btn btn-danger">반려</button>	
-											
-											</c:if>	
-     					   	  <c:if test="${ (sessionScope.loginUser.jobCode eq 'J10') && (ap.status ne 'C')   }">
-											
-										<button type="button"
-											onclick="postFormSubmit(3)"
-											class="btn btn-success">승인</button>		
-											
-												<button type="button"
-											onclick="postFormSubmit(2)"
-											class="btn btn-danger">반려</button>
-                            </c:if>
-									</div> <!--  버튼그룹 끝  -->
 							<form id="postForm"  method="post">
 								<input type="hidden" name="ano" value="${ap.approvalNo}">
 					       
@@ -234,13 +187,49 @@
 		$(document).on('click','#delete',function(){
 			if(confirm("정말로 삭제하시겠습니까?\n삭제 후엔 복구가 불가능합니다.")){
 				$("#updateForm").submit();
+			}else{
+				return false;
 			}					
 		});
 		
+		
+		
+		
 		$(document).on('click','#update',function(){
+			
+			var formNo = $("#formNo").val();
+			var approvalTitle = $("#approvalTitle").val();
+			var summernote = $("#summernote").val();
+			
+			
+			if (formNo == "") {
+				alert("결재종류를 선택해 주세요!");
+				$("#formNo").focus();
+				return false;
+			}
+			if (approvalTitle == "") {
+				alert("제목을 입력해주세요!");
+				$("#approvalTitle").focus();
+				$("#approvalTitle").val("");
+				
+				return false;
+			}
+
+			if (summernote == "") {
+				alert("내용을 입력해 주세요!");
+				$("#summernote").focus();
+				$("#summernote").val("");
+				return false;
+			}
+		
 			if(confirm("정말로 제출하시겠습니까?\n기안 후엔 수정이 불가능합니다.")){
-				$("#delete").submit();
-			}					
+		
+			document.updateForm.method = "post";
+			document.updateForm.action = "updateApproval.do";
+			document.updateForm.submit();
+			}else{
+				return false;
+			}
 		});
 	</script>
 

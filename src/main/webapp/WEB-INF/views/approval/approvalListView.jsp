@@ -63,8 +63,8 @@
 
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
-									<!--  <th style="width:10%;">결재양식</th>		-->
-									<th style="width: 10%;">긴급</th>
+								     <th style="width:10%;">결재양식</th>		
+									<th style="width: 10%; ">긴급</th>
 									<th>제목</th>
 
 								</tr>
@@ -76,8 +76,8 @@
 											<tr>
 												<td>${al.approvalNo }</td>
 												<td>${al.approvalDate }</td>
-												<!--   <td >${yl.formName }</td> -->
-												<td>${al.urgent }</td>
+											    <td >${al.formName }</td> 
+												<td><strong><font color="#DC143C">${al.urgent }</font></strong></td>
 												<td>${al.approvalTitle }</td>
 
 											</tr>
@@ -99,10 +99,10 @@
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
-
-									<th style="width: 10%;">긴급</th>
+                                    <th style="width:10%;">결재양식</th>	
+									<th style="width: 10%; font-color:red;">긴급</th>
 									<th>제목</th>
-									<th>상태</th>
+								    <th  style="width: 10%;">상태</th>
 
 								</tr>
                               </thead>
@@ -113,8 +113,8 @@
 											<tr>
 												<td>${al.approvalNo }</td>
 												<td>${al.approvalDate }</td>
-
-												<td>${al.urgent }</td>
+                                                <td >${al.formName }</td> 
+											   <td><strong><font color="#DC143C">${al.urgent }</font></strong></td>
 												<td>${al.approvalTitle }</td>
                                                 <td><i class="fas fa-clipboard-list" /><a href=""data-toggle="modal" data-id="'+row['approvalNo']+'" data-target="#detailEmp">수정하기</a></td>
                                                
@@ -137,7 +137,7 @@
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
-									<!--  <th style="width:10%;">결재양식</th>		-->
+									  <th style="width:10%;">결재양식</th>	
 									<th style="width: 10%;">긴급</th>
 									<th>제목</th>
 
@@ -151,8 +151,8 @@
 											<tr>
 												<td>${al.approvalNo }</td>
 												<td>${al.approvalDate }</td>
-												<!--   <td >${yl.formName }</td> -->
-												<td>${al.urgent }</td>
+												<td >${al.formName }</td> 
+											   <td><strong><font color="#DC143C">${al.urgent }</font></strong></td>
 												<td>${al.approvalTitle }</td>
 
 											</tr>
@@ -180,14 +180,16 @@
 							<caption>● 결재 진행 > 미결재 문서</caption>
 							<br>
 							<br>
-							<table id="boardList" class="table table-bordered" style="text-align: center;">
+							<table id="boardList" class="table table-bordered" style="text-align: center; width: 80%;">
 							<thead>
 								<tr>
-									<th style="width: 10%;"> 품의 번호</th>
+									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
+									<th style="width: 5%;">긴급</th>
+									  <th style="width:10%;">결재양식</th>	
 									<th style="width: 10%;">기안자</th>
 									<th>제목</th>
-									<th style="width: 10%;">상태</th>
+								
 
 								</tr>
                             </thead>
@@ -195,12 +197,12 @@
 									<c:forEach items="${ falist }" var="fa">
 										<c:if test="${fa.status eq 'Y' && fa.firstApprEmp eq loginUser.empNo}">
 										<tr>
-											<td>${fa.approvalNo}</td>
+										<td>${fa.approvalNo}</td>
 											<td>${fa.approvalDate}</td>
-											<td>${fa.empName}</td>
+											<td><strong><font color="#DC143C">${fa.urgent }</font></strong></td>
+											<td >${fa.formName }</td>
+											<td>${fa.empName}</td>											
 											<td>${fa.approvalTitle}</td>
-											<td></td>
-
 
 
 
@@ -216,10 +218,12 @@
 										<tr>
 											<td>${cl.approvalNo}</td>
 											<td>${cl.approvalDate}</td>
-											<td>${cl.empName}</td>
+											<td><strong><font color="#DC143C">${cl.urgent }</font></strong></td>
+											<td >${cl.formName }</td>
+											<td>${cl.empName}</td>											
 											<td>${cl.approvalTitle}</td>
 										
-											<td></td>
+											
 
 
 
@@ -233,14 +237,16 @@
 							<caption>● 결재 진행 > 결재 문서</caption>
 							<br>
 							<br>
-							<table id="boardList" class="table table-bordered" style="text-align: center;">
+							<table id="boardList" class="table table-bordered" style="text-align: center;width: 80%;">
 							<thead>
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
 									<th style="width: 10%;">기안일</th>
+									<th style="width: 5%;">긴급</th>
+									  <th style="width:10%;">결재양식</th>	
 									<th style="width: 10%;">기안자</th>
 									<th>제목</th>
-									<th style="width: 10%;" >상태</th>
+									
 
 								</tr>
 							<thead>	
@@ -250,9 +256,11 @@
 										<tr>
 											<td>${fa.approvalNo}</td>
 											<td>${fa.approvalDate}</td>
-											<td>${fa.empName}</td>
+											<td><strong><font color="#DC143C">${fa.urgent }</font></strong></td>
+											<td >${fa.formName }</td>
+											<td>${fa.empName}</td>											
 											<td>${fa.approvalTitle}</td>
-											<td></td>
+										
 
 
 
@@ -269,12 +277,14 @@
 										<c:forEach items="${ clist }" var="cl">
 										<c:if test="${ (cl.lastAppEmp eq loginUser.empNo)  && (cl.status eq 'C') }">
 										<tr>
-											<td>${cl.approvalNo}</td>
+												<td>${cl.approvalNo}</td>
 											<td>${cl.approvalDate}</td>
-											<td>${cl.empName}</td>
+											<td><strong><font color="#DC143C">${cl.urgent }</font></strong></td>
+											<td >${cl.formName }</td>
+											<td>${cl.empName}</td>											
 											<td>${cl.approvalTitle}</td>
 										
-											<td></td>
+										
 
 
 
@@ -303,6 +313,7 @@
 				</script>
 
 			<script>
+		
 					$(function() {
 						$("#boardList_update tbody tr")
 								.click(

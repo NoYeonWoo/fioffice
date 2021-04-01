@@ -55,6 +55,7 @@
                         	<button type="button" class="btn  btn-primary">휴가계</button>
                         	<a href="view.workMain"><button type="button" class="btn  btn-primary">임시 메인</button></a>
                         	<a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인2</button></a>
+                        	<input type="hidden" name="empNo" value="${loginUser.empNo}">
                         </div>
                         </span>
                         

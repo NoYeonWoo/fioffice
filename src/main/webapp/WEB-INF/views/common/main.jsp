@@ -233,12 +233,13 @@
                     </div>
                 </div>
             </div>
-            <!-- [ Todo-list1 ] end -->-->
+            <!-- [ Todo-list1 ] end -->
  			<!-- [ Todo-list1 ] start -->
                    <div class="col-xl-6 col-md-12">
                 <div class="card table-card">
                     <div class="card-header">
-                        <h5>Projects</h5>
+                        <h5>   ${loginUser.empName } 의 toDo+    </h5>
+                                 
                         <div class="card-header-right">
                             <div class="btn-group card-option">
                                 <button type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -259,50 +260,17 @@
                             <table class="table table-hover mb-0" id="todoMainList">
                                 <thead>
                                     <tr>
-                                        <th>
-                                          
                                         
-                                            ${loginUser.empName } 의 toDo+
-                                        </th>
-                                     
-                                        <th>할일</th>
-                                        <th>Due Date</th>
-                                        <th class="text-right">check</th>
+                                        <th style= "text-align:left">제목</th>
+                                        <th style= "text-align:left">내용</th>
+                                        <th style= "text-align:right">마감날짜</th>
+                              
+                           
+                            
                                     </tr>
                                 </thead>
                            
-                                <tbody>
-                                     <tr>
-                                      
-                                        <td>
-                                     
-                                            <div class="chk-option">
-                                                <label class="check-task custom-control custom-checkbox d-flex justify-content-center done-task">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <span class="custom-control-label"></span>
-                                                </label>
-                                            </div>
-                                          
-                                            <div class="d-inline-block align-middle">
-                                                <img src="assets/images/user/avatar-4.jpg" alt="user image" class="img-radius wid-40 align-top m-r-15">
-                                                <div class="d-inline-block">
-                                                    <h6>John Deo ${item.todoTitle }</h6>
-                                                    <p class="text-muted m-b-0">${item.todoTitle }</p>
-                                                </div>
-                                                    
-                                            </div>
-                                   
-                                        </td>
-                                            
-                                        <td>Able Pro</td>
-                                        <td>Jun, 26</td>
-                                        <td class="text-right"><label class="badge badge-light-danger">Low</label>          </td>             
-                     
-                                 
-                                    </tr>
-                     
-                        
-              
+                                <tbody>                 
                                 </tbody>
                                 
                             </table>
@@ -311,39 +279,44 @@
                     </div>
                 </div>
             </div>
+            
             <script>
       function topList(){
          $.ajax({
             url : "todoMainListView.do",
-            type : "get",
             success : function(todolist) {
-               var value="";
-              
-               for(var i in todolist){
-            	  
-                  value += '<tr class="thumbbo"  data-tno="'+todolist[i].todoNo+'">'+
-                  
-                    '<td width="100px" align="left">'+todolist[i].todoTitle+'</td>'+
-                    '<td width="50px" align="left">'+todolist[i].todoContent+'</td>'+
-                    
-                    '</tr>';
-               }        
+            	$tableBody = $('#todoMainList tbody');
+            	$tableBody.html('');
+            	var todoS=${todolist.status}
+              	  	
+            	$.each(todolist, function(i, obj){
+            		var $tr = $('<tr>');	  
+               		var $tTitle = $('<td  style= "text-align:left">').text(obj.todoTitle);
+               		var $tContent = $('<td  style= "text-align:left">').text(obj.todoContent);
+              		var $tdoneDate = $('<td style= "text-align:right">').text(obj.todoDoneDate);
+              	 
                   
                
-               $("#todoMainList").html(value);
-            },
-            error : function() {
-               console.log("ajax 통신실패");
-            }
-
-         });
-      }
+				$tr.append($tTitle);
+				$tr.append($tContent);
+				$tr.append($tdoneDate);
+				$tableBody.append($tr);
+			});
+		}
+	});
+}
       $(function(){
          topList();
          <%--setInterval(function(){
             topList();
          }, 5000);--%>
+         
+     	$("#todoMainList tbody ").click(function(){
+			location.href="todoListView.do";
+		});
       })
+      
+  
    </script>
             <!-- [ Todo-list1 ] end -->
             

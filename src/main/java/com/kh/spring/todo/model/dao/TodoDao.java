@@ -43,7 +43,7 @@ public class TodoDao {
 
 	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession, Employee emp) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("todoMapper.selectTodo",emp);
+		return (ArrayList)sqlSession.selectList("todoMapper.selectMainTodo",emp);
 	}
 
 	public Todo selectTodo(SqlSessionTemplate sqlSession, String todoNo) {

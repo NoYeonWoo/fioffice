@@ -7,8 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"></jsp:include>
-	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
+
 	
 	<br>
 	<div align="center">	

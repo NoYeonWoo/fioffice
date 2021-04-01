@@ -57,6 +57,10 @@
 					
                               
 								<div class="form-group">
+								 <strong>결재종류 : </strong>
+								   <input type="text" class="form-control"
+										value="${ap.formName} "
+										name="formName" readonly>
 									<strong>기안자 : </strong><input type="text" class="form-control"
 										value="${ap.empName} ( ${ap.deptName} ${ap.empPosition}) "
 										name="empNo" readonly>
@@ -106,22 +110,22 @@
 							
 									<div id="buttons" style="margin-left: 80%;">
 						   	  <c:if test="${(sessionScope.loginUser.empNo eq ap.firstApprEmp) && (ap.status ne 'A')  }">
-										<button type="button"
+										<button type="button" id="confirm"
 											onclick="postFormSubmit(1)"
 											class="btn btn-success">승인1</button>
 											
-											<button type="button"
+											<button type="button" id="reject"
 											onclick="postFormSubmit(2)"
 											class="btn btn-danger">반려</button>	
 											
 											</c:if>	
      					   	  <c:if test="${ (sessionScope.loginUser.jobCode eq 'J10') && (ap.status ne 'C')   }">
 											
-										<button type="button"
+										<button type="button" id="confirm"
 											onclick="postFormSubmit(3)"
 											class="btn btn-success">승인</button>		
 											
-												<button type="button"
+												<button type="button" id="reject"
 											onclick="postFormSubmit(2)"
 											class="btn btn-danger">반려</button>
                             </c:if>
@@ -144,11 +148,32 @@
 									postForm.attr("action","updateCStatus.do");
 									
 								}
-								postForm.submit();
+						
 							}
 							
+							</script>
+							<script>
+							$(document).on('click','#confirm',function(){
+								if(confirm("정말로 승인하시겠습니까?\n승인 후엔 복구가 불가능합니다.")){
+									$("#postForm").submit();
+								}else{
+									return false;
+								}					
+							});
+							
+							
+							$(document).on('click','#reject',function() {
+								if(confirm("정말로 반려하시겠습니까?\n반려 후엔 복구가 불가능합니다.")){
+									$("#postForm").submit();
+								}else {
+									return false;
+								}					
+							});
 							
 							</script>
+							
+							
+							
 								
 								</div>
 						
