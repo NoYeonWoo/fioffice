@@ -65,7 +65,7 @@
 										<li><a href="mypage.do" class="dropdown-item"><i class="feather icon-user"></i> 마이 페이지</a></li>
 										<li><a href="email_inbox.html" class="dropdown-item"><i class="feather icon-message-circle"></i> 메신저</a></li>
 										<li><a href="" class="dropdown-item"><i class="feather icon-mail"></i> 이메일</a></li>
-										<li><a href="authority.ad" class="dropdown-item"><i class="feather icon-settings"></i> 관리자</a></li>
+										<li><a href="adminMain.ad" onclick="return adminCheck();"class="dropdown-item"><i class="feather icon-settings"></i> 관리자</a></li>
 									</ul>
 								</div>
 							</div>
@@ -73,7 +73,38 @@
 					</ul>
 				</div>
 				
-			
+			<script type="text/javascript">
+			function adminCheck(){
+				var type;
+				if(${loginUser.empNo}=='970601101'){
+					return true;
+				}else{
+					$.ajax({
+						type:"POST",
+						url:"checkAdmin.ad",
+						data:{
+							empNo:'${loginUser.empNo}'
+						},
+						async:false,
+						success:function(count){
+							console.log(count);
+							if(count==0){
+								alert("권한이 없습니다.");
+								type = false;
+							}
+							else{
+								type = true;
+							}
+						},
+						error:function(e){
+							console.log(e.responseText);
+						}
+						
+					});
+				}
+				return type;
+			}
+			</script>
 	</header>
 	<!-- [ Header ] end -->
 </body>

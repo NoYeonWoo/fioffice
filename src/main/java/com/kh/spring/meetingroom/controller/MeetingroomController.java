@@ -1,6 +1,9 @@
 package com.kh.spring.meetingroom.controller;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -8,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-
 
 import com.google.gson.GsonBuilder;
 import com.kh.spring.meetingroom.model.service.MeetingroomService;
@@ -83,20 +85,23 @@ public class MeetingroomController {
 	@RequestMapping("enrollForm.re")
 	public String authorityView(Model model) {
 		ArrayList<Meetingroom> rList = meetingService.selectRoomList();
-		System.out.println(rList);
+		Date time = new Date(System.currentTimeMillis());
+		meetingService.checkReservation(time);
 		model.addAttribute("rList",rList);
 		return "reservation/reservationInsertForm";
 	}
 	
-	//예약 체크
+	//예약날 체크
 	@RequestMapping("selectDateRes.re")
 	@ResponseBody
-	public String selectDateReservation(String selectDate,String rNo,Model model) {
+	public ArrayList<Reservation> selectDateReservation(String selectDate,String rNo,Model model) {
 		Reservation res = new Reservation();
-		res.setResDateS(selectDate);
+		System.out.println(selectDate);
+		res.setResDate(java.sql.Date.valueOf(selectDate));
 		res.setRoomNo(rNo);
+		System.out.println();
 		ArrayList<Reservation> resList = meetingService.selectDateReservation(res);
-		return new GsonBuilder().create().toJson(resList);
+		return resList;
 	}
 		
 	//내 예약리스트
@@ -123,5 +128,34 @@ public class MeetingroomController {
 			model.addAttribute("msg","예약을 실패하였습니다.");
 			return "redirect:enrollForm.re";
 		}
+	}
+	
+	//예약 취소
+	@RequestMapping("deleteReservation.re")
+	@ResponseBody
+	public String deleteReservation(String resNo) {
+		int result = meetingService.deleteReservation(resNo);
+		return String.valueOf(result);
+	}
+	
+	
+	//예약관리화면
+	@RequestMapping("reservation.ad")
+	public String reservationAdminView(Model model) {
+		Date time = new Date(System.currentTimeMillis());
+		meetingService.checkReservation(time);
+		return "admin/reservationAdminView";
+	}
+	
+	//예약리스트
+	@RequestMapping(value="selectReservation" , produces="application/json; charset=UTF-8")
+	@ResponseBody
+	public String selectReservation(String status) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		ArrayList<Reservation> resList = meetingService.selectReservation(status);
+		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
+		for(int i = 0; i < resList.size(); i++) resList.get(i).setResDateS(format.format(resList.get(i).getResDate()));
+		result.put("data", resList);
+		return new GsonBuilder().create().toJson(result);
 	}
 }

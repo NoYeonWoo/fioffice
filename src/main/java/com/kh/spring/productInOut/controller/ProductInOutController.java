@@ -34,7 +34,7 @@ public class ProductInOutController {
 	}
 	
 	//거래처 리스트
-	@RequestMapping(value="selectClientList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="selectClientList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectClientList() {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -134,7 +134,7 @@ public class ProductInOutController {
 	}
 	
 	//상품 리스트
-	@RequestMapping(value="selectProductList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="selectProductList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectProductList(String cliNo) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -244,7 +244,7 @@ public class ProductInOutController {
 	}
 	
 	//입출고리스트
-	@RequestMapping(value="selectInoutList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="selectInoutList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectInoutList(String proNo,String cliNo) {
 		Map<String, Object> result = new HashMap<String, Object>();

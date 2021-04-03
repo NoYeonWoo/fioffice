@@ -26,6 +26,8 @@ public class Reservation {
 	private String roomNo;
 	private String roomName;
 	private String empNo;
+	private String empName;
 	private String status;
+	private String location;
 	
 }

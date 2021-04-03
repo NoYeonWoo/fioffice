@@ -127,21 +127,6 @@
 	.app-board-category .app-category-child>ul>li.app-ative>a{font-weight:600}
 	
 	.app-board-category>li:hover>.app-category-child{display:block}
-	
-	div.left {
-        width: 50%;
-        float: left;
-        box-sizing: border-box;
-        
-    	}
-    
-    	div.right {
-        
-        float: right;
-        box-sizing: border-box;
-        
-   		}
-   	
    	tbody tr:hover td {
     background: #F8F9FA;
 	}
@@ -178,7 +163,7 @@
                             <h5 class="m-b-10"></h5>
                         </div>
                         <ul class="breadcrumb">
-                          <li class="breadcrumb-item"><a href="index.jsp">
+                          <li class="breadcrumb-item"><a href="adminMain.jsp">
                           <i class="feather icon-home"></i></a></li>
                         </ul>
                     </div>

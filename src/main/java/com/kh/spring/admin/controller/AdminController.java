@@ -44,7 +44,32 @@ public class AdminController {
 	
 
   //--------------------------------------------------------권한--------------------------------------------------------//
-  	//권한관리화면 /관리리스트
+	
+	//AdmimcheckCount
+	@RequestMapping("checkAdmin.ad")
+	@ResponseBody
+	public String checkAdmin(String empNo) {
+		int count = adminService.checkAdmin(empNo);
+		System.out.println(count);
+		return String.valueOf(count);
+	}
+	
+	//AdmimcheckCount
+	@RequestMapping("selectAdmin.ad")
+	@ResponseBody
+	public ArrayList selectAdmin(String empNo) {
+		ArrayList admin = adminService.selectAdmin(empNo);
+		System.out.println(admin);
+		return admin;
+	}
+		
+	//관리자메인화면
+	@RequestMapping("adminMain.ad")
+	public String adminMain(Model model) {
+		return "admin/adminMain";
+	}
+		
+	//권한관리화면 /관리리스트
 	@RequestMapping("authority.ad")
 	public String authorityView(Model model) {
 		ArrayList<AdminMenu> adminList = adminService.selectAdminList();
@@ -54,7 +79,7 @@ public class AdminController {
 	}
 	
 	//권한리스트
-	@RequestMapping(value="selectAuthList",produces="appliction/json; charset=UTF-8" )
+	@RequestMapping(value="selectAuthList",produces="application/json; charset=UTF-8" )
 	@ResponseBody
 	public String selectAuthList() {
 
@@ -131,7 +156,7 @@ public class AdminController {
 	}
 	
 	//상위부서리스트
-	@RequestMapping(value="deptMainList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="deptMainList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String deptMainList() {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -140,7 +165,7 @@ public class AdminController {
 	}
 	
 	//하위부서리스트
-	@RequestMapping(value="deptSubList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="deptSubList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String deptSubList(String deptCode) {
 		Map<String, Object> result = new HashMap<String, Object>();
@@ -163,7 +188,7 @@ public class AdminController {
 	}
 	
 	//부서 구성원리스트
-	@RequestMapping(value="deptEmpList",produces="appliction/json; charset=UTF-8" )
+	@RequestMapping(value="deptEmpList",produces="application/json; charset=UTF-8" )
 	@ResponseBody
 	public String deptEmpList(String deptCode) {
 
@@ -180,7 +205,7 @@ public class AdminController {
 	}
 	
 	//캘린더리스트
-	@RequestMapping(value="selectCalendarList", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="selectCalendarList", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectCalendarList() {
 		Map<String, Object> result = new HashMap<String, Object>();

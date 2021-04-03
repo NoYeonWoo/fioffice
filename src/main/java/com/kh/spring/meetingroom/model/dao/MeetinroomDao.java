@@ -53,4 +53,19 @@ public class MeetinroomDao {
 		return sqlSession.insert("meetingMapper.insertReservation", res);
 	}
 
+	public int deleteReservation(SqlSessionTemplate sqlSession, String resNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.delete("meetingMapper.deleteReservation",resNo);
+	}
+
+	public void checkReservation(SqlSessionTemplate sqlSession, Date time) {
+		// TODO Auto-generated method stub
+		sqlSession.delete("meetingMapper.checkReservation",time);
+	}
+
+	public ArrayList<Reservation> selectReservation(SqlSessionTemplate sqlSession, String status) {
+		// TODO Auto-generated method stub
+		return (ArrayList)sqlSession.selectList("meetingMapper.selectReservation",status);
+	}
+
 }

@@ -45,13 +45,18 @@ select::-ms-expand {
 }
 .rcards{
 background-color:rgba(184, 172, 208, 0.5)!important;
-border-color:rgba(184, 172, 208, 0.5)!important;
-cursor:none;
+cursor:default !important;
 }
 .selectCards{
 background-color: #B87AD0 !important;
 border-color: #B87AD0 !important;
 
+}
+#myRlist{
+	cursor:pointer !important;
+}
+.hide{
+	display:none;
 }
  </style>
 </head>
@@ -103,6 +108,7 @@ border-color: #B87AD0 !important;
                            	<option value="${ r.roomNo }">${ r.roomName }</option>
 					    </c:forEach>
                     </select>
+                   
                    	<button type="button" data-toggle="modal" data-target="#myReservation" class="btn btn-primary" style="float:right">내 예약보기</button>
                 </div> 
                 <hr style="border: 3px #B8ACD0 solid; width:88%; border-radius: 2em;">
@@ -122,12 +128,20 @@ border-color: #B87AD0 !important;
 	<script>
 	$(document).ready(function(){
 		$("#meetingroom").val("");
+		
 	});
 	
 	$("#meetingroom").change(function() {
 		$("#calendar").children().remove();
+		$("#rInfo").remove();
 		if($("#meetingroom option:selected").val()!=""){
 			rNo = $("#meetingroom option:selected").val();
+			<c:forEach items="${ rList }" var="r">
+			if(${r.roomNo}==rNo){
+				$("#meetingroom").after(' <span id="rInfo">최대인원 : ${r.limitCount}명 &nbsp;&nbsp;&nbsp;위치 : ${r.location}</span>')
+			}
+		</c:forEach>
+			
 			calrendarView();
 			$("#calendar").hide();
 			$("#calendar").fadeIn(1000);
@@ -155,6 +169,7 @@ border-color: #B87AD0 !important;
 					alert("당일예약은 회사에 문의해주세요.");
 				}else{
 		            selectDate=get_date_str(date);
+		            console.log(selectDate);
 		            selectDateRes();
 		           $("#addReservation").modal("show");  
 				}
@@ -167,10 +182,9 @@ border-color: #B87AD0 !important;
 	    var sYear = date.getFullYear();
 	    var sMonth = date.getMonth() + 1;
 	    var sDate = date.getDate();
-
 	    sMonth = sMonth > 9 ? sMonth : "0" + sMonth;
 	    sDate  = sDate > 9 ? sDate : "0" + sDate;
-	    return sYear.substring(2) +"/"+ sMonth +"/"+ sDate;
+	    return sYear +"-"+ sMonth +"-"+ sDate;
 	}
 	</script>
 	
@@ -220,12 +234,12 @@ border-color: #B87AD0 !important;
 		$.ajax({
 			type:"POST",
 			url: "selectDateRes.re",
-			data:{date:selectDate,
+			data:{selectDate:selectDate,
 				  rNo:rNo},
 			success:function(resList){
 				for(var i = 0; i<resList.length;i++){
 					for(var j = resList[i].staTime; j <= resList[i].endTime;j++){
-						console.log(j);
+						
 						$("#card"+j).removeClass("cards").addClass("rcards");
 					}
 				}
@@ -302,34 +316,27 @@ border-color: #B87AD0 !important;
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
             <div class="modal-body">
-				<form name="resInsert" action="login.me" method="post" autocomplete="off">
-					<table id="rList" class="table table-hover row-border  nowrap">
-	                	<thead>
-	                    	<tr>
-	                        	<th id="rDate" style="width: 20%;">날짜</th>
-	                            <th id="rTitle" style="width: 40%;">회의명</th>
-	                            <th id="rRoom" style="width: 20%;">회의실</th>
-	                            <th id="rTime" style="width: 20%;">시간</th> 
-	                        </tr>
-	                   	</thead>
-	                    <tbody>  
-	                    </tbody>
-                    </table>
-					<div class="modal-footer">
-                    	<button type="submit" class="btn btn-primary">수정하기</button>
-                    	<button type="button" class="btn btn-danger" data-dismiss="modal">삭제하기</button>
-                	</div>
-				</form>	
+				<table id="rList" class="table table-hover row-border  nowrap">
+	                <thead>
+	                    <tr>
+	                        <th style="width: 25%;">날짜</th>
+	                        <th style="width: 35%;">회의명</th>
+	                        <th style="width: 20%;">회의실</th>
+	                        <th style="width: 20%;">시간</th> 
+	                    </tr>
+	                </thead>
+	          	    <tbody>
+	                    
+	                 
+	                </tbody>
+                </table>
 			</div>
 		</div>
 	</div>
 </div>
 	<script>
-	$("#myReservation").on('show.bs.modal',function(e){
+	function myReservation(){
 		$("#rList tbody").children().remove();
-		for(var i=9;i<=18;i++){
-			
-		}
 		$.ajax({
 			type:"POST",
 			url: "selectMyRes.re",
@@ -338,20 +345,50 @@ border-color: #B87AD0 !important;
 			success:function(resList){
 				for(var i = 0; i<resList.length;i++){
 					$("#rList tbody").append(
-							'<tr><td>'+resList[i].resDateS+'</td><td>'+resList[i].resTitle+'</td><td>'
-							+resList[i].roomName+'</td><td>'+resList[i].staTime+'시 ~'+resList[i].endTime+'시</td></tr>')
+							'<tr id="myRlist"><td>'+resList[i].resDateS+'</td><td>'+resList[i].resTitle+'</td><td>'
+							+resList[i].roomName+'</td><td>'+resList[i].staTime+':00 ~'+(Number(resList[i].endTime)+1)+':00</td></tr>');
+					$("#rList tbody").append('<tr class="hide"><td colspan="5">'+
+                	'<span>회의실 장소 : </span><span>'+resList[i].location+'</span>'+
+                	'<p><button type="button" class="btn btn-sm btn-danger" onclick="deleteRes('+resList[i].resNo+')" style="float:right">예약취소</button></p>'+
+                	'<span>회의 내용 : </span><span style="padding-top:1rem;">'+resList[i].resContent+'</span></td></tr>');
 				}
 			},
 			error:function(e){  
 	            console.log(e.responseText);  
 	        }
 		});
+	}
+	$("#myReservation").on('show.bs.modal',function(e){
+		myReservation();
 	}); 
+	$(document).on("click","#rList #myRlist",function(event){
+		console.log($(this).closest('tr').next('tr'));
+		$(this).closest('tr').next('tr').toggleClass("hide");
+
+	});
+	function deleteRes(resNo){
+		console.log(resNo);
+		$.ajax({
+			type:"POST",
+			url:"deleteReservation.re",
+			data:{resNo:resNo},
+			success:function(result){
+				if(result>0){
+					alert("예약이 취소되었습니다.");
+					myReservation();
+				}else{
+					alert("예약취소가 실패하였습니다.")
+				}
+			},
+			error:function(e){  
+	            console.log(e.responseText);  
+	        }
+		});
+	}
 	$('.modal').on('hidden.bs.modal', function (e) {
-	    $(this).find('form')[0].reset()
+		$(this).find('form')[0].reset()
 	});
 	</script>
-
    
     
     <jsp:include page="../common/footer.jsp"/>

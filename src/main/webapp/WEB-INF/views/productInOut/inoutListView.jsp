@@ -213,13 +213,7 @@
 		
 		
 	});
- 	$('input[name=all_selected]').on('click', function(){
-		if ($(this).is( ":checked" )) {
-			table.rows(  ).select();
-		} else {
-			table.rows(  ).deselect();
-		}
-	});
+ 	
  	function selectioList(){
  		var table =$('#inoutList').DataTable({
  			destroy : true,

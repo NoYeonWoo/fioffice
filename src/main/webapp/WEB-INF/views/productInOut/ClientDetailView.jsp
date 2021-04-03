@@ -142,9 +142,9 @@ label{
                         </tr><tr>
                         <td style="width:15%">구분</td>
                             <td style="width:20%">
-                            	<input type="radio" name="sortation" value="입고">
+                            	<input type="radio" name="sortation" value="입고" checked onclick="return(false);">
                     			<label for="in">IN</label> &nbsp;&nbsp;
-                    			<input type="radio" name="sortation" value="출고">
+                    			<input type="radio" name="sortation" value="출고" checked onclick="return(false);">
                     			<label for="out">OUT</label></td>
                             <td style="width:20%">사업자등록번호</td>
                             <td style="width:20%"><input type="text" name="corporateNo"  class="form-control form-control-sm" style="width:80%" value="${client.corporateNo}"></td>
@@ -215,9 +215,6 @@ label{
 		if(name.cliName.value==""){
 			$(name.cliName).attr("placeholder","거래처명을 입력해주세요");
 			name.cliName.focus();
-			return false;
-		}else if(name.sortation.value==""){
-			alert("입/출고를 선택해주세요.");
 			return false;
 		}else if(name.corporateNo.value==""){
 			$(name.corporateNo).attr("placeholder","사업자등록번호를 입력해주세요");
