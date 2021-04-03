@@ -1,6 +1,8 @@
   <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@page import="java.sql.Timestamp"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,9 +14,20 @@
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     
+    <style>
+    		#center{
+	text-align:center;
+	margin: auto;
+	}
+    
+    
+    </style>
+    
+    
+    
 </head>
 
-<body class="       ">
+<body class="       " onload="printClock()">
       
    <!-- [ Pre-loader ] start 로딩기능 
    <div class="loader-bg">
@@ -54,100 +67,261 @@
           <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
          <div class="row">
          
+         
+         <c:set var="today" value="<%=new java.util.Date()%>" />
+				<!-- 현재날짜 -->
+				<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
+				
+				<form action="start.work" method="post" id="startWork">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}"><!-- 원래 eno -->
+    				<!--  <input type="hidden" name="timeNow" id="timeNow" value="${date}" />-->
+    			</form>
+    			<form action="end.work1" method="post" id="endWork1">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}">
+    				<!--<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />-->
+    			</form>
+    			<form action="end.work2" method="post" id="endWork2">
+    				<input type="hidden" name="empNo" id = "empNo" value="${loginUser.empNo}">
+    				<!--<input type="hidden" name="timeNow" id="timeNow"  value="${date}" />-->
+    			</form>
+         
          <!-- 근태관리 화면시작 -->
             <div class="col-xl-6 col-md-12">
-               <div class="card latest-update-card">
-                  <div class="card-header">
-                     <h5>근태관리</h5>
-                     <div class="card-header-right">
-                        <div class="btn-group card-option">
-                           <button type="button" class="btn dropdown-toggle"
-                              data-toggle="dropdown" aria-haspopup="true"
-                              aria-expanded="false">
-                              <i class="feather icon-more-horizontal"></i>
-                           </button>
-                           <ul
-                              class="list-unstyled card-option dropdown-menu dropdown-menu-right">
-                              <li class="dropdown-item full-card"><a href="#!"><span><i
-                                       class="feather icon-maximize"></i> maximize</span><span
-                                    style="display: none"><i
-                                       class="feather icon-minimize"></i> Restore</span></a></li>
-                              <li class="dropdown-item minimize-card"><a href="#!"><span><i
-                                       class="feather icon-minus"></i> collapse</span><span
-                                    style="display: none"><i class="feather icon-plus"></i>
-                                       expand</span></a></li>
-                              <li class="dropdown-item reload-card"><a href="#!"><i
-                                    class="feather icon-refresh-cw"></i> reload</a></li>
-                              <li class="dropdown-item close-card"><a href="#!"><i
-                                    class="feather icon-trash"></i> remove</a></li>
-                           </ul>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="card-body">
-                     <div class="latest-update-box">
-                        <div class="row p-t-30 p-b-30">
-                           <div class="col-auto text-right update-meta">
-                              <p class="text-muted m-b-0 d-inline-flex">2 hrs ago</p>
-                              <i class="feather icon-twitter bg-twitter update-icon"></i>
-                           </div>
-                           <div class="col">
-                              <a href="#!">
-                                 <h6>+ 1652 Followers</h6>
-                              </a>
-                              <p class="text-muted m-b-0">You’re getting more and more
-                                 followers, keep it up!</p>
-                           </div>
-                        </div>
-                        <div class="row p-b-30">
-                           <div class="col-auto text-right update-meta">
-                              <p class="text-muted m-b-0 d-inline-flex">4 hrs ago</p>
-                              <i class="feather icon-briefcase bg-c-red update-icon"></i>
-                           </div>
-                           <div class="col">
-                              <a href="#!">
-                                 <h6>+ 5 New Products were added!</h6>
-                              </a>
-                              <p class="text-muted m-b-0">Congratulations!</p>
-                           </div>
-                        </div>
-  	                  <div class="row p-b-0">
-                           <div class="col-auto text-right update-meta">
-                              <p class="text-muted m-b-0 d-inline-flex">2 day ago</p>
-                              <i class="feather icon-facebook bg-facebook update-icon"></i>
-                           </div>
-                           <div class="col">
-                              <a href="#!">
-                                 <h6>+1 Friend Requests</h6>
-                              </a>
-                              <p class="text-muted m-b-10">This is great, keep it up!</p>
-                              <div class="table-responsive">
-                                 <table class="table table-hover">
-                                    <tr>
-                                       <td class="b-none"><a href="#!" class="align-middle">
-                                             <img
-                                             src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/avatar-2.jpg"
-                                             alt="user image"
-                                             class="img-radius wid-40 align-top m-r-15">
-                                             <div class="d-inline-block">
-                                                <h6>Jeny William</h6>
-                                                <p class="text-muted m-b-0">Graphic Designer</p>
-                                             </div>
-                                       </a></td>
-                                    </tr>
-                                 </table>
-                              </div>
-                           </div>
-                        </div>
-                     </div>
-                     <div class="text-center">
-                        <a href="#!" class="b-b-primary text-primary">View all
-                           Projects</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <!-- 근태관리화면끝 -->
+					<div class="card latest-update-card">
+						<div class="card-header">
+							<h5>근태관리</h5>
+							<div class="card-header-right">
+								<div class="btn-group card-option">
+									<div
+										style="width: 160%; height: 160%; line-height: 160%; color: #666; font-size: 160%; text-align: center;"
+										id="clock">
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<div class="card-body">
+							<div class="latest-update-box">
+
+								<div class="row p-t-30 p-b-30">
+									<div class="col-auto text-right update-meta">
+										<p class="text-muted m-b-0 d-inline-flex">출근시간</p>
+										<i class="feather icon-user-check bg-twitter update-icon"></i>
+									</div>
+
+
+									
+									<div class="col">
+
+										
+										<h6 id="workStartTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)%60}"/>분
+										</c:forEach>
+										
+										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										
+									</div>
+
+
+
+
+								</div>
+
+								<div class="row p-t-30 p-b-30">
+									<div class="col-auto text-right update-meta">
+										<p class="text-muted m-b-0 d-inline-flex">퇴근시간</p>
+										<i class="feather icon-user-minus bg-c-red update-icon"></i>
+									</div>
+									<div class="col">
+										
+										<h6 id="workEndTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)%60%60}"/>분
+										</c:forEach>
+										<h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										
+									</div>
+								</div>
+
+
+								<div class="row p-t-30 p-b-30">
+									<div class="col-auto text-right update-meta">
+										<p class="text-muted m-b-0 d-inline-flex">총근무 시간</p>
+										<i class="fas fa-equals bg-c-blue update-icon"></i>
+									</div>
+									<div class="col">
+										
+										<h6 id="workTotalTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										
+										<c:forEach items="${ workUser }" var="w">
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)}"/>시
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)%60}"/>분
+										</c:forEach>
+										
+										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										
+									</div>
+								</div>
+
+
+							</div>
+
+
+
+
+							<br>
+
+							<div class="row" id="center">
+								<div class="col-md-12">
+
+									<div class="card-body">
+									
+									
+									
+									
+									
+									
+									<!--
+									<c:choose>
+    									<c:when test="${ 0 ne sessionScope.workUser.workEndMin}">
+        									<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
+    									</c:when>
+    									<c:otherwise>
+        									<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+    									</c:otherwise>
+									</c:choose>
+									-->
+                					<!--  
+                					<c:if test="${ null ne sessionScope.workUser.workEnd }">
+	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+	                					qqqqq
+                					</c:if>
+                					
+                					<c:if test="${ null eq sessionScope.workUser.workEnd }">
+	                					<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
+	                					empp
+               		 				</c:if>
+               		 				<c:if test="${ null ne sessionScope.workUser.endWork && null ne sessionScope.workUser.startWork }">
+	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+	                					sdfsdfsdfsd
+                					</c:if>
+									-->
+										
+										<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
+													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
+										
+
+									</div>
+									
+								</div>
+							</div>
+
+
+						</div>
+						</div>
+						</div>
+            
+            
+            <script>
+            <!--
+            function startTime(){
+                $.ajax({
+                   url : "WorkMainView.work",
+                   success : function(workUser) {
+                   	$tableBody = $('#workStartTime h6');
+                   	$tableBody.html('');
+                   	var workS=${workUser.status}
+                     	  	
+                   	$.each(todolist, function(i, obj){
+                   		var $h6 = $('<h6>');	  
+                      		var $tTitle = $('<label>').text(obj.todoTitle);
+                      		var $tContent = $('<label>').text(obj.todoContent);
+                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
+                     	 
+                         
+                      
+       				$h6.append($tTitle);
+       				$h6.append($tContent);
+       				$tableBody.append($<h6>);
+       			});
+       		}
+       	});
+       }
+            
+            
+            <!-- ----------------------------------------- -->
+            
+            <!-- 
+            
+            function endTime(){
+                $.ajax({
+                   url : "WorkMainView.work",
+                   success : function(workUser) {
+                   	$tableBody = $('#workStartTime h6');
+                   	$tableBody.html('');
+                   	var workS=${workUser.status}
+                     	  	
+                   	$.each(todolist, function(i, obj){
+                   		var $h6 = $('<h6>');	  
+                      		var $tTitle = $('<label>').text(obj.todoTitle);
+                      		var $tContent = $('<label>').text(obj.todoContent);
+                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
+                     	 
+                         
+                      
+       				$h6.append($tTitle);
+       				$h6.append($tContent);
+       				$tableBody.append($<h6>);
+       			});
+       		}
+       	});
+       }
+       -->
+       
+       
+       <!-- ----------------------------------------- -->
+       
+       <!--
+       function totalTime(){
+                $.ajax({
+                   url : "WorkMainView.work",
+                   success : function(workUser) {
+                   	$tableBody = $('#workStartTime h6');
+                   	$tableBody.html('');
+                   	var workS=${workUser.status}
+                     	  	
+                   	$.each(todolist, function(i, obj){
+                   		var $h6 = $('<h6>');	  
+                      		var $tTitle = $('<label>').text(obj.todoTitle);
+                      		var $tContent = $('<label>').text(obj.todoContent);
+                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
+                     	 
+                         
+                      
+       				$h6.append($tTitle);
+       				$h6.append($tContent);
+       				$tableBody.append($<h6>);
+       			});
+       		}
+       	});
+       }
+       -->
+            </script>
+            
+            
+           
+            
+
+            <!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 -->
+            
+            
+            
+            
             
             
             <!-- [ Todo-list1 ] start 
@@ -283,6 +457,7 @@
             <script>
       function topList(){
          $.ajax({
+        	 
             url : "todoMainListView.do",
             success : function(todolist) {
             	$tableBody = $('#todoMainList tbody');
@@ -318,7 +493,9 @@
       
   
    </script>
-            <!-- [ Todo-list1 ] end -->
+   
+   
+            <!-- [ Todo-list1 ] end --><!-- [ Todo-list1 ] end --><!-- [ Todo-list1 ] end --><!-- [ Todo-list1 ] end --><!-- [ Todo-list1 ] end -->
             
             
           
@@ -492,6 +669,51 @@
     
    
     </script>
+    
+    
+    
+    <!-- 김영찬 스크립트 -->
+    			<script>
+
+function printClock() {
+    
+    var clock = document.getElementById("clock");            // 출력할 장소 선택
+    var currentDate = new Date();                                     // 현재시간
+    var calendar = currentDate.getFullYear() + "-" + (currentDate.getMonth()+1) + "-" + currentDate.getDate() // 현재 날짜
+    var amPm = 'AM'; // 초기값 AM
+    var currentHours = addZeros(currentDate.getHours(),2); 
+    var currentMinute = addZeros(currentDate.getMinutes() ,2);
+    var currentSeconds =  addZeros(currentDate.getSeconds(),2);
+    
+    if(currentHours >= 12){ // 시간이 12보다 클 때 PM으로 세팅, 12를 빼줌
+    	amPm = 'PM';
+    	currentHours = addZeros(currentHours - 12,2);
+    }
+
+    if(currentSeconds >= 50){// 50초 이상일 때 색을 변환해 준다.
+       currentSeconds = '<span style="color:#de1951;">'+currentSeconds+'</span>'
+    }
+    clock.innerHTML = calendar+"("+currentHours+":"+currentMinute+":"+currentSeconds +")"+" <span style='font-size:30%;'>"+ amPm+"</span>"; //날짜를 출력해 줌
+    
+    setTimeout("printClock()",1000);         // 1초마다 printClock() 함수 호출
+}
+
+function addZeros(num, digit) { // 자릿수 맞춰주기
+	  var zero = '';
+	  num = num.toString();
+	  if (num.length < digit) {
+	    for (i = 0; i < digit - num.length; i++) {
+	      zero += '0';
+	    }
+	  }
+	  return zero + num;
+}
+
+</script>
+    <!-- 김영찬 스크립트 끝 -->
+    
+    
+    
     
     <script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/jquery-ui.custom.min.js' type="text/javascript"></script>
 	<script src='${pageContext.request.contextPath}/resources/fullcalendar/assets/js/fullcalendar.js' type="text/javascript"></script>

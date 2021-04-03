@@ -108,6 +108,12 @@ public class WorkServiceImpl implements WorkService {
 		return workDao.updateMin(sqlSession,empNo);
 	}
 
+	@Override
+	public int updateWorkDay(Work times) {
+		// TODO Auto-generated method stub
+		return workDao.updateWorkDay(sqlSession,times);
+	}
+
 
 
 

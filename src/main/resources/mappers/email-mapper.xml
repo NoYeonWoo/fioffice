@@ -34,6 +34,15 @@
 		WHERE STATUS='Y'
 	
 	</select>
+	<select id="selectListCountIm" resultType="_int">
+	
+		SELECT COUNT(*)
+		FROM EMAIL
+		WHERE STATUS='Y' AND EMAIL_IMPORTANT='Y'
+	
+	</select>
+	
+	
 	<select id="selectList" resultMap="emailResultSet">
 	 
 		SELECT *
@@ -43,6 +52,16 @@
 	
 	</select>
 	
+	
+	
+	<select id="selectListIm" resultMap="emailResultSet">
+	 
+		SELECT *
+		FROM EMAIL
+		WHERE STATUS = 'Y' AND EMAIL_SEND=#{empNo} AND EMAIL_IMPORTANT ='Y'
+		ORDER BY EMAIL_NO DESC
+	
+	</select>
 	
 	<select id="selectUser" resultMap="emailResultSet">
 		SELECT * 
@@ -66,8 +85,8 @@
 			null,
 			SYSDATE,
 			'Y',
-			<!-- #{emailImportant},-->
-			'N',
+			<!-- #{emailImportant},아래    'N'   -->
+			#{emailImportant},
 			#{empNo},
 			#{emailSendEmail},
 			
@@ -84,6 +103,12 @@
 		and status='Y'
 	</select>
 	
+	<update id="deleteEmail" parameterType="_int">
 	
+	UPDATE EMAIL
+	SET STATUS='N'
+	WHERE EMAIL_NO=#{emailNo}
+	
+	</update>
 	
 </mapper>

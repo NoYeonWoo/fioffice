@@ -37,6 +37,8 @@ public interface WorkService {
 
 	int updateMin(String empNo);
 
+	int updateWorkDay(Work times);
+
 
 
 }

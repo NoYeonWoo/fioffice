@@ -70,7 +70,7 @@
 		
 		
 		<!-- workDayReset  중요할때 바꾸기!!!!!!!!!!-->
-		
+		<!--
 		<choose>
    			<when test='workDay == "월"'>
    				#{workStack},
@@ -83,7 +83,7 @@
    				DEFAULT,
    			</otherwise>
    		</choose>
-		
+		-->
 		<!--
 		<choose>
    			<when test=' empty workStack'>
@@ -102,7 +102,12 @@
    		#{workStack},
 		#{workExceed},
 		#{workRemain},
-		-->
+		아래꺼 지워라-->
+		
+   		DEFAULT,
+   		DEFAULT,
+   		DEFAULT,
+		
 		SYSDATE,
 		default,
 		#{empNo},
@@ -116,6 +121,31 @@
 
 	
 	</insert>
+	
+	<!-- 신규 매퍼 -->
+	<update id="updateWorkDay" parameterType="Work"><!-- 날짜 초기화 -->
+		UPDATE WORK
+		
+		<choose>
+   			<when test='workDay == "월"'>
+				SET WORK_STACK = default,
+    			WORK_EXCEED= default,
+    			WORK_REMAIN= default
+   			</when>
+   			<otherwise>
+    			SET WORK_STACK = #{workStack},
+    			WORK_EXCEED= #{workExceed},
+    			WORK_REMAIN= #{workRemain}
+   			</otherwise>
+   		</choose> 
+   		 
+   		
+   			
+    	WHERE EMP_NO=#{empNo} AND TO_CHAR(WORK_DATE,'YYYY-MM-DD') = TO_CHAR(SYSDATE,'YYYY-MM-DD')
+	</update>
+	
+	
+	
 	
 	<update id="startWorkMin" parameterType="Work">
 		UPDATE WORK

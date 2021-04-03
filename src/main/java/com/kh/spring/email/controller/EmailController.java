@@ -12,9 +12,11 @@ import java.util.Date;
 import java.util.Properties;
 
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
@@ -78,14 +80,15 @@ public class EmailController {
 		
 		ArrayList<Email> list = emailService.selectListCount(pi,emp);
 		
-		
+		System.out.println("list긴급점검  "+list);
 		
 		//////////////////////////
 		EmailInfo emailInfo2 =  emailService.selectUserInfo2(emp);
+		System.out.println("emp긴급점검  "+emp);
 		//Email email =  emailService.selectUser2(emp);//1개만검색
-		System.out.println("로그인한사람 이메일정보들 전 emp2"+emp);
-		System.out.println("로그인한사람 이메일정보들 emailInfo2"+emailInfo2);
-		System.out.println("로그인한사람 이메일정보들 list"+list);
+		//System.out.println("로그인한사람 이메일정보들 전 emp2"+emp);
+		//System.out.println("로그인한사람 이메일정보들 emailInfo2"+emailInfo2);
+		//System.out.println("로그인한사람 이메일정보들 list"+list);
 		//setAttribute("emailInfo", emailInfo);
 		session.setAttribute("emailInfo2", emailInfo2);
 		//session.setAttribute("email", email);
@@ -98,6 +101,33 @@ public class EmailController {
 		
 
 		return "email/emailTest";
+		
+	}
+	
+	
+	@RequestMapping("view.emailImportant")//value="view.email",method=RequestMethod.POST
+	public String selectListImportant(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
+		
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		
+		int listCount = emailService.selectListCountIm();//////////
+		
+		//System.out.println("카운트 숫자"+listCount);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);//최대 10   5보여줌
+		
+		ArrayList<Email> listIm = emailService.selectListCountIm(pi,emp);
+		
+
+		EmailInfo emailInfo2 =  emailService.selectUserInfo2(emp);
+
+		session.setAttribute("emailInfo2", emailInfo2);
+		model.addAttribute("emailInfo2",emailInfo2);
+		
+		model.addAttribute("listIm",listIm);
+		model.addAttribute("pi",pi);
+		
+
+		return "email/emailImportant";
 		
 	}
 
@@ -135,11 +165,13 @@ public class EmailController {
 	}
 	
 	@RequestMapping("delete.email")
-	public String deleteEmail(@RequestParam("eno") int eno ,HttpServletRequest request, Model model) {
+	public String deleteEmail(@RequestParam("emailNo") int eno ,HttpServletRequest request, Model model)  {
 		
+		System.out.println("eno 이메일 컨트롤러 delete"+eno);
 		int result = emailService.deleteEmail(eno);
-
-		return "redirect:view.add2";
+		System.out.println(result);
+		
+		return "redirect:view.email";
 	}
 	
 	
@@ -150,7 +182,7 @@ public class EmailController {
 	public String sendEmail(HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response,
 			//@RequestParam("emailReceive")String emailReceive,
 			//@RequestParam("emailSendEmail")String emailSendEmail,
-			@ModelAttribute Email email,@ModelAttribute EmailInfo Info) {
+			@ModelAttribute Email email,@ModelAttribute EmailInfo Info) throws Exception {
 		
 		//email = (Email) session.getAttribute("email");
 		Info = (EmailInfo) session.getAttribute("emailInfo2");
@@ -162,37 +194,47 @@ public class EmailController {
 		//final String password = emailInfo.getEmailPwd();
 		///////////////////
 				
-		String host = Info.getEmailHost(); 
-		final String username = Info.getEmailId();
-		final String password = Info.getEmailPwd();
-		String port=Info.getEmailPort();
+		System.out.println("Info 체크   "+Info);
+		String host = Info.getEmailHost();   //smtp.naver.com
 		
-		String address =  email.getEmailReceiveEmail();
-		String title =  email.getEmailTitle();
-		String content =  email.getEmailContent();
+		final String username = Info.getEmailId();//  dudgus22342
+		final String password = Info.getEmailPwd();// 비번번번번
+		
+		
+		String port=Info.getEmailPort();// 465,  587 포트번호
+		
+		String addressYou =  email.getEmailSendEmail();   ///상대방 이메일    ffffff@naver.com 
+		
+		String addressMe =  email.getEmailReceiveEmail();  //내이메일     zon2429@naver.com
+		
+		String title =  email.getEmailTitle();  //제목ㅁ곰곰곰고
+		
+		String content =  email.getEmailContent();// 내용내용
 		
 		
 		System.out.println("---------------------------------");
+		//smtp.naver.com    dudgus22342              비밀번호             465
+		//ffffff@naver.com            zon2429@naver.com  wwwwwwwwwwww   zzzzzzzzzzzz
 		System.out.println("send버튼 정보들"+"     "+host+"     "+username+"     "+password+"     "+port+"   ");
-		System.out.println("email버튼 정보들"+"     "+address+"     "+title+"     "+content);
-		System.out.println("email버튼 정보들2"+"     "+address+"     "+title+"     "+content);
+		System.out.println("email버튼 정보들       "+     addressYou +"     "+addressMe+"     "+title+"     "+content);
 		
 		int result = emailService.insertemail(email);
-		System.out.println("address컨트롤러 insert 리설트  "+result);
+		//System.out.println("address컨트롤러 insert 리설트  "+result);
 		//System.out.println("email버튼 정보들3"+"     "+emailReceive+"     "+"     "+emailSendEmail);
 		
 		//매일내용
-		/*
-		String recipient =address;
-		String subject ="제목입니다";
-		String body = "내용입니다";
+		
+		
+		String recipient =addressYou; //상대방
+		String subject =title;
+		String body = content;
 		
 		Properties props = System.getProperties();
 		
 		
 		props.put("mail.smtp.host",host);
-		props.put("mail.smtp.port",host);
-		props.put("mail.smtp.auth",host);
+		props.put("mail.smtp.port",port);
+		props.put("mail.smtp.auth","true");
 		props.put("mail.smtp.ssl.enable","true");
 		props.put("mail.smtp.ssl.trust",host);
 				
@@ -202,7 +244,7 @@ public class EmailController {
 			String pw = password;
 			
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(un, pw);
+				return new PasswordAuthentication(un,pw);
 			}
 		});
 		
@@ -210,7 +252,7 @@ public class EmailController {
 		
 		Message mimeMessage = new MimeMessage(Mailsession);
 		
-		mimeMessage.setFrom(new InternetAddress("***@naver.com"));
+		mimeMessage.setFrom(new InternetAddress(addressMe));
 		mimeMessage.setRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 		mimeMessage.setSubject(subject);
 		mimeMessage.setText(body);
@@ -218,11 +260,18 @@ public class EmailController {
 		
 				
 				//EmailInfo info= (EmailInfo) session.getAttribute("emailInfo");//유저 emailinfo 담음
-		*/
+		
 		return "redirect:view.email";
 		
 	}
 	
+	@RequestMapping("resend.emailgo")
+	public ModelAndView resendEmail(@RequestParam("emailNo")int emailNo, ModelAndView mv) {
+		
+		Email e = emailService.selectEmailDetail(emailNo);
+		mv.addObject("e",e).setViewName("email/emailResend");
+		return mv;
+	}
 	
 	////////////////시작
 }

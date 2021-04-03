@@ -34,11 +34,22 @@ public class EmailServiceImpl implements EmailService {
 		// TODO Auto-generated method stub
 		return emailDao.selectListCount(sqlSession);
 	}
+	@Override
+	public int selectListCountIm() {//////////////////////////
+		// TODO Auto-generated method stub
+		return emailDao.selectListCount(sqlSession);
+	}
+
 
 	@Override
 	public ArrayList<Email> selectListCount(PageInfo pi,Employee emp) {
 		// TODO Auto-generated method stub
 		return emailDao.selectListCount(sqlSession,pi,emp);
+	}
+	@Override
+	public ArrayList<Email> selectListCountIm(PageInfo pi,Employee emp) {
+		// TODO Auto-generated method stub
+		return emailDao.selectListCountIm(sqlSession,pi,emp);
 	}
 
 	@Override
