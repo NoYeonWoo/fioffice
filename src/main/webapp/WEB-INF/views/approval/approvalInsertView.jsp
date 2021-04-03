@@ -177,6 +177,7 @@
 		document.form.method = "post";
 		document.form.action = "insertApproval.do";
 		document.form.submit();
+		
 		}else{
 			return false;
 		}
