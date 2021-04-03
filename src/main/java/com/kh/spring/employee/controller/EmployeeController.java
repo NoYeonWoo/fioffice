@@ -316,10 +316,10 @@ public class EmployeeController {
 			if(result>0) {
 				 model.addAttribute("emp",emp);
 				 session.setAttribute("msg", "비밀번호초기화 완료! 사번으로 로그인해 주세요 ");
-	        	 return "redirect:/";
+	        	 return "common/login";
 			}else {
 				session.setAttribute("msg","수정실패!");
-				 return "redirect:/";
+				 return "common/login";
 		 }
 		 	
 	

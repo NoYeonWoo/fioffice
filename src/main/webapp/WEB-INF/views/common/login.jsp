@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,6 +13,13 @@
 </head>
 
 <body class="">
+
+<c:if test="${ !empty msg }">
+		<script>
+			alert("${msg}");
+</script>
+		<c:remove var="msg" scope="session"/>
+</c:if>
  	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 
 	          <div class="m-header">
