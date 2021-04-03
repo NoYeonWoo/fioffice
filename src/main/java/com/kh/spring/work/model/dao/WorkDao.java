@@ -89,6 +89,11 @@ public class WorkDao {
 		return sqlSession.update("workMapper.endWorkMin", empNo); 
 	}
 
+	public int updateWorkDay(SqlSessionTemplate sqlSession, Work times) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("workMapper.updateWorkDay", times); 
+	}
+
 
 	
 

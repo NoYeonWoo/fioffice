@@ -41,6 +41,10 @@
  				<form action="send.emailgo" method="post" id="goEmailSend">
     				<input type="hidden" name="eno" id ="eno" value="${loginUser.empNo}">
     			</form>
+    			
+    			<form action="view.emailImportant" method="post" id="goEmailImportant">
+    				<input type="hidden" name="eno" id ="eno" value="${loginUser.empNo}">
+    			</form>
  
  
  <!-- [ stiped-table ] start -->
@@ -50,12 +54,12 @@
                         <h5>주소록</h5>
                         <span class="d-block m-t-5">
                         <div class="card-body">
-                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" value="">
                         	<br>
                         	<button type="button" class="btn  btn-secondary">검색하기</button>
                         	<!-- <a href="send.emailgo"><button type="submit" class="btn  btn-primary">보내기</button></a>-->
                         	<button type="button" class="btn  btn-primary" onclick="$('#goEmailSend').submit();">내 주소록</button></a>
-                        	<a href="detail.email"><button type="button" class="btn  btn-primary">임시상세</button></a>
+                        	<a href="view.emailImportant"><button type="button" class="btn  btn-primary">임시상세</button></a>
                         	
                         </div>
                         </span>

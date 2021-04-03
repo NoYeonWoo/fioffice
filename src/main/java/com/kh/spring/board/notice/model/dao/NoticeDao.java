@@ -52,5 +52,9 @@ public class NoticeDao {
 		return (ArrayList)sqlSession.selectList("noticeMapper.selectReplyList", nno);
 	}
 
+	public ArrayList<Notice> selectMainNotice(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("noticeMapper.selectTopList");
+	}
+
 	
 }

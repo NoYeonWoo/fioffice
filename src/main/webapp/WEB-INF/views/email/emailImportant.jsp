@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@page import="java.sql.Timestamp"%>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -95,7 +94,7 @@
                         		-->
                         			<!-- <a href="send.email"><button type="button" class="btn  btn-primary">보내기</button></a>-->
                         			<button type="button" class="btn  btn-primary" onclick="$('#goMail').submit();">보내기</button></a>
-                        			<a href="view.emailImportant"><button type="button" class="btn  btn-primary">중요이메일</button></a>
+                        			<a href="view.email"><button type="button" class="btn  btn-primary">일반이메일</button></a>
 
 								</div>
 							</span>
@@ -115,14 +114,14 @@
 										</tr>
 									</thead>
 									<tbody>
-										<c:forEach items="${ list }" var="e">
+										<c:forEach items="${ listIm }" var="i">
 											<tr>
-												<td>${ e.emailNo }</td>
-												<td>${ e.emailReceiveEmail }</td>
-												<td>${ e.emailReceive }</td>
-												<td>${ e.emailTitle }</td>
-												<td>${ e.emailContent }</td>
-												<td>${ e.emailTime }</td>
+												<td>${ i.emailNo }</td>
+												<td>${ i.emailReceiveEmail }</td>
+												<td>${ i.emailReceive }</td>
+												<td>${ i.emailTitle }</td>
+												<td>${ i.emailContent }</td>
+												<td>${ i.emailTime }</td>
 											</tr>
 										</c:forEach>
 										
@@ -156,7 +155,7 @@
 							<c:choose>
 								<c:when test="${ pi.currentPage ne p }">
 									<li class="page-item"><a class="page-link"
-										href="view.email?currentPage=${ p }">${ p }</a></li>
+										href="view.emailImportant?currentPage=${ p }">${ p }</a></li>
 								</c:when>
 								<c:otherwise>
 									<li class="page-item disabled"><a class="page-link"
@@ -169,11 +168,11 @@
 						<c:choose>
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
-									href="view.email?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
+									href="view.emailImportant?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link"
-									href="view.email?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
+									href="view.emailImportant?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
 							</c:otherwise>
 						</c:choose>
 					</ul>

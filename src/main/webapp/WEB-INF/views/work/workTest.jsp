@@ -86,15 +86,16 @@
                         <h5>출근기록</h5>
                         <span class="d-block m-t-5">
                         <div class="card-body">
-                        <input type="email" class="form-control" id="Email" aria-describedby="emailHelp" placeholder="검색">
-                        	<br>
-                        	<button type="button" class="btn  btn-secondary">검색하기</button>
-                        	<button type="button" class="btn  btn-primary">휴가계</button>
+                        <!--
+									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
+                        			<br>
+                        			<button type="button" class="btn  btn-secondary">검색하기</button>
+                        		-->
+                        	<!--<button type="button" class="btn  btn-primary">휴가계</button>-->
                         	<a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인</button></a>
                         	
                         </div>
                         </span>
-                        
                     </div>
                     <div class="card-body table-border-style">
                         <div class="table-responsive">

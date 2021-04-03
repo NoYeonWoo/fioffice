@@ -37,6 +37,7 @@ import com.google.gson.JsonIOException;
 import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
 import com.kh.spring.employee.model.vo.Employee;
+//import com.kh.spring.todo.controller.aTodo;
 import com.kh.spring.todo.model.vo.Todo;
 import com.kh.spring.work.model.service.WorkService;
 import com.kh.spring.work.model.vo.Work;
@@ -49,6 +50,31 @@ public class WorkController {
 	@Autowired
 	private WorkService workService;
 
+	
+	
+	
+	
+	
+	@RequestMapping(value="WorkMainView.work",produces ="application/json;charset=UTF-8")
+	public void MainlistWork(String empNo,Model model, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
+		
+		
+		Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser =workService.selectUser(emp);
+		System.out.println("메인에 던지는 유저의 최신 근태::"+workUser);
+		response.setContentType("application/json;charset=utf-8");
+		new GsonBuilder().setDateFormat("yyyy-MM-dd-HH-mm").create().toJson(workUser,response.getWriter());
+		//model.addAttribute("workUser",workUser);
+		
+		
+	}
+	
+	
+	
+
+	
+	
+	
 	@RequestMapping("view.work")
 	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 
@@ -86,6 +112,7 @@ public class WorkController {
 		Employee emp= (Employee) session.getAttribute("loginUser");
 		ArrayList<Work> workUser = workService.selectUser(emp);
 		System.out.println("emp 임시"+emp);
+		System.out.println("work컨트롤러의 workUser 한줄"+workUser);
 		model.addAttribute("workUser",workUser);
 		return "work/workMain2";
 	}
@@ -105,86 +132,69 @@ public class WorkController {
 		//System.out.println(eno);//951220103
 		// 찍어보기
 
-		
-		
-		/*
-		SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        Date timeNow2 = null;
-		try {
-			timeNow2 = (Date) dateParser.parse(timeNow);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        System.out.println("gfdkl"+timeNow2);
-        java.sql.Date timeNowT = new java.sql.Date(timeNow2.getTime());
-		System.out.println("시간변환 1: ");
-		System.out.println("시간변환 2: "+timeNowT);
-		*/
-		/*
-		//SimpleDateFormat dateParser = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		//SimpleDateFormat dateParser2 = new SimpleDateFormat("HH:mm:ss");
-		//SimpleDateFormat dateParser3 = new SimpleDateFormat("HH:mm:ss");
-        Date date = null;
-        LocalDateTime date2 = null;
 
-		try {
-			date = dateParser.parse(timeNow);
-
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println("date 타임 "+date);
-		date2=LocalDateTime.now();
-		//System.out.println("지금시간"+LocalDateTime.now());
-        java.sql.Date s = new java.sql.Date(date.getTime());
-        System.out.println("s 타임"+s);
-		*/
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd kk:mm:ss");
-		//timeNow = dateFormat.format(Calendar.getInstance().getTime());
-		//
-		//System.out.println("시간"+timeNow);
-		
-		
-		
-		/////////////////////////////////////////////
-		
-		//System.out.println("empNo"+.getEmpNo());//951220103
-		//System.out.println("empNo 컨"+empNo);
 		Work preWork = workService.selectTimes(empNo);
 		//System.out.println("preWork :: "+preWork.toString());
 
+		System.out.println("사원근태 최신 로우!! : "+preWork);
 		
-		Times.setWorkStack(preWork.getWorkStack());
-		Times.setWorkExceed(preWork.getWorkExceed());
-		Times.setWorkRemain(preWork.getWorkRemain());
-		////
+		if(preWork==null){
+			System.out.println("경유지 1");
+			
+		}else {
+			Times.setWorkStack(preWork.getWorkStack());//전꺼
+			Times.setWorkExceed(preWork.getWorkExceed());
+			Times.setWorkRemain(preWork.getWorkRemain());
+		}
 		
-		System.out.println("Times들 :: "+Times.toString());
+		System.out.println("경유지 2");
 		
+		/////////////////////////////
+
 		//model.addAttribute("Times", Times);
 		
 		
-		int result= workService.insertWork(Times);
+		int result= workService.insertWork(Times);//최초 출근 시작!!!!!!!!!!
+		System.out.println("경유지 3");
+
+		//Times.setWorkDay(preWork.getWorkDay());
 		
-		int result2 =workService.insertwork2(empNo);//시작(분)넣기
+		if(preWork==null) {
+			System.out.println("최초출근자이다.");
+		}else {
+			Times.setWorkDay(preWork.getWorkDay());
+			int result3= workService.updateWorkDay(Times);//주간리셋 
+		}
 		
+		
+		if(preWork==null){
+			System.out.println("경유지 4");
+			int result5 =workService.insertwork2(empNo);
+		}else {
+		
+		int result4 =workService.insertwork2(empNo);//시작( 마지막 2속성 분)넣기
+		}
 		//model.addAttribute("loginUser", loginUser);
 		///////////////////////////////
-		
+		System.out.println("경유지 5");
 		Employee emp= (Employee) session.getAttribute("loginUser");
 		ArrayList<Work> workUser = workService.selectUser(emp);
 		model.addAttribute("workUser",workUser);
 		
 		//int result = workService.insertWork(work);
 		
-		if (result2>0) {
+		
+		
+		
+		
+		return "redirect:view.workMain2";
+		/*
+		if (result4>0) {
 			return "work/workMain2";
 		}else {
 			return "location.reload";
 		}
-		
+		*/
 	}
 	
 	@RequestMapping("end.work1")//@RequestParam("empNo") String empNo Work w

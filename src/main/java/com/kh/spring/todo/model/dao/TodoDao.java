@@ -38,7 +38,7 @@ public class TodoDao {
 
 	public int deleteTodo(SqlSessionTemplate sqlSession, int tno) {
 		// TODO Auto-generated method stub
-		return sqlSession.update("todoMapper.updateDelete",tno);
+		return sqlSession.delete("todoMapper.updateDelete",tno);
 	}
 
 	public ArrayList<Todo> selectMainTodo(SqlSessionTemplate sqlSession, Employee emp) {

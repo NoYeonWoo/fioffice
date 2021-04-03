@@ -28,39 +28,24 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<insert id="insertMessage" parameterType="Message">
 		INSERT INTO MESSAGE_MSG
-		VALUES(SEQ_MSG.NEXTVAL,#{msgReceiver},#{msgSender},#{msgContent},#{msgDate},
-		#{msgReadStatus},#{msgReceiver})
+		VALUES(SEQ_MSG.NEXTVAL,#{chatNo},#{msgSender},#{msgContent},SYSDATE,
+		DEFAULT,#{msgReceiver})
 	</insert>
 	
 	
-	<select id="selectMsgDetail" resultMap="MessageResultSet" parameterType="string">	
-	 SELECT *
-	 FROM MESSAGE_MSG A
-	 LEFT JOIN EMPLYEE B USING ON A.MSG_RECEIVER = B.EMP_NO
-	 WHERE msgNo=#{msgNo}
-	</select>	
+	<insert id="insertMsg" parameterType="Message">
+		INSERT INTO MESSAGE_MSG
+		VALUES(SEQ_MSG.NEXTVAL,#{chatNo},#{msgSender},#{msgContent},SYSDATE,
+		DEFAULT,#{msgReceiver})
+	</insert>
 	
-	
-	<!--  
-	<select id="chatroomList" parameterType="string" resultMap="ChatRoomResultSet">
-	
+	<select id="selectMsgList" resultMap="MessageResultSet">
+	  SELECT A.MSG_NO, A.CHAT_NO, A.MSG_CONTENT, A.MSG_SENDER, A.MSG_RECEIVER, A.MSG_DATE, B.CHANGE_NAME
+	  FROM MESSAGE_MSG A LEFT JOIN EMPLOYEE B ON A.MSG_SENDER=B.EMP_NO
+	  WHERE A.CHAT_NO=#{chatNo}
+	  AND A.MSG_READ_STATUS='Y'
+	  ORDER BY MSG_NO
 	</select>
-	
 
-	<select id="selectChatroom" parameterType="string" resultMap="ChatRoomResultSet">
-	
-	</select>
-	
-	<select id="selectMessage" parameterType="string" resultMap="MessageResultSet">
-	
-	</select>
-	
-	
-	
-	<update id="deleteChatroom" parameterType="_int">
-	
-	</update>
-	-->
-	
 	
 </mapper>

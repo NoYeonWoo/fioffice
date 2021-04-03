@@ -92,9 +92,11 @@
 							<h5>주소록</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
+									<!--
 									<input type="text" class="form-control" id="Email" aria-describedby="emailHelp" value="123">
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
+                        		-->
                         			<button type="button" class="btn  btn-primary" onclick="$('#goAdd').submit();">내 주소록</button></a>
 
 								</div>

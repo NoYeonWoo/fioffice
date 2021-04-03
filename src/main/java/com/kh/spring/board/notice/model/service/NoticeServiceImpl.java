@@ -65,5 +65,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDao.updateNotice(sqlSession, n);
 	}
 
+	@Override
+	public ArrayList<Notice> selectMainNotice() {
+		return noticeDao.selectMainNotice(sqlSession);
+	}
+
 	 
 }

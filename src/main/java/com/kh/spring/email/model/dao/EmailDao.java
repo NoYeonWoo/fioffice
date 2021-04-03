@@ -27,6 +27,10 @@ public class EmailDao {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("emailMapper.selectListCount");
 	}
+	public int selectListCountIm(SqlSessionTemplate sqlSession) {/////////////////ㅅ 정
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("emailMapper.selectListCountIm");
+	}
 
 	public ArrayList<Email> selectListCount(SqlSessionTemplate sqlSession, PageInfo pi, Employee emp) {
 		// TODO Auto-generated method stub
@@ -34,7 +38,24 @@ public class EmailDao {
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
 		return (ArrayList)sqlSession.selectList("emailMapper.selectList", emp, rowBounds); 
 	}
+	
+	public ArrayList<Email> selectListCountIm(SqlSessionTemplate sqlSession, PageInfo pi, Employee emp) {
+		// TODO Auto-generated method stub
+		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		return (ArrayList)sqlSession.selectList("emailMapper.selectListIm", emp, rowBounds); 
+	}
+	
+	
+	
+	
+	
+	
 //////////////////////////////////////
+	
+	
+	
+	
 	public ArrayList<EmailInfo> selectUser(SqlSessionTemplate sqlSession, Employee emp) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("emailMapper.selectUser",emp);

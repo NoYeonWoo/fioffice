@@ -112,9 +112,10 @@
                <li class="nav-item">
                    <a href="todoListView.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
+               <!--  
                <li class="nav-item">
                    <a href="slist.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
-               </li>
+               </li> -->
                      <li class="nav-item">
                    <a href="enrollForm.re" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
                </li>
@@ -125,14 +126,18 @@
                <li class="nav-item">
                    <a href="view.add2" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
                </li>
-               <li class="nav-item">
-                   <a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a><!-- ssdd -->
+               <li class="nav-item pcoded-hasmenu">
+               		<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">이메일</span></a>
+               		<ul class="pcoded-submenu">
+                       <li><a href="view.email">이메일함</a></li>
+                       <li><a href="view.emailImportant">중요이메일함</a></li>
+                   </ul>
+                   <!--<a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>--><!-- ssdd -->
 
                </li>
                   <li class="nav-item">
-                   <a href="chat.mo" class="nav-link"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+                   <a href="msgView.ma" class="nav-link"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
-               
                   <li class="nav-item pcoded-menu-caption">
                    <label>Product</label>
                </li>

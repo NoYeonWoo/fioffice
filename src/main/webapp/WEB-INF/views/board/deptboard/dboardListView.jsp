@@ -274,14 +274,14 @@
 	    
 		<br><br><div> <!-- 하단 영역 --> 
 		
-		<!-- 서치 버튼 -->
+		<!-- 서치 버튼 
 				<div class="left">&nbsp;
 					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList" name="searchKey" id="searchKey"></label>
 					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>
 				</div>
-
+		-->
 		  
         		
        <!-- 페이징 영역 -->
