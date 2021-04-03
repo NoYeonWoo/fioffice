@@ -362,7 +362,7 @@
 	var calendar = $('#calendar').fullCalendar( {
 		plugins: ['interaction'],
 		header : {
-			left : 'agendaDay,agendaWeek,month'
+			left : 'month'
 		},
 		editable : false,
 		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
@@ -374,7 +374,7 @@
 		/* 일정 받아옴 */
 		events : [ 
 			<c:forEach items="${list}" var="ca">
-			<c:if test="${ca.empNo eq loginUser.empNo or ca.calCate eq 30}">
+			<c:if test="${ca.empNo eq loginUser.empNo or ca.calCate eq 30 or ca.calCate eq 40}">
 			{
 			id : '${ca.calNo}',
 			title : '${ca.calTitle }',

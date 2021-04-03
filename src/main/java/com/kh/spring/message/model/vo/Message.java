@@ -1,7 +1,6 @@
 package com.kh.spring.message.model.vo;
 
-import java.sql.Date;
-
+import java.sql.Timestamp;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -20,7 +19,7 @@ public class Message {
 	private String msgSender;
 	private String msgReceiver;
 	private String msgContent;
-	private Date msgDate;
+	private Timestamp msgDate;
 	private String msgReadStatus;
 	private String empName; //받는 사람 이름
 	private String empPosition; //받는 사람

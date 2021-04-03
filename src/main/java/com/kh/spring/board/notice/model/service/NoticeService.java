@@ -26,5 +26,7 @@ public interface NoticeService {
 
 	int updateNotice(Notice n);
 
+	ArrayList<Notice> selectMainNotice();
+
 }
  
