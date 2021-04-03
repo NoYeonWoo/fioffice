@@ -15,7 +15,7 @@ public interface MessageService {
 
 	Message selectMsg(String msgNo);
 
-	ArrayList<Message> selectMsgList(int msgNo);
+	ArrayList<Message> selectMsgList(String chatNo);
 
 	
 }

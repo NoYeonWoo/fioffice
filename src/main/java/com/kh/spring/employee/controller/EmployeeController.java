@@ -59,7 +59,7 @@ public class EmployeeController {
 	
 	//사원리스트
 	@ResponseBody
-	@RequestMapping(value="selectEmpList.do", produces="appliction/json; charset=UTF-8")
+	@RequestMapping(value="selectEmpList.do", produces="application/json; charset=UTF-8")
 	public String selectEmpList() {
 		  Map<String, Object> result = new HashMap<String, Object>();
 		  result.put("data", employeeService.selectEmpList());

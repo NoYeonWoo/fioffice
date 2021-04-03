@@ -36,8 +36,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public ArrayList<Message> selectMsgList(int msgNo) {
-		return messageDao.selectMsgList(sqlSession, msgNo);
+	public ArrayList<Message> selectMsgList(String chatNo) {
+		return messageDao.selectMsgList(sqlSession, chatNo);
 	}	 
 	 
 }

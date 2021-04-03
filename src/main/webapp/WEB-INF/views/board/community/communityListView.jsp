@@ -260,13 +260,14 @@
 	    
 		<br><br><div> <!-- 하단 영역 --> 
 		
-		<!-- 서치 버튼 -->
+		<!-- 서치 버튼 
 				<div class="left">&nbsp;
-					<label><input type="txt" id="keyword" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
+					<label><input type="txt" id="keyWord" class="form-control form-control-sm" placeholder="" aria-controls="cboardList"></label>
 					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>
 				</div>
+        -->
         		
        <!-- 페이징 영역 -->
        <div class="right">

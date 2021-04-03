@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.google.gson.JsonObject;
@@ -35,6 +36,7 @@ import com.kh.spring.board.notice.model.service.NoticeService;
 import com.kh.spring.board.notice.model.vo.Notice;
 import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
+import com.kh.spring.todo.model.vo.Todo;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -95,6 +97,17 @@ public class NoticeController {
 		
 		return "board/notice/noticeListView";
 		  
+	}
+	
+	@RequestMapping(value="noticeMainListView.bo",produces ="application/json;charset=UTF-8")
+	public void MainlistTodo(Model m, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
+		 
+		ArrayList<Notice> noticeList = noticeService.selectMainNotice();
+		
+		System.out.println("공지사항 메인 : " + noticeList);
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(noticeList,response.getWriter());//
+		
 	}
 	
 	

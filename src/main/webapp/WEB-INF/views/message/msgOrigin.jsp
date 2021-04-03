@@ -17,7 +17,7 @@
 <style>
 
 
-		div.addMsgArea {
+		div.addMsgBtn {
 		
 		   text-align: center;
 		   display: inline-block;
@@ -80,7 +80,7 @@
 					<div class="row no-gutters">
 						<div class="col-lg-3 col-md-4 col-sm-12">
 						
-							<div class="chat-list bg-light-gray" style="width:400%;">
+							<div class="chat-list bg-light-gray">
 								<div class="chat-search">
 									<span class="ti-search"></span>
 									<input type="text" placeholder="사원 목록입니다.">
@@ -109,7 +109,32 @@
 							
 						</div>
 						
-
+						<!-- 채팅방 리스트
+						<div class="chat-list" style="width:75%;">
+								<div class="chat-search">
+									<span class="ti-search"></span>
+									<input type="text" placeholder="채팅방입니다.">
+								</div>
+								<div class="notification-list chat-notification-list customscroll">
+								
+								 <c:forEach items="${list}" var="emp">
+							     <div class="chatRoomList">
+							     <input type="hidden" id="chatNo" value="${cr.chatroomNp}">
+									<ul>
+										<li>
+											<a href="" data-toggle="modal" data-id="chatNo" data-target="#msgView">
+												<img src="${pageContext.request.contextPath}/resources/upload_files/${emp.changeName}">
+												<h3 class="clearfix" id="empName1">${emp.empName} ${emp.empPosition}</h3>
+												<p id="deptName1">마지막에 보내진 메세지</p>
+											</a>
+										</li>
+									</ul>
+									</div>
+									</c:forEach>
+								</div>
+							</div> -->
+						
+						
 					</div>
                         </div> <!-- 카드 바디 영역 -->
               
@@ -120,42 +145,37 @@
             <div class="modal-dialog modal-lg">
                <div class="modal-content">
                   <div class="modal-body">
+ 
 							
 							<div class="chat-detail">
 								<div class="chat-profile-header clearfix">
-								
 									<div class="left">
 										<div class="clearfix">
 											<div class="chat-profile-photo">
-													<img id="changeName" name="changeName">
+													<img src="${pageContext.request.contextPath}/resources/upload_files/" + >
 											</div>
 											<div class="chat-profile-name">
 												<h3 style="color:#8069AE;" id="empName" name="empName"></h3>
 												<span id="deptName" name="deptName"></span>
+												
+												<input type="hidden" id="chatNo" name="chatNo">
+												<input type="hidden" id="msgSender" name="msgSender" value="${loginUser.empNo}" class="form-control form-control-user">
+												<input type="hidden" id="msgReceiver" name="msgReceiver">
 											</div>
 										</div>
 									</div>
 									
 								</div>
 								<div class="chat-box">
-								
-									
-									<div class="chat-desc customscroll" >
-									
-							<table id="msgListArea" align="center" style="border-collapse:collapse; padding:10px;">
-						                <tbody>
-						                </tbody>
-						      </table>
-						      
-     						 <!-- 메세지 리스트 영역 
+									<div class="chat-desc customscroll">
 									<ul>
 											<li class="clearfix">
 												<span class="chat-img">
-													<img id="changeName" name="changeName">
+													<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png">
 												</span>
 												<div class="chat-body clearfix">
-													<p>하.... </p>
-													<div class="chat_time">09:40PM</div>
+													<p id="msgContent" name="msgContent">상대방이 보낸 말풍선</p>
+													<div class="chat_time" id="msgDate" name="msgDate">09:40PM</div>
 												</div>
 											</li>
 											<li class="clearfix admin_chat">
@@ -163,32 +183,26 @@
 													<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}">
 												</span>
 												<div class="chat-body clearfix">
-													<p>하....</p>
-													<div class="chat_time">10:40PM</div>
+													<p id="msgContent" name="msgContent">ㅇㅇ.</p>
+													<div class="chat_time" id="msgDate" name="msgDate">10:40PM</div>
 												</div>
 											</li>
-									</ul>-->
-									</div>	<!-- 메세지 리스트 영역 -->
+										</ul>
+									</div>
 									
-									<!-- 메세지 전송 영역 -->
 									<div class="chat-footer">
 										<div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
-										<div class="chat_text_area">
-											<textarea id="msgContent" name="msgContent" placeholder="메세지를 입력해주세요."></textarea>
-											
-												<input type="hidden" id="msgSender" name="msgSender" value="${loginUser.empNo}" class="form-control form-control-user">
-												<input type="hidden" id="msgReceiver" name="msgReceiver">
-												<input type="hidden" id="chatNo" name="chatNo">
-											
+										<div class="chat_text_area"id="msgContent" name="msgContent">
+											<textarea placeholder="메세지를 입력해주세요."></textarea>
 										</div>
 										<div>
-										<div class="addMsgArea" id="addMsgArea">
+										<div class="addMsgBtn">
 			                                <button class="btn btn-primary btn-icon" id="addMsgBtn">
 			                                    <i class="feather icon-message-circle"></i>
 			                                </button>
 			                       	 	</div>
 			                       	 	</div>
-									</div> <!-- 메세지 전송 영역 -->
+									</div>
 									
 								</div>
 						
@@ -196,28 +210,28 @@
 						
 		<script>
 		
-
+        /*
 		
     	$(function(){
     		selectMsgList();
     		
     		$("#addMsgBtn").click(function(){
-        		var chatNo = $("#chatNo").val();
-        		console.log(chatNo);
+        		var mno = ${msg.msgNo};
 
-    			if($("#msgContent").val().trim().length != 0){
+    			if($("#replyContent").val().trim().length != 0){
     				
     				$.ajax({
-    					url:"minsert.ma",
+    					url:"minsert.ca",
     					type:"post",
-    					data:{chatNo:chatNo,
+    					data:{msgNo:mno,
     						  msgContent:$("#msgContent").val(),
-    						  msgSender:$("#msgSender").val(),
-    						  msgReceiver:$("#chatNo").val()},
+    						  msgSender:"${loginUser.empNo}"},
+    						  msgReceiver:$("#empNo").val(),
     					success:function(result){
     						if(result > 0){
-    							$("#msgContent").val("");
-    							selectMsgList();
+    							$("#chat-desc customscroll").val("");
+    							selectReplyList();
+    							
     						}else{
     							alert("메세지 전송 실패");
     						}
@@ -234,28 +248,32 @@
     	});
     	
     	function selectMsgList(){
-    		var chatNo = $("#chatNo").val();
-    		console.log("메세지 리스트 : " + chatNo);
-    		
+    		var cno = ${cb.cboardNo};
     		$.ajax({
-    			type:"POST",
-    			url:"mlist.ma",
-    			data:{chatNo:chatNo},
-    			success:function(msgList){
-    				
+    			url:"mlist.ca",
+    			data:{cno:cno},
+    			type:"get",
+    			success:function(list){
     				var value="";
-    				$.each(msgList, function(i, msg){
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + msg.msgSender + "</th>" +
-   								 "<td style='width:80%'>" + msg.msgContent + "</td>" +
-   								 "<td style='width:10%'>" + msg.msgDate + "</td>" +
+    				$.each(list, function(i, obj){
+    					
+    					if("${loginUser.empNo}" == obj.msgSender){
+    						value += "<tr style='background:#F1F3F5'>";
+    					}else{
+    						value += "<tr>";
+    					}
+    					
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
+   								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
+   								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";
     				});
-    				$("#msgListArea tbody").html(value);
+    				$("#reply tbody").html(value);
+    			},error:function(){
+    				console.log("메세지 리스트 조회용 ajax 통신 실패");
     			}
-    			
     		});
-    	
-    	}
+    	}*/
     	
   
     </script>
@@ -268,7 +286,82 @@
             </div>
          <!-- 모달 끝  -->
                         
-         
+                        
+         <!-- 채팅방 모달 Test  -->
+         <div class="modal fade bd-example-modal-lg" tabindex="-1" id="msgView"
+            role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+               <div class="modal-content">
+                  <div class="modal-body">
+ 
+							
+							<div class="chat-detail">
+								<div class="chat-profile-header clearfix">
+									<div class="left">
+										<div class="clearfix">
+											<div class="chat-profile-photo">
+													<img id="changeName" name="changeName">
+											</div>
+											<div class="chat-profile-name">
+												<h3 style="color:#8069AE;" id="msgReceiver" name="msgReceiver">상대방 이름 직급</h3>
+												<span>부서</span>
+												<input type="hidden" id="msgSender" name="msgSender" value="${loginUser.empNo}" class="form-control form-control-user">
+												<input type="hidden" id="chatNo" name="chatNo">
+												<input type="hidden" id="msgNo" name="msgNo">
+											</div>
+										</div>
+									</div>
+									
+								</div>
+								<div class="chat-box">
+									<div class="chat-desc customscroll">
+										<ul>
+											<li class="clearfix">
+												<span class="chat-img">
+													<img src="${pageContext.request.contextPath}/resources/ablePro/assets/images/user/profile.png">
+												</span>
+												<div class="chat-body clearfix">
+													<p id="msgContent" name="msgContent">상대방이 보낸 말풍선</p>
+													<div class="chat_time" id="msgDate" name="msgDate">09:40PM</div>
+												</div>
+											</li>
+											<li class="clearfix admin_chat">
+												<span class="chat-img">
+													<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}">
+												</span>
+												<div class="chat-body clearfix">
+													<p id="msgContent" name="msgContent">ㅇㅇ.</p>
+													<div class="chat_time" id="msgDate" name="msgDate">10:40PM</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									
+									<div class="chat-footer">
+										<div class="file-upload"><a href="#"><i class="fa fa-paperclip"></i></a></div>
+										<div class="chat_text_area">
+											<textarea placeholder="메세지를 입력해주세요."></textarea>
+										</div>
+										<div>
+										<div class="addMsgBtn">
+			                                <button class="btn btn-primary btn-icon" id="addMsg">
+			                                    <i class="feather icon-message-circle"></i>
+			                                </button>
+			                       	 	</div>
+			                       	 	</div>
+									</div>
+									
+								</div>
+						
+						</div> <!-- 메세지 Area 끝 -->
+							
+						</div>
+                 
+                  </div>
+               </div>
+            </div>
+            </div>
+         <!-- 모달 끝  -->
                         
  
 			
@@ -289,7 +382,7 @@
    
  
     $('#insertMsg').on('show.bs.modal', function (event) {
-    	
+
     	var empNo = $(event.relatedTarget).data('id');
     	console.log(empNo);
     	
@@ -303,10 +396,10 @@
                 $("#insertMsg #empName").html(emp.empName);
                 $("#insertMsg #deptName").html(emp.deptName);
                 $("#insertMsg #empPosition").html(emp.empPosition);
-                $("#insertMsg #changeName").attr("src", "${pageContext.request.contextPath}/resources/upload_files/" + emp.changeName);
+                $("#insertMsg #changeName").html(emp.changeName);
+                $("#insertMsg #empNo").html(emp.empNo);
+                $("#insertMsg #msgReceiver").html(emp.empNo);
                 
-                $("#insertMsg #msgReceiver").val(emp.empNo);
-                $("#insertMsg #chatNo").val(emp.empNo);
                 
                 
             },   
@@ -314,8 +407,8 @@
                  console.log(e.responseText);  
              }
       		});
-    	
-    		selectMsgList();
+
+    	   //$("#msgView").modal("show");
     		
     		
      });

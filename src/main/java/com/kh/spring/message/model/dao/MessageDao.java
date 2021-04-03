@@ -18,16 +18,17 @@ public class MessageDao {
 		
 	}
 
+	public Message selectMsg(SqlSessionTemplate sqlSession, String msgNo) {
+		return sqlSession.selectOne("messageMapper.selectMsg", msgNo);
+	}
+	
+	
 	public int insertMsg(SqlSessionTemplate sqlSession, Message msg) {
 		return sqlSession.insert("messageMapper.insertMsg", msg);
 	}
 
-	public Message selectMsg(SqlSessionTemplate sqlSession, String msgNo) {
-		return sqlSession.selectOne("messageMapper.selectMsg", msgNo);
-	}
-
-	public ArrayList<Message> selectMsgList(SqlSessionTemplate sqlSession, int msgNo) {
-		return (ArrayList)sqlSession.selectList("noticeMapper.selectMsgList", msgNo);
+	public ArrayList<Message> selectMsgList(SqlSessionTemplate sqlSession, String chatNo) {
+		return (ArrayList)sqlSession.selectList("messageMapper.selectMsgList", chatNo);
 	}
 
 }

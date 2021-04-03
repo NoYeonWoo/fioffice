@@ -499,8 +499,24 @@
             
             
           
+                           
+        <!-- 캘린더 -->
+         <div class="col-xl-6 col-md-12">
+            <div class="card table-card">
+
+                    
+                 <div class="pd-20 card-box mb-30">
+               <div class="calendar-wrap">
+                  <div id='calendar'></div>
+               </div>
+                 
+               </div>
+            </div>
+        </div> <!-- 캘린더 -->
+        
+          
             <!-- 공지사항게시판 시작 -->
-            <div class="col-xl-12">
+             <div class="col-xl-6 col-md-12">
                 <div class="card">
                      <div class="card-header">
                         <h5>공지사항</h5>
@@ -515,51 +531,65 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
-                    
-                 </div>
-      		</div>
-
-                	<!-- 공지사항게시판 끝 -->       
-                    
-             
-                    
-                   
-        <!-- 캘린더 -->
-        <div class="col-lg-8 col-md-12">
-            <div class="card table-card">
-                    <div class="card-header">
-                        <h5>캘린더</h5>
-                    </div>
-                    
-                 <div class="pd-20 card-box mb-30">
-               <div class="calendar-wrap">
-                  <div id='calendar'></div>
-               </div>
-                 
-               </div>
-            </div>
-        </div>
-   
-    	<!-- 캘린더 일정 -->
-                    <div class="card-body text-center">
-                        <div class="table-responsive">
-                            <table class="table">
-                                <thead>
+                        </div>
+                        
+                          <div class="pd-20 card-box mb-30">
+                            
+                             <table class="table table-inverse mb-0" id="noticeMainList">
+							<thead>
                                     <tr>
-                                        <th>++ 일정 ++</th>
+                                        <th>제목</th>
+                                        <th>작성자</th>
+                                        <th>조회수</th>
                                     </tr>
                                 </thead>
+                           
                                 <tbody>
-                                
-                                   <tr>
-                                        <td>${ca.cboardTitle }</td>
-                                    </tr>
-                                   
                                 </tbody>
+                                
                             </table>
-                        </div>
-      		         </div>
+                    </div>
+
+                    
+                 </div>
+      		</div><!-- 공지사항게시판 끝 -->    
+      
+      <script>
+      function noticeList(){
+         $.ajax({
+            url : "noticeMainListView.bo",
+            type : "get",
+            success : function(noticeList) {
+               var value="";
+              
+               for(var i in noticeList){
+            	  
+                  value += '<tr class="thumbbo" data-nno="'+noticeList[i].noticeNo+'">'+
+                  	'<td width="70px" align="left">'+noticeList[i].noticeTitle+'</td>'+
+                    '<td width="20px" align="left">'+'관리자'+'</td>'+
+                    '<td width="10px" align="left">'+noticeList[i].count+'</td>'+
+                    
+                    '</tr>';
+               }        
+                  
+               
+               $("#noticeMainList tbody").html(value);
+            },
+            error : function() {
+               console.log("ajax 통신실패");
+            }
+
+         });
+      }
+      $(function(){
+    	  noticeList();
+      })
+   </script>  
+      		
+      		 
+                    
+ 
+   
                 </div>
             </div>
 </div>
@@ -582,8 +612,6 @@
 		
 		/* 일정 받아옴 */
 		events : [ 
-			<c:forEach items="${list}" var="ca">
-			<c:if test="${ca.empNo eq loginUser.empNo }">
 			{
 			id : '${ca.calNo}',
 			title : '${ca.calTitle }',
@@ -594,73 +622,8 @@
 			backgroundColor: '${ca.calColor}',
 			textColor: '#ffffff'
 			}, 
-			</c:if>
-			</c:forEach>
-		 ], 
-		 
-		select: function (startDate, endDate, jsEvent, view) {
-
-		    $(".fc-body").unbind('click');
-		    $(".fc-body").on('click', 'td', function (e) {
-
-		      $("#contextMenu")
-		        .addClass("contextOpened")
-		        .css({
-		          display: "block",
-		          left: e.pageX,
-		          top: e.pageY
-		        });
-		      return false;
-		    });
-
-		    var today = moment();
-
-		  },
-
-		 //일정 클릭시 확인 및 수정이벤트 
-		  eventClick: function (event, jsEvent, view) {
-			  var cano = event.id;
-			  console.log(cano);
-
-		            $.ajax({
-		               type:"POST",  
-		               url:"selectCalendar", 
-		               async:false,
-		               data:{calNo:cano},
-		               success:function(ca){
-		            	   console.log(cano);
-		            	  
-		                   $("#viewCalendar #calNo").val(ca.calNo);
-		                   $("#viewCalendar #empNo").val(ca.empNo);
-		                   $("#viewCalendar #cateName").val(ca.cateName);
-		                   $("#viewCalendar #calTitle").val(ca.calTitle);
-		                   $("#viewCalendar #calContent").val(ca.calContent);
-		                   $("#viewCalendar #calSDates").val(ca.calSDates);
-		                   $("#viewCalendar #calEDates").val(ca.calEDates);
-		                   
-		                   $("#viewCalendar #empNo").val(ca.empNo);
-		                   $("#viewCalendar #calCate").val(ca.calCate);
-		                   $("#viewCalendar #calType").val(ca.calType);
-		                   $("#viewCalendar #calColor").val(ca.calColor);
-		                   $("#viewCalendar #status").val(ca.status);
-		                   
-		               },
-		               
-		               error:function(e){  
-		                   console.log(e.responseText);  
-		               }
-		        		});   
-		            
-		            $("#viewCalendar").modal("show");
-		         
-		  },
-		  
-		 
-		 
-		dayClick: function(date, allDay, jsEvent, view) {        
-	           $("#addCalendar").modal("show");
-          }
-
+		 ]
+	
       });
 	
 		calendar.render();
