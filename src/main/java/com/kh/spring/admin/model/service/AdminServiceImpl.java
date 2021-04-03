@@ -1,8 +1,6 @@
 package com.kh.spring.admin.model.service;
 
-import java.awt.List;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -92,6 +90,16 @@ public class AdminServiceImpl implements AdminService {
 	public int deleteCalendar(String calNo) {
 		// TODO Auto-generated method stub
 		return adminDao.deleteCalendar(sqlSession,calNo);
+	}
+	@Override
+	public int checkAdmin(String empNo) {
+		// TODO Auto-generated method stub
+		return adminDao.checkAdmin(sqlSession,empNo);
+	}
+	@Override
+	public ArrayList selectAdmin(String empNo) {
+		// TODO Auto-generated method stub
+		return adminDao.selectAdmin(sqlSession,empNo);
 	}
 	
 

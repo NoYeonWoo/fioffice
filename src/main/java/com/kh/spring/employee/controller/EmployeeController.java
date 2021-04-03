@@ -301,7 +301,7 @@ public class EmployeeController {
 	    
 	    @RequestMapping(value="resetpw.do", method=RequestMethod.POST)	
 		 public String resetPwd ( Employee emp, @RequestParam("empNo")String empNo,
-				                                            @RequestParam("email")String email ,HttpSession session,Model model)throws Exception {
+				                                            @RequestParam("email")String email ,Model model)throws Exception {
 		    
 		
 			 System.out.println("empNo :::"+empNo);
@@ -315,11 +315,11 @@ public class EmployeeController {
 			System.out.println(result);
 			if(result>0) {
 				 model.addAttribute("emp",emp);
-				 session.setAttribute("msg", "비밀번호초기화 완료! 사번으로 로그인해 주세요 ");
-	        	 return "common/login";
+				 model.addAttribute("msg", "비밀번호초기화 완료! 사번으로 로그인해 주세요 ");
+	        	 return "redirect:/";
 			}else {
-				session.setAttribute("msg","수정실패!");
-				 return "common/login";
+				model.addAttribute("msg","수정실패!");
+				 return "redirect:/";
 		 }
 		 	
 	

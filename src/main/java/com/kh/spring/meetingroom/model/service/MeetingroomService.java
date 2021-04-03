@@ -24,4 +24,10 @@ public interface MeetingroomService {
 
 	int insertReservation(Reservation res);
 
+	int deleteReservation(String resNo);
+
+	void checkReservation(Date time);
+
+	ArrayList<Reservation> selectReservation(String status);
+
 }

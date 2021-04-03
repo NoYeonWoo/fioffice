@@ -58,5 +58,20 @@ public class MeetingroomServiceImpl implements MeetingroomService {
 		// TODO Auto-generated method stub
 		return  meetingDao.insertReservation(sqlSession, res);
 	}
+	@Override
+	public int deleteReservation(String resNo) {
+		// TODO Auto-generated method stub
+		return meetingDao.deleteReservation(sqlSession,resNo);
+	}
+	@Override
+	public void checkReservation(Date time) {
+		meetingDao.checkReservation(sqlSession,time);
+		
+	}
+	@Override
+	public ArrayList<Reservation> selectReservation(String status) {
+		// TODO Auto-generated method stub
+		return meetingDao.selectReservation(sqlSession,status);
+	}
 
 }

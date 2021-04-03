@@ -20,7 +20,9 @@
 		<result property="resContent" column="RES_CONTENT" />
 		<result property="roomNo" column="ROOM_NO" />
 		<result property="roomName" column="ROOM_NAME" />
+		<result property="location" column="LOCATION" />
 		<result property="empNo" column="EMP_NO" />
+		<result property="empName" column="EMP_NAME" />
 		<result property="status" column="STATUS" />
 	</resultMap>
 	
@@ -57,23 +59,24 @@
 	</update>
 	
 	<select id="selectRoomList" resultMap="roomResultSet">
-		SELECT ROOM_NO, ROOM_NAME 
+		SELECT *
 		FROM ROOM
 		WHERE STATUS = 'Y'
 	</select>
 	
 	<select id="selectMyReservation" parameterType="string" resultMap="resResultSet">
-		SELECT A.*,B.ROOM_NAME 
+		SELECT A.*,B.ROOM_NAME,B.LOCATION
 		FROM ROOM_RES A JOIN ROOM B ON (A.ROOM_NO=B.ROOM_NO)
         WHERE A.STATUS = 'Y'
 		AND EMP_NO = #{empNo}
+		ORDER BY RES_DATE ASC
 	</select>
 	
 	<select id="selectDateReservation" parameterType="Reservation" resultMap="resResultSet">
 		SELECT STA_TIME, END_TIME
 		FROM ROOM_RES
 		WHERE STATUS = 'Y'
-		AND RES_DATE = #{resDateS}
+		AND RES_DATE = #{resDate}
 		AND ROOM_NO = #{roomNo}
 	</select>
 	
@@ -91,4 +94,25 @@
 		DEFAULT	
 		)
 	</insert>
+	
+	<delete id="deleteReservation" parameterType="string">
+		DELETE FROM ROOM_RES
+		WHERE RES_NO = #{res_no}
+	</delete>
+	
+	<update id="checkReservation" parameterType="date">
+		<![CDATA[
+		UPDATE ROOM_RES
+		SET STATUS = 'N'
+		WHERE RES_DATE < #{time}
+		]]>
+	</update>
+	
+	<select id="selectReservation" parameterType="string" resultMap="resResultSet">
+		SELECT A.*,B.ROOM_NAME,C.EMP_NAME
+		FROM ROOM_RES A JOIN ROOM B ON (A.ROOM_NO=B.ROOM_NO)
+        JOIN EMPLOYEE C ON (A.EMP_NO = C.EMP_NO)
+        WHERE A.STATUS = #{status}
+		ORDER BY RES_DATE ASC
+	</select>
 </mapper>

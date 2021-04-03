@@ -155,4 +155,16 @@
 		FROM CALENDAR
 		WHERE CAL_NO=#{calNo} 
 	</delete>
+	
+	<select id="checkAdmin" parameterType="string" resultType="_int">
+		SELECT COUNT(*)
+		FROM AUTHORITY
+		WHERE EMP_NO = #{empNo}
+	</select>
+	
+	<select id="selectAdmin">
+		SELECT ADMIN_NO
+		FROM AUTHORITY
+		WHERE EMP_NO = #{empNo}
+	</select>
 </mapper>

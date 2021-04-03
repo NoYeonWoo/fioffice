@@ -44,7 +44,7 @@
                         <h5 class="m-b-10"></h5>
                      </div>
                      <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.jsp"><i
+                        <li class="breadcrumb-item"><a href="adminMain.jsp"><i
                               class="feather icon-home"></i></a></li>
                      </ul>
                   </div>
@@ -239,7 +239,7 @@
               data:{empNo:$(event.relatedTarget).data('id')},
               success:function(emp){
                   $("#empName").html(emp.empName);
-                  $("#empNo").val(emp.empNo);
+                  $("#empNo").val(emp.empNo).html();
                   $("#empNo1").html(emp.empNo);
                   $("#deptName").html(emp.deptName);
                   $("#empPosition").html(emp.empPosition);
