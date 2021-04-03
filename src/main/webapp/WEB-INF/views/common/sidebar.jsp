@@ -125,8 +125,13 @@
                <li class="nav-item">
                    <a href="view.add2" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
                </li>
-               <li class="nav-item">
-                   <a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a><!-- ssdd -->
+               <li class="nav-item pcoded-hasmenu">
+               		<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">이메일</span></a>
+               		<ul class="pcoded-submenu">
+                       <li><a href="view.email">이메일함</a></li>
+                       <li><a href="view.emailImportant">중요이메일함</a></li>
+                   </ul>
+                   <!--<a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>--><!-- ssdd -->
 
                </li>
                   <li class="nav-item">

@@ -51,6 +51,15 @@
 <div class="row">
  
  
+ 			<form id="EmailResend" action="resend.emailgo" method="post">
+ 			<input type="hidden" name="emailNo" value="${e.emailNo}">
+ 				<input type="hidden" class="form-control" id="empNo" name="empNo" value="${ e.emailReceive }">
+ 				<input type="hidden" class="form-control" id="emailTitle" name="emailTitle" value="${e.emailTitle}">
+ 				<input type="hidden" class="form-control" id="emailSendEmail" name='emailSendEmail' value="${e.emailReceiveEmail}">
+ 				<input type="hidden" class="form-control" id="emailContent" name="emailContent" value="${e.emailContent}">
+ 			</form>
+ 
+ 
  
  
  <!-- [ Main Content ] start -->
@@ -87,6 +96,7 @@
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="floating-label" for="Email">이메일</label>
+                                        <input type="hidden" name="emailNo" value="${e.emailNo}">
                                         <input type="hidden" name="emailReceive" value="${e.empNo}">
                                         <input type="email" class="form-control" id="emailSendEmail" name='emailSendEmail' aria-describedby="emailTitle" value="${e.emailReceiveEmail}" readonly="readonly">
                                     </div>
@@ -133,6 +143,7 @@
 
 							<div class="card-body">
 								<button type="button" class="btn  btn-primary btn-lg" onclick="$('#EmailDelete').submit();">삭제하기</button></a>
+								<button type="button" class="btn  btn-primary btn-lg" onclick="$('#EmailResend').submit();">답장하기</button></a>
 							</div>
 
 								</div>

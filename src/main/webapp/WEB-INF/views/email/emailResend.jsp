@@ -67,7 +67,7 @@
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">받는사람</label>
                                         <input type="hidden" name="emailReceiveEmail" value="${emailInfo2.emailEmail}">
-                                        <input type="text" class="form-control" id="empNo" name="empNo" value="" placeholder="상대방 사번을 쓰시오">
+                                        <input type="text" class="form-control" id="empNo" name="empNo" value="${ e.emailReceive }" placeholder="상대방 사번을 쓰시오">
                                     </div>
                                 </div>
                                 <div class="col-sm-3">
@@ -87,13 +87,13 @@
                                     <div class="form-group">
                                         <label class="floating-label" for="Email">이메일</label>
                                         <input type="hidden" name="emailReceive" value="${emailInfo2.empNo}">
-                                        <input type="email" class="form-control" id="emailSendEmail" name='emailSendEmail' aria-describedby="emailTitle" placeholder="상대방 이메일을 쓰시오">
+                                        <input type="email" class="form-control" id="emailSendEmail" name='emailSendEmail' aria-describedby="emailTitle" value="${e.emailReceiveEmail} " placeholder="상대방 이메일을 쓰시오">
                                     </div>
                                 </div>
                                 <div class="col-sm-12">
                                     <div class="form-group">
                                         <label class="floating-label" for="Text">제목</label>
-                                        <input type="text" class="form-control" id="emailTitle" name="emailTitle" placeholder="">
+                                        <input type="text" class="form-control" id="emailTitle" value=" ${e.emailTitle }<--RESEND " name="emailTitle" placeholder="">
                                     </div>
                                 </div>
                                 
@@ -110,7 +110,8 @@
                             	<div class="input-group-prepend">
                                 <span class="input-group-text">내용</span>
                            	 	</div>
-                            	<textarea id="emailContent" name="emailContent" class="form-control" aria-label="With textarea" ></textarea>
+                            	<textarea id="emailContent" name="emailContent" class="form-control" aria-label="With textarea" >${e.emailContent}           ${e.emailTime}
+<------------------------------resend---------------------------------></textarea>
                         		</div>
                         
                         	</div>
@@ -128,11 +129,13 @@
                         	<input type="hidden" name="emailHost" value="${emailInfo.emailHost}">
                         	<input type="hidden" name="emailPort" value="${emailInfo.emailPort}">
                         	-->
-                        	<!--  
+                        	<!--
                         	${loginUser.empNo}
                         	${emailInfo2.emailEmail}
                         	${emailInfo2.emailEmail}
                         	${email.emailTitle}
+                        	-->
+                        	<!--
                         	<input type="text" name="emailReceiveEmail" value="${emailInfo2.emailEmail}">
                         	-->
 

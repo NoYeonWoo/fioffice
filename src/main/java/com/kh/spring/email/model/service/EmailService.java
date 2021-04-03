@@ -10,8 +10,9 @@ import com.kh.spring.employee.model.vo.Employee;
 public interface EmailService {
 	
 	int selectListCount();
-	ArrayList<Email> selectListCount(PageInfo pi,Employee emp);
-	
+	int selectListCountIm();
+	ArrayList<Email> selectListCount(PageInfo pi,Employee emp);//////
+	ArrayList<Email> selectListCountIm(PageInfo pi, Employee emp);
 	
 	ArrayList<EmailInfo> selectUser(Employee emp);
 	ArrayList<EmailInfo> selectMainEmail(Employee emp);
