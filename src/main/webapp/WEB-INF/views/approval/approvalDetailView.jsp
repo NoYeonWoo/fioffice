@@ -112,7 +112,7 @@
 						   	  <c:if test="${(sessionScope.loginUser.empNo eq ap.firstApprEmp) && (ap.status ne 'A')  }">
 										<button type="button" id="confirm"
 											onclick="postFormSubmit(1)"
-											class="btn btn-success">승인1</button>
+											class="btn btn-success">승인</button>
 											
 											<button type="button" id="reject"
 											onclick="postFormSubmit(2)"

@@ -59,6 +59,7 @@ font-size: 25px;
 #app-block {
 	background-color: #B8ACD0;
 	width: auto;
+	height:160px;
 }
 
 #title-block {
@@ -85,7 +86,7 @@ p {
 }
 
 .subd {
-	font-size: 5px;
+	font-size: 10px;
 }
 </style>
 </head>
@@ -123,7 +124,7 @@ p {
 				<div class="col-sm-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="m-0 font-weight-bold text-primary">TODO+</h3>
+							<h5 class="m-0 font-weight-bold ">TODO+</h5>
 						
 						</div>
 
@@ -162,11 +163,11 @@ p {
 														
 															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
 															<div align="right"> <a  onclick="postFormSubmit(2);"><i class="fas fa-trash-alt"></i></a></div>
-																<p class="titled">${item.todoTitle }</p>
-																<p class="subd">기한:${item.todoDoneDate} }</p>
-																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
+															
+																<p class="titled">제목:${item.todoTitle }</p>
+															    <p class="titled">내용:${item.todoContent}  </p>
 														        <div align="right">
-													                <a  onclick="postFormSubmit(1);"><i class="fas fa-arrow-right"></i></a>
+													                  <p class="subd">기한:${item.todoDoneDate} </p> <a  onclick="postFormSubmit(1);"><i class="fas fa-arrow-right"></i></a>
 													               
 													            </div>
 													            
@@ -221,11 +222,11 @@ p {
 														<li>
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
 														<div align="right"> <a  onclick="postFormSubmits(2);"><i class="fas fa-trash-alt"></i></a></div>
-																<p class="titled">${item.todoTitle }</p>
-																<p class="subd">기한:${item.todoDoneDate} }</p>
-																<p class="subd">내용:${item.todoContent} } 작성자: ${loginUser.empName }</p>
+																<p class="titled">제목${item.todoTitle }</p>
+																
+																<p class="titled">내용:${item.todoContent} </p>
 													<div align="right">
-													                <a  onclick="postFormSubmits(1);"><i class="fas fa-arrow-right"></i></a>
+													               <p class="subd">기한:${item.todoDoneDate} </p> <a  onclick="postFormSubmits(1);"><i class="fas fa-arrow-right"></i></a>
 													               
 													            </div>
 													            
@@ -272,11 +273,12 @@ p {
 								                          <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
-																<p class="titled">${item.todoTitle }</p>
-																<p class="subd">기한:${item.todoDoneDate} }</p>
-																<p class="subd">내용:${item.todoContent} }</p>
+																<p class="titled">제목:${item.todoTitle }</p>
+														
+																<p class="titled">내용:${item.todoContent} }</p>
 															
-																<div align="right"> <a  onclick="deletetodo();"><i class="fas fa-trash-alt"></i></a></div>
+																<div align="right"> 
+																		<p class="subd">기한:${item.todoDoneDate} </p><a  onclick="deletetodo();"><i class="fas fa-trash-alt"></i></a></div>
 													            
 													            <form id="deletetodo" action="" method="post">
 																	<input type="hidden" name="tno" value="${ item.todoNo }">
