@@ -108,6 +108,7 @@ public class ApprovalController {
 	
 		if (result > 0) {
             System.out.println("ap.getStatus"+ap.getStatus());
+            session.setAttribute("msg", "성공적으로 결재를 올렸습니다.");
 			return "redirect:approvalList.do";
 		} else {
 
@@ -226,7 +227,7 @@ public class ApprovalController {
 		mv.addObject("status", status);
 		mv.addObject("firstApprEmpNo",ap.getFirstApprEmp());
 		mv.addObject("ap",approvalService.selectdetailapproval(ano)).setViewName("approval/approvalUpdateForm");
-	
+		
 		
 		   
 		return mv;
@@ -273,6 +274,7 @@ public class ApprovalController {
 		     System.out.println("업데이트문서1"+ap);           	   
 			 mv.addObject("ano",ap.getApprovalNo()).setViewName("redirect:approvalList.do");
 			 System.out.println("업데이트문서2"+ap);
+			  session.setAttribute("msg", "성공적으로 결재를 수정하였습니다.");
 		}
 		
 
@@ -282,19 +284,20 @@ public class ApprovalController {
 	}
     
 	@RequestMapping("deleteApproval.do")
-	public String deleteApproval(int approvalNo, String fileName, HttpServletRequest request, Model model) {
+	public String deleteApproval(int approvalNo, String fileName, HttpServletRequest request, Model model,HttpSession session) {
 
 		int result = approvalService.deleteApproval(approvalNo);
 
 		if (result > 0) {
 			if (!fileName.equals("")) {
 				deleteFile(fileName, request);
+			
 			}
-			return "redirect:approvalList.do";
-		}else {
-			throw new CommException("게시물 삭제에 실패하였습니다");
+			  session.setAttribute("msg", "성공적으로 삭제하였습니다.");
+			
+			
 		}
-
+		return "redirect:approvalList.do";
 	}
 
 	private void deleteFile(String fileName, HttpServletRequest request) {

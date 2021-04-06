@@ -196,7 +196,7 @@ public class EmployeeController {
 	
 	
 /*로그인 암호화 전  */	
-	 @RequestMapping(value="login.me",method=RequestMethod.POST)
+	 @RequestMapping(value="login.me",method= {RequestMethod.POST,RequestMethod.GET})
 	   public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
 			 Employee loginUser = (Employee) session.getAttribute("loginUser");
 		     
@@ -381,7 +381,7 @@ public class EmployeeController {
      emp.setAddress(post+"/"+address1+"/"+address2);
      int result =employeeService.updateMypage(emp);
      if(result>0) {
-    	 
+    	 model.addAttribute("msg", "마이페이지 수정완료! ");
     	 model.addAttribute("loginUser",emp);
     	 return "employee/mypage";
     	 

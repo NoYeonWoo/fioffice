@@ -15,8 +15,8 @@ import com.kh.spring.employee.model.vo.Employee;
 
 
 
-public class Logininterceptor extends HandlerInterceptorAdapter {
-	private Logger log = LoggerFactory.getLogger(Logininterceptor.class); // 로그 선언
+public class viewadd2interceptor extends HandlerInterceptorAdapter {
+	private Logger log = LoggerFactory.getLogger(viewadd2interceptor.class); // 로그 선언
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
