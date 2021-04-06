@@ -8,7 +8,7 @@ import com.kh.spring.employee.model.vo.Employee;
 
 public interface  AddressService {
 	//String empNo
-	int selectListCount(String eno);
+	int selectListCount(Employee eno);  //원래 String eno
 	int selectListCount2();
 	ArrayList<Address> selectListCount(PageInfo pi);
 	ArrayList<Employee> selectListCount2(PageInfo pi);
@@ -23,7 +23,7 @@ public interface  AddressService {
 	int updateAddress(Address a);
 	//String selectAddressNum(String eno);
 	//Address selectAddress(String eno);
-	ArrayList<Address> selectList(PageInfo pi, String eno);
+	ArrayList<Address> selectList(PageInfo pi, Employee eno);//원래 String eno
 
 
 

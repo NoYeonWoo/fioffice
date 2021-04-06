@@ -23,8 +23,8 @@ public class Address {
 	public String addressAddress;
 	public String addressMemo;
 	public String status;
-	public String empNum;
-
+	public String empNo;
+	//원래 empNum
 	
 }
 

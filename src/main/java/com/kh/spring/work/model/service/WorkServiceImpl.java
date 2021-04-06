@@ -97,9 +97,9 @@ public class WorkServiceImpl implements WorkService {
 
 	////////////////////사람찾기
 	@Override
-	public ArrayList<Work> selectUser(Employee emp) {
+	public ArrayList<Work> selectUser(String empNo) {
 		// TODO Auto-generated method stub
-		return workDao.selectUser(sqlSession,emp);
+		return workDao.selectUser(sqlSession,empNo);
 	}
 
 	@Override

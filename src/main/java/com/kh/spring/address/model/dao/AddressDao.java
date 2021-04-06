@@ -13,7 +13,7 @@ import com.kh.spring.employee.model.vo.Employee;
 @Repository("addressDao")
 public class AddressDao {
 //////////////////////////
-	public int selectListCount(SqlSessionTemplate sqlSession,String eno) {
+	public int selectListCount(SqlSessionTemplate sqlSession,Employee eno) {  //원래 String eno     개인 주소록 불러오기
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("addressMapper.selectListCount",eno);
 	}
@@ -64,7 +64,7 @@ public class AddressDao {
 		return sqlSession.selectOne("addressMapper.selectAddressNum",eno);
 	}
 
-	public ArrayList<Address> selectList(SqlSessionTemplate sqlSession, PageInfo pi, String eno) {
+	public ArrayList<Address> selectList(SqlSessionTemplate sqlSession, PageInfo pi, Employee eno) {  //원래 String eno  개인 주소록 불러오기
 		// TODO Auto-generated method stub
 		int offset = (pi.getCurrentPage()-1)* pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());

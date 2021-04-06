@@ -35,7 +35,7 @@
 	
 	</select>
 	
-	<select id="selectUser" parameterType="Work" resultMap="workResultSet">
+	<select id="selectUser" parameterType="string" resultMap="workResultSet">
 		SELECT * 
  		FROM (SELECT *FROM WORK WHERE EMP_NO=#{empNo} ORDER BY WORK_NO DESC)
  		WHERE ROWNUM=1

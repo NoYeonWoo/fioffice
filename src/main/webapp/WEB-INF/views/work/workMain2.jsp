@@ -128,7 +128,7 @@
 										
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin%60)%60%60}"/>분
 										</c:forEach>
 										
 										</h6>
@@ -150,7 +150,7 @@
 										<h6>
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin%60)%60%60}"/>분
 										</c:forEach>
 										</h6>
 										
@@ -169,7 +169,7 @@
 										
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum%60)%60%60}"/>분
 										</c:forEach>
 										
 										</h6>

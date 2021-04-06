@@ -67,7 +67,6 @@
           <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
          <div class="row">
          
-         
          <c:set var="today" value="<%=new java.util.Date()%>" />
 				<!-- 현재날짜 -->
 				<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
@@ -115,16 +114,15 @@
 
 										
 										<h6 id="workStartTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
-										
+										<!-- 
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin%60)%60}"/>분
 										</c:forEach>
-										
+										-->
 										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										
 									</div>
-
 
 
 
@@ -140,9 +138,9 @@
 										<h6 id="workEndTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)%60%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin%60)%60%60}"/>분
 										</c:forEach>
-										<h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										
 									</div>
 								</div>
@@ -159,11 +157,11 @@
 										
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum%60)%60}"/>분
 										</c:forEach>
 										
 										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
-										
+
 									</div>
 								</div>
 
@@ -228,89 +226,148 @@
             
             
             <script>
-            <!--
-            function startTime(){
+            
+            function workUserStart(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workStartTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workStartMin)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workStartMin)%60));
+						var $bun = $('<label>').text("분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
             
+            $(function(){
+            	workUserStart();
+            })
             
-            <!-- ----------------------------------------- -->
-            
-            <!-- 
-            
-            function endTime(){
+ //////////////////////////////////////////////////////////////////////////////////////////           
+ 
+       function workUserEnd(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workEndTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workEndMin)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workEndMin)%60));
+						var $bun = $('<label>').text("분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
-       -->
-       
-       
-       <!-- ----------------------------------------- -->
-       
-       <!--
-       function totalTime(){
+            ////////////////////////////////////////////////////////////////////////////////
+            $(function(){
+            	workUserEnd();
+            })
+            
+       function workUserTotal(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workTotalTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workSum)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workSum)%60));
+						var $bun = $('<label>').text(" 분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
-       -->
+            
+
+            $(function(){
+            	workUserTotal();
+            })
+            
             </script>
             
             
@@ -445,6 +502,8 @@
                                 </thead>
                            
                                 <tbody>                 
+                                
+                                <!--  -->
                                 </tbody>
                                 
                             </table>

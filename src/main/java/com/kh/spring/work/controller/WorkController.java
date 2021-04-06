@@ -53,7 +53,7 @@ public class WorkController {
 	
 	
 	
-	
+	/*
 	
 	@RequestMapping(value="WorkMainView.work",produces ="application/json;charset=UTF-8")
 	public void MainlistWork(String empNo,Model model, HttpSession session,HttpServletRequest request, HttpServletResponse response ) throws Exception {
@@ -68,7 +68,7 @@ public class WorkController {
 		
 		
 	}
-	
+	*/
 	
 	
 
@@ -80,7 +80,7 @@ public class WorkController {
 
 			
 			Employee emp= (Employee) session.getAttribute("loginUser");
-			
+			System.out.println("work emp ddd"+emp);
 			int listCount = workService.selectListCount();
 			PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
 			
@@ -98,26 +98,52 @@ public class WorkController {
 	
 	
 	
-	
+	/*
 	@RequestMapping("view.workMain")
 	public String viewWorkMain() {
 		
 		return "work/workMain";
 	}
-	
+	*/
 	
 	@RequestMapping("view.workMain2")
 	public String viewWorkMain2(Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
-		
+		System.out.println("workmain 시작");
 		Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(emp);
+		//ArrayList<Work> workUser = workService.selectUser(emp);
 		System.out.println("emp 임시"+emp);
-		System.out.println("work컨트롤러의 workUser 한줄"+workUser);
-		model.addAttribute("workUser",workUser);
+		//System.out.println("work컨트롤러의 workUser 한줄"+workUser);
+		//model.addAttribute("workUser",workUser);
 		return "work/workMain2";
 	}
 	
-	
+	/*
+	@RequestMapping(value="view.workMain",produces ="application/json;charset=UTF-8")
+	public ArrayList<Work> viewWorkMain(String empNo, HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("work메인 시작   ");
+		
+		//Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(empNo);
+		response.setContentType("application/json;charset=utf-8");
+		System.out.println("work컨트롤러의 workUser 한줄 메인으로 던지기"+workUser);
+		new Gson().toJson(workUser,response.getWriter());
+		
+		return workUser;
+	}
+	*/
+	@RequestMapping(value="view.workMain",produces ="application/json;charset=UTF-8")
+	public void viewWorkMain(String empNo, HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("work메인 시작   ");
+		
+		//Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(empNo);
+		response.setContentType("application/json;charset=utf-8");
+		System.out.println("work컨트롤러의 workUser 한줄 메인으로 던지기"+workUser);
+		new Gson().toJson(workUser,response.getWriter());
+
+	}
 
 	
 	////////////////////////////////////////////////////////////////시작
@@ -178,7 +204,7 @@ public class WorkController {
 		///////////////////////////////
 		System.out.println("경유지 5");
 		Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(emp);
+		ArrayList<Work> workUser = workService.selectUser(empNo);
 		model.addAttribute("workUser",workUser);
 		
 		//int result = workService.insertWork(work);
@@ -187,7 +213,7 @@ public class WorkController {
 		
 		
 		
-		return "redirect:view.workMain2";
+		return "redirect:/";
 		/*
 		if (result4>0) {
 			return "work/workMain2";
@@ -257,14 +283,14 @@ public class WorkController {
 		int result5 =workService.updateMin(empNo);//시작(분)넣기
 		
 		
-		Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(emp);
+		//Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(empNo);/////
 		model.addAttribute("workUser",workUser);
 		
 		if (result4>0) {//4
-			return "work/workMain2";//"work/workMain2"
+			return "redirect:/";//"work/workMain2"
 		}else {
-			return "work/workMain2";
+			return "redirect:/";
 		}
 		
 	}
