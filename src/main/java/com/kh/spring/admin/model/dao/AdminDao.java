@@ -86,12 +86,7 @@ public class AdminDao {
 		return sqlSession.delete("adminMapper.deleteCalendar", calNo);
 	}
 
-	public int checkAdmin(SqlSessionTemplate sqlSession, String empNo) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("adminMapper.checkAdmin", empNo);
-	}
-
-	public ArrayList selectAdmin(SqlSessionTemplate sqlSession, String empNo) {
+	public ArrayList<String> checkAdmin(SqlSessionTemplate sqlSession, String empNo) {
 		// TODO Auto-generated method stub
 		return (ArrayList)sqlSession.selectList("adminMapper.checkAdmin", empNo);
 	}

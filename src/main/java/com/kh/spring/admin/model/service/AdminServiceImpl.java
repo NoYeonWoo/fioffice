@@ -92,15 +92,9 @@ public class AdminServiceImpl implements AdminService {
 		return adminDao.deleteCalendar(sqlSession,calNo);
 	}
 	@Override
-	public int checkAdmin(String empNo) {
+	public ArrayList<String> checkAdmin(String empNo) {
 		// TODO Auto-generated method stub
 		return adminDao.checkAdmin(sqlSession,empNo);
 	}
-	@Override
-	public ArrayList selectAdmin(String empNo) {
-		// TODO Auto-generated method stub
-		return adminDao.selectAdmin(sqlSession,empNo);
-	}
-	
 
 }

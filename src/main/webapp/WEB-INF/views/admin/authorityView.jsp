@@ -92,10 +92,9 @@
                             <table class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>메뉴명</th>
-                                        <th>상세</th>
-                                        <th>운영자/관리자/마스터</th>
-                                        <th>설정바로가기</th>
+                                        <th style="width:15%">메뉴명</th>
+                                        <th style="width:20%">상세</th>
+                                        <th style="width:65%">운영자/관리자/마스터</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -137,11 +136,9 @@
     
 	$(document).ready(function(){
 		<c:forEach items="${ adminList }" var="ad">
-    	$('tbody').append('<tr><td style="width:10%">${ad.adminName}</td>'
-    			+'<td style="width:15%">${ad.adminInfo}</td>'
-    			+'<td style="width:55%"> <ul class="name_tag" id="${ad.adminNo}"></ul></td>'
-    			+'<td style="width:20%"><a href="index.jsp"><span class="pcoded-micon"><i class="feather icon-external-link "></i></span>'
-    			+'<span>모든권한</span></a></td></tr>');
+    	$('tbody').append('<tr><td>${ad.adminName}</td>'
+    			+'<td>${ad.adminInfo}</td>'
+    			+'<td> <ul class="name_tag" id="${ad.adminNo}"></ul></td></tr>');
 		</c:forEach>
 		selectAuth();
 		$('#oganization').on('show.bs.modal', function (event) {

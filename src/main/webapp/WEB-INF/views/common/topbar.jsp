@@ -74,9 +74,9 @@
 				</div>
 				
 			<script type="text/javascript">
-			function adminCheck(){
-				var type;
-				if(${loginUser.empNo}=='970601101'){
+			function adminCheck(adminNo){
+				var type=false;
+				if('${loginUser.empNo}'=='970601101'){
 					return true;
 				}else{
 					$.ajax({
@@ -86,14 +86,24 @@
 							empNo:'${loginUser.empNo}'
 						},
 						async:false,
-						success:function(count){
-							console.log(count);
-							if(count==0){
-								alert("권한이 없습니다.");
+						success:function(admin){
+							console.log("admin : "+admin);
+							if(admin==""){
 								type = false;
 							}
 							else{
-								type = true;
+								console.log("adminNo : "+adminNo);
+								if(typeof adminNo == "undefined" ){
+									type = true;
+								}else{
+									$.each(admin,function(index,value){
+										if(value==adminNo || value=='A001'){
+											type = true;
+											return false;
+										}
+									});
+								}
+								
 							}
 						},
 						error:function(e){
@@ -101,8 +111,12 @@
 						}
 						
 					});
+					if(type==false){
+						alert("권한이 없습니다.");
+					}
+					return type;
 				}
-				return type;
+				
 			}
 			</script>
 	</header>

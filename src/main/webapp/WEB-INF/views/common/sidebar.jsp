@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
 	<!-- 썸머노트  -->
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
-	
+	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
    <title>FIOFFICE</title>
 	
 	<style>
@@ -61,10 +61,6 @@
          <div class="navbar-content scroll-div " >
          
             <div class="">
-          
-            
-          
-             
               
                <div class="main-menu-header">
                    <c:if test="${sessionScope.loginUser.changeName eq null }">
@@ -112,10 +108,10 @@
                <li class="nav-item">
                    <a href="todoListView.do" class="nav-link "><span class="pcoded-micon"><i class="fas fa-calendar-check"></i></span><span class="pcoded-mtext">TODO+</span></a>
                </li>
-               <!--  
+                 
                <li class="nav-item">
                    <a href="slist.so" class="nav-link "><span class="pcoded-micon"><i class="fas fa-vote-yea"></i></span><span class="pcoded-mtext">설문</span></a>
-               </li> -->
+               </li>
                      <li class="nav-item">
                    <a href="enrollForm.re" class="nav-link "><span class="pcoded-micon"><i class="fas fa-network-wired"></i></span><span class="pcoded-mtext">회의실예약</span></a>
                </li>
@@ -138,24 +134,43 @@
                   <li class="nav-item">
                    <a href="msgView.ma" class="nav-link"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
-                  <li class="nav-item pcoded-menu-caption">
-                   <label>Product</label>
-               </li>
                
-                  <li class="nav-item pcoded-hasmenu">
-                   <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>
-                   <ul class="pcoded-submenu">
-                       <li><a href="pList.pio">상품관리</a></li>
-                       <li><a href="ioList.pio">입출고관리</a></li>
-                       <li><a href="cList.pio">거래처관리</a></li>
-                       
-                   </ul>
-               </li>
-               
-               
-               
-               
-               
+                  
+	           </ul>
+			<script type="text/javascript">
+					if('${loginUser.empNo}'=='970601101'){
+						$('.pcoded-inner-navbar').append('<li class="nav-item pcoded-menu-caption">'+
+				                   '<label>Product</label></li>'+
+				                  '<li class="nav-item pcoded-hasmenu">'+
+				    	          '<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>'+
+				    	          '<ul class="pcoded-submenu"><li><a href="pList.pio">상품관리</a></li>'+
+				    	          '<li><a href="ioList.pio" >입출고관리</a></li><li><a href="cList.pio">거래처관리</a></li></ul></li>');
+					}else{
+						$.ajax({
+							type:"POST",
+							url:"checkAdmin.ad",
+							data:{
+								empNo:'${loginUser.empNo}'
+							},
+							async:false,
+							success:function(aList){
+								$.each(aList,function(index,value){
+									if(value=='A007' || value=="A001"){
+										$('.pcoded-inner-navbar').append('<li class="nav-item pcoded-menu-caption">'+
+								                   '<label>Product</label></li>'+
+								                  '<li class="nav-item pcoded-hasmenu">'+
+								    	          '<a href="#!" class="nav-link"><span class="pcoded-micon"><i class="feather icon-layout"></i></span><span class="pcoded-mtext">상품서비스</span></a>'+
+								    	          '<ul class="pcoded-submenu"><li><a href="pList.pio">상품관리</a></li>'+
+								    	          '<li><a href="ioList.pio" >입출고관리</a></li><li><a href="cList.pio">거래처관리</a></li></ul></li>');
+									}
+								});
+							},
+							error:function(e){
+								console.log(e.responseText);
+							}
+						});
+					}
+			</script>
                
                
                
@@ -219,7 +234,6 @@
                </li>
                <li class="nav-item"><a href="sample-page.html" class="nav-link "><span class="pcoded-micon"><i class="feather icon-sidebar"></i></span><span class="pcoded-mtext">Sample page</span></a></li>
 -->
-            </ul>
             
          </div>
       </div>
@@ -228,7 +242,7 @@
    
    <!-- Required Js -->
    
-    <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
+   
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/bootstrap.min.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/ripple.js"></script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/pcoded.min.js"></script>

@@ -39,13 +39,13 @@ public interface ProductInOutService {
 
 	ArrayList<Inout> selectInoutList(Map<String, Object> map);
 
-	int insertInout(Inout inout);
+	int insertInout(Inout inout, Product product);
 
 	int selectInoutCount();
 
 	Inout selectInout(String inoutNo);
 
-	int deleteInout(String inoutNo);
+	int deleteInout(String inoutNo, Product product);
 
 	
 

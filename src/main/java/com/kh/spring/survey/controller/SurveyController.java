@@ -58,5 +58,13 @@ public class SurveyController {
 		return "survey/surveyInsertForm";
 		  
 	}
-	
+	@RequestMapping("sinsert.so")
+	public String insertSurvey(Survey sur,String[] qOption) {
+		for(int i  =0; i<qOption.length;i++) {
+			System.out.println(qOption[i]);
+		}
+		System.out.println(sur.toString());
+		return "redirect:slist.so";
+		  
+	}
 }

@@ -40,9 +40,7 @@ public interface AdminService {
 
 	int deleteCalendar(String calNo);
 
-	int checkAdmin(String empNo);
-
-	ArrayList selectAdmin(String empNo);
+	ArrayList<String> checkAdmin(String empNo);
 
 	
 

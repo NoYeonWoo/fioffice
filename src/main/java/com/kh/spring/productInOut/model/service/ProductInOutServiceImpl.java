@@ -95,10 +95,18 @@ public class ProductInOutServiceImpl implements ProductInOutService {
 		// TODO Auto-generated method stub
 		return proInoutDao.selectInoutList(sqlSession,map);
 	}
+
 	@Override
-	public int insertInout(Inout inout) {
+	public int insertInout(Inout inout, Product product) {
 		// TODO Auto-generated method stub
-		return proInoutDao.insertInout(sqlSession,inout);
+		int result1 = proInoutDao.insertInout(sqlSession,inout);
+		int result2 = proInoutDao.updateProduct(sqlSession,product);
+		if(result1>0&&result2>0) {
+			return 1;
+		}else {
+			return 0;
+		}
+		
 	}
 	@Override
 	public int selectInoutCount() {
@@ -110,10 +118,17 @@ public class ProductInOutServiceImpl implements ProductInOutService {
 		// TODO Auto-generated method stub
 		return proInoutDao.selectInout(sqlSession,inoutNo);
 	}
+
 	@Override
-	public int deleteInout(String inoutNo) {
+	public int deleteInout(String inoutNo, Product product) {
 		// TODO Auto-generated method stub
-		return proInoutDao.deleteInout(sqlSession,inoutNo);
+		int result1 = proInoutDao.deleteInout(sqlSession,inoutNo);
+		int result2 = proInoutDao.updateProduct(sqlSession,product);
+		if(result1>0&&result2>0) {
+			return 1;
+		}else {
+			return 0;
+		}
 	}
 
 }

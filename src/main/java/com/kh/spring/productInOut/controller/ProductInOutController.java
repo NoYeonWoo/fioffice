@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -266,11 +267,15 @@ public class ProductInOutController {
 	//입출고 추가
 	@RequestMapping("insertInout")
 	public String insertInout(String incliNo,Inout inout, Model model) {
+		
 		System.out.println(inout.toString());
 		inout.setInoutNo(String.valueOf(proInoutService.selectInoutCount()+1));
+		
 		//if(inout.getCliNo()=="")inout.setCliNo(null);
 		if(inout.getComment().equals(""))inout.setComment(null);
+		
 		Product product = proInoutService.selectProduct(inout.getProNo());
+		
 		if(inout.getSortation().equals("입고")) {
 			product.setInStock(product.getInStock()+inout.getQuantity());
 			product.setStock(product.getStock()+inout.getQuantity());
@@ -278,47 +283,49 @@ public class ProductInOutController {
 			product.setOutStock(product.getOutStock()+inout.getQuantity());
 			product.setStock(product.getStock()-inout.getQuantity());
 		}
-		int result1 = proInoutService.insertInout(inout);
-		if(result1 > 0) {
-			int result2 = proInoutService.updateProduct(product);
-			if(result2 > 0) {
+		
+		int result = proInoutService.insertInout(inout,product);
+		
+		if(result > 0) {
 				return "redirect:ioList.pio";
-			}else {
-				model.addAttribute("msg","상품수정을 실패하였습니다.");
-				return "redirect:ioList.pio";
-			}
-			
 		}else {
 			model.addAttribute("msg","입출고추가를 실패하였습니다.");
 			return "redirect:ioList.pio";
 		}
 				
 	}
-	//상품 전체삭제
+	//입출고 취소
 	@RequestMapping("deleteInout")
 	public String deleteInout(String proNo,String inoutNo, Model model) {
+		
 		Inout io = proInoutService.selectInout(inoutNo);
-		Product p = proInoutService.selectProduct(proNo);
+		Product product = proInoutService.selectProduct(proNo);
+		
 		if(io.getSortation().equals("입고")) {
-			if(p.getStock()-io.getQuantity()<0) {
+			
+			if(product.getStock()-io.getQuantity()<0) {
 				model.addAttribute("msg","재고를 확인해주세요.");
 				return "redirect:ioList.pio";
 			}else {
-				p.setStock(p.getStock()-io.getQuantity());
-				p.setInStock(p.getInStock()-io.getQuantity());
+				product.setStock(product.getStock()-io.getQuantity());
+				product.setInStock(product.getInStock()-io.getQuantity());
 			}
+			
 		}else {
-			p.setStock(p.getStock()+io.getQuantity());
-			p.setOutStock(p.getOutStock()-io.getQuantity());
+			product.setStock(product.getStock()+io.getQuantity());
+			product.setOutStock(product.getOutStock()-io.getQuantity());
 		}
-			int pUpdate = proInoutService.updateProduct(p);
-			int ioUpdate = proInoutService.deleteInout(inoutNo);
-			if(pUpdate<0||ioUpdate<0) {
+		
+			int result = proInoutService.deleteInout(inoutNo, product);
+			
+			if(result>0) {
+				model.addAttribute("msg","취소를 성공하였습니다.");
+				return "redirect:ioList.pio";
+			}else {
 				model.addAttribute("msg","취소를 실패하였습니다.");
 				return "redirect:ioList.pio";
 			}
-			model.addAttribute("msg","취소를 성공하였습니다.");
-			return "redirect:ioList.pio";
+			
 	}
 	
 }

@@ -30,28 +30,28 @@
                    <label>ADMIN</label>
                </li>
                <li class="nav-item">
-                   <a href="authority.ad" onclick="return checkAdmin('A001');"class="nav-link "><span class="pcoded-micon"><i class="feather icon-edit m-r-5"></i></span><span class="pcoded-mtext">권한관리</span></a>
+                   <a href="authority.ad" onclick="return adminCheck('A001');"class="nav-link "><span class="pcoded-micon"><i class="feather icon-edit m-r-5"></i></span><span class="pcoded-mtext">권한관리</span></a>
                </li>
                <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-users m-r-5"></i></span><span class="pcoded-mtext">인사관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="dept.ad">부서관리</a></li>
-                       <li><a href="manageEmp.do">사원관리</a></li>
-                       <li><a href="insertEmpForm">사원추가</a></li>
+                       <li><a href="dept.ad" onclick="return adminCheck('A002');">부서관리</a></li>
+                       <li><a href="manageEmp.do" onclick="return adminCheck('A002');">사원관리</a></li>
+                       <li><a href="insertEmpForm" onclick="return adminCheck('A002');">사원추가</a></li>
                    </ul>
                </li>
                
                 <li class="nav-item pcoded-hasmenu">
                    <a href="#!" class="nav-link "><span class="pcoded-micon"><i class="feather icon-grid m-r-5"></i></span><span class="pcoded-mtext">메뉴관리</span></a>
                    <ul class="pcoded-submenu">
-                       <li><a href="notice.ad">공지사항</a></li>
-                       <li><a href="calendar.ad">캘린더</a></li>
-                       <li><a href="survey.ad">설문</a></li>
+                       <li><a href="notice.ad" onclick="return adminCheck('A003');">공지사항</a></li>
+                       <li><a href="calendar.ad" onclick="return adminCheck('A004');">캘린더</a></li>
+                       <li><a href="survey.ad" onclick="return adminCheck('A001');">설문</a></li>
                        <li class="pcoded-hasmenu">
                        	<a href="#!">회의실</a>
                        	 <ul class="pcoded-submenu">
-                       	 	<li><a href="meetingRoom.ad">회의실</a></li>
-                       	 	<li><a href="reservation.ad">예약현황</a></li>
+                       	 	<li><a href="meetingRoom.ad" onclick="return adminCheck('A006');">회의실</a></li>
+                       	 	<li><a href="reservation.ad" onclick="return adminCheck('A006');">예약현황</a></li>
                        	 </ul>
                        </li>
                    </ul>
@@ -62,32 +62,6 @@
       </div>
    </nav>
    <!-- [ navigation menu ] end -->
-   	<script>
-   		var aList=[];
-   		$(document).ready(function(){
-   			$.ajax({
-   				type:"POST",
-   				url:"selectAdmin.ad",
-   				data:{
-   					empNo:'${loginUser.empNo}'
-   				},
-   				async:false,
-   				success:function(admin){
-   					console.log(admin);
-   					aList = admin;
-   				},
-   				error:function(e){
-   					console.log(e.responseText);
-   				}
-   				
-   			});
-   	   		console.log(aList);
-   		});
-   		
-		function checkAdmin(adminNo){
-			
-		}
-   	</script>
    
    <!-- Required Js -->
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
