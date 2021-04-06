@@ -1,16 +1,12 @@
 package com.kh.spring.employee.model.service;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import com.kh.spring.admin.model.vo.Department;
 import com.kh.spring.admin.model.vo.Job;
 import com.kh.spring.employee.model.dao.EmployeeDao;
 import com.kh.spring.employee.model.vo.Employee;
@@ -34,10 +30,8 @@ public class EmployeeServiceImpl implements EmployeeService {
 	}
 
 
-	 @Transactional
 	@Override
 	public int updateMypage(Employee emp) {
-		int result =employeeDao.updateMypage(sqlSession, emp);
 		return employeeDao.updateMypage(sqlSession,emp);
 	}
 
@@ -72,6 +66,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public int updateEntDate(Employee emp) {
 		// TODO Auto-generated method stub
+	
 		return employeeDao.updateEntDate(sqlSession, emp);
 	}
 

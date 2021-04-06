@@ -4,6 +4,14 @@
 <html>
 <head>
  <style>
+.btn-primary{
+	background-color: #B8ACD0 !important;
+    border-color: #B8ACD0 !important;
+}
+.btn{
+	padding : 0.5rem 0.95rem !important;
+	margin-bottom : 1rem !important;
+}
  </style>
  
   <!-- Favicon icon -->

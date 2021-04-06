@@ -350,7 +350,7 @@ border-color: #B87AD0 !important;
 					$("#rList tbody").append('<tr class="hide"><td colspan="5">'+
                 	'<span>회의실 장소 : </span><span>'+resList[i].location+'</span>'+
                 	'<p><button type="button" class="btn btn-sm btn-danger" onclick="deleteRes('+resList[i].resNo+')" style="float:right">예약취소</button></p>'+
-                	'<span>회의 내용 : </span><span style="padding-top:1rem;">'+resList[i].resContent+'</span></td></tr>');
+                	'<span>회의 내용 : </span><span style="padding-top:1rem; white-space:pre;">'+resList[i].resContent+'</span></td></tr>');
 				}
 			},
 			error:function(e){  

@@ -48,20 +48,20 @@ public class AdminController {
 	//AdmimcheckCount
 	@RequestMapping("checkAdmin.ad")
 	@ResponseBody
-	public String checkAdmin(String empNo) {
-		int count = adminService.checkAdmin(empNo);
-		System.out.println(count);
-		return String.valueOf(count);
-	}
-	
-	//AdmimcheckCount
-	@RequestMapping("selectAdmin.ad")
-	@ResponseBody
-	public ArrayList selectAdmin(String empNo) {
-		ArrayList admin = adminService.selectAdmin(empNo);
-		System.out.println(admin);
+	public ArrayList<String> checkAdmin(String empNo) {
+		ArrayList<String> admin = adminService.checkAdmin(empNo);
+		System.out.println("admin : "+admin);
 		return admin;
 	}
+	
+	//AdmimList
+	/*@RequestMapping("selectAdmin.ad")
+	@ResponseBody
+	public ArrayList selectAdmin(String empNo) {
+		String[] admin = adminService.selectAdmin(empNo);
+		System.out.println("admin : "+admin);
+		return admin;
+	}*/
 		
 	//관리자메인화면
 	@RequestMapping("adminMain.ad")
@@ -124,17 +124,22 @@ public class AdminController {
 	@RequestMapping("/insertAuthority")
 	@ResponseBody
 	public String insertAuthority(Authority auth) {
-		
-		auth.setAuthNo(auth.getAdminNo()+auth.getEmpNo());
-		
-		int result1 = adminService.selectAuthority(auth.getAuthNo());
-		
-		if(result1 < 1) {
-			int result2 = adminService.insertAuthority(auth);
-			return String.valueOf(result2);
+		auth.setAuthNo("A001"+auth.getEmpNo());
+		int result = adminService.selectAuthority(auth.getAuthNo());
+		if(result<1) {
+			auth.setAuthNo(auth.getAdminNo()+auth.getEmpNo());
+			int result1 = adminService.selectAuthority(auth.getAuthNo());
+			if(result1 < 1) {
+				int result2 = adminService.insertAuthority(auth);
+				return String.valueOf(result2);
+			}else {
+				return String.valueOf(result1+1);
+			}	
 		}else {
-			return String.valueOf(result1+1);
-		}	
+				return String.valueOf(result+1);
+		}
+
+		
 	}
 	
 	//권한삭제
