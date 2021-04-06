@@ -314,22 +314,21 @@
 	                    
 						<div class="modal-footer">
 						<br><br><br>
-
 							<button type="submit" class="btn btn-primary">수정</button>
 							</form>	
-							
+							 <!-- 삭제용 폼 -->
 							 <form name="deleteCalendar" action="cdelete.ca" method="post">
 							<input type="hidden" name="calNo" id="calNo">
 							<button type="submit" class="btn btn-danger">삭제</button>
 	    					</form>
-						
+							
 	                	</div>
 					
 					
 				</div>
 	            </div>
 	        </div>
-	        <!-- 삭제용 폼 -->
+	       
 		   
 	   			
 					
@@ -370,6 +369,8 @@
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
+		timeFormat                : 'HH:mm',
+		editable                  : true,
 		
 		/* 일정 받아옴 */
 		events : [ 
@@ -408,10 +409,8 @@
 
 		  },
 
-		 //일정 클릭시 확인 및 수정이벤트 
+		 /* 일정 클릭시 확인 및 수정이벤트 */
 		  eventClick: function (event, jsEvent, view) {
-			  
-			 
 			  
 			  var cano = event.id;
 			  console.log(cano);
@@ -441,12 +440,13 @@
 		               },
 		               
 		               error:function(e){  
-		                   console.log(e.responseText);  
+		                   console.log(e.responseText); 
+
 		               }
 		        		});   
 		            
 		            $("#viewCalendar").modal("show");
-		         
+
 		  },
 		  
 		 

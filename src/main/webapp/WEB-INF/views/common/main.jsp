@@ -535,7 +535,7 @@
                         
                           <div class="pd-20 card-box mb-30">
                             
-                             <table class="table table-inverse mb-0" id="noticeMainList">
+                            <table class="table table-hover mb-0" id="noticeMainList">
 							<thead>
                                     <tr>
                                         <th>제목</th>
@@ -564,10 +564,12 @@
               
                for(var i in noticeList){
             	  
-                  value += '<tr class="thumbbo" data-nno="'+noticeList[i].noticeNo+'">'+
-                  	'<td width="70px" align="left">'+noticeList[i].noticeTitle+'</td>'+
-                    '<td width="20px" align="left">'+'관리자'+'</td>'+
-                    '<td width="10px" align="left">'+noticeList[i].count+'</td>'+
+                  value +=
+                	'<input type="hidden" value="'+noticeList[i].noticeNo+'">'+
+                	'<tr>'+
+                  	'<td width="70px">'+noticeList[i].noticeTitle+'</td>'+
+                    '<td width="20px">'+'관리자'+'</td>'+
+                    '<td width="10px">'+noticeList[i].count+'</td>'+
                     
                     '</tr>';
                }        
@@ -583,6 +585,11 @@
       }
       $(function(){
     	  noticeList();
+    	  
+    	  $("#noticeMainList tbody ").click(function(){
+  			location.href="ndetail.bo?nno=" + $(this).children().eq(0).val();
+  		});
+    	  
       })
    </script>  
       		
@@ -602,27 +609,70 @@
 
 	var calendar = $('#calendar').fullCalendar( {
 		plugins: ['interaction'],
-		
 		editable : false,
-		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+		firstDay : 0,
 		selectable : true,
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
 		
-		/* 일정 받아옴 */
+		 /* 일정 받아옴
 		events : [ 
 			{
-			id : '${ca.calNo}',
-			title : '${ca.calTitle }',
-			description : '${ca.calContent}',
-			start : '${ca.calSDates}',
-			end : '${ca.calEDates}',
-			type : '${ca.calCateName}',
-			backgroundColor: '${ca.calColor}',
+			id : '1',
+			title : '찍히는지 테스트',
+			description : '찍히는지 테스트',
+			start : '2021-04-04T09:20',
+			end : '2021-04-04T13:20',
+			type : '나의 일정',
+			backgroundColor: '#B8ACD0',
 			textColor: '#ffffff'
 			}, 
-		 ]
+		 ]*/
+		 
+		 
+		
+		 events:
+			 
+			 function (start, end, callback) {
+			    $.ajax({
+			      type: "POST",
+			      url: "calendarmain.ca",
+			      dataType:"json",
+			      success: function(calList) {
+			    	  var events = [];
+			    	  console.log(calList);
+			    	  
+	 					$.each(calList,function(idx,cal) {
+	 						//console.log(cal.calTitle); //찍힘
+							//console.log(calList[idx].calTitle); //찍힘
+							
+							var id = calList[idx].calNo;
+							var title = calList[idx].calTitle;
+							var description = calList[idx].calContent;
+							var type = calList[idx].calCateName;
+							var startDay = calList[idx].calSDates;
+							var endDay = calList[idx].calEDates;
+							var backgroundColor = calList[idx].calColor;
+
+							events.push({
+								id : id,
+								title : title,
+								description: description,
+								start : startDay,
+								end : endDay,
+								type: type,
+								backgroundColor : backgroundColor,
+								textColor : '#ffffff'
+							});
+						});
+						console.log("events : " + JSON.stringify(events));
+						callback(events);
+
+			      }
+			      
+			    });
+			  }
 	
       });
 	
@@ -630,7 +680,6 @@
 	
     });
     
-   
     </script>
     
     

@@ -2,9 +2,9 @@ package com.kh.spring.message.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
 import java.util.ArrayList;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -31,7 +31,6 @@ public class MessageController {
 	private EmployeeService employeeService;
 	
  
-
 	/* 메세지를 보낼 수 있는 사원 리스트 (본인 제외) */
 	@RequestMapping("msgView.ma")
 	public String selectEmpList(Model model, HttpSession session) throws Exception {
@@ -39,39 +38,55 @@ public class MessageController {
 		Employee empNo = (Employee)session.getAttribute("loginUser");
 
 		ArrayList<Employee> list = messageService.msgEmpList(empNo);
-
+		
 		System.out.println("메신저 로그인 : " + empNo);
 		model.addAttribute("list", list);
 		
-		return "message/msgChat";
-		
+		return "message/messageMainView";
 	}
 	
+	/* 메세지 채팅창 */
+	@RequestMapping("selectMsg")
+	@ResponseBody
+	public Object selectMsg(String empNo, HttpSession session) {
+		Employee loginNo = (Employee)session.getAttribute("loginUser");
+		
+		Employee emp = employeeService.selectEmployee(empNo);
+
+		String mem1 = emp.getEmpNo().substring(6,9);
+		String mem2 = loginNo.getEmpNo().substring(6,9);
+		
+		int meme1 = Integer.parseInt(mem1);
+		int meme2 = Integer.parseInt(mem2);
+		
+		if(meme1 > meme2) {
+			String chatNo = mem2 + mem1;
+			emp.setChatNo(chatNo);
+		}else {
+			String chatNo = mem1 + mem2;
+			emp.setChatNo(chatNo);
+		}
+		
+		return emp;
+	}
 	
+	/* 메세지 보냄 */
 	@ResponseBody
 	@RequestMapping("minsert.ma")
 	public String insertMsg(Message msg) {
-		System.out.println("등록 거쳐감");
 
-		System.out.println(msg.toString());
-		
 		int result = messageService.insertMsg(msg);
-
-		System.out.println("등록 : " + msg);
 		
 		return String.valueOf(result);
-		
 	}
 	
-	@RequestMapping(value="mlist.ma")
+	/* 메세지 불러옴 */
+	@RequestMapping(value="mlist", produces="application/json; charset=UTF-8")
 	@ResponseBody
 	public String selectmList(String chatNo) {
-		System.out.println("넘어옴");
 		ArrayList<Message> msgList = messageService.selectMsgList(chatNo);
-		return new GsonBuilder().setDateFormat("YYYY/MM/dd/HH:mm").create().toJson(msgList);
 		
+		return new GsonBuilder().setDateFormat("yy년 M월 d일 HH시 mm분").create().toJson(msgList);
 	}
-	
-	
 	
 }

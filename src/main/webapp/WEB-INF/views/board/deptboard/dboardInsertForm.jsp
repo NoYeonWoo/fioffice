@@ -82,7 +82,6 @@
 		                     <option value="긴급" style="color : black;">긴급</option>
 		                     <option value="알림" style="color : black;">알림</option>
 		                     <option value="공지" style="color : black;">공지</option>
-		                     <option value="일반" style="color : black;">일반</option>
                   		</select>
 
 					    <input type="text" class="form-control" id="dboardTitle" name="dboardTitle" placeholder="제목을 입력해주세요." required>

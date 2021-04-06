@@ -35,6 +35,7 @@ public class Employee {
 	private String empPosition;//직급
 	private String jobCode;//직급코드
 	private String deptCode;//부서코드
+	private String chatNo;//채팅방
 
 
 }

@@ -43,6 +43,11 @@ public class CalendarServiceImpl implements CalendarService {
 		return calendarDao.deleteCalendar(sqlSession, calNo);
 	}
 
-	 
+	@Override
+	public ArrayList<Calendar> mainList(Calendar ca) {
+		return calendarDao.mainList(sqlSession, ca);
+	}
+
+ 
 	 
 }
