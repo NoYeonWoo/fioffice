@@ -5,6 +5,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+  <!-- CSS -->
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 <style>
 #boardList {
 	text-align: center;
@@ -63,7 +69,6 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">My Portal</a></li>
                         </ul>
                     </div>
                 </div>
@@ -96,12 +101,14 @@
                         			<!-- <a href="send.email"><button type="button" class="btn  btn-primary">보내기</button></a>-->
                         			<button type="button" class="btn  btn-primary" onclick="$('#goMail').submit();">보내기</button></a>
                         			<a href="view.emailImportant"><button type="button" class="btn  btn-primary">중요이메일</button></a>
+                        			<!--<a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인</button></a> -->
 
 								</div>
 							</span>
 
 						</div>
 						<div class="card-body table-border-style">
+						
 							<div class="table-responsive">
 								<table class="table table-striped" id="emailList">
 									<thead>
@@ -132,13 +139,10 @@
 								
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- [ stiped-table ] end -->
-
-
-
-				<div id="pagingArea">
+						
+						
+						
+						<div id="pagingArea">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
@@ -178,6 +182,16 @@
 						</c:choose>
 					</ul>
 				</div>
+						
+						
+						
+					</div>
+				</div>
+				<!-- [ stiped-table ] end -->
+
+
+				<!-- 원래 번호 -->
+				
 
 				<br clear="both">
 				<br> <br>

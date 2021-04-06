@@ -79,9 +79,9 @@ public class WorkDao {
 	}
 ////////////////////////
 
-	public ArrayList<Work> selectUser(SqlSessionTemplate sqlSession, Employee emp) {
+	public ArrayList<Work> selectUser(SqlSessionTemplate sqlSession, String empNo) {
 		// TODO Auto-generated method stub
-		return (ArrayList)sqlSession.selectList("workMapper.selectUser",emp); 
+		return (ArrayList)sqlSession.selectList("workMapper.selectUser",empNo); 
 	}
 
 	public int updateMin(SqlSessionTemplate sqlSession, String empNo) {
