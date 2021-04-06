@@ -328,5 +328,10 @@
 	
 	
 	<!-- [ Main Content ] 메인화면 끝 -->
+	  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
+	
+
+	</body>
+	</html>
 
     

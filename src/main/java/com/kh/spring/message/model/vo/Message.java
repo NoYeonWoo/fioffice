@@ -24,6 +24,6 @@ public class Message {
 	private String empName; //받는 사람 이름
 	private String empPosition; //받는 사람
 	private String deptName; //받는 사람
-	
+	private String profile; //프로필 = changeName
 	
 }

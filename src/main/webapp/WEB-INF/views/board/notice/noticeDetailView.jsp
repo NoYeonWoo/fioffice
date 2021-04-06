@@ -283,7 +283,7 @@
     						value += "<tr>";
     					}
     					
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriteName + "</th>" +
+    					value += "<th style='width:10%'>&nbsp;&nbsp;" + obj.replyWriterName + "</th>" +
    								 "<td style='width:80%'>" + obj.replyContent + "</td>" +
    								 "<td style='width:10%'>" + obj.replyDate + "</td>" +
     						 "</tr>";

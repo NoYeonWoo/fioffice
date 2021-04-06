@@ -38,6 +38,7 @@ public class DeptController {
 	@Autowired
 	private DeptService deptService;
 	
+	/* 부서게시판 목록 */
 	@RequestMapping("dlist.bo")
 	public String ListView(@RequestParam(value="currentPage", required=false, defaultValue="1") 
 	   int currentPage, Model model) {
@@ -51,10 +52,10 @@ public class DeptController {
 	   model.addAttribute("list", list);
 	   model.addAttribute("pi", pi);
 	      
-	   return "board/deptboard/dboardListView";
-	        
+	   return "board/deptboard/dboardListView";  
 	}
 	
+	/* 부서게시판 디테일뷰 */
 	@RequestMapping("ddetail.bo")
 	public ModelAndView selectBoard(int dno, ModelAndView mv) {
 		int result = deptService.updateIncreaseCount(dno);
@@ -71,12 +72,11 @@ public class DeptController {
 	}
 	
 	
-	
+	/* 부서게시판 등록 */
 	@RequestMapping("dinsertForm.bo")
 	public String dboardInsertForm() {
 		
 		return "board/deptboard/dboardInsertForm";
-		  
 	}
 	
 	@RequestMapping("dinsert.bo")
@@ -101,11 +101,11 @@ public class DeptController {
 		
 		int result = deptService.insertDeptBoard(db);
 		
-		if(result > 0) {
-		return "redirect:dlist.bo";
-		}else {
-		throw new CommException("게시물 작성에 실패하였습니다.");
-		}
+			if(result > 0) {
+				return "redirect:dlist.bo";
+			}else {
+				throw new CommException("게시물 작성에 실패하였습니다.");
+			}
 		}
 	
 	
@@ -161,7 +161,7 @@ public class DeptController {
 			return renameFileName;
 	}
 	
-	
+	/* 부서게시판 수정 */
 	@RequestMapping("dupdateForm.bo")
 	public ModelAndView updateForm(ModelAndView mv, int dno) {
 		
@@ -169,7 +169,6 @@ public class DeptController {
 		setViewName("board/deptboard/dboardUpdateForm");
 		
 		return mv;
-		
 	}
 	
 	@RequestMapping("dupdate.bo")
@@ -188,9 +187,9 @@ public class DeptController {
 		}
 		
 		return mv;
-		
 	}
 	
+	/* 부서게시판 삭제 */
 	@RequestMapping("ddelete.bo")
 	public String deleteBoard(int dno, String fileName, HttpServletRequest request, Model model) {
 		
@@ -199,8 +198,6 @@ public class DeptController {
 		
 		
 		return "redirect:dlist.bo";
-		
-		
 	}
 	
 	private void deleteFile(String fileName, HttpServletRequest request) {
@@ -210,12 +207,10 @@ public class DeptController {
 		
 		File deleteFile = new File(savePath + fileName);
 		deleteFile.delete();
-		
-		
 	}
 
 	
-	
+	/* 댓글 등록 */
 	@ResponseBody
 	@RequestMapping("rinsert.dbo")
 	public String insertReply(Reply r) {
@@ -223,9 +218,9 @@ public class DeptController {
 		int result = deptService.insertReply(r);
 		
 		return String.valueOf(result);
-		
 	}
 	
+	/* 댓글 목록 */
 	@ResponseBody
 	@RequestMapping(value="rlist.dbo", produces="application/json; charset=UTF-8")
 	public String selectReplyList(int dno) {
@@ -233,7 +228,6 @@ public class DeptController {
 		ArrayList <Reply> list = deptService.selectReplyList(dno);
 		
 		return new GsonBuilder().setDateFormat("yy년 MM월 dd일 HH:mm").create().toJson(list);
-		
 	}
 		
 	

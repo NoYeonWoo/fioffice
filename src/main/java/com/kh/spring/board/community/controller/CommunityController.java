@@ -42,7 +42,7 @@ public class CommunityController {
 	@Autowired
 	private CommunityService communityService;
 	
-	
+	/* 커뮤니티 목록 */
 	@RequestMapping("clist.bo")
 	public String adminNoticeView(@RequestParam(value="currentPage", required=false, defaultValue="1") int currentPage, Model model) {
 		
@@ -55,10 +55,10 @@ public class CommunityController {
 		model.addAttribute("list", list);
 		model.addAttribute("pi", pi);
 		
-		return "board/community/communityListView";
-		  
+		return "board/community/communityListView";  
 	}
-	
+
+	/* 커뮤니티 디테일뷰 */
 	@RequestMapping("cdetail.bo")
 	public ModelAndView selectBoard(int cno, ModelAndView mv) {
 		int result = communityService.updateIncreaseCount(cno);
@@ -74,6 +74,7 @@ public class CommunityController {
 		return mv;
 	}
 	
+	/* 커뮤니티 좋아요 */
 	@RequestMapping("recommend.do")
     public String recommend (@RequestParam int cno, ModelAndView mv) {
         
@@ -88,15 +89,12 @@ public class CommunityController {
     
         return "forward:clist.do"; //페이지값을 그대로 넘겨받기위해서 포워딩을 사용해 컨트롤러로 리턴시킨다.
     }
-
 	
-	
-	
+	/* 커뮤니티 등록 */
 	@RequestMapping("cinsertForm.bo")
 	public String cboardInsertForm() {
 		
-		return "board/community/communityInsertForm";
-		  
+		return "board/community/communityInsertForm"; 
 	}
 	
 	@RequestMapping("cinsert.bo")
@@ -122,11 +120,11 @@ public class CommunityController {
 		int result = communityService.insertCommunity(cb);
 		
 		if(result > 0) {
-		return "redirect:clist.bo";
+			return "redirect:clist.bo";
 		}else {
-		throw new CommException("게시물 작성에 실패하였습니다.");
+			throw new CommException("게시물 작성에 실패하였습니다.");
 		}
-		}
+	}
 	
 	
 	private String saveFile(MultipartFile file, HttpServletRequest request) {
@@ -181,7 +179,7 @@ public class CommunityController {
 			return renameFileName;
 	}
 	
-	
+	/* 커뮤니티 수정 */
 	@RequestMapping("cupdateForm.bo")
 	public ModelAndView updateForm(ModelAndView mv, int cno) {
 		
@@ -189,7 +187,6 @@ public class CommunityController {
 		setViewName("board/community/communityUpdateForm");
 		
 		return mv;
-		
 	}
 	
 	@RequestMapping("cupdate.bo")
@@ -208,9 +205,9 @@ public class CommunityController {
 		}
 		
 		return mv;
-		
 	}
 	
+	/* 커뮤니티 삭제 */
 	@RequestMapping("cdelete.bo")
 	public String deleteBoard(int cno, String fileName, HttpServletRequest request, Model model) {
 		
@@ -219,8 +216,6 @@ public class CommunityController {
 		
 		
 		return "redirect:clist.bo";
-		
-		
 	}
 	
 	private void deleteFile(String fileName, HttpServletRequest request) {
@@ -230,21 +225,18 @@ public class CommunityController {
 		
 		File deleteFile = new File(savePath + fileName);
 		deleteFile.delete();
-		
-		
 	}
 
-	
-	
+	/* 댓글 등록 */
 	@ResponseBody
 	@RequestMapping("rinsert.cbo")
 	public String insertReply(Reply r) {
 		int result = communityService.insertReply(r);
 		
 		return String.valueOf(result);
-		
 	}
 	
+	/* 댓글 목록 */
 	@ResponseBody
 	@RequestMapping(value="rlist.cbo", produces="application/json; charset=UTF-8")
 	public String selectReplyList(int cno) {
@@ -255,7 +247,7 @@ public class CommunityController {
 		
 	}
 	
-	//좋아요 버튼
+	/* 좋아요 버튼 */
 	@RequestMapping("clickLikes")
 	@ResponseBody
 	public Map<String, Object> likesButton(HttpServletRequest request, @RequestParam("cboardNo") int cno, Model model) {	

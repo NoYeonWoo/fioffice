@@ -15,6 +15,8 @@ public interface CalendarService {
 	int updateCalendar(Calendar ca);
 
 	int deleteCalendar(int calNo);
+
+	ArrayList<Calendar> mainList(Calendar ca);
 	
 }
  

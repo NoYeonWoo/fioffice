@@ -1,18 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-        <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
-
 <head>
+<meta charset="UTF-8">
+<title>FIOFFICE</title>
 
-    <!-- HTML5 Shim and Respond.js IE11 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 11]>
-    	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    	<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    	<![endif]-->
-
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
 
 </head>
 <!-- [ offline-ui ] start -->

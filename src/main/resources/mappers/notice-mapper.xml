@@ -38,11 +38,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectList" parameterType="String" resultMap="NoticeResultSet">
 		SELECT A.*,NVL((SELECT COUNT(*) FROM REPLY
-		WHERE REF_BNO = A.NOTICE_NO AND A.STATUS='Y'
+		WHERE REF_BNO = A.NOTICE_NO AND STATUS='Y'
 		GROUP BY NOTICE_NO),0) REPLY_COUNT, EMP_NAME
 		FROM NOTICE A LEFT JOIN EMPLOYEE ON NOTICE_WRITER=EMP_NO
-      	AND A.STATUS = 'Y'
-		ORDER BY NOTICE_NO DESC
+      	WHERE A.STATUS = 'Y'
+      	ORDER BY NOTICE_NO DESC
 	</select>
 	
 	<insert id="insertNotice" parameterType="Notice">
@@ -98,17 +98,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="selectReplyList" resultMap="replyResultSet">
 		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
-	    FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
-	    WHERE REF_BNO=#{noticeNo}
-	    AND A.STATUS='Y'
-	    ORDER BY REPLY_NO
-	</select>
-	
-	<select id="commentCount" resultType="_int">
-		SELECT COUNT(*)
-		FROM REPLY
+		FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
 		WHERE REF_BNO=#{noticeNo}
-		AND STATUS='Y'
+		AND A.STATUS='Y'
+		ORDER BY REPLY_NO
 	</select>
 	
 	<select id="selectSearchList" resultType="Notice" parameterType="map">
