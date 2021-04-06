@@ -4,9 +4,11 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.kh.spring.mainCalendar.model.vo.Calendar;
 
+@SessionAttributes("loginUser")
 @Repository("calendarDao")
 public class CalendarDao {
 
@@ -32,7 +34,10 @@ public class CalendarDao {
 		System.out.println("삭제" + calNo);
 		return sqlSession.update("calendarMapper.deleteCalendar", calNo);
 	}
-
 	
+	public ArrayList<Calendar> mainList(SqlSessionTemplate sqlSession, Calendar ca) {
+		return (ArrayList)sqlSession.selectList("calendarMapper.selectMainList", ca);
+	}
+
 
 }

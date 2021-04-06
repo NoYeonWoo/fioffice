@@ -139,6 +139,27 @@
 	padding:20px 0px 0px 0px;
 	}
 	
+			
+		div.left {
+        width: 50%;
+        float: left;
+        box-sizing: border-box;
+        
+    	}
+    
+    	div.right {
+        
+        float: right;
+        box-sizing: border-box;
+        
+   		}
+   		
+   		div.comment {
+        
+       	text-align: right;
+       	 
+   		}
+   		
    	
 	</style>
 </head>
@@ -262,17 +283,17 @@
                 <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                			<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 	
                     <c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
                     	<c:choose>
 	                		<c:when test="${ pi.currentPage ne p }">
-                    			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ p }">${ p }</a></li>
+                    			<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ p }">${ p }</a></li>
 	                		</c:when>
 	                		<c:otherwise>
 	                			<li class="page-item disabled"><a class="page-link" href="">${ p }</a></li>
@@ -283,10 +304,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="notice.ad?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="nlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="notice.ad?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

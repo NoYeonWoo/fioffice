@@ -29,7 +29,7 @@ public interface WorkService {
 
 	Work selectTimes(String empNo);//String empNo Work w
 
-	ArrayList<Work> selectUser(Employee emp);
+	ArrayList<Work> selectUser(String empNo);
 
 	int insertwork2(String empNo);
 	

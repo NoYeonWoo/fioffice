@@ -51,7 +51,7 @@ public class TodoCotroller {
 
 		System.out.println("todolist main::"+todolist);
 		response.setContentType("application/json;charset=utf-8");
-		new GsonBuilder().setDateFormat("yyyy-MM-dd-HH-mm").create().toJson(todolist,response.getWriter());
+		new GsonBuilder().setDateFormat("yyyy년MM월dd일 HH시mm").create().toJson(todolist,response.getWriter());
 		
 		
 	}

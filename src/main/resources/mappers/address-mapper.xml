@@ -14,7 +14,7 @@
 		<result column="ADDRESS_ADDRESS" property="addressAddress"/>
 		<result column="ADDRESS_MEMO" property="addressMemo"/>
 		<result column="STATUS" property="status"/>
-		<result column="EMP_NO" property="empNum"/>
+		<result column="EMP_NO" property="empNo"/>
 	</resultMap>
 	
 	<resultMap type="Employee" id="employeeResultSet">
@@ -38,7 +38,7 @@
 	    <result property="deptCode" column="DEPT_CODE" />
 	    <result property="jobCode" column="JOB_CODE" />
   	</resultMap>
-	
+	<!-- empNum ) empNo -->
 	<select id="selectListCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM ADDRESS
@@ -57,12 +57,12 @@
 		SELECT *
 		FROM ADDRESS
 		WHERE STATUS = 'Y'
-		AND EMP_NO=#{empNum}
+		AND EMP_NO=#{empNo}
 		ORDER BY ADDRESS_NO DESC
 		
 	
 	</select>
-	<select id="selectList2" resultMap="employeeResultSet">
+	<select id="selectList2" resultMap="employeeResultSet"><!-- 전체 -->
 		SELECT *
 		FROM EMPLOYEE
 		WHERE STATUS = 'Y'
@@ -74,7 +74,7 @@
 		SELECT *
 		FROM EMPLOYEE
 		WHERE STATUS = 'Y'
-		AND EMP_NO=#{empNum}
+		AND EMP_NO=#{empNo}
 		ORDER BY EMP_NO DESC
 	
 	</select>
@@ -103,7 +103,7 @@
 	
 		INSERT INTO ADDRESS
 		VALUES(SEQ_ADDRESS_NO.NEXTVAL, #{addressName}, #{addressPhone}, #{addressEmail}, #{addressComName}, #{addressJob}, #{addressTel}, #{addressDept},#{addressAddress},
-		#{addressMemo},default,#{empNum})
+		#{addressMemo},default,#{empNo})
 	
 	
 	</insert>

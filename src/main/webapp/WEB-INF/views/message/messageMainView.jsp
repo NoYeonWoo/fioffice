@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+  <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
@@ -17,13 +17,12 @@
 <style>
 
 
-		div.addMsgArea {
+	div.addMsgArea {
+	   text-align: center;
+	   display: inline-block;
+	   padding: 20px;
 		
-		   text-align: center;
-		   display: inline-block;
-		   padding: 20px;
-		
-		}
+	}
 
 </style>
 </head>
@@ -82,7 +81,7 @@
 						
 							<div class="chat-list bg-light-gray" style="width:400%;">
 								<div class="chat-search">
-									<span class="ti-search"></span>
+									<span class="ti-user"></span>
 									<input type="text" placeholder="사원 목록입니다.">
 								</div>
 								
@@ -114,7 +113,7 @@
                         </div> <!-- 카드 바디 영역 -->
               
                         
-         <!-- 쪽지 처음 보내기 (채팅방 생성) Test  -->
+         <!-- 메세지 모달  -->
          <div class="modal fade bd-example-modal-lg" tabindex="-1" id="insertMsg"
             role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -135,40 +134,15 @@
 											</div>
 										</div>
 									</div>
-									
 								</div>
-								<div class="chat-box">
 								
-									
-									<div class="chat-desc customscroll" >
-									
-							<table id="msgListArea" align="center" style="border-collapse:collapse; padding:10px;">
-						                <tbody>
-						                </tbody>
-						      </table>
-						      
-     						 <!-- 메세지 리스트 영역 
-									<ul>
-											<li class="clearfix">
-												<span class="chat-img">
-													<img id="changeName" name="changeName">
-												</span>
-												<div class="chat-body clearfix">
-													<p>하.... </p>
-													<div class="chat_time">09:40PM</div>
-												</div>
-											</li>
-											<li class="clearfix admin_chat">
-												<span class="chat-img">
-													<img src="${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}">
-												</span>
-												<div class="chat-body clearfix">
-													<p>하....</p>
-													<div class="chat_time">10:40PM</div>
-												</div>
-											</li>
-									</ul>-->
-									</div>	<!-- 메세지 리스트 영역 -->
+								<!-- 메세지 리스트 출력 영역 -->
+								<div class="chat-box">
+								<div class="chat-desc customscroll">
+									<ul id="msgAreaList">
+									</ul>
+			
+								</div>	<!-- 메세지 리스트 출력 영역 끝 -->
 									
 									<!-- 메세지 전송 영역 -->
 									<div class="chat-footer">
@@ -188,7 +162,7 @@
 			                                </button>
 			                       	 	</div>
 			                       	 	</div>
-									</div> <!-- 메세지 전송 영역 -->
+									</div> <!-- 메세지 전송 영역 끝 -->
 									
 								</div>
 						
@@ -213,7 +187,7 @@
     					data:{chatNo:chatNo,
     						  msgContent:$("#msgContent").val(),
     						  msgSender:$("#msgSender").val(),
-    						  msgReceiver:$("#chatNo").val()},
+    						  msgReceiver:$("#msgReceiver").val()},
     					success:function(result){
     						if(result > 0){
     							$("#msgContent").val("");
@@ -235,31 +209,40 @@
     	
     	function selectMsgList(){
     		var chatNo = $("#chatNo").val();
-    		console.log("메세지 리스트 : " + chatNo);
+    		console.log("메세지 리스트 채팅방 : " + chatNo);
     		
     		$.ajax({
-    			type:"POST",
-    			url:"mlist.ma",
+    			url:"mlist",
     			data:{chatNo:chatNo},
+    			type:"POST",
     			success:function(msgList){
-    				
     				var value="";
+    				console.log(msgList);
+    				
     				$.each(msgList, function(i, msg){
-    					value += "<th style='width:10%'>&nbsp;&nbsp;" + msg.msgSender + "</th>" +
-   								 "<td style='width:80%'>" + msg.msgContent + "</td>" +
-   								 "<td style='width:10%'>" + msg.msgDate + "</td>" +
-    						 "</tr>";
+   
+    					if("${loginUser.empNo}" == msg.msgSender){
+    						value += "<li class='clearfix admin_chat'><span class='chat-img'>" +
+    						"<img src='${pageContext.request.contextPath}/resources/upload_files/${sessionScope.loginUser.changeName}'></span>";
+    					}else{
+    						value += "<li class='clearfix'><span class='chat-img'><img src='${pageContext.request.contextPath}/resources/upload_files/"
+    						+ msg.profile + "'></span>";
+    					}
+    					
+    					value += "<div class='chat-body clearfix'><p>" + msg.msgContent +
+    					    "<div class='chat_time'>" + msg.msgDate + "</div></div></li>";
     				});
-    				$("#msgListArea tbody").html(value);
+    				  $("#msgAreaList").html(value);
+
+    			},error:function(){
+    				console.log("메세지 리스트 조회용 ajax 통신 실패");
     			}
-    			
     		});
     	
     	}
-    	
+
   
-    </script>
-							
+    </script>		
 						</div>
                  
                   </div>
@@ -272,14 +255,14 @@
                         
  
 			
-         <br>
+    <br>
 
 	</div> <!--지우지 마세요    div class="row"  -->
 	</div> <!--지우지 마세요   div class="pcoded-content"  -->
 	</div> <!--지우지 마세요    div class="pcoded-main-container"  -->
 	
 	
-	<!-- [ Main Content ] 메인화면 끝 -->
+	</div><!-- [ Main Content ] 메인화면 끝 -->
 	
 
     
@@ -296,7 +279,7 @@
     	
     	$.ajax({
             type:"POST",  
-            url:"selectEmployee",  
+            url:"selectMsg",  
             async:false,
             data:{empNo:empNo},
             success:function(emp){
@@ -306,7 +289,7 @@
                 $("#insertMsg #changeName").attr("src", "${pageContext.request.contextPath}/resources/upload_files/" + emp.changeName);
                 
                 $("#insertMsg #msgReceiver").val(emp.empNo);
-                $("#insertMsg #chatNo").val(emp.empNo);
+                $("#insertMsg #chatNo").val(emp.chatNo);
                 
                 
             },   

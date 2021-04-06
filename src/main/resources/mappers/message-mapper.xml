@@ -16,15 +16,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="empName" column="EMP_NAME"/>
 		<result property="empPosition" column="JOB_NAME"/>
 		<result property="deptName" column="DEPT_NAME"/>
+		<result property="profile" column="CHANGE_NAME"/>
 	</resultMap>
-	
-	<resultMap id="ChatRoomResultSet" type="ChatRoom">
-		<id property="chatRoomNo" column="CHAT_NO"/>
-		<result property="member1" column="MEMBER1"/>
-		<result property="member2" column="MEMBER2"/>
-		<result property="chatRoomStatus" column="CHAT_STATUS"/>
-	</resultMap>
-	
 
 	<insert id="insertMessage" parameterType="Message">
 		INSERT INTO MESSAGE_MSG
@@ -40,7 +33,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<select id="selectMsgList" resultMap="MessageResultSet">
-	  SELECT A.MSG_NO, A.CHAT_NO, A.MSG_CONTENT, A.MSG_SENDER, A.MSG_RECEIVER, A.MSG_DATE, B.CHANGE_NAME
+	  SELECT A.MSG_NO, A.CHAT_NO, A.MSG_CONTENT, A.MSG_SENDER, A.MSG_RECEIVER, A.MSG_DATE, B.EMP_NAME, B.CHANGE_NAME
 	  FROM MESSAGE_MSG A LEFT JOIN EMPLOYEE B ON A.MSG_SENDER=B.EMP_NO
 	  WHERE A.CHAT_NO=#{chatNo}
 	  AND A.MSG_READ_STATUS='Y'

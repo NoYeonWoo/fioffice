@@ -183,14 +183,14 @@
 	<div class="app-article-vote">
 		<div class="card-body">
 		
-		<!-- 자신의 글이 아닐 때만 추천 가능 -->
+		<!-- 자신의 글이 아닐 때만 추천 가능
 	 
 		 	<c:if test="${ loginUser.empNo != cb.cboardWriter }">
 			<button type="button" id="addLike" class="btn btn-outline-primary"><i class="feather mr-2 icon-thumbs-up"></i>추천 수
 			<span class="likeCt">${ cb.boardLikeCount }</span>
 			</button>
 			</c:if>
-
+		 -->
 		</div>
 	</div>
 	</div>
@@ -373,7 +373,7 @@
 	</div>
 	<br>
     
-	
+	</div>
 	</div> <!-- div class="container-fluid" -->
 	</div> <!-- div class="wrapper" -->
 	</div> <!--지우지 마세요    div class="row"  -->
@@ -382,5 +382,8 @@
 	
 	
 	<!-- [ Main Content ] 메인화면 끝 -->
+  <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
 
+	</body>
+	</html>
     

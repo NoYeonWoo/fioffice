@@ -22,12 +22,12 @@ public class AddressServiceImpl implements AddressService {
 	private AddressDao addressDao;
 	
 	@Override
-	public int selectListCount(String eno) {
+	public int selectListCount(Employee eno) {  // 원래 String eno
 		// TODO Auto-generated method stub
 		return addressDao.selectListCount(sqlSession,eno);
 	}
 	@Override
-	public ArrayList<Address> selectList(PageInfo pi, String eno) {
+	public ArrayList<Address> selectList(PageInfo pi, Employee eno) {// 원래 String eno
 		// TODO Auto-generated method stub
 		return addressDao.selectList(sqlSession,pi,eno);
 	}

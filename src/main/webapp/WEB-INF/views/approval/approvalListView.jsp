@@ -41,7 +41,7 @@
 					<div class="card">
 						<div class="card-header">
 
-							<h3 class="m-0 font-weight-bold text-primary">나의 문서함</h3>
+							<h5 class="m-0 font-weight-bold ">나의 문서함</h5>
 							  <c:if test="${sessionScope.loginUser.jobCode ne 'J10' }">
 							  
 							<a class="btn btn-secondary" style="float: right"
@@ -56,7 +56,7 @@
 							● 결재 진행 > 진행 문서 <br>
 							<br>
 
-							<table class="table table-bordered" id="boardList"
+							<table class="table table-bordered table-hover" id="boardList"
 								style="text-align: center; width: 80%;">
 							<thead>	
 								<tr>
@@ -93,7 +93,7 @@
 							<caption>● 결재 진행 > 반려 문서</caption>
 							<br>
 							<br>
-							<table class="table table-bordered" id="boardList_update"
+							<table class="table table-bordered table-hover" id="boardList_update"
 								style="text-align: center; width: 80%;">
 			                 <thead>					
 								<tr>
@@ -131,7 +131,7 @@
 							<caption>● 결재 진행 > 완료 문서</caption>
 							<br>
 							<br>
-							<table class="table table-bordered" id="boardList"
+							<table class="table table-bordered table-hover" id="boardList"
 								style="text-align: center; width: 80%;">
 							<thead>	
 								<tr>
@@ -173,14 +173,14 @@
 				<div class="col-md-12">
 					<div class="card">
 						<div class="card-header">
-							<h3 class="m-0 font-weight-bold text-primary"
-								style="display: inline-block;">나의 결재</h3>
+							<h5 class="m-0 font-weight-bold "
+								style="display: inline-block;">나의 결재</h5>
 						</div>
 						<div class="card-body">
 							<caption>● 결재 진행 > 미결재 문서</caption>
 							<br>
 							<br>
-							<table id="boardList" class="table table-bordered" style="text-align: center; width: 80%;">
+							<table id="boardList" class="table table-bordered table-hover" style="text-align: center; width: 80%;">
 							<thead>
 								<tr>
 									<th style="width: 10%;">품의 번호</th>
@@ -237,7 +237,7 @@
 							<caption>● 결재 진행 > 결재 문서</caption>
 							<br>
 							<br>
-							<table id="boardList" class="table table-bordered" style="text-align: center;width: 80%;">
+							<table id="boardList" class="table table-bordered table-hover" style="text-align: center;width: 80%;">
 							<thead>
 								<tr>
 									<th style="width: 10%;">품의 번호</th>

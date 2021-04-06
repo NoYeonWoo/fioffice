@@ -4,7 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+  <!-- CSS -->
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <style>
 #boardList {
@@ -67,7 +72,6 @@
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.jsp"><i
 										class="feather icon-home"></i></a></li>
-								<li class="breadcrumb-item"><a href="#!">My Portal</a></li>
 							</ul>
 						</div>
 					</div>
@@ -97,7 +101,7 @@
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
                         		-->
-                        			<button type="button" class="btn  btn-primary" onclick="$('#goAdd').submit();">내 주소록</button></a>
+                        			<!-- 버튼 -->
 
 								</div>
 							</span>
@@ -105,7 +109,12 @@
 						</div>
 						<div class="card-body table-border-style">
 							<div class="table-responsive">
+							
+							<button type="button" class="btn  btn-primary" onclick="$('#goAdd').submit();">내 주소록</button></a>
+							
+								<br>
 								<table class="table table-striped" id="addressList">
+								<br>
 									<thead>
 										<tr>
 											<th>사번</th>
@@ -137,14 +146,13 @@
 								
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- [ stiped-table ] end -->
-
-
-
-				<div id="pagingArea">
+						
+						
+						
+						<div id="pagingArea">
+						
 					<ul class="pagination">
+
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
@@ -183,6 +191,15 @@
 						</c:choose>
 					</ul>
 				</div>
+						
+						
+						
+					</div>
+				</div>
+				<!-- [ stiped-table ] end -->
+
+
+
 
 				<br clear="both">
 				<br> <br>

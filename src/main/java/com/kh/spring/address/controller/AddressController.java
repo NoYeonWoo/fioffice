@@ -38,11 +38,11 @@ public class AddressController {
 	private AddressService addressService;
 
 	@RequestMapping("view.add2")//전체사원
-	public String selectList2(@RequestParam(value="currentPage",required=false, defaultValue="1")  int currentPage, Model model) {
+	public String selectList2(@RequestParam(value="currentPage",required=false, defaultValue="1")  int currentPage ,Model model) {
 		int listCount = addressService.selectListCount2();
 		//System.out.println(listCount);
 		
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,100,10);
 		
 		ArrayList<Employee> list = addressService.selectListCount2(pi);
 		
@@ -55,20 +55,23 @@ public class AddressController {
 	}
 	
 	
-	@RequestMapping("view.add")//개인 주소록
-	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage,@RequestParam("eno")String eno,Model model) {
+	@RequestMapping("view.add")//개인 주소록   String eno
+	public String selectList(@RequestParam(value="currentPage",required=false, defaultValue="1") int currentPage, Model model,HttpSession session,HttpServletRequest request, HttpServletResponse response) {
 		
-
+		
 		//a.setEmpNum(eno);//eno
-		
-		//Employee loginUser=(Employee)model.getAttribute("loginUser");
+
+		Employee eno = (Employee)session.getAttribute("loginUser");
 		//System.out.println(loginUser.toString());
 		//int listCount = addressService.selectListCount(loginUser.getEmpNo());
-		//System.out.println("로긴유저 문자열"+loginUser.toString());
+		//System.out.println("로긴유저 문자열"+loginUser.toString());//원래 String eno
+		//System.out.println("번호클릭 경유지1"+eno);
 		int listCount = addressService.selectListCount(eno);
-
-		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);
+		//System.out.println("번호클릭 경유지2"+eno);
+		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,100,10);
+		//System.out.println("번호클릭 경유지3"+eno);
 		ArrayList<Address> list = addressService.selectList(pi,eno);
+		//System.out.println("번호클릭 경유지4"+eno);
 		//ArrayList<Address> list = addressService.selectList(pi,loginUser.getEmpNo());
 	    //ArrayList<Address> list = deptService.selectListCount(pi,loginUser.getDeptCode());
 

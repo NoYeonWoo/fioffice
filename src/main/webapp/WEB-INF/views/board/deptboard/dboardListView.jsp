@@ -276,8 +276,8 @@
 		
 		<!-- 서치 버튼 
 				<div class="left">&nbsp;
-					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="cboardList" name="searchKey" id="searchKey"></label>
-					<a href="csearch.bo" class="app-button app-button-rounded app-button-xs primary">
+					<label><input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dboardList" name="searchKey" id="searchKey"></label>
+					<a href="dsearch.bo" class="app-button app-button-rounded app-button-xs primary">
 						<span class="text" style="color: white">검색</span>
 					</a>
 				</div>
@@ -288,13 +288,13 @@
        <div class="right">
   		<div id="pagingArea">
   		
-                <ul class="pagination">
+         <ul class="pagination">
                 	<c:choose>
                 		<c:when test="${ pi.currentPage ne 1 }">
-                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage-1 }">Previous</a></li>
+                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="">Previous</a></li>
+                			<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 	
@@ -312,10 +312,10 @@
                     
                     <c:choose>
                 		<c:when test="${ pi.currentPage ne pi.maxPage }">
-                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
                 		</c:when>
                 		<c:otherwise>
-                			<li class="page-item disabled"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }">Next</a></li>
+                			<li class="page-item disabled"><a class="page-link" href="dlist.bo?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
                 		</c:otherwise>
                 	</c:choose>
                 </ul>

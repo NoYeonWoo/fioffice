@@ -31,6 +31,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE A.STATUS='Y'
 	</select>
 	
+	<select id="selectMainList" parameterType="string" resultMap="CalendarResultSet">	
+		SELECT A.*, B.CATEGORY_TITLE, B.CATEGORY_COLOR
+		FROM CALENDAR A INNER JOIN CAL_CATEGORY B ON A.CAL_CATE=B.CATEGORY_NO
+		WHERE A.STATUS='Y'
+		AND CAL_CATE ='30' OR CAL_CATE ='40'
+	</select>
+	
 	
 	<!-- 디테일 -->
 	<select id="selectCalendar" parameterType="string" resultMap="CalendarResultSet">

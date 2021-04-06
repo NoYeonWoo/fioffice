@@ -4,6 +4,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+  <!-- CSS -->
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 <style>
 #boardList {
 	text-align: center;
@@ -62,7 +68,6 @@
                         </div>
                         <ul class="breadcrumb">
                             <li class="breadcrumb-item"><a href="index.jsp"><i class="feather icon-home"></i></a></li>
-                            <li class="breadcrumb-item"><a href="#!">My Portal</a></li>
                         </ul>
                     </div>
                 </div>
@@ -131,18 +136,13 @@
 								
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- [ stiped-table ] end -->
-
-
-
-				<div id="pagingArea">
+						
+						<div id="pagingArea">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
 								<li class="page-item"><a class="page-link"
-									href="view.email?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li><!--이전페이지 -->
+									href="view.emailImportant?currentPage=${ pi.currentPage-1 }"><div class="feather icon-chevron-left"></div></a></li><!--이전페이지 -->
 							</c:when>
 							<c:otherwise>
 								<li class="page-item disabled"><a class="page-link" href=""><div class="feather icon-chevron-left"></div></a></li>
@@ -177,6 +177,15 @@
 						</c:choose>
 					</ul>
 				</div>
+						
+						
+					</div>
+				</div>
+				<!-- [ stiped-table ] end -->
+
+
+
+				<!-- 반허자리 -->
 
 				<br clear="both">
 				<br> <br>

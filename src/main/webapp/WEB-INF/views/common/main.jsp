@@ -67,7 +67,6 @@
           <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
          <div class="row">
          
-         
          <c:set var="today" value="<%=new java.util.Date()%>" />
 				<!-- 현재날짜 -->
 				<c:set var="date"><fmt:formatDate value="${today}" pattern="yyyy-MM-dd hh:mm:ss" /></c:set>
@@ -115,16 +114,15 @@
 
 										
 										<h6 id="workStartTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
-										
+										<!-- 
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workStartMin%60)%60}"/>분
 										</c:forEach>
-										
+										-->
 										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										
 									</div>
-
 
 
 
@@ -140,9 +138,9 @@
 										<h6 id="workEndTime"><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)%60%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workEndMin%60)%60%60}"/>분
 										</c:forEach>
-										<h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
+										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
 										
 									</div>
 								</div>
@@ -159,11 +157,11 @@
 										
 										<c:forEach items="${ workUser }" var="w">
 											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)}"/>시
-											<fmt:parseNumber integerOnly="true" value="${(w.workSum/60)%60}"/>분
+											<fmt:parseNumber integerOnly="true" value="${(w.workSum%60)%60}"/>분
 										</c:forEach>
 										
 										</h6><!-- 시간자리 aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa-->
-										
+
 									</div>
 								</div>
 
@@ -228,89 +226,148 @@
             
             
             <script>
-            <!--
-            function startTime(){
+            
+            function workUserStart(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workStartTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workStartMin)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workStartMin)%60));
+						var $bun = $('<label>').text("분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
             
+            $(function(){
+            	workUserStart();
+            })
             
-            <!-- ----------------------------------------- -->
-            
-            <!-- 
-            
-            function endTime(){
+ //////////////////////////////////////////////////////////////////////////////////////////           
+ 
+       function workUserEnd(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workEndTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workEndMin)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workEndMin)%60));
+						var $bun = $('<label>').text("분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
-       -->
-       
-       
-       <!-- ----------------------------------------- -->
-       
-       <!--
-       function totalTime(){
+            ////////////////////////////////////////////////////////////////////////////////
+            $(function(){
+            	workUserEnd();
+            })
+            
+       function workUserTotal(){
                 $.ajax({
-                   url : "WorkMainView.work",
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
                    success : function(workUser) {
-                   	$tableBody = $('#workStartTime h6');
+                	   
+                   	$tableBody = $('#workTotalTime');
                    	$tableBody.html('');
-                   	var workS=${workUser.status}
+                   	//var workS=${workUser.status}
                      	  	
-                   	$.each(todolist, function(i, obj){
-                   		var $h6 = $('<h6>');	  
-                      		var $tTitle = $('<label>').text(obj.todoTitle);
-                      		var $tContent = $('<label>').text(obj.todoContent);
-                     		var $tdoneDate = $('<label>').text(obj.todoDoneDate);
-                     	 
+                   	$.each(workUser, function(i, obj){
+
+                   		/*
+                   		var $fmt = $('fmt:parseNumber');
+						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
+						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
+						$fmt.append($hour);
+						$fmt.append($minute);
+						$tableBody.append($fmt);
+						*/
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workSum)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workSum)%60));
+						var $bun = $('<label>').text(" 분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
                          
-                      
-       				$h6.append($tTitle);
-       				$h6.append($tContent);
-       				$tableBody.append($<h6>);
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
        			});
        		}
        	});
        }
-       -->
+            
+
+            $(function(){
+            	workUserTotal();
+            })
+            
             </script>
             
             
@@ -445,6 +502,8 @@
                                 </thead>
                            
                                 <tbody>                 
+                                
+                                <!--  -->
                                 </tbody>
                                 
                             </table>
@@ -535,7 +594,7 @@
                         
                           <div class="pd-20 card-box mb-30">
                             
-                             <table class="table table-inverse mb-0" id="noticeMainList">
+                            <table class="table table-hover mb-0" id="noticeMainList">
 							<thead>
                                     <tr>
                                         <th>제목</th>
@@ -564,10 +623,12 @@
               
                for(var i in noticeList){
             	  
-                  value += '<tr class="thumbbo" data-nno="'+noticeList[i].noticeNo+'">'+
-                  	'<td width="70px" align="left">'+noticeList[i].noticeTitle+'</td>'+
-                    '<td width="20px" align="left">'+'관리자'+'</td>'+
-                    '<td width="10px" align="left">'+noticeList[i].count+'</td>'+
+                  value +=
+                	'<input type="hidden" value="'+noticeList[i].noticeNo+'">'+
+                	'<tr>'+
+                  	'<td width="70px">'+noticeList[i].noticeTitle+'</td>'+
+                    '<td width="20px">'+'관리자'+'</td>'+
+                    '<td width="10px">'+noticeList[i].count+'</td>'+
                     
                     '</tr>';
                }        
@@ -583,6 +644,11 @@
       }
       $(function(){
     	  noticeList();
+    	  
+    	  $("#noticeMainList tbody ").click(function(){
+  			location.href="ndetail.bo?nno=" + $(this).children().eq(0).val();
+  		});
+    	  
       })
    </script>  
       		
@@ -602,27 +668,70 @@
 
 	var calendar = $('#calendar').fullCalendar( {
 		plugins: ['interaction'],
-		
 		editable : false,
-		firstDay : 0, //  1(Monday) this can be changed to 0(Sunday) for the USA system
+		firstDay : 0,
 		selectable : true,
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
 		
-		/* 일정 받아옴 */
+		 /* 일정 받아옴
 		events : [ 
 			{
-			id : '${ca.calNo}',
-			title : '${ca.calTitle }',
-			description : '${ca.calContent}',
-			start : '${ca.calSDates}',
-			end : '${ca.calEDates}',
-			type : '${ca.calCateName}',
-			backgroundColor: '${ca.calColor}',
+			id : '1',
+			title : '찍히는지 테스트',
+			description : '찍히는지 테스트',
+			start : '2021-04-04T09:20',
+			end : '2021-04-04T13:20',
+			type : '나의 일정',
+			backgroundColor: '#B8ACD0',
 			textColor: '#ffffff'
 			}, 
-		 ]
+		 ]*/
+		 
+		 
+		
+		 events:
+			 
+			 function (start, end, callback) {
+			    $.ajax({
+			      type: "POST",
+			      url: "calendarmain.ca",
+			      dataType:"json",
+			      success: function(calList) {
+			    	  var events = [];
+			    	  console.log(calList);
+			    	  
+	 					$.each(calList,function(idx,cal) {
+	 						//console.log(cal.calTitle); //찍힘
+							//console.log(calList[idx].calTitle); //찍힘
+							
+							var id = calList[idx].calNo;
+							var title = calList[idx].calTitle;
+							var description = calList[idx].calContent;
+							var type = calList[idx].calCateName;
+							var startDay = calList[idx].calSDates;
+							var endDay = calList[idx].calEDates;
+							var backgroundColor = calList[idx].calColor;
+
+							events.push({
+								id : id,
+								title : title,
+								description: description,
+								start : startDay,
+								end : endDay,
+								type: type,
+								backgroundColor : backgroundColor,
+								textColor : '#ffffff'
+							});
+						});
+						console.log("events : " + JSON.stringify(events));
+						callback(events);
+
+			      }
+			      
+			    });
+			  }
 	
       });
 	
@@ -630,7 +739,6 @@
 	
     });
     
-   
     </script>
     
     

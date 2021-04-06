@@ -3,8 +3,14 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<!-- 개인주소록 -->
 <head>
-
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+  <!-- CSS -->
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
+<link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
 
 <style>
 #boardList {
@@ -67,7 +73,6 @@
 							<ul class="breadcrumb">
 								<li class="breadcrumb-item"><a href="index.jsp"><i
 										class="feather icon-home"></i></a></li>
-								<li class="breadcrumb-item"><a href="#!">My Portal</a></li>
 							</ul>
 						</div>
 					</div>
@@ -78,7 +83,7 @@
 
 			<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 			<div class="row">
-
+				<input type="hidden" name="eno" value="${loginUser.empNo}">
 
 
 				<!-- [ stiped-table ] start -->
@@ -93,17 +98,23 @@
                         			<br>
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
                         		-->
+                        		<!--
                         			<input type="hidden" name="eno" value="${loginUser.empNo}">
-                        			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
                         			<a href ="view.add2"><button type="button" class="btn  btn-primary">전체주소록</button></a>
-
+                        			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
+								-->
 								</div>
 							</span>
 
 						</div>
 						<div class="card-body table-border-style">
 							<div class="table-responsive">
+							
+                        			<a href ="view.add2"><button type="button" class="btn  btn-primary">전체주소록</button></a>
+                        			<a href ="goinsert.add"><button type="button" class="btn  btn-primary">추가하기</button></a>
+                        			<br>
 								<table class="table table-striped" id="addressList">
+								<br>
 									<thead>
 										<tr>
 											<th>번호</th>
@@ -139,13 +150,12 @@
 								
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- [ stiped-table ] end -->
-
-
-
-				<div id="pagingArea">
+						
+						
+						
+						
+						
+						<div id="pagingArea">
 					<ul class="pagination">
 						<c:choose>
 							<c:when test="${ pi.currentPage ne 1 }">
@@ -160,6 +170,7 @@
 						<!-- ㅇㅁㄴㅇㅁ노암닝ㅁ너ㅣㅏ어ㅣㅁ넝ㅁ너ㅏ암너         이제 번호 클릭이동 -->
 						
 						<c:forEach begin="${ pi.startPage }" end="${ pi.endPage }" var="p">
+						
 							<c:choose>
 								<c:when test="${ pi.currentPage ne p }">
 									<li class="page-item"><a class="page-link"
@@ -174,6 +185,7 @@
 
 
 						<c:choose>
+						
 							<c:when test="${ pi.currentPage ne pi.maxPage }">
 								<li class="page-item"><a class="page-link"
 									href="view.add?currentPage=${ pi.currentPage+1 }"><div class="feather icon-chevron-right"></div></a></li>
@@ -185,6 +197,19 @@
 						</c:choose>
 					</ul>
 				</div>
+				
+				
+				
+					</div>	
+				</div>
+				<!-- [ stiped-table ] end -->
+
+
+
+
+				
+				<!-- 원래 번호이동들 -->
+				
 
 				<br clear="both">
 				<br> <br>
