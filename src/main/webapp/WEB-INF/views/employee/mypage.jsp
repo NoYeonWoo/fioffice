@@ -7,8 +7,12 @@
 
 </head>
 
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
 <body class="">
-
+ 
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
 	<!--메인 화면 전체시작 -->
@@ -22,7 +26,7 @@
 			<div class="col-md-12">
 				<div class="card mb-4">
 					<div class="card-header">
-						<h3>마이페이지</h3>
+						<h5>마이페이지</h5>
 					</div>
 					<br> <br>
 

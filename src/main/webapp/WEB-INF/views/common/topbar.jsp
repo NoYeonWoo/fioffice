@@ -13,7 +13,7 @@
 			alert("${msg}");
 		</script>
 		<c:remove var="msg" scope="session"/>
-	</c:if>
+</c:if>
 <!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
@@ -32,9 +32,7 @@
 				<div class="collapse navbar-collapse">
 					
 					<ul class="navbar-nav ml-auto">
-						
 						<li>
-
 							<div class="dropdown drp-user">
 							
 							

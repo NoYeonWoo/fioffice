@@ -6,21 +6,22 @@
 <head>
 <meta charset="UTF-8  ">
 <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
-    <meta name="description" content="" />
-    <meta name="keywords" content="">
-    <meta name="author" content="Phoenixcoded" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+<meta name="description" content="" />
+<meta name="keywords" content="">
+<meta name="author" content="Phoenixcoded" />
    
-      <!-- Favicon icon -->
-	 <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
-	 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
 	 
-    <!-- vendor css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
-	<!-- 썸머노트  -->
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
-	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
-   <title>FIOFFICE</title>
+<!-- vendor css -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
+
+<!-- 썸머노트  -->
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/summernote/summernote-lite.css">
+<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/vendor-all.min.js"></script>
+<title>FIOFFICE</title>
 	
 	<style>
 	
@@ -123,16 +124,14 @@
                    <a href="view.add2" class="nav-link "><span class="pcoded-micon"><i class="fas fa-phone-square"></i></span><span class="pcoded-mtext">주소록</span></a>
                </li>
                <li class="nav-item pcoded-hasmenu">
-               		<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-clipboard-list"></i></span><span class="pcoded-mtext">이메일</span></a>
+               		<a href="#!" class="nav-link "><span class="pcoded-micon"><i class="fas fa-envelope"></i></span><span class="pcoded-mtext">이메일</span></a>
                		<ul class="pcoded-submenu">
                        <li><a href="view.email">이메일함</a></li>
                        <li><a href="view.emailImportant">중요이메일함</a></li>
                    </ul>
-                   <!--<a href="view.email" class="nav-link "><span class="pcoded-micon"><i class="fas fa-mail-bulk"></i></span><span class="pcoded-mtext">이메일</span></a>--><!-- ssdd -->
-
                </li>
                   <li class="nav-item">
-                   <a href="msgView.ma" class="nav-link"><span class="pcoded-micon"><i class="fab fa-rocketchat"></i></span><span class="pcoded-mtext">메신저</span></a>
+                   <a href="msgView.ma" class="nav-link"><span class="pcoded-micon"><i class="fas fa-comment"></i></span><span class="pcoded-mtext">메신저</span></a>
                </li>
                
                   
