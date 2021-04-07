@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="categoryColor" column="CATEGORY_COLOR"/>
 	</resultMap>
 	
+	<!-- 리스트 -->
 	
 	<select id="selectCList" parameterType="string" resultMap="CalendarResultSet">	
 		SELECT A.*, B.CATEGORY_TITLE, B.CATEGORY_COLOR
@@ -68,6 +69,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CAL_EDATE=#{calEDates}
 		WHERE CAL_NO=#{calNo}
 	</update>
-	
 	
 </mapper>

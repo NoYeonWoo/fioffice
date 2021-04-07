@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Category {
-
+	 
 	private String categoryNo;
 	private String categoryTitle;
 	private String categoryColor;

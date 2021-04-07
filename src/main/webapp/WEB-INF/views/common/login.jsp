@@ -10,7 +10,7 @@
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  
  <!-- vendor css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
 </head>
 
 <body class="">

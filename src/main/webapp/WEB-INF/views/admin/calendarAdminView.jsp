@@ -6,7 +6,7 @@
  <!-- Favicon icon -->
  <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
- 
+  
  <style>
 #calendarList td,th{
 	padding:0.75rem !important;

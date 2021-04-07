@@ -48,7 +48,5 @@ public class CalendarServiceImpl implements CalendarService {
 	public ArrayList<Calendar> mainList(Employee emp) {
 		return calendarDao.mainList(sqlSession, emp);
 	}
-
  
-	 
 }

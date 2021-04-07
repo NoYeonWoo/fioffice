@@ -13,7 +13,7 @@
 			alert("${msg}");
 		</script>
 		<c:remove var="msg" scope="session"/>
-	</c:if>
+</c:if>
 <!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		

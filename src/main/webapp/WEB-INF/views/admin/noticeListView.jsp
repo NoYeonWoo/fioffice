@@ -10,7 +10,7 @@
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
    	
 <!-- CSS -->
-
+ 
 <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
 <!-- CSS -->
 <script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>

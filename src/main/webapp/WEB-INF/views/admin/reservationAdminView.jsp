@@ -11,7 +11,7 @@
 .btn{
 	padding : 0.5rem 0.95rem !important;
 	margin-bottom : 1rem !important;
-}
+} 
  </style>
  
   <!-- Favicon icon -->

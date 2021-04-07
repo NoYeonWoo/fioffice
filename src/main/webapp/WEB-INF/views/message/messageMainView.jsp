@@ -16,7 +16,6 @@
 
 <style>
 
-
 	div.addMsgArea {
 	   text-align: center;
 	   display: inline-block;

@@ -42,6 +42,7 @@
    .a_tag{
    color: #777 !important;
    }
+   
    ul.ztree {margin: 1rem 0.2rem;
    			 padding : 2rem 1rem; 
    			 border: 1px solid #617775;
@@ -52,6 +53,7 @@
    border:1px #fff solid !important;
    font-family:bold !important;
    }
+   
 </style>
 </head>
 

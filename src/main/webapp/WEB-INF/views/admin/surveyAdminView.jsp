@@ -3,7 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
- <style>
+<style>
+ 
 #surveyList td,th{
 	padding:0.75rem !important;
 	}	

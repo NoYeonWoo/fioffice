@@ -12,7 +12,7 @@ import com.kh.spring.mainCalendar.model.vo.Calendar;
 @SessionAttributes("loginUser")
 @Repository("calendarDao")
 public class CalendarDao {
-
+	
 	public int insertCalendar(SqlSessionTemplate sqlSession, Calendar ca) {
 		return sqlSession.insert("calendarMapper.insertCalendar", ca);
 	}
@@ -39,6 +39,5 @@ public class CalendarDao {
 	public ArrayList<Calendar> mainList(SqlSessionTemplate sqlSession, Employee emp) {
 		return (ArrayList)sqlSession.selectList("calendarMapper.selectMainList", emp);
 	}
-
 
 }
