@@ -1,5 +1,6 @@
 ## [FIOFFICE] FIRE 🔥 + OFFICE
-> [언택트 업무 시대의 그룹웨어](https://www.miricanvas.com/v/18pghd)
+> 언택트 업무 시대의 그룹웨어
+> [프레젠테이션](https://www.miricanvas.com/v/18pghd)
 
 ### [TEAM] TABB
 <a href="https://github.com/NoYeonWoo/fioffice/graphs/contributors">
