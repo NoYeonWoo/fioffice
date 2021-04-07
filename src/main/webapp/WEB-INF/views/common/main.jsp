@@ -15,6 +15,8 @@
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     
     <style>
+    
+    
     		#center{
 	text-align:center;
 	margin: auto;
@@ -176,44 +178,10 @@
 							<div class="row" id="center">
 								<div class="col-md-12">
 
-									<div class="card-body">
-									
-									
-									
-									
-									
-									
-									<!--
-									<c:choose>
-    									<c:when test="${ 0 ne sessionScope.workUser.workEndMin}">
-        									<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
-    									</c:when>
-    									<c:otherwise>
-        									<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
-    									</c:otherwise>
-									</c:choose>
-									-->
-                					<!--  
-                					<c:if test="${ null ne sessionScope.workUser.workEnd }">
-	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
-	                					qqqqq
-                					</c:if>
-                					
-                					<c:if test="${ null eq sessionScope.workUser.workEnd }">
-	                					<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
-	                					empp
-               		 				</c:if>
-               		 				<c:if test="${ null ne sessionScope.workUser.endWork && null ne sessionScope.workUser.startWork }">
-	                					<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
-	                					sdfsdfsdfsd
-                					</c:if>
-									-->
-										
+									<div class="card-body">	
 										<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
-										
-
 									</div>
 									
 								</div>
@@ -375,97 +343,7 @@
             
 
             <!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 --><!-- 근태관리화면끝 -->
-            
-            
-            
-            
-            
-            
-            <!-- [ Todo-list1 ] start 
-            <div class="col-xl-6">
-                <div class="card">
-                    <div class="card-header">
-                        <h5>To Do List</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="input-group mb-3">
-                            <input type="text" name="task-insert" class="form-control add_task_todo" placeholder="Create your task list" required="">
-                            <div class="input-group-append">
-                                <button class="btn waves-effect waves-light btn-secondary" id="add-btn">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="new-task">
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck1">
-                                        <span class="custom-control-label">Lorem Ipsum Dolor Sit Amet</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(1);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck2">
-                                        <span class="custom-control-label">Industry's standard dummy text ever since the 1500s</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(2);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck3">
-                                        <span class="custom-control-label">The point of using Lorem Ipsum is that it has a more-or-less </span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(3);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck4">
-                                        <span class="custom-control-label">Contrary to popular belief</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(4);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck5">
-                                        <span class="custom-control-label">There are many variations of passages of Lorem Ipsum</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(5);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck6">
-                                        <span class="custom-control-label">Sed ut perspiciatis unde omnis iste natus</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(6);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                            <div class="to-do-list mb-3">
-                                <div class="d-inline-block">
-                                    <label class="check-task custom-control custom-checkbox d-flex justify-content-center">
-                                        <input type="checkbox" class="custom-control-input" id="customCheck7">
-                                        <span class="custom-control-label"> must explain to you how all this mistaken idea</span>
-                                    </label>
-                                </div>
-                                <div class="float-right"><a onclick="delete_todo(7);" href="#!" class="delete_todolist"><i class="far fa-trash-alt"></i></a></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- [ Todo-list1 ] end -->
- 			<!-- [ Todo-list1 ] start -->
+
                    <div class="col-xl-6 col-md-12">
                 <div class="card table-card">
                     <div class="card-header">
@@ -674,24 +552,9 @@
 		defaultView : 'month',
 		allDaySlot : false,
 		selectHelper : true,
-		
-		 /* 일정 받아옴
-		events : [ 
-			{
-			id : '1',
-			title : '찍히는지 테스트',
-			description : '찍히는지 테스트',
-			start : '2021-04-04T09:20',
-			end : '2021-04-04T13:20',
-			type : '나의 일정',
-			backgroundColor: '#B8ACD0',
-			textColor: '#ffffff'
-			}, 
-		 ]*/
-		 
-		 
-		
-		 events:
+
+		/* 일정 받아옴 */
+		events:
 			 
 			 function (start, end, callback) {
 			    $.ajax({
@@ -703,9 +566,7 @@
 			    	  console.log(calList);
 			    	  
 	 					$.each(calList,function(idx,cal) {
-	 						//console.log(cal.calTitle); //찍힘
-							//console.log(calList[idx].calTitle); //찍힘
-							
+	 						
 							var id = calList[idx].calNo;
 							var title = calList[idx].calTitle;
 							var description = calList[idx].calContent;
@@ -726,6 +587,8 @@
 							});
 						});
 						console.log("events : " + JSON.stringify(events));
+						
+						/* 이벤트 콜백 */
 						callback(events);
 
 			      }

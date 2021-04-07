@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
  <!-- data tables css -->
  <style>
  .btn-primary{
@@ -67,7 +71,7 @@ label{
             <div class="col-sm-10 mx-auto">
                 <div class="card">
                     <div class="card-header">
-                        <h3>상세보기</h3>
+                        <h5>상세보기</h5>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">

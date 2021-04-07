@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 @SessionAttributes("loginUser")
@@ -35,8 +36,8 @@ public class CalendarDao {
 		return sqlSession.update("calendarMapper.deleteCalendar", calNo);
 	}
 	
-	public ArrayList<Calendar> mainList(SqlSessionTemplate sqlSession, Calendar ca) {
-		return (ArrayList)sqlSession.selectList("calendarMapper.selectMainList", ca);
+	public ArrayList<Calendar> mainList(SqlSessionTemplate sqlSession, Employee emp) {
+		return (ArrayList)sqlSession.selectList("calendarMapper.selectMainList", emp);
 	}
 
 

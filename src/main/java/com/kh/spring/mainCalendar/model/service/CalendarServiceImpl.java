@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.spring.employee.model.vo.Employee;
 import com.kh.spring.mainCalendar.model.dao.CalendarDao;
 import com.kh.spring.mainCalendar.model.vo.Calendar;
 
@@ -44,8 +45,8 @@ public class CalendarServiceImpl implements CalendarService {
 	}
 
 	@Override
-	public ArrayList<Calendar> mainList(Calendar ca) {
-		return calendarDao.mainList(sqlSession, ca);
+	public ArrayList<Calendar> mainList(Employee emp) {
+		return calendarDao.mainList(sqlSession, emp);
 	}
 
  

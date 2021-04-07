@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
 <link
 	href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css'
 	rel='stylesheet' />
@@ -98,7 +102,7 @@ border-color: #B87AD0 !important;
 	<div class="col-sm-10 mx-auto">
 		<div class="card" style="min-height: 100vh;" >
 			<div class="card-header">
-				<h3>회의실예약</h3>
+				 <h5>회의실 예약</h5>
 			</div>
             <div class="card-body" >
             	<div class="roomSelect">
