@@ -32,9 +32,7 @@
 				<div class="collapse navbar-collapse">
 					
 					<ul class="navbar-nav ml-auto">
-						
 						<li>
-
 							<div class="dropdown drp-user">
 							
 							

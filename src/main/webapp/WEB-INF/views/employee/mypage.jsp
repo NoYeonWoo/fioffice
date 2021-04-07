@@ -12,7 +12,7 @@
 <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  
 <body class="">
-
+ 
 	<jsp:include page="/WEB-INF/views/common/sidebar.jsp"></jsp:include>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp"></jsp:include>
 	<!--메인 화면 전체시작 -->

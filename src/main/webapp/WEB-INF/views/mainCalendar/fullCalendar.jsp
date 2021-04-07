@@ -44,9 +44,6 @@
 	    background-color: #8069AE;
 	    border-color: #8069AE;
 	}
-	
-		
-		
 
 	:root {
 		--aside-width: 17.625rem;

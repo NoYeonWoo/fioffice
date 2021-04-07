@@ -15,16 +15,14 @@
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.css' rel='stylesheet' />
 <link href='${pageContext.request.contextPath}/resources/fullcalendar/assets/css/fullcalendar.print.css' rel='stylesheet' media='print' />
     
-    <style>
-    
-    
-    		#center{
+<style>
+
+#center{
 	text-align:center;
 	margin: auto;
 	}
-    
-    
-    </style>
+
+</style>
     
     
     

@@ -49,6 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND A.STATUS = 'Y'
 	</select>
 	
+	
+	<!-- 등록 수정 삭제 -->
 	<insert id="insertCalendar" parameterType="Calendar">
 		INSERT INTO CALENDAR
 		VALUES(SEQ_CAL.NEXTVAL,#{empNo},#{calCate},#{calTitle},#{calContent},

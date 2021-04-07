@@ -26,7 +26,6 @@ public class CalendarController {
 
 	@Autowired
 	private CalendarService calendarService;
-	
  
 	/* 메인 캘린더 */
 	@RequestMapping("cmain.ca")

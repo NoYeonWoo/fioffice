@@ -20,7 +20,6 @@
 	   text-align: center;
 	   display: inline-block;
 	   padding: 20px;
-		
 	}
 
 </style>

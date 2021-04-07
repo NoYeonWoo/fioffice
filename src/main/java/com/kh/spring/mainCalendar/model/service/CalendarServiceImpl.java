@@ -12,16 +12,16 @@ import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 @Service("calendarService")
 public class CalendarServiceImpl implements CalendarService {
-	
-	@Autowired	
-	   private SqlSessionTemplate sqlSession;
-	   
-	   @Autowired
-	   private CalendarDao calendarDao;
+
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+
+	@Autowired
+	private CalendarDao calendarDao;
 
 	@Override
 	public int insertCalendar(Calendar ca) {
-		return calendarDao.insertCalendar(sqlSession,ca);
+		return calendarDao.insertCalendar(sqlSession, ca);
 	}
 
 	@Override
@@ -48,5 +48,5 @@ public class CalendarServiceImpl implements CalendarService {
 	public ArrayList<Calendar> mainList(Employee emp) {
 		return calendarDao.mainList(sqlSession, emp);
 	}
- 
+
 }
