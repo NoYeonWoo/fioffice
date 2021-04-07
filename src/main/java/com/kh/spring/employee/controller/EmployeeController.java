@@ -195,7 +195,7 @@ public class EmployeeController {
 	 }**/
 	
 	
-/*로그인 암호화 전  */	
+/*로그인 암호화 전 후  */	
 	 @RequestMapping(value="login.me",method= {RequestMethod.POST,RequestMethod.GET})
 	   public String loginMember( Employee emp,Model model,HttpSession session) throws Exception {
 			 Employee loginUser = (Employee) session.getAttribute("loginUser");
@@ -265,7 +265,7 @@ public class EmployeeController {
 	
 
 	    
-		 
+		//패스워드 암호화  
 	    @RequestMapping(value="updatePwdenc.me", method=RequestMethod.POST)	
 		 public String updatePwdenc (@RequestParam("currentPwd")String currentPwd,
 				                                            @RequestParam("newPwd")String newPwd ,HttpSession session,Model model)throws Exception {
@@ -298,7 +298,7 @@ public class EmployeeController {
 		 		
 	    
 	    
-	    
+	    //패스워드 초기화
 	    @RequestMapping(value="resetpw.do", method=RequestMethod.POST)	
 		 public String resetPwd ( Employee emp, @RequestParam("empNo")String empNo,
 				                                            @RequestParam("email")String email ,Model model)throws Exception {

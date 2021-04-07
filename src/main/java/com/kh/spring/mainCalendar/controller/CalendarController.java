@@ -23,10 +23,9 @@ import com.kh.spring.mainCalendar.model.vo.Calendar;
 
 @Controller
 public class CalendarController {
-	
+
 	@Autowired
 	private CalendarService calendarService;
-	
  
 	/* 메인 캘린더 */
 	@RequestMapping("cmain.ca")
@@ -98,9 +97,10 @@ public class CalendarController {
 	/* 메인 */
 	@ResponseBody
 	@RequestMapping(value="calendarmain.ca", produces ="application/json;charset=UTF-8")
-	public void MainCalendar(Calendar ca, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
-		 
-		ArrayList<Calendar> calList = calendarService.mainList(ca);
+	public void MainCalendar(String empNo, HttpSession session, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Employee emp = (Employee) session.getAttribute("loginUser");
+		
+		ArrayList<Calendar> calList = calendarService.mainList(emp);
 		System.out.println("캘린더 메인 : " + calList);
 		  
 		response.setContentType("application/json;charset=utf-8");

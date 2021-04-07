@@ -5,6 +5,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+ <!-- Favicon icon -->
+ <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
 <style type="text/css">
 li {
 	display: list-item;
@@ -88,6 +92,13 @@ p {
 .subd {
 	font-size: 10px;
 }
+
+#spot {
+ font-size: 15px;
+ ackground-color: #00ff0000;
+ border-style:none;
+ 
+}
 </style>
 </head>
 
@@ -160,16 +171,17 @@ p {
 								                        
 								                        	 <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
+														<div align="right"> <button type="button" class="btn btn-primary"  onclick="postFormSubmit(2)"><i  class="fas fa-trash-alt" id="spot"></i></button> <button   class="btn btn-primary"   onclick="postFormSubmit(1)"><i class="fas fa-arrow-right" id="spot"></i></button></div>
 														
 															<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
-															<div align="right"> <a  onclick="postFormSubmit(2);"><i class="fas fa-trash-alt"></i></a></div>
-															
+															 <div align="right">  </div>
 																<p class="titled">제목:${item.todoTitle }</p>
-															    <p class="titled">내용:${item.todoContent}  </p>
-														        <div align="right">
-													                  <p class="subd">기한:${item.todoDoneDate} </p> <a  onclick="postFormSubmit(1);"><i class="fas fa-arrow-right"></i></a>
-													               
-													            </div>
+															    <p class="titled">내용:${item.todoContent}  </p>														     
+													           <p class="subd">기한:${item.todoDoneDate} </p>
+													            
+													         
+													       
+													      
 													            
 													            <form id="postForm" action="" method="post">
 																	<input type="hidden" name="tno" value="${ item.todoNo }">
@@ -220,15 +232,16 @@ p {
 								                        <c:if test="${item.status eq 'N'}">
 								                 
 														<li>
+													<div align="right"> <button type="button" class="btn btn-primary"  onclick="postFormSubmits(2)"><i  class="fas fa-trash-alt" id="spot"></i></button> <button   class="btn btn-primary"   onclick="postFormSubmits(1)"><i class="fas fa-arrow-right" id="spot"></i></button></div>
+														
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
-														<div align="right"> <a  onclick="postFormSubmits(2);"><i class="fas fa-trash-alt"></i></a></div>
 																<p class="titled">제목${item.todoTitle }</p>
 																
 																<p class="titled">내용:${item.todoContent} </p>
-													<div align="right">
-													               <p class="subd">기한:${item.todoDoneDate} </p> <a  onclick="postFormSubmits(1);"><i class="fas fa-arrow-right"></i></a>
+												
+													               <p class="subd">기한:${item.todoDoneDate} </p>
 													               
-													            </div>
+													          
 													            
 													            <form id="postForms" action="" method="post">
 																	<input type="hidden" name="tno" value="${ item.todoNo }">
@@ -272,13 +285,16 @@ p {
 								                        <c:if test="${item.status eq 'D'}">
 								                          <c:if test="${item.empNo eq loginUser.empNo }">
 														<li>
+														<div align="right"> <button type="button" class="btn btn-primary"  onclick="deletetodo();"><i  class="fas fa-trash-alt" id="spot"></i> </button></div>
+													
 														<div class="data" id="app-block" data-toggle="modal" data-target="#detailTodo"  data-id="${item.todoNo}" >
+														
 																<p class="titled">제목:${item.todoTitle }</p>
 														
-																<p class="titled">내용:${item.todoContent} }</p>
+																<p class="titled">내용:${item.todoContent} </p>
 															
-																<div align="right"> 
-																		<p class="subd">기한:${item.todoDoneDate} </p><a  onclick="deletetodo();"><i class="fas fa-trash-alt"></i></a></div>
+																
+																		<p class="subd">기한:${item.todoDoneDate} </p>
 													            
 													            <form id="deletetodo" action="" method="post">
 																	<input type="hidden" name="tno" value="${ item.todoNo }">

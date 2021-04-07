@@ -4,6 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
 <style>
 	ul.name_tag li {
 	display: inline-block;
@@ -38,6 +42,7 @@
    .a_tag{
    color: #777 !important;
    }
+   
    ul.ztree {margin: 1rem 0.2rem;
    			 padding : 2rem 1rem; 
    			 border: 1px solid #617775;
@@ -48,6 +53,7 @@
    border:1px #fff solid !important;
    font-family:bold !important;
    }
+   
 </style>
 </head>
 

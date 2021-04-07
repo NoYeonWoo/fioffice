@@ -30,137 +30,16 @@
 		base-package="com.kh.spring" />
 
 	<interceptors>
-		<interceptor>
-			<mapping path="/approvalList.do" />
-			<beans:bean id="Blistinterceptor"
-				class="com.kh.spring.common.interceptor.approvalinterceptor" />
+	 	<interceptor>
+			<mapping path="/*" />
+			<exclude-mapping path="/login.me"/>
+			<exclude-mapping path="/login.do"/>
+			<exclude-mapping path="/resetpw.do"/>
+			<exclude-mapping path="/logout.me"/>
+			<beans:bean id="Logininterceptor"
+				class="com.kh.spring.common.interceptor.Logininterceptor" />
 		</interceptor>
-		<!-- <interceptor> <mapping path="/login.me" /> <beans:bean id="Logininterceptor" 
-			class="com.kh.spring.common.interceptor.Logininterceptor" /> </interceptor> -->
-		<interceptor>
-			<mapping path="/cmain.ca" />
-			<beans:bean id="calendarintercepter"
-				class="com.kh.spring.common.interceptor.calendarintercepter" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/clist.bo" />
-			<beans:bean id="clistinterceptor"
-				class="com.kh.spring.common.interceptor.clistinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/dlist.bo" />
-			<beans:bean id="dlistinterceptor"
-				class="com.kh.spring.common.interceptor.dlistinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/nlist.bo" />
-			<beans:bean id="nlistinterceptor"
-				class="com.kh.spring.common.interceptor.nlistinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/view.work" />
-			<beans:bean id="workinterceptor"
-				class="com.kh.spring.common.interceptor.workinterceptor" />
-		</interceptor>
-
-
-		<interceptor>
-			<mapping path="/todoListView.do" />
-			<beans:bean id="todoListViewinterceptor"
-				class="com.kh.spring.common.interceptor.todoListViewinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/enrollForm.re" />
-			<beans:bean id="enrollFormreinterceptor"
-				class="com.kh.spring.common.interceptor.enrollFormreinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/view.add2" />
-			<beans:bean id="viewadd2interceptor"
-				class="com.kh.spring.common.interceptor.viewadd2interceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/view.email" />
-			<beans:bean id="vewemailinterceptor"
-				class="com.kh.spring.common.interceptor.vewemailinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/view.emailImportant" />
-			<beans:bean id="vewemailinterceptor2"
-				class="com.kh.spring.common.interceptor.vewemailinterceptor2" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/msgView.ma" />
-			<beans:bean id="messengerinterceptor"
-				class="com.kh.spring.common.interceptor.messengerinterceptor" />
-		</interceptor>
-
-
-		<interceptor>
-			<mapping path="/authority.ad" />
-			<beans:bean id="authorityinterceptor "
-				class="com.kh.spring.common.interceptor.authorityinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/authority.ad#!" />
-			<beans:bean id="authorityinterceptor2"
-				class="com.kh.spring.common.interceptor.authorityinterceptor2" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/dept.ad" />
-			<beans:bean id="deptauthinterceptor"
-				class="com.kh.spring.common.interceptor.deptauthinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/manageEmp.do" />
-			<beans:bean id="menagempinterceptor"
-				class="com.kh.spring.common.interceptor.menagempinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/insertEmpForm" />
-			<beans:bean id="insertempinterceptor"
-				class="com.kh.spring.common.interceptor.insertempinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/notice.ad" />
-			<beans:bean id="noticeauthinterceptor"
-				class="com.kh.spring.common.interceptor.noticeauthinterceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/calendar.ad" />
-			<beans:bean id="calendarauthointerceptor"
-				class="com.kh.spring.common.interceptor.calendarauthointerceptor" />
-		</interceptor>
-
-		<interceptor>
-			<mapping path="/survey.ad" />
-			<beans:bean id="surveyauthointerceptor"
-				class="com.kh.spring.common.interceptor.surveyauthointerceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/meetingRoom.ad" />
-			<beans:bean id="meetingrauthinterceptor"
-				class="com.kh.spring.common.interceptor.meetingrauthinterceptor" />
-		</interceptor>
-		<interceptor>
-			<mapping path="/reservation.ad" />
-			<beans:bean id="reservationauthointerceptor"
-				class="com.kh.spring.common.interceptor.reservationauthointerceptor" />
-		</interceptor>
+		
 
 	</interceptors>
 </beans:beans>
