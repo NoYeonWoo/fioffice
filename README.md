@@ -2,10 +2,8 @@
 > 언택트 업무 시대의 그룹웨어
 
 ### [TEAM] TABB
-[[Contribute](CONTRIBUTING.md)].
-
 <a href="https://github.com/NoYeonWoo/fioffice/graphs/contributors">
-<img src="https://opencollective.com/fioffice/contributors.svg?width=890&button=false" />
+   <img src="https://contrib.rocks/image?repo=NoYeonWoo/fioffice" />
 </a>
 
 - [김영찬](https://github.com/Desmond2429) : 근태관리, 주소록, 이메일
