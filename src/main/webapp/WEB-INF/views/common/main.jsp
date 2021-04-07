@@ -177,7 +177,7 @@
 							<div class="row" id="center">
 								<div class="col-md-12">
 
-									<div class="card-body">	
+                <div class="card-body" id="workButton">
 										<button type="button" class="btn  btn-primary bg-twitter btn-lg" onclick="$('#startWork').submit();">출근하기</button>
 													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 										<button type="button" class="btn  btn-secondary btn-lg" onclick="$('#endWork1').submit();">퇴근하기</button>
@@ -194,6 +194,48 @@
             
             <script>
             
+            
+            /*
+            
+            function workUserButton(){
+                $.ajax({
+                type : "POST",
+                   data : {empNo:"${loginUser.empNo}"},
+                   url : "view.workMain",
+                   success : function(workUser) {
+                	   
+                   	$tableBody = $('#workButton');
+                   	$tableBody.html('');
+                   	//var workS=${workUser.status}
+                     	  	
+                   	$.each(workUser, function(i, obj){
+						var $Button = $('<button')
+						
+						var $label = $('<label>');
+						var $hour = $('<label>').text(parseInt((obj.workStartMin)/60));
+						var $si = $('<label>').text("시   ");
+						var $minute = $('<label>').text(parseInt((obj.workStartMin)%60));
+						var $bun = $('<label>').text("분");
+						$label.append($hour);
+						$label.append($si);
+						$label.append($minute);
+						$label.append($bun);
+						$tableBody.append($label);
+						
+                         
+       				//$h6 #workStartTime.append((Number(obj.workStartMin)/60)));
+       				//$h6#workStartTime.append(Number(obj.workStartMin)%60);
+       				//$tableBody.append($<h6>);
+       			});
+       		}
+       	});
+       }
+            
+            $(function(){
+            	workUserButton();
+            })
+            */
+    ////////////////////////////////////////////////////////////////////////////////////////////////////        
             function workUserStart(){
                 $.ajax({
                 type : "POST",
@@ -207,14 +249,6 @@
                      	  	
                    	$.each(workUser, function(i, obj){
 
-                   		/*
-                   		var $fmt = $('fmt:parseNumber');
-						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
-						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
-						$fmt.append($hour);
-						$fmt.append($minute);
-						$tableBody.append($fmt);
-						*/
 						
 						var $label = $('<label>');
 						var $hour = $('<label>').text(parseInt((obj.workStartMin)/60));
@@ -254,15 +288,6 @@
                    	//var workS=${workUser.status}
                      	  	
                    	$.each(workUser, function(i, obj){
-
-                   		/*
-                   		var $fmt = $('fmt:parseNumber');
-						var $hour = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)/60));
-						var $minute = $('fmt:parseNumber style= "integerOnly:true">').text((Number(obj.workStartMin)%60));
-						$fmt.append($hour);
-						$fmt.append($minute);
-						$tableBody.append($fmt);
-						*/
 						
 						var $label = $('<label>');
 						var $hour = $('<label>').text(parseInt((obj.workEndMin)/60));

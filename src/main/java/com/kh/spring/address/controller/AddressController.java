@@ -64,25 +64,15 @@ public class AddressController {
 		Employee eno = (Employee)session.getAttribute("loginUser");
 		//System.out.println(loginUser.toString());
 		//int listCount = addressService.selectListCount(loginUser.getEmpNo());
-		//System.out.println("로긴유저 문자열"+loginUser.toString());//원래 String eno
-		//System.out.println("번호클릭 경유지1"+eno);
 		int listCount = addressService.selectListCount(eno);
-		//System.out.println("번호클릭 경유지2"+eno);
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,100,10);
-		//System.out.println("번호클릭 경유지3"+eno);
 		ArrayList<Address> list = addressService.selectList(pi,eno);
-		//System.out.println("번호클릭 경유지4"+eno);
 		//ArrayList<Address> list = addressService.selectList(pi,loginUser.getEmpNo());
 	    //ArrayList<Address> list = deptService.selectListCount(pi,loginUser.getDeptCode());
 
-
-		
 		model.addAttribute("list",list);
 		model.addAttribute("pi",pi);
 		
-
-		
-
 		return "address/addressView3";
 		
 	}
@@ -93,7 +83,6 @@ public class AddressController {
 	public ModelAndView selectAddress(int ano, ModelAndView mv){
 		
 		Address a = addressService.selectAddress(ano);
-		//System.out.println("address컨트롤러 detail ano  "+ano);
 		mv.addObject("a",a).setViewName("address/addressDetail");
 		return mv;
 		
@@ -104,7 +93,6 @@ public class AddressController {
 	public String deleteAddress(@RequestParam("ano") int ano ,HttpServletRequest request, Model model){
 		
 		int result =addressService.deleteAddress(ano);
-
 		System.out.println("delete.add 리설트  "+result);
 		return "redirect:view.add2";
 		
@@ -113,11 +101,8 @@ public class AddressController {
 	
 	@RequestMapping("goupdate.add")
 	public ModelAndView updateForm(@RequestParam("ano") int ano, ModelAndView mv, HttpServletRequest request){
-		
-		
+
 		Address a = addressService.selectAddress(ano);
-		
-		//System.out.println("address컨트롤러 goupdate ano asdkasjkldasdjlkasd::  "+ano);
 		mv.addObject("a",a).setViewName("address/addressUpdate");
 		return mv;
 		

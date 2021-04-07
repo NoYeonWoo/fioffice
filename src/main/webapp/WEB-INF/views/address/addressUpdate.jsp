@@ -143,7 +143,7 @@
                         
                         <div class="row" id="center">
                         <div class="col-md-12">
-						<input type="hidden" name="empNum" value="${loginUser.empNo}">
+						<input type="hidden" name="empNo" value="${loginUser.empNo}">
 					<div class="card-body">
 						<button type="submit" class="btn  btn-primary btn-lg">수정하기</button>
 					</div>

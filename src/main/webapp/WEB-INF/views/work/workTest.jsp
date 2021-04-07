@@ -97,7 +97,7 @@
                         			<button type="button" class="btn  btn-secondary">검색하기</button>
                         		-->
                         	<!--<button type="button" class="btn  btn-primary">휴가계</button>-->
-                        	<a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인</button></a>
+                        	<!-- <a href="view.workMain2"><button type="button" class="btn  btn-primary">임시 메인</button></a>-->
                         	
                         </div>
                         </span>
@@ -126,22 +126,31 @@
 												<td><fmt:formatDate value="${w.workStart}" pattern="yyyy-MM-dd"/></td>
 												<td><fmt:formatDate value="${w.workEnd}" pattern="yyyy-MM-dd"/></td>
 												-->
-												
+												<!--
 												<td>${ w.workStart }</td>
 												<td>${ w.workEnd }</td>
+												-->
+												<td>
+												<fmt:parseNumber integerOnly="true" value="${(w.workStartMin/60)}"/>시
+												<fmt:parseNumber integerOnly="true" value="${(w.workStartMin%60)}"/>분
+												</td>
 												
+												<td>
+												<fmt:parseNumber integerOnly="true" value="${(w.workEndMin/60)}"/>시
+												<fmt:parseNumber integerOnly="true" value="${(w.workEndMin%60)}"/>분
+												</td>
 												
 												<td>
 												<fmt:parseNumber integerOnly="true" value="${(w.workStack/60)}"/>시
-												<fmt:parseNumber integerOnly="true" value="${(w.workExceed/60)%60}"/>분
+												<fmt:parseNumber integerOnly="true" value="${(w.workExceed%60)}"/>분
 												</td>
 												<td>
 												<fmt:parseNumber integerOnly="true" value="${(w.workExceed/60)}"/>시
-												<fmt:parseNumber integerOnly="true" value="${(w.workExceed/60)%60}"/>분<!-- (w.workExceed/60)%60 -->
+												<fmt:parseNumber integerOnly="true" value="${(w.workExceed%60)}"/>분<!-- (w.workExceed/60)%60 -->
 												</td>
 												<td>
 												<fmt:parseNumber integerOnly="true" value="${(w.workRemain/60)}"/>시
-												<fmt:parseNumber integerOnly="true" value="${(w.workRemain/60)%60}"/>분
+												<fmt:parseNumber integerOnly="true" value="${(w.workRemain%60)}"/>분
 												</td>
 												
 												
