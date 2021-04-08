@@ -5,36 +5,173 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 
 <mapper namespace="surveyMapper">
-
 	
 	<resultMap id="SurveyResultSet" type="Survey">
 		<id property="surNo" column="SUR_NO"/>
 		<result property="surWriter" column="SUR_WRITER"/>
+		<result property="empName" column="EMP_NAME"/>
 		<result property="surTitle" column="SUR_TITLE"/>
 		<result property="surContent" column="SUR_CONTENT"/>
-		<result property="surStart" column="SUR_START"/>
 		<result property="surEnd" column="SUR_END"/>
 		<result property="surDate" column="SUR_DATE"/>
 		<result property="status" column="STATUS"/>
 		<result property="surqContent" column="SURQ_CONTENT"/>
 		<result property="surqType" column="SURQ_TYPE"/>
+		<result property="profile" column="CHANGE_NAME"/>
 		<result property="surqStatus" column="SURQ_STATUS"/>
+		<result property="deptCode" column="DEPT_CODE"/>
+		<result property="deptName" column="DEPT_NAME"/>
+		<result property="count" column="COUNT"/>
 	</resultMap>
-
-	<select id="selectListCount" resultType="_int">
+	
+	<resultMap id="OptionResultSet" type="SurveyOption">
+		<id property="suroNo" column="SURO_NO"/>
+		<result property="surNo" column="SUR_NO"/>
+		<result property="option" column="OPTION"/>
+	</resultMap>
+	
+	<resultMap id="AnswerResultSet" type="SurveyAnswer">
+		<id property="suraNo" column="SURA_NO"/>
+		<result property="surNo" column="SUR_NO"/>
+		<result property="optionCount" column="OPTION_COUNT"/>
+		<result property="option" column="OPTION"/>
+		<result property="suraWriter" column="SURA_WRITER"/>
+		<result property="suroNo" column="SURO_NO"/>
+		<result property="suraContent" column="SURA_CONTENT"/>
+	</resultMap>
+	
+	<resultMap id="replyResultSet" type="Reply">
+		<id property="replyNo" column="REPLY_NO" />
+		<result property="replyWriter" column="REPLY_WRITER"/>
+		<result property="replyWriterName" column="EMP_NAME"/>
+		<result property="replyContent" column="REPLY_CONTENT" />
+		<result property="refBoardNo" column="REF_BNO" />
+		<result property="replyDate" column="REPLY_DATE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+	
+	<select id="selectSurveyAll" parameterType="string" resultMap="SurveyResultSet">
+		SELECT SUR_NO, SUR_TITLE, EMP_NAME, SUR_WRITER, SUR_END, SUR_DATE, DEPT_NAME 
+		FROM SURVEY S LEFT JOIN EMPLOYEE ON (SUR_WRITER = EMP_NO)
+        LEFT JOIN DEPT D ON (S.DEPT_CODE=D.DEPT_CODE) 
+		WHERE S.STATUS=#{status}
+		ORDER BY SUR_NO ASC
+	</select>
+	
+	<select id="selectSurveyList" parameterType="Survey" resultMap="SurveyResultSet">
+		SELECT SUR_NO, SUR_TITLE, SURVEY.DEPT_CODE, EMP_NAME, SUR_WRITER, SUR_END, SUR_DATE 
+		FROM SURVEY LEFT JOIN EMPLOYEE ON (SUR_WRITER = EMP_NO)
+		WHERE SURVEY.STATUS=#{status}
+		AND (SURVEY.DEPT_CODE IS NULL
+	 	OR SURVEY.DEPT_CODE=#{deptCode})
+		ORDER BY SUR_NO ASC
+	</select>
+	
+	<select id="selectSurveyCount" resultType="_int">
 		SELECT COUNT(*)
 		FROM SURVEY
-		WHERE STATUS='Y'
 	</select>
 	
-	<select id="selectList" resultMap="SurveyResultSet">
-		SELECT *
-		FROM SURVEY
-		WHERE STATUS='Y'
-		ORDER BY SUR_NO DESC
+	<insert id="insertSurvey" parameterType="Survey">
+		INSERT INTO SURVEY
+		VALUES(
+			#{surNo},
+			#{surWriter},
+			#{surTitle},
+			#{surContent},
+			#{surEnd},
+			#{surDate},
+			DEFAULT,
+			#{surqContent},
+			<choose>
+				<when test = "surqType!=null">
+				#{surqType},
+				</when>
+				<otherwise>
+				DEFAULT,
+				</otherwise>
+			</choose>
+			#{surqStatus},
+			#{deptCode}
+		)
+	</insert>
+	<insert id="insertOption" parameterType="SurveyOption">
+		INSERT INTO SUR_OPTION
+		VALUES(
+			#{suroNo},
+			#{surNo},
+			#{option}
+		)
+	</insert>
+	
+	<select id="selectSurvey" parameterType="string" resultMap="SurveyResultSet">
+		SELECT S.*,EMP_NAME,CHANGE_NAME,NVL((SELECT COUNT(DISTINCT SURA_WRITER) FROM SUR_ANSWER WHERE SUR_NO= S.SUR_NO),0) "COUNT"
+		FROM SURVEY S LEFT JOIN EMPLOYEE ON (SUR_WRITER = EMP_NO)
+		WHERE SUR_NO = #{sNo}
 	</select>
 	
+	<select id="selectMAnswer" parameterType="string" resultMap="AnswerResultSet">
+		SELECT SURO_NO, "OPTION", NVL((SELECT COUNT(*) FROM SUR_ANSWER WHERE SURO_NO= A.SURO_NO GROUP BY SURO_NO),0) OPTION_COUNT
+		FROM SUR_OPTION A
+		WHERE A.SUR_NO = #{surNo}
+		ORDER BY SURO_NO ASC
+	</select>
 	
+	<select id="selectEAnswer" parameterType="string" resultMap="AnswerResultSet">
+		SELECT SURA_CONTENT
+		FROM SUR_ANSWER
+		WHERE SUR_NO = #{surNo}
+	</select>
 	
+	<select id="checksurAnswer" parameterType="hashmap" resultType="_int">
+		SELECT COUNT(*)
+		FROM SUR_ANSWER
+		WHERE SUR_NO = #{sNo}
+		AND SURA_WRITER = #{empNo}
+	</select>
 	
+	<insert id="insertAnswer" parameterType="SurveyAnswer">
+		INSERT INTO SUR_ANSWER
+		VALUES(
+			SEQ_SUR_ANSWER.NEXTVAL,
+			#{surNo},
+			#{suraWriter},
+			#{suroNo},
+			#{suraContent}
+		)
+	</insert>
+	
+	<update id="deleteSurvey" parameterType="string">
+		UPDATE SURVEY
+		SET STATUS = 'E'
+		WHERE SUR_NO = #{surNo}
+	</update>
+	
+	<insert id="insertReply" parameterType="Reply">
+		INSERT INTO REPLY
+		VALUES(SEQ_RNO.NEXTVAL, #{replyWriter}, #{refBoardNo}, #{replyContent}, SYSDATE, DEFAULT)
+	</insert>
+	
+	<select id="selectReplyList" parameterType="string" resultMap="replyResultSet">
+		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
+		FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
+		WHERE REF_BNO=#{sno}
+		AND A.STATUS='Y'
+		ORDER BY REPLY_NO
+	</select>
+	
+	<delete id="deleteAnswer" parameterType="SurveyAnswer">
+		DELETE 
+		FROM SUR_ANSWER
+		WHERE SURA_WRITER=#{suraWriter}
+		AND SUR_NO=#{surNo}
+	</delete>
+	
+	<update id="checkSurvey" parameterType="date">
+		<![CDATA[
+		UPDATE SURVEY
+		SET STATUS = 'E'
+		WHERE SUR_END < #{time}
+		]]>
+	</update>
 </mapper>

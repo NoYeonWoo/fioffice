@@ -31,12 +31,12 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int updateIncreaseCount(int nno) {
+	public int updateIncreaseCount(String nno) {
 		return noticeDao.updateIncreaseCount(sqlSession, nno);
 	}
 
 	@Override
-	public Notice selectBoard(int nno) {
+	public Notice selectBoard(String nno) {
 		return noticeDao.selectBoard(sqlSession, nno);
 	}
 
@@ -46,7 +46,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public ArrayList<Reply> selectReplyList(int nno) {
+	public ArrayList<Reply> selectReplyList(String nno) {
 		return noticeDao.selectReplyList(sqlSession, nno);
 	}
 
@@ -56,7 +56,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int deleteNotice(int nno) {
+	public int deleteNotice(String nno) {
 		return noticeDao.deleteNotice(sqlSession, nno);
 	}
 

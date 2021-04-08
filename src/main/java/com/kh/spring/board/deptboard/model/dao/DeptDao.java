@@ -24,11 +24,11 @@ public class DeptDao {
 		return (ArrayList)sqlSession.selectList("deptboardMapper.selectDList", deptCode, rowBounds);
 	}
 
-	public int updateIncreaseCount(SqlSessionTemplate sqlSession, int dno) {
+	public int updateIncreaseCount(SqlSessionTemplate sqlSession, String dno) {
 		return sqlSession.update("deptboardMapper.updateIncreaseCount", dno);
 	}
 
-	public DeptBoard selectBoard(SqlSessionTemplate sqlSession, int dno) {
+	public DeptBoard selectBoard(SqlSessionTemplate sqlSession, String dno) {
 		return sqlSession.selectOne("deptboardMapper.selectDboard", dno);
 	}
 
@@ -36,7 +36,7 @@ public class DeptDao {
 		return sqlSession.insert("deptboardMapper.insertDboard", db);
 	}
 	
-	public int deleteDeptBoard(SqlSessionTemplate sqlSession, int cno) {
+	public int deleteDeptBoard(SqlSessionTemplate sqlSession, String cno) {
 		return sqlSession.update("deptboardMapper.deleteDboard", cno);
 	}
 
@@ -48,7 +48,7 @@ public class DeptDao {
 		return sqlSession.insert("deptboardMapper.insertReply", r);
 	}
 
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int dno) {
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, String dno) {
 		return (ArrayList)sqlSession.selectList("deptboardMapper.selectReplyList", dno);
 	}
 

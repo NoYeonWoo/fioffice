@@ -137,7 +137,7 @@ border-color: #B87AD0 !important;
 		if($("#meetingroom option:selected").val()!=""){
 			rNo = $("#meetingroom option:selected").val();
 			<c:forEach items="${ rList }" var="r">
-			if(${r.roomNo}==rNo){
+			if('${r.roomNo}'==rNo){
 				$("#meetingroom").after(' <span id="rInfo">최대인원 : ${r.limitCount}명 &nbsp;&nbsp;&nbsp;위치 : ${r.location}</span>')
 			}
 		</c:forEach>
@@ -312,7 +312,7 @@ border-color: #B87AD0 !important;
 		<div class="modal-content">
 		<!-- Modal Header -->
 			<div class="modal-header">
-				<h4 class="modal-title">예약 시간</h4>
+				<h4 class="modal-title">예약 확인</h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
             </div>
             <div class="modal-body">
@@ -345,7 +345,7 @@ border-color: #B87AD0 !important;
 			success:function(resList){
 				for(var i = 0; i<resList.length;i++){
 					$("#rList tbody").append(
-							'<tr id="myRlist"><td>'+resList[i].resDateS+'</td><td>'+resList[i].resTitle+'</td><td>'
+							'<tr id="myRlist"><td>'+resList[i].resDate+'</td><td>'+resList[i].resTitle+'</td><td>'
 							+resList[i].roomName+'</td><td>'+resList[i].staTime+':00 ~'+(Number(resList[i].endTime)+1)+':00</td></tr>');
 					$("#rList tbody").append('<tr class="hide"><td colspan="5">'+
                 	'<span>회의실 장소 : </span><span>'+resList[i].location+'</span>'+

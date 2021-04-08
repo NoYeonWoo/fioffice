@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString  
 public class Community {
 	
-	public int cboardNo;
+	public String cboardNo;
 	public String cboardWriter;
 	public String cboardTitle;
 	public String cboardContent;

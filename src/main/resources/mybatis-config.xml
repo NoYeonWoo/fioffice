@@ -18,6 +18,8 @@
 		<typeAlias type="com.kh.spring.admin.model.vo.Job" alias="Job"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.Authority" alias="Authority"/>
 		<typeAlias type="com.kh.spring.survey.model.vo.Survey" alias="Survey"/>
+		<typeAlias type="com.kh.spring.survey.model.vo.SurveyAnswer" alias="SurveyAnswer"/>
+		<typeAlias type="com.kh.spring.survey.model.vo.SurveyOption" alias="SurveyOption"/>
 		<typeAlias type="com.kh.spring.approval.model.vo.Approval" alias="Approval"/>
 		<typeAlias type="com.kh.spring.admin.model.vo.AdminMenu" alias="AdminMenu"/>
 		<typeAlias type="com.kh.spring.meetingroom.model.vo.Meetingroom" alias="MRoom"/>
@@ -49,5 +51,6 @@
 		<mapper resource="/mappers/calendar-mapper.xml"/>
 	    <mapper resource="/mappers/email-mapper.xml"/>
 	    <mapper resource="/mappers/message-mapper.xml"/>
+	    <mapper resource="/mappers/survey-mapper.xml"/>
 	</mappers>
 </configuration>

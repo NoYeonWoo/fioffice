@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SYSDATE, DEFAULT, DEFAULT, DEFAULT)
 	</insert>
 	
-	<update id="deleteComm" parameterType="_int">
+	<update id="deleteComm" parameterType="string">
 		UPDATE COMMUNITY
 		SET STATUS='N'
 		WHERE CBOARD_NO=#{cboardNo}
@@ -70,25 +70,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE CBOARD_NO=#{cboardNo}
 	</update>
 	
-	<update id="updateIncreaseCount" parameterType="_int">
+	<update id="updateIncreaseCount" parameterType="string">
 		UPDATE COMMUNITY
 		SET BOARD_VIEWCOUNT=BOARD_VIEWCOUNT+1
 		WHERE CBOARD_NO=#{cboardNo}
 	</update>
 	
-	<update id="updateLikeCount" parameterType="_int">
+	<update id="updateLikeCount" parameterType="string">
 		UPDATE COMMUNITY
 		SET BOARD_LIKECOUNT=BOARD_LIKECOUNT+1
 		WHERE CBOARD_NO=#{cboardNo}
 	</update>
 	
-	<update id = "recommend">
+	<update id = "recommend" parameterType="string">
 		UPDATE COMMUNITY
 		SET BOARD_LIKECOUNT=BOARD_LIKECOUNT+1 
 		WHERE CBOARD_NO=#{cboardNo}
 	</update>
 	
-	<select id="selectComm" resultMap="CommunityResultSet">
+	<select id="selectComm" parameterType="string" resultMap="CommunityResultSet">
 		SELECT A.*, B.EMP_NAME, B.CHANGE_NAME
 		FROM COMMUNITY A INNER JOIN EMPLOYEE B ON A.CBOARD_WRITER=B.EMP_NO
 		WHERE A.CBOARD_NO=#{cboardNo}

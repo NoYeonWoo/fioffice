@@ -32,12 +32,12 @@ public class DeptServiceImpl implements DeptService {
 	}
 
 	@Override
-	public int updateIncreaseCount(int dno) {
+	public int updateIncreaseCount(String dno) {
 		return deptDao.updateIncreaseCount(sqlSession, dno);
 	}
 
 	@Override
-	public DeptBoard selectBoard(int dno) {
+	public DeptBoard selectBoard(String dno) {
 		return deptDao.selectBoard(sqlSession, dno);
 	}
 
@@ -52,13 +52,13 @@ public class DeptServiceImpl implements DeptService {
 	}
 
 	@Override
-	public ArrayList<Reply> selectReplyList(int dno) {
+	public ArrayList<Reply> selectReplyList(String dno) {
 		return deptDao.selectReplyList(sqlSession, dno);
 	}
 
 	
 	@Override
-	public int deleteDeptBoard(int dno) {
+	public int deleteDeptBoard(String dno) {
 		return deptDao.deleteDeptBoard(sqlSession, dno);
 	}
 
