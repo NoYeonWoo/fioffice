@@ -26,11 +26,11 @@ public class CommunityDao {
 		return (ArrayList)sqlSession.selectList("communityMapper.selectCList", null, rowBounds);
 	}
 
-	public int updateIncreaseCount(SqlSessionTemplate sqlSession, int cno) {
+	public int updateIncreaseCount(SqlSessionTemplate sqlSession, String cno) {
 		return sqlSession.update("communityMapper.updateIncreaseCount", cno);
 	}
 
-	public Community selectBoard(SqlSessionTemplate sqlSession, int cno) {
+	public Community selectBoard(SqlSessionTemplate sqlSession, String cno) {
 		return sqlSession.selectOne("communityMapper.selectComm", cno);
 	}
 
@@ -38,7 +38,7 @@ public class CommunityDao {
 		return sqlSession.insert("communityMapper.insertComm", cb);
 	}
 	
-	public int deleteCommunity(SqlSessionTemplate sqlSession, int cno) {
+	public int deleteCommunity(SqlSessionTemplate sqlSession, String cno) {
 		return sqlSession.update("communityMapper.deleteComm", cno);
 	}
 
@@ -50,11 +50,11 @@ public class CommunityDao {
 		return sqlSession.insert("communityMapper.insertReply", r);
 	}
 
-	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, int cno) {
+	public ArrayList<Reply> selectReplyList(SqlSessionTemplate sqlSession, String cno) {
 		return (ArrayList)sqlSession.selectList("communityMapper.selectReplyList", cno);
 	}
 
-	public int recommend(SqlSessionTemplate sqlSession, int cno) {
+	public int recommend(SqlSessionTemplate sqlSession, String cno) {
 		return sqlSession.update("communityMapper.recommend", cno);
 	}
 

@@ -29,9 +29,7 @@
 .modal-content .table td{
    line-height: 35px!important;
    }
-.table-hover>tbody>tr:hover{
-		cursor:pointer
-}
+
 .btn-sm{
 	padding:0.2rem, 0.5rem !important;
 }
@@ -251,7 +249,7 @@
                 },
             columns : [
                	{data: "inoutNo"},
-               	{data: "inoutDateS"},
+               	{data: "inoutDate"},
                	{data: "sortation"},
                	{data: "cliName"},
                	{data: "proNo",

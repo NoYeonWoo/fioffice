@@ -14,7 +14,7 @@ import lombok.ToString;
 @ToString 
 public class DeptBoard {
 	
-	public int dboardNo;
+	public String dboardNo;
 	public String dboardWriter;
 	public String deptCode;
 	public String dboardCategory;

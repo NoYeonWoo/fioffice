@@ -14,19 +14,19 @@ public interface CommunityService {
 
 	ArrayList<Community> selectList(PageInfo pi);
 
-	int updateIncreaseCount(int cno);
+	int updateIncreaseCount(String cno);
 
-	Community selectBoard(int cno);
+	Community selectBoard(String cno);
 
 	int insertCommunity(Community cb);
 
 	int insertReply(Reply r);
 
-	ArrayList<Reply> selectReplyList(int cno);
+	ArrayList<Reply> selectReplyList(String cno);
 
-	int recommend(int cno);
+	int recommend(String cno);
 	
-	int deleteCommunity(int cno);
+	int deleteCommunity(String cno);
 
 	int updateCommunity(Community cb);
 

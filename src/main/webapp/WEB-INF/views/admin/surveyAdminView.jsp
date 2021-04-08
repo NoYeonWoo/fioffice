@@ -105,9 +105,7 @@
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
    	
 <!-- CSS -->
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
 
 </head>
 
@@ -143,15 +141,14 @@
      <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>일정관리</h5>
+                        <h3>설문관리</h3>
                     </div>
                     <div class="card-body">
                         <div class="dt-responsive table-responsive">
                             	<table id="surveyAdminList" class="table table-hover row-border  nowrap">
 	                                <thead>
 	                                    <tr>
-	                                    <th id="check" style="width: 7%; text-align: center;">
-	                                    <input type="checkbox" name="all_selected"></th>
+	                                    <th></th>
 	                                    <th id="sNo" style="width: 5%;">번호</th>
 	                                    <th id="sStatus" style="width: 5%;">상태</th>
 	                                    <th id="sTitle" style="width: 25%;">제목</th>
@@ -159,16 +156,6 @@
 	                                    <th id="sWriter" style="width: 15%;">작성자</th>
 	                                    </tr>
 	                                </thead>
-	                                <tbody>  
-	                                <tr>
-							            <td></td>
-							            <td>57</td>
-							            <td>진행중</td>
-							            <td>오늘의 점심 메뉴</td>
-							            <td>2021-03-12 (금) 00:00 ~ 2021-03-13 (토) 23:59</td>
-							            <td>김상후 대표이사</td>
-						            </tr>
-						            </tbody>
                             	</table>
                         	</div>
                         </div>
@@ -182,59 +169,82 @@
     
     
     <jsp:include page="../common/footer.jsp"/>
-<script>
+	<script>
 	$(document).ready(function() {
+		selectList("S");
+	});
+	function selectList(status){
 		var table = $('#surveyAdminList').DataTable({
+			destroy:true,
 			columnDefs: [
-				{
-		            className: 'select-checkbox',
-		            targets:   0
-		        },
-		        
-                { orderable: false, targets: [0,2,3,4,5]},
-
+				{visible: false, targets :0},
+                { orderable: false, targets: [0,5]},
+                { searchable: false, targets: [0,1,2,4]}
               ],
-              select: {
-		            style:    'multi',
-		            selector: 'td:first-child'
-		        },
-		        order: [[ 2, 'asc' ]],
+		        order: [[ 1, 'asc' ]],
               dom: '<"float-left"B>frtp',
-
+              language: {
+              	  zeroRecords: "설문이 존재하지 않습니다."
+                },
 	        buttons: [{
-	            text: '진행',
+	            text: '설문추가',
 	            className: 'btn-primary',
 	            action: function(e, dt, node, config) {
-	            	$("").modal("show");
+	            	location.href="sinsertForm.so";
 	            }
 	        },{
-	            text: '중지',
+	            text: '진행중',
 	            className: 'btn-secondary',
 	            action: function(e, dt, node, config) {
-	            	$("").modal("show");
+	            	$('#surveyAdminList').empty();
+	            	selectList("S");
 	            }
 	        },{
 	            text: '완료',
 	            className: 'btn-secondary',
 	            action: function(e, dt, node, config) {
-	            	$("").modal("show");
+	            	$('#surveyAdminList').empty();
+	            	selectList("E");
 	            }
-	        },{
-	            text: '삭제',
-	            className: 'btn-danger',
-	            action: function(e, dt, node, config) {
-	            }
-	        }]
+	        }],
+	        ajax : {
+                url :"selectSurveyAll"
+                ,type : "POST"
+                ,data:{status:status}
+                ,dataType : "JSON"
+                },
+            columns : [
+            	{data: "surNo"},
+               	{data:null, 
+               		render: function(data, type, row, meta){
+               			return  meta.row+1;
+               		}},
+               	{data: "deptName",defaultContent: "",
+               		render:function(data, type, row){
+               			if(type=='display'){
+               				if(data==null){
+               					data="전체";
+               				}
+               			}
+               			return data;
+               		}},
+               	{data: "surTitle"},
+               	{data: "surEnd",
+               		render:function(data, type, row){
+               			if(type=='display'){
+               				data=row['surDate']+' ~ '+data;
+               			}
+               			return data;
+               		}},
+               	{data: "empName"}
+               ]
 	    });
-		$('input[name=all_selected]').on('click', function(){
-			if ($(this).is( ":checked" )) {
-				table.rows(  ).select();
-			} else {
-				table.rows(  ).deselect();
-			}
-			});
-	});
-	
+		$('#surveyAdminList tbody').on( 'click', 'tr', function () {
+	    	console.log(table.row(this).data());
+	    	var data = table.row( this ).data();
+			location.href="detailAdminSurvey?sNo=" + data['surNo'];
+		});
+	}
 
 	
 	</script>
@@ -242,7 +252,6 @@
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.buttons.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.bootstrap4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.select.min.js"></script>
 </body>
 </html>
 	                                    

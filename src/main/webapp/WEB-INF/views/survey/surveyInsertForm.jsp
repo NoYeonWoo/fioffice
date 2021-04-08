@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -85,8 +86,14 @@ a:hover {
 </head>
 
 <body class="">
-
-	<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
+	<c:choose>
+		<c:when test="${deptCode eq null}">
+		<jsp:include page="/WEB-INF/views/common/adminSidebar.jsp" />
+		</c:when>
+		<c:otherwise>
+		<jsp:include page="/WEB-INF/views/common/sidebar.jsp" />
+		</c:otherwise>
+	</c:choose>
 	<jsp:include page="/WEB-INF/views/common/topbar.jsp" />
 
 
@@ -134,6 +141,14 @@ a:hover {
 				<form name="surveyForm" role="form" action="sinsert.so" method="post"
 					autocomplete="off" onsubmit="return check();">
 					<input type="hidden" class="form-control" value="${loginUser.empNo}"name="surWriter">
+					<c:choose>
+						<c:when test="${deptCode eq null}">
+			       			<input type="hidden" class="form-control" value=""name="deptCode">
+			    		</c:when>
+    					<c:otherwise>
+       						<input type="hidden" class="form-control" value="${loginUser.deptCode}"name="deptCode">
+   		 				</c:otherwise>
+					</c:choose>
 					<table class="form-type">
 						<tbody>
 							<tr>
@@ -198,6 +213,8 @@ a:hover {
 	<jsp:include page="/WEB-INF/views/common/footer.jsp" />
 
 	<script>
+	$(document).ready(function(){
+	});
 		$("#surqStatus").change(function() {
 			$("#selectBox").toggle();
 			$("input[name='surqType']").prop("checked",false);
@@ -219,12 +236,6 @@ a:hover {
 			var date = new Date();
 			var date1 = new Date($("#surEnd").val());
 			var name = document.surveyForm;
-			console.log($("#qOption").length);
-			console.log($("#qOption").val());
-			$("input[name=qOption]").each(function(idx){   
-			    var value = $(this).val();
-			    console.log(value);
-			});
 			if(name.surTitle.value==""){
 				$(name.surTitle).attr("placeholder","제목을  입력해주세요");
 				name.surTitle.focus();
@@ -247,15 +258,15 @@ a:hover {
 				if(name.surqType.value==""){
 					alert("중복여부를 선택해주세요.");
 					return false;
-				}if($("#qOption").length <1){
+				}if($("input[name=qOption]").length <2){
 					alert("객관식은 2개이상의 보기가 필요합니다.");
 					return false;
-				}else{$("input[name=qOption]").each(function(idx){   
-						if($(this).val()==""){
-							alert((idx+1)+"번째 보기를 입력해주세요.")
-							return false;
-						}
-					});
+				}
+				for(var i = 0; i < $("input[name=qOption]").length; i++){
+					if($("input[name=qOption]")[i].value==""){
+						alert((i+1)+"번째 보기를 입력해주세요.");
+						return false;
+					}
 				}
 			}
 			return true;

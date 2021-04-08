@@ -12,19 +12,19 @@ public interface DeptService {
 
 	ArrayList<DeptBoard> selectList(PageInfo pi, String deptCode);
 
-	int updateIncreaseCount(int dno);
+	int updateIncreaseCount(String dno);
 
-	DeptBoard selectBoard(int dno);
+	DeptBoard selectBoard(String dno);
 
 	int insertDeptBoard(DeptBoard db);
 
 	int updateDeptBoard(DeptBoard db);
 
-	int deleteDeptBoard(int dno);
+	int deleteDeptBoard(String dno);
 
 	int insertReply(Reply r);
 
-	ArrayList<Reply> selectReplyList(int dno);
+	ArrayList<Reply> selectReplyList(String dno);
 
 
 }

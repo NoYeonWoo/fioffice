@@ -25,9 +25,7 @@
  .modal-content .table td{
    line-height: 35px!important;
    }
-.table-hover>tbody>tr:hover{
-	cursor:pointer
-}
+
  </style>
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">

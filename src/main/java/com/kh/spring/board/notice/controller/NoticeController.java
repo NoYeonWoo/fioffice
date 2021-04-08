@@ -55,7 +55,7 @@ public class NoticeController {
 	
 	/* 관리자 공지사항 디테일뷰 */
 	@RequestMapping("ndetail.ad")
-	public ModelAndView adminNoticeSelect(int nno, ModelAndView mv) {
+	public ModelAndView adminNoticeSelect(String nno, ModelAndView mv) {
 		int result = noticeService.updateIncreaseCount(nno);
 		
 		if(result > 0) {
@@ -191,7 +191,7 @@ public class NoticeController {
 	
 	/* 공지사항 디테일뷰 */
 	@RequestMapping("ndetail.bo")
-	public ModelAndView selectNotice(int nno, ModelAndView mv) {
+	public ModelAndView selectNotice(String nno, ModelAndView mv) {
 		int result = noticeService.updateIncreaseCount(nno);
 		
 		if(result > 0) {
@@ -206,7 +206,7 @@ public class NoticeController {
 	
 	/* 공지사항 삭제 */
 	@RequestMapping("ndelete.bo")
-	public String deleteBoard(int nno, String fileName, HttpServletRequest request, Model model) {
+	public String deleteBoard(String nno, String fileName, HttpServletRequest request, Model model) {
 		
 		int result = noticeService.deleteNotice(nno);
 		System.out.println("넘어옴" + nno);
@@ -232,7 +232,7 @@ public class NoticeController {
 	
 	/* 공지사항 수정 */
 	@RequestMapping("nupdateForm.bo")
-	public ModelAndView updateForm(ModelAndView mv, int nno) {
+	public ModelAndView updateForm(ModelAndView mv, String nno) {
 		
 		mv.addObject("n", noticeService.selectBoard(nno)).
 		setViewName("board/notice/noticeUpdateForm");
@@ -284,7 +284,7 @@ public class NoticeController {
 	/* 댓글 목록 */
 	@ResponseBody
 	@RequestMapping(value="rlist.bo", produces="application/json; charset=UTF-8")
-	public String selectReplyList(int nno) {
+	public String selectReplyList(String nno) {
 		
 		ArrayList <Reply> list = noticeService.selectReplyList(nno);
 		

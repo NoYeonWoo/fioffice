@@ -85,8 +85,11 @@ public class MeetingroomController {
 	@RequestMapping("enrollForm.re")
 	public String authorityView(Model model) {
 		ArrayList<Meetingroom> rList = meetingService.selectRoomList();
-		Date time = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String today=sdf.format(new java.util.Date());
+		Date time = Date.valueOf(today);
 		meetingService.checkReservation(time);
+		System.out.println(time);
 		model.addAttribute("rList",rList);
 		return "reservation/reservationInsertForm";
 	}
@@ -105,13 +108,11 @@ public class MeetingroomController {
 	}
 		
 	//내 예약리스트
-	@RequestMapping("selectMyRes.re")
+	@RequestMapping(value="selectMyRes.re" , produces="application/json; charset=UTF-8")
 	@ResponseBody
-	public ArrayList<Reservation> selectMyReservation(String empNo,Model model) {
+	public String selectMyReservation(String empNo,Model model) {
 		ArrayList<Reservation> resList = meetingService.selectMyReservation(empNo);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
-		for(int i = 0; i < resList.size(); i++) resList.get(i).setResDateS(format.format(resList.get(i).getResDate()));
-		return resList;
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(resList);
 	}
 	
 	//예약추가
@@ -142,7 +143,9 @@ public class MeetingroomController {
 	//예약관리화면
 	@RequestMapping("reservation.ad")
 	public String reservationAdminView(Model model) {
-		Date time = new Date(System.currentTimeMillis());
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String today=sdf.format(new java.util.Date());
+		Date time = Date.valueOf(today);
 		meetingService.checkReservation(time);
 		return "admin/reservationAdminView";
 	}
@@ -152,10 +155,22 @@ public class MeetingroomController {
 	@ResponseBody
 	public String selectReservation(String status) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		ArrayList<Reservation> resList = meetingService.selectReservation(status);
-		SimpleDateFormat format = new SimpleDateFormat("yyyy년 MM월 dd일 ");
-		for(int i = 0; i < resList.size(); i++) resList.get(i).setResDateS(format.format(resList.get(i).getResDate()));
-		result.put("data", resList);
-		return new GsonBuilder().create().toJson(result);
+		result.put("data", meetingService.selectReservation(status));
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(result);
 	}
+	
+	//예약 삭제
+	@RequestMapping("deleteReservation.ad")
+	public String deleteReservationAdmin(String resNo,Model model) {
+		System.out.println("예약 번호 : "+resNo);
+		int result = meetingService.deleteReservation(resNo);
+		if(result > 0) {
+			model.addAttribute("msg","취소가 완료되었습니다.");
+			return "redirect:reservation.ad";
+		}else {
+			model.addAttribute("msg","취소를 실패하였습니다.");
+			return "redirect:reservation.ad";
+		}
+	}
+	
 }

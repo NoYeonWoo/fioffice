@@ -1,4 +1,4 @@
-package com.kh.spring.board.community.model.vo;
+package com.kh.spring.survey.model.vo;
 
 import java.sql.Date;
 
@@ -12,11 +12,10 @@ import lombok.ToString;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString  
-public class Likes {
-	
-	public int likeNo;
-	public String empNo; //추천 누르는 사람의 사번
-	public String cboardNo; //추천될 글 번호
-	
+@ToString
+public class SurveyOption {
+
+	private String suroNo;
+	private String surNo;
+	private String option;
 }

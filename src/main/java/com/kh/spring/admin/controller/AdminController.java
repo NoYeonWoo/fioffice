@@ -250,10 +250,7 @@ public class AdminController {
 		return "redirect:calendar.ad";
 	}
 		
-	@RequestMapping("survey.ad")
-	public String surveyView() {
-		return "admin/surveyAdminView";
-	}
+	
 	
 	
 	

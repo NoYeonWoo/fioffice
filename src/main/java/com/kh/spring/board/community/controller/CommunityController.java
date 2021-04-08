@@ -60,7 +60,7 @@ public class CommunityController {
 
 	/* 커뮤니티 디테일뷰 */
 	@RequestMapping("cdetail.bo")
-	public ModelAndView selectBoard(int cno, ModelAndView mv) {
+	public ModelAndView selectBoard(String cno, ModelAndView mv) {
 		int result = communityService.updateIncreaseCount(cno);
 		
 		if(result > 0) {
@@ -76,7 +76,7 @@ public class CommunityController {
 	
 	/* 커뮤니티 좋아요 */
 	@RequestMapping("recommend.do")
-    public String recommend (@RequestParam int cno, ModelAndView mv) {
+    public String recommend (@RequestParam String cno, ModelAndView mv) {
         
 		System.out.println("넘어오냐");
 		int result = communityService.recommend(cno);
@@ -181,7 +181,7 @@ public class CommunityController {
 	
 	/* 커뮤니티 수정 */
 	@RequestMapping("cupdateForm.bo")
-	public ModelAndView updateForm(ModelAndView mv, int cno) {
+	public ModelAndView updateForm(ModelAndView mv, String cno) {
 		
 		mv.addObject("cb", communityService.selectBoard(cno)).
 		setViewName("board/community/communityUpdateForm");
@@ -209,7 +209,7 @@ public class CommunityController {
 	
 	/* 커뮤니티 삭제 */
 	@RequestMapping("cdelete.bo")
-	public String deleteBoard(int cno, String fileName, HttpServletRequest request, Model model) {
+	public String deleteBoard(String cno, String fileName, HttpServletRequest request, Model model) {
 		
 		int result = communityService.deleteCommunity(cno);
 		System.out.println("넘어옴" + cno);
@@ -239,7 +239,7 @@ public class CommunityController {
 	/* 댓글 목록 */
 	@ResponseBody
 	@RequestMapping(value="rlist.cbo", produces="application/json; charset=UTF-8")
-	public String selectReplyList(int cno) {
+	public String selectReplyList(String cno) {
 		
 		ArrayList <Reply> list = communityService.selectReplyList(cno);
 		
@@ -250,7 +250,7 @@ public class CommunityController {
 	/* 좋아요 버튼 */
 	@RequestMapping("clickLikes")
 	@ResponseBody
-	public Map<String, Object> likesButton(HttpServletRequest request, @RequestParam("cboardNo") int cno, Model model) {	
+	public Map<String, Object> likesButton(HttpServletRequest request, @RequestParam("cboardNo") String cno, Model model) {	
 		
 		Employee loginUser=(Employee)model.getAttribute("loginUser");
 		

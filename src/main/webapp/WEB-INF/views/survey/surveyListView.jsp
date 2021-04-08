@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,9 +10,7 @@
       	
 <!-- CSS -->
 
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/board/assets/css/style.css" />
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
- <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
 
 <style>
 	#buttons button{
@@ -60,7 +57,9 @@
 	  text-decoration: none;
 	  transition: background-color .3s;
 	}
-	
+	.table-hover>tbody>tr:hover{
+		cursor:pointer
+	}
 	.pagination a.active {
 	  background-color: rgb(2, 1, 13);
 	  color: white;
@@ -99,8 +98,8 @@
    
     
 <!--메인 화면 전체시작 -->
-   <div class="pcoded-main-container">
-     <div class="pcoded-content">
+<div class="pcoded-main-container">
+	<div class="pcoded-content">
       
          
    <!-- [ breadcrumb start 부트스트랩에서 사이트 이동하는기능 -->
@@ -122,126 +121,60 @@
   
   
 	<!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
-		<!-- 메인레버 -->
-	<div id="wrapper">
-
-		<!-- 컨텐츠 영역 -->
-		<div class="container-fluid">
-		
-		<!-- 타이틀 영역 -->
-          <div class="card shadow mb-4">
-            <div class="card-header py-3">
-               <h3>설문</h3>
+<!-- 메인레버 -->
+<div id="wrapper">
+<!-- 컨텐츠 영역 -->
+	<div class="container-fluid">
+	<!-- 타이틀 영역 -->
+    	<div class="card shadow mb-4">
+        	<div class="card-header py-3">
+            	<h3>설문</h3>
             </div>
-            
-            
-			
-			
-		<div>
-		
+  		<div>
 		<!-- left -->
-		<div class="left">
-          		
-			
-                    <div class="table-responsive">
-                        <div class="card-body" align="center">
-				
-				<!-- 설문 등록 -->
-					<a href="sinsertForm.so" class="btn  btn-primary btn-lg">
-					<span class="icon text-white-50">
-						<i class="fas fa-plus"></i>
-					</span>
-					<span class="text" style="color: white">&nbsp;설문등록</span>
-					</a>
-					<br><br>
-					
-		<ul class="pcoded-submenu">
-				<li>
-					<p class="title">
-						<a href="" data-category="progress">
-							<span class="txt" title="진행중인 설문">진행중인 설문</span>
+			<div class="left">
+          		<div class="table-responsive">
+                	<div class="card-body" align="center">
+					<!-- 설문 등록 -->
+						<a href="sinsertForm.so?deptCode=${loginUser.deptCode }" class="btn  btn-primary btn-lg">
+							<span class="icon text-white-50">
+								<i class="fas fa-plus"></i>
+							</span>
+							<span class="text" style="color: white">&nbsp;설문등록</span>
 						</a>
-					</p>
-				</li>
-				<li>
-					<p class="title">
-						<a href="" data-category="finished">
-							<span class="txt" title="마감된 설문">마감된 설문</span>
-						</a>
-					</p>
-				</li>
-				<li>
-					<p class="title">
-						<a href="" data-category="my">
-							<span class="txt" title="내가 만든 설문">내가 만든 설문</span>
-						</a>
-					</p>
-				</li>
-			</ul>
-</div>
-                      </div>
-                  
-		</div>
-		
-		
-           	<!-- 컨텐츠 영역 -->
-				<br>
-				<div class="right">
-				<div class="dataTables_wrapper container">
-				
-			<table id="surveyList" class="table table-hover row-border  nowrap">
-               <thead>
-	                <tr>
-	                <th id="sNo" style="width: 10%;">번호</th>
-	                <th id="sStatus" style="width: 10%;">상태</th>
-	               	<th id="sTitle" style="width: 25%;">제목</th>
-	               	<th id="sDate" style="width: 30%;">설문 기간</th>
-	                <th id="sWriter" style="width: 15%;">작성자</th>
-	                </tr>
-	           </thead>
-            
- 
-            <tbody role="alert">
-            <c:forEach items="${ list }" var="s">
-            <tr>
-	            <td>${s.surNo}</td>
-	            <td>${s.status}</td>
-	            <td><span id="txt">${s.surTitle}</span>
-	            <td>${s.surStart} ~ ${s.surEnd}</td>
-	            <td>${s.surWriter}</td>
-            </tr>
-            </c:forEach>	
-            </tbody>
-            
-            </table>
-		</div>
-        </div>
-        
-         <!-- 페이지 영역  
-              <br><br>
-               	<div class="row" style="width: 90%; margin-left: 5%;">
-               		<div class="pagination">
+						<br><br>
+						<p class="title">
+							<a href="javascript:void(0);" onclick="selectTable('S');" data-category="progress">
+								<span class="txt" title="진행중인 설문">진행중인 설문</span></a></p>
 
-							<nav aria-label="Page navigation example">
-							<ul class="pagination">
-								<li class="page-item"><a class="page-link" href="#!">Previous</a></li>
-								<li class="page-item"><a class="page-link" href="#!">1</a></li>
-								<li class="page-item"><a class="page-link" href="#!">2</a></li>
-								<li class="page-item"><a class="page-link" href="#!">3</a></li>
-								<li class="page-item"><a class="page-link" href="#!">Next</a></li>
-							</ul>
-						</nav>
+						<p class="title">
+							<a href="javascript:void(0);"  onclick="selectTable('E');" data-category="finished">
+								<span class="txt" title="마감된 설문">마감된 설문</span></a></p>
 					</div>
-               </div> -->
-               
-        <br>
+				</div>
+			</div>
+           	<!-- 컨텐츠 영역 -->
+			<br>
+			<div class="right">
+				<div class="dataTables_wrapper container">
+					<table id="surveyList" class="table table-hover row-border  nowrap">
+               			<thead>
+			                <tr>
+			                <th></th>
+			                <th id="sNo" style="width: 10%;">번호</th>
+			                <th id="sStatus" style="width: 15%;">상태</th>
+			               	<th id="sTitle" style="width: 33%;">제목</th>
+			               	<th id="sDate" style="width: 27%;">설문 기간</th>
+			                <th id="sWriter" style="width: 20%;">작성자</th>
+			                </tr>
+	           			</thead>
+            		</table>
+				</div>
+        	</div>     
+        	<br>
         </div>
-        </div>
-        
-        
-        
-        </div> <!-- left right -->
-		</div>
+	</div> <!-- left right -->
+</div>
 	</div> <!--지우지 마세요    div class="row"  -->
 	</div> <!--지우지 마세요   div class="pcoded-content"  -->
 	</div> <!--지우지 마세요    div class="pcoded-main-container"  -->
@@ -254,33 +187,78 @@
     <jsp:include page="/WEB-INF/views/common/footer.jsp"/>
     
     <script>
+    var table;
     $(document).ready(function() {
-		var table = $('#surveyList').DataTable({
+    	
+		selectTable("S");
+	});
+    function selectTable(status){
+    	if(table!=null){
+    		$('#surveyList').empty();
+    	}
+		table = $('#surveyList').DataTable({
+			destroy:true,
 			columnDefs: [
-				{ orderable: false, targets: [1,2,3,4]},
-				{ searchable: false, targets: [0,1]}
+				{visible: false, targets :0},
+				{ orderable: false, targets: [0,5]},
+				{ searchable: false, targets: [0,1,4]}
               ],
-              dom: '<"float-right">t<"float-left"f><"float-right"p>'
+              order: [[ 1, 'asc' ]],
+              dom: '<"float-right">t<"float-left"f><"float-right"p>',
+              language: {
+              	  zeroRecords: "설문이 존재하지 않습니다."
+                },
+    	        ajax : {
+                    url :"selectSurveyList"
+                    ,type : "POST"
+                    ,data:{deptCode:'${loginUser.deptCode}',
+                    	status:status}
+                    ,dataType : "JSON"
+                    },
+                columns : [
+                	{data: "surNo"},
+                   	{data: null,
+                   		render: function(data, type, row, meta){
+                   			return meta.row+1;
+                   		}},
+                   	{data: "deptCode",defaultContent: "",
+                   		render:function(data, type, row){
+                   			if(type=='display'){
+                   				if(data==null){
+                   					data="전체";
+                   				}else{
+                   					data="부서";
+                   				}
+                   			}
+                   			return data;
+                   		}},
+                   	{data: "surTitle"},
+                   	{data:"surEnd",
+                   		render:function(data, type, row){
+                   			if(type=='display'){
+                   				data=row['surDate']+' ~ '+data;
+                   			}
+                   			return data;
+                   		}},
+                   	{data: "empName"}
+                   ]
           	
 	    });
-		
-	});
-    
-    $(function(){
-		$("#surveyList tbody tr").click(function(){
-			location.href="sdetail.so?sno=" + $(this).children().eq(0).text();
+		$('#surveyList tbody').on( 'click', 'tr', function () {
+	    	console.log(table.row(this).data());
+	    	var data = table.row( this ).data();
+			location.href="detailSurvey?sNo=" + data['surNo']+"&empNo=${loginUser.empNo}";
 		});
-	});
+	}
+    
     
    
 	</script>
     
 <!-- JS -->
-	<script src="${pageContext.request.contextPath}/resources/board/assets/js/boardjs.css"></script>
  	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.bootstrap4.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.buttons.min.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/buttons.bootstrap4.min.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/dataTables.select.min.js"></script>
 </body>
 </html>

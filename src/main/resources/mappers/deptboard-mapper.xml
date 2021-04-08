@@ -42,7 +42,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE REF_BNO = A.DBOARD_NO AND STATUS='Y'
 		GROUP BY DBOARD_NO),0) REPLY_COUNT, EMP_NAME
 		FROM DEPTBOARD A LEFT JOIN EMPLOYEE ON DBOARD_WRITER=EMP_NO
-		WHERE a.dept_code = #{deptCode}
+		WHERE A.DEPT_CODE = #{deptCode}
       	AND A.STATUS = 'Y'
       	ORDER BY DBOARD_NO DESC
 	</select>
@@ -53,7 +53,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SYSDATE, DEFAULT, DEFAULT)
 	</insert>
 	
-	<update id="deleteDboard" parameterType="_int">
+	<update id="deleteDboard" parameterType="string">
 		UPDATE DEPTBOARD
 		SET STATUS='N'
 		WHERE DBOARD_NO=#{dboardNo}
@@ -67,13 +67,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE DBOARD_NO=#{dboardNo}
 	</update>
 	
-	<update id="updateIncreaseCount" parameterType="_int">
+	<update id="updateIncreaseCount" parameterType="string">
 		UPDATE DEPTBOARD
 		SET COUNT=COUNT+1
 		WHERE DBOARD_NO=#{dboardNo}
 	</update>
 	
-	<select id="selectDboard" resultMap="DeptboardResultSet">
+	<select id="selectDboard" parameterType="string" resultMap="DeptboardResultSet">
 		SELECT A.*, B.EMP_NAME, B.CHANGE_NAME 
 		FROM DEPTBOARD A INNER JOIN EMPLOYEE B ON A.DBOARD_WRITER=B.EMP_NO
 		WHERE A.DBOARD_NO=#{dboardNo}
@@ -85,7 +85,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		VALUES(SEQ_RNO.NEXTVAL, #{replyWriter}, #{refBoardNo}, #{replyContent}, SYSDATE, DEFAULT)
 	</insert>
 	
-	<select id="selectReplyList" resultMap="replyResultSet">
+	<select id="selectReplyList" parameterType="string" resultMap="replyResultSet">
 		SELECT REPLY_NO, EMP_NAME, REPLY_CONTENT, REPLY_DATE
 		FROM REPLY A LEFT JOIN EMPLOYEE ON REPLY_WRITER=EMP_NO
 		WHERE REF_BNO=#{dboardNo}

@@ -11,8 +11,13 @@
 .btn{
 	padding : 0.5rem 0.95rem !important;
 	margin-bottom : 1rem !important;
-} 
-</style>
+
+}
+.table-hover{
+	cursor:pointer !important;
+}
+ </style>
+
  
 <!-- Favicon icon -->
 <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
@@ -89,33 +94,33 @@
 				<button type="button" class="close" data-dismiss="modal">&times;</button>  <!-- 다이얼로그 닫기 -->
 			</div>
 			<div class="modal-body">
-				<form name="clientUpdate" action="updateClient" method="post" autocomplete="off" onsubmit="return check();">
-					<table class="table table-detail "  align="center">
-	                    <tr>
-		                    <td style="width:7%">예약시간</td>
-		                    <td style="width:3%;text-align:center">:</td>
-		                    <td id="resDate" colspan="4"></td>
-		                </tr><tr>
-		                    <td>예약자</td>
-		                    <td style="text-align:center">:</td>
-		                    <td id="empName" style="width:25%"></td>
-		                    <td style="width:7%">회의실</td>
-		                    <td style="width:3%;text-align:center">:</td>
-		                    <td id="roomName"></td>
-		                </tr><tr>
-		                    <td>회의명</td>
-		                    <td style="text-align:center">:</td>
-		                    <td id="resTitle"  colspan="4"></td>
-		                </tr><tr>
-		                    <td>회의내용</td>
-		                    <td style="text-align:center">:</td>
-		                    <td id="resContent"  colspan="4"></td>
-		                </tr>
-					</table>
-					<div class="modal-footer">
-	                    <button type="submit" class="btn btn-primary">수정하기</button>
-	                    <button type="button" class="btn btn-danger" data-dismiss="modal">취소</button>
-	                </div>
+				<table class="table table-detail "  align="center">
+	            	<tr>
+		            	<td style="width:7%">예약시간</td>
+		                <td style="width:3%;text-align:center">:</td>
+		                <td id="resDate" colspan="4"></td>
+		            </tr><tr>
+		                <td>예약자</td>
+		                <td style="text-align:center">:</td>
+		                <td id="empName" style="width:25%"></td>
+		                <td style="width:7%">회의실</td>
+		                <td style="width:3%;text-align:center">:</td>
+		                <td id="roomName"></td>
+		            </tr><tr>
+		                <td>회의명</td>
+		                <td style="text-align:center">:</td>
+		                <td id="resTitle"  colspan="4"></td>
+		            </tr><tr>
+		                <td>회의내용</td>
+		                <td style="text-align:center">:</td>
+		                <td id="resContent"  colspan="4"></td>
+		            </tr>
+				</table>
+				<div class="modal-footer">
+	                <button type="button" class="btn btn-danger" data-dismiss="modal">닫기</button>
+	            </div>
+	            <form id="reservation" action="deleteReservation.ad" method="post">
+	             <input type="hidden" name="resNo" id="resNo" value="">   
 				</form>	
 			</div>
 		</div>
@@ -125,7 +130,6 @@
     
     <jsp:include page="../common/footer.jsp"/>
 	<script>
-	//var table;
 	$(document).ready(function() {
 		selectList('Y');
 		
@@ -164,7 +168,7 @@
 	        	dataType : "JSON"
 	        },
 	        columns : [
-	        	{data:"resDateS"},
+	        	{data:"resDate"},
 	        	{data:"roomName"},
 	        	{data:"resTitle"},
 	        	{data:"empName"},
@@ -179,20 +183,23 @@
 	        ]
 	    });
 		$('#reservationList tbody').on( 'click', 'tr', function () {
-		    
 		    var data = table.row( this ).data();
+		    $("#resDetail .modal-footer .btn-primary").remove();
 		    console.log(data);
-		    $("#resDetail #resDate").html(data['resDateS']+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+		    $("#resDetail #resDate").html(data['resDate']+'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
 		    								+ data['staTime']+"시  ~ "+(Number(data['endTime'])+1)+"시");
 		    $("#resDetail #resTime").html();
 		    $("#resDetail #empName").html(data['empName']);
 		    $("#resDetail #roomName").html(data['roomName']);
 		    $("#resDetail #resTitle").html(data['resTitle']);
-		    $("#resDetail #resContent").html(data['resContent']);
+		    $("#resDetail #resContent").html('<span style="white-space:pre;">'+data['resContent']+'</span>');
+		    $("#reservation #resNo").val(data['resNo']);
+		    if(data['status']=='Y'){
+		    	$("#resDetail .modal-footer").prepend('<button type="button" onclick="$(\'#reservation\').submit();" class="btn btn-primary">예약취소</button>');
+		    }
 		    $("#resDetail").modal("show");
 		} );
 	}
-	
 	
 	</script>
     <script src="${pageContext.request.contextPath}/resources/ablePro/assets/js/plugins/jquery.dataTables.min.js"></script>

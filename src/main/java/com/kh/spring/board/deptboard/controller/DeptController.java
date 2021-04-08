@@ -57,7 +57,7 @@ public class DeptController {
 	
 	/* 부서게시판 디테일뷰 */
 	@RequestMapping("ddetail.bo")
-	public ModelAndView selectBoard(int dno, ModelAndView mv) {
+	public ModelAndView selectBoard(String dno, ModelAndView mv) {
 		int result = deptService.updateIncreaseCount(dno);
 		
 		if(result > 0) {
@@ -163,7 +163,7 @@ public class DeptController {
 	
 	/* 부서게시판 수정 */
 	@RequestMapping("dupdateForm.bo")
-	public ModelAndView updateForm(ModelAndView mv, int dno) {
+	public ModelAndView updateForm(ModelAndView mv, String dno) {
 		
 		mv.addObject("db", deptService.selectBoard(dno)).
 		setViewName("board/deptboard/dboardUpdateForm");
@@ -191,7 +191,7 @@ public class DeptController {
 	
 	/* 부서게시판 삭제 */
 	@RequestMapping("ddelete.bo")
-	public String deleteBoard(int dno, String fileName, HttpServletRequest request, Model model) {
+	public String deleteBoard(String dno, String fileName, HttpServletRequest request, Model model) {
 		
 		int result = deptService.deleteDeptBoard(dno);
 		System.out.println("넘어옴" + dno);
@@ -223,7 +223,7 @@ public class DeptController {
 	/* 댓글 목록 */
 	@ResponseBody
 	@RequestMapping(value="rlist.dbo", produces="application/json; charset=UTF-8")
-	public String selectReplyList(int dno) {
+	public String selectReplyList(String dno) {
 		
 		ArrayList <Reply> list = deptService.selectReplyList(dno);
 		

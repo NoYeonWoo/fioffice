@@ -255,13 +255,9 @@ public class ProductInOutController {
 		map.put("cliNo", cliNo);
 		map.put("proNo", proNo);
 		ArrayList<Inout> iList = proInoutService.selectInoutList(map);
-		for(Inout i : iList) {
-			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-			i.setInoutDateS(format.format(i.getInoutDate()));
-		}
 		result.put("data",iList);
 		System.out.println(result);
-		return new GsonBuilder().create().toJson(result);
+		return new GsonBuilder().setDateFormat("yyyy년 MM월 dd일").create().toJson(result);
 	}
 	
 	//입출고 추가

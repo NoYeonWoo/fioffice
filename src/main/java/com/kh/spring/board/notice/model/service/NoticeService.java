@@ -12,17 +12,17 @@ public interface NoticeService {
 
 	ArrayList<Notice> selectList(PageInfo pi);
 
-	int updateIncreaseCount(int nno);
+	int updateIncreaseCount(String nno);
 
-	Notice selectBoard(int nno);
+	Notice selectBoard(String nno);
 
 	int insertReply(Reply r);
 
-	ArrayList<Reply> selectReplyList(int nno);
+	ArrayList<Reply> selectReplyList(String nno);
 
 	int insertNotice(Notice n);
 
-	int deleteNotice(int nno);
+	int deleteNotice(String nno);
 
 	int updateNotice(Notice n);
 

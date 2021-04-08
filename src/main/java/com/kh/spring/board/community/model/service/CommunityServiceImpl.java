@@ -34,12 +34,12 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public int updateIncreaseCount(int cno) {
+	public int updateIncreaseCount(String cno) {
 		return communityDao.updateIncreaseCount(sqlSession, cno);
 	}
 
 	@Override
-	public Community selectBoard(int cno) {
+	public Community selectBoard(String cno) {
 		return communityDao.selectBoard(sqlSession, cno);
 	}
 
@@ -54,17 +54,17 @@ public class CommunityServiceImpl implements CommunityService {
 	}
 
 	@Override
-	public ArrayList<Reply> selectReplyList(int cno) {
+	public ArrayList<Reply> selectReplyList(String cno) {
 		return communityDao.selectReplyList(sqlSession, cno);
 	}
 
 	@Override
-	public int recommend(int cno) {
+	public int recommend(String cno) {
 		return communityDao.recommend(sqlSession, cno);
 	}
 	
 	@Override
-	public int deleteCommunity(int cno) {
+	public int deleteCommunity(String cno) {
 		return communityDao.deleteCommunity(sqlSession, cno);
 	}
 
