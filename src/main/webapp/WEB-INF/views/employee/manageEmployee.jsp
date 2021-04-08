@@ -3,6 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+ 
 <style type="text/css">
 /* Styles for wrapping the search box */
 .main {

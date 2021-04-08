@@ -89,7 +89,7 @@
 				<div class="col-xl-12">
 					<div class="card">
 						<div class="card-header">
-							<h5>이메일함</h5>
+							<h5>중요이메일함</h5>
 							<span class="d-block m-t-5">
 								<div class="card-body">
 									<!--

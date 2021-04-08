@@ -77,18 +77,13 @@ public class EmailController {
 		
 		int listCount = emailService.selectListCount();//////////
 		PageInfo pi = Pagination.getPageInfo(listCount, currentPage,10,10);//최대 10   5보여줌
-		
 		ArrayList<Email> list = emailService.selectListCount(pi,emp);
-		
 		System.out.println("list긴급점검  "+list);
 		
 		//////////////////////////
 		EmailInfo emailInfo2 =  emailService.selectUserInfo2(emp);
 		System.out.println("emp긴급점검  "+emp);
 		//Email email =  emailService.selectUser2(emp);//1개만검색
-		//System.out.println("로그인한사람 이메일정보들 전 emp2"+emp);
-		//System.out.println("로그인한사람 이메일정보들 emailInfo2"+emailInfo2);
-		//System.out.println("로그인한사람 이메일정보들 list"+list);
 		//setAttribute("emailInfo", emailInfo);
 		session.setAttribute("emailInfo2", emailInfo2);
 		//session.setAttribute("email", email);
@@ -199,18 +194,11 @@ public class EmailController {
 		
 		final String username = Info.getEmailId();//  dudgus22342
 		final String password = Info.getEmailPwd();// 비번번번번
-		
-		
 		String port=Info.getEmailPort();// 465,  587 포트번호
-		
 		String addressYou =  email.getEmailSendEmail();   ///상대방 이메일    ffffff@naver.com 
-		
 		String addressMe =  email.getEmailReceiveEmail();  //내이메일     zon2429@naver.com
-		
 		String title =  email.getEmailTitle();  //제목ㅁ곰곰곰고
-		
 		String content =  email.getEmailContent();// 내용내용
-		
 		
 		System.out.println("---------------------------------");
 		//smtp.naver.com    dudgus22342              비밀번호             465

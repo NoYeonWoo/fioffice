@@ -13,7 +13,7 @@
 			alert("${msg}");
 		</script>
 		<c:remove var="msg" scope="session"/>
-	</c:if>
+</c:if>
 <!-- [ Header ] start -->
 	<header class="navbar pcoded-header navbar-expand-lg navbar-light header-blue">
 		
@@ -32,9 +32,7 @@
 				<div class="collapse navbar-collapse">
 					
 					<ul class="navbar-nav ml-auto">
-						
 						<li>
-
 							<div class="dropdown drp-user">
 							
 							
@@ -64,7 +62,7 @@
 									
 										<li><a href="mypage.do" class="dropdown-item"><i class="feather icon-user"></i> 마이 페이지</a></li>
 										<li><a href="msgView.ma" class="dropdown-item"><i class="feather icon-message-circle"></i> 메신저</a></li>
-										<li><a href="" class="dropdown-item"><i class="feather icon-mail"></i> 이메일</a></li>
+										<li><a href="view.email" class="dropdown-item"><i class="feather icon-mail"></i> 이메일</a></li>
 										<li><a href="adminMain.ad" onclick="return adminCheck();"class="dropdown-item"><i class="feather icon-settings"></i> 관리자</a></li>
 									</ul>
 								</div>

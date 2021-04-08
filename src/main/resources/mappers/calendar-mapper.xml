@@ -24,6 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result property="categoryColor" column="CATEGORY_COLOR"/>
 	</resultMap>
 	
+	<!-- 리스트 -->
 	
 	<select id="selectCList" parameterType="string" resultMap="CalendarResultSet">	
 		SELECT A.*, B.CATEGORY_TITLE, B.CATEGORY_COLOR
@@ -35,7 +36,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT A.*, B.CATEGORY_TITLE, B.CATEGORY_COLOR
 		FROM CALENDAR A INNER JOIN CAL_CATEGORY B ON A.CAL_CATE=B.CATEGORY_NO
 		WHERE A.STATUS='Y'
-		AND CAL_CATE ='30' OR CAL_CATE ='40'
+		AND A.EMP_NO=#{empNo}
+		OR CAL_CATE ='30' OR CAL_CATE ='40'
 	</select>
 	
 	
@@ -47,6 +49,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		AND A.STATUS = 'Y'
 	</select>
 	
+	
+	<!-- 등록 수정 삭제 -->
 	<insert id="insertCalendar" parameterType="Calendar">
 		INSERT INTO CALENDAR
 		VALUES(SEQ_CAL.NEXTVAL,#{empNo},#{calCate},#{calTitle},#{calContent},
@@ -67,6 +71,5 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			CAL_EDATE=#{calEDates}
 		WHERE CAL_NO=#{calNo}
 	</update>
-	
 	
 </mapper>

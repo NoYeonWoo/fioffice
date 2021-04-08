@@ -4,12 +4,13 @@
 <!DOCTYPE html>
 <html>
 <head>
+<title>FIOFFICE</title>
  <!-- Favicon icon -->
  <link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  <link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
  
  <!-- vendor css -->
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
+<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/style.css">
 </head>
 
 <body class="">
@@ -32,7 +33,6 @@
 <!-- [ Main Content ] 브래드크럽프 밑에 부분 메인시작 -->
 <div class="row">
  
-
 <!-- [ auth-signup ] start -->
 <div class="auth-wrapper">
 	<div class="auth-content">

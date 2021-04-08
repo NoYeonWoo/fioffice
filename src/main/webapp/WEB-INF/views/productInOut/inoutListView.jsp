@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<!-- Favicon icon -->
+<link rel="icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="${pageContext.request.contextPath}/resources/board/assets/images/favicon.ico" type="image/x-icon">
+
  <!-- data tables css -->
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/dataTables.bootstrap4.min.css">
  <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/ablePro/assets/css/plugins/select.dataTables.min.css">
@@ -63,7 +68,7 @@
 	<div class="col-sm-12">
 		<div class="card">
 			<div class="card-header">
-				<h3>입출고관리</h3>
+				<h5>입출고관리</h5>
 			</div>
 			<div class="card-body">
 				<div class="dt-responsive table-responsive">

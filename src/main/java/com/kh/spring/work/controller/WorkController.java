@@ -36,6 +36,7 @@ import com.google.gson.JsonIOException;
 
 import com.kh.spring.address.model.vo.PageInfo;
 import com.kh.spring.common.Pagination;
+import com.kh.spring.common.exception.CommException;
 import com.kh.spring.employee.model.vo.Employee;
 //import com.kh.spring.todo.controller.aTodo;
 import com.kh.spring.todo.model.vo.Todo;
@@ -116,22 +117,6 @@ public class WorkController {
 		//model.addAttribute("workUser",workUser);
 		return "work/workMain2";
 	}
-	
-	/*
-	@RequestMapping(value="view.workMain",produces ="application/json;charset=UTF-8")
-	public ArrayList<Work> viewWorkMain(String empNo, HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
-		
-		System.out.println("work메인 시작   ");
-		
-		//Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(empNo);
-		response.setContentType("application/json;charset=utf-8");
-		System.out.println("work컨트롤러의 workUser 한줄 메인으로 던지기"+workUser);
-		new Gson().toJson(workUser,response.getWriter());
-		
-		return workUser;
-	}
-	*/
 	@RequestMapping(value="view.workMain",produces ="application/json;charset=UTF-8")
 	public void viewWorkMain(String empNo, HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
@@ -147,65 +132,75 @@ public class WorkController {
 
 	
 	////////////////////////////////////////////////////////////////시작
-	
+	//System.out.println(timeNow);//2021-03-27 03:41:43
+			//System.out.println(timeNow.getClass().getName());//java.lang.String
+			//System.out.println(eno);//951220103
+			// 아래에찍어보기
 	
 	@RequestMapping(value="start.work",method=RequestMethod.POST)//원래 eno timeNow // Work work //@RequestParam("empNo") String empNo
 	public String workStart(Work Times,@RequestParam("empNo") String empNo, HttpServletRequest request, Model model,HttpSession session, HttpServletResponse response) {
-		
-		
-		//System.out.println(timeNow);//2021-03-27 03:41:43
-		//System.out.println(timeNow.getClass().getName());//java.lang.String
-		//System.out.println(eno);//951220103
-		// 찍어보기
-
 
 		Work preWork = workService.selectTimes(empNo);
 		//System.out.println("preWork :: "+preWork.toString());
 
 		System.out.println("사원근태 최신 로우!! : "+preWork);
 		
+		 String[] weekDay = { "일", "월", "화", "수", "목", "금", "토" };     
+
+		   Calendar cal = Calendar.getInstance(); 
+		      int num = cal.get(Calendar.DAY_OF_WEEK)-1; 
+		      String today = weekDay[num]; 
+		      System.out.println("오늘의 요일 숫자 "+num); 
+		      System.out.println("오늘의 요일 : " + today ); 
+
 		if(preWork==null){
-			System.out.println("경유지 1");
-			
-		}else {
-			Times.setWorkStack(preWork.getWorkStack());//전꺼
-			Times.setWorkExceed(preWork.getWorkExceed());
-			Times.setWorkRemain(preWork.getWorkRemain());
-		}
-		
-		System.out.println("경유지 2");
-		
-		/////////////////////////////
-
-		//model.addAttribute("Times", Times);
-		
-		
-		int result= workService.insertWork(Times);//최초 출근 시작!!!!!!!!!!
-		System.out.println("경유지 3");
-
-		//Times.setWorkDay(preWork.getWorkDay());
-		
-		if(preWork==null) {
+			System.out.println("신입 경유지 1");
+			int result= workService.insertWork(Times);
+			System.out.println("신입 경유지 2");
 			System.out.println("최초출근자이다.");
-		}else {
-			Times.setWorkDay(preWork.getWorkDay());
-			int result3= workService.updateWorkDay(Times);//주간리셋 
-		}
-		
-		
-		if(preWork==null){
-			System.out.println("경유지 4");
+			System.out.println("신입 경유지 3");
 			int result5 =workService.insertwork2(empNo);
+
+			Employee emp= (Employee) session.getAttribute("loginUser");
+			ArrayList<Work> workUser = workService.selectUser(empNo);
+			model.addAttribute("workUser",workUser);
+			return "redirect:/";   //신입 끝
 		}else {
-		
-		int result4 =workService.insertwork2(empNo);//시작( 마지막 2속성 분)넣기
+			System.out.println("경유지 1");
+			String Day = (preWork.getWorkDay());//전꺼
+			System.out.println("타임스.워크데이"+Day);
+			if(Day.equals(today)) {
+				throw new CommException("오늘은 이미 출근버튼을 누르셨습니다.");
+				
+			}else {
+				Times.setWorkStack(preWork.getWorkStack());//전꺼
+				Times.setWorkExceed(preWork.getWorkExceed());
+				Times.setWorkRemain(preWork.getWorkRemain());
+				System.out.println("경유지 2");
+				int result= workService.insertWork(Times);
+				System.out.println("경유지 3");
+				Times.setWorkDay(preWork.getWorkDay());
+				int result3= workService.updateWorkDay(Times);//주간리셋
+				int result4 =workService.insertwork2(empNo);
+				
+				Employee emp= (Employee) session.getAttribute("loginUser");
+				ArrayList<Work> workUser = workService.selectUser(empNo);
+				model.addAttribute("workUser",workUser);
+				
+				return "redirect:/";
+				
+			}
+			
 		}
+		
+		//System.out.println("촤종경유지 4");
+
 		//model.addAttribute("loginUser", loginUser);
 		///////////////////////////////
-		System.out.println("경유지 5");
-		Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(empNo);
-		model.addAttribute("workUser",workUser);
+		//System.out.println("경유지 5");
+		//Employee emp= (Employee) session.getAttribute("loginUser");
+		//ArrayList<Work> workUser = workService.selectUser(empNo);
+		//model.addAttribute("workUser",workUser);
 		
 		//int result = workService.insertWork(work);
 		
@@ -213,7 +208,7 @@ public class WorkController {
 		
 		
 		
-		return "redirect:/";
+		//return "redirect:/";
 		/*
 		if (result4>0) {
 			return "work/workMain2";
@@ -246,52 +241,56 @@ public class WorkController {
 		//System.out.println("preWork22 :: "+preWork.toString());
 		
 
+		/*
+		String[] weekDay = { "일", "월", "화", "수", "목", "금", "토" };     
 
+		   Calendar cal = Calendar.getInstance(); 
+		      int num = cal.get(Calendar.DAY_OF_WEEK)-1; 
+		      String today = weekDay[num]; 
+		      System.out.println("오늘의 요일 숫자 "+num); 
+		      System.out.println("오늘의 요일 : " + today ); 
+		*/
+		      Work preDay = workService.selectTimes(empNo);
+		      int judge = preDay.workEndMin;
 		
-		
-		
-		
-		
-		System.out.println("WWWW1 :: "+w.toString());
-		
-		
-		int result = workService.updateWork1(w);
-		System.out.println("WWWW2 :: "+w.toString());
-		int result2 = workService.updateWork2(w);
-		System.out.println("WWWW3 :: "+w.toString());
-		int result3 = workService.updateWork3(w);
-		
-		
-		
-		
-		Work preWork = workService.selectTimes(empNo);
-		w.setWorkStack(preWork.getWorkStack());
-		w.setWorkExceed(preWork.getWorkExceed());
-		w.setWorkRemain(preWork.getWorkRemain());
-		w.setWorkSum(preWork.getWorkSum());
-		w.setWorkRemainTotal(preWork.getWorkRemainTotal());//?? 왜안되
-		w.setWorkDay(preWork.getWorkDay());//이건왜됨
-		w.setWorkDayReset(preWork.getWorkDayReset());
-		
-		//w.setWorkRemain(preWork.getWorkRemainTotal());
-		
-		System.out.println("WWWW4 :: "+w.toString());
-		int result4 = workService.updateWork4(w);
-		System.out.println("WWWWE :: "+w.toString());
+		      if(judge==0) {  		
+			  		int result = workService.updateWork1(w);
+			  		System.out.println("WWWW2 :: "+w.toString());
+			  		int result2 = workService.updateWork2(w);
+			  		System.out.println("WWWW3 :: "+w.toString());
+			  		int result3 = workService.updateWork3(w);
+			  			
+			  		Work preWork = workService.selectTimes(empNo);
+			  		w.setWorkStack(preWork.getWorkStack());
+			  		w.setWorkExceed(preWork.getWorkExceed());
+			  		w.setWorkRemain(preWork.getWorkRemain());
+			  		w.setWorkSum(preWork.getWorkSum());
+			  		w.setWorkRemainTotal(preWork.getWorkRemainTotal());//?? 왜안되
+			  		w.setWorkDay(preWork.getWorkDay());//이건왜됨
+			  		w.setWorkDayReset(preWork.getWorkDayReset());
+			  		
+			  		//w.setWorkRemain(preWork.getWorkRemainTotal());
+			  		
+			  		System.out.println("WWWW4 :: "+w.toString());
+			  		int result4 = workService.updateWork4(w);
+			  		System.out.println("WWWWE :: "+w.toString());
 
+			  		
+			  		int result5 =workService.updateMin(empNo);//시작(분)넣기
+			  		
+			  		
+			  		//Employee emp= (Employee) session.getAttribute("loginUser");
+			  		ArrayList<Work> workUser = workService.selectUser(empNo);/////
+			  		model.addAttribute("workUser",workUser);
+			  		
+			  		return "redirect:/";
+		    	  
+		      }else {
+		    	
+		    	  throw new CommException("오늘은 이미 퇴근버튼을 누르셨습니다.");
+		      }
 		
-		int result5 =workService.updateMin(empNo);//시작(분)넣기
-		
-		
-		//Employee emp= (Employee) session.getAttribute("loginUser");
-		ArrayList<Work> workUser = workService.selectUser(empNo);/////
-		model.addAttribute("workUser",workUser);
-		
-		if (result4>0) {//4
-			return "redirect:/";//"work/workMain2"
-		}else {
-			return "redirect:/";
-		}
+	
 		
 	}
 	
@@ -329,6 +328,22 @@ public class WorkController {
 		
 		return "work/workMain2";
 	
+	}
+	*/
+	
+	/*
+	@RequestMapping(value="view.workMain",produces ="application/json;charset=UTF-8")
+	public ArrayList<Work> viewWorkMain(String empNo, HttpSession session,HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+		System.out.println("work메인 시작   ");
+		
+		//Employee emp= (Employee) session.getAttribute("loginUser");
+		ArrayList<Work> workUser = workService.selectUser(empNo);
+		response.setContentType("application/json;charset=utf-8");
+		System.out.println("work컨트롤러의 workUser 한줄 메인으로 던지기"+workUser);
+		new Gson().toJson(workUser,response.getWriter());
+		
+		return workUser;
 	}
 	*/
 	////////////////시작
